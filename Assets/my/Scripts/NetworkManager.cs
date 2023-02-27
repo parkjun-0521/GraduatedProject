@@ -235,6 +235,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
         buttonEvent.OptionClose();
+        buttonEvent.SoundOptionClose();
 
 
         // 방에서 나가고 로비로 돌아왔을때 
@@ -246,7 +247,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)    
     {
-        //if (info.photonView.gameObject.name.Equals("WebViewPrefab")) {
+        //if (info.photonView.gameObject.name==("WebViewPrefab")) {
         //    WebViewRPC.Instance._Prefab = web;
         //    WebViewRPC.Instance.Initalize();
         //}
@@ -285,7 +286,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 받아온 값이 admin 계정일 때 
         // 관리자와 사용자의 화면을 구별하여 각각 버튼 활성화의 값을 다르게 줌 
         // 공개방 생성 버튼만 만듬 ( 추후 관리자도 공개방에 입장하기 버튼을 활성화 할 예정 ) 
-        if (reSplit[1].Equals("1")) {
+        if (reSplit[1]==("1")) {
             adminCheck = true;
             ConnectServerObj.SetActive(false);          // 관리자 서버 연결 화면 비활성화 
             Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
@@ -302,7 +303,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
         // 받아온 값이 user 계정일 때 
         // 공개방 입장 버튼만 만듬 
-        else if (reSplit[1].Equals("0")) {
+        else if (reSplit[1] == "0" ) {
             adminCheck = false;
             UserConnectServerObj.SetActive(false);      // 사용자 서버 연결 화면 비활성화       
             Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
@@ -581,9 +582,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                     //thirdPersonController.CameraObj();
                     PhotonNetwork.CreateRoom(TeamName, new RoomOptions { MaxPlayers = 8 });
                 }
-                else if (mapname.Equals(""))
+                else if (mapname=="")
                     Debug.Log("맵을 선택해주세요.");
-                else if (playername.Equals(""))
+                else if (playername=="")
                     Debug.Log("캐릭터를 선택해 주세요");
             }
         }
@@ -871,7 +872,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 팀방과 공개방에서 방을 떠날 때 
         for (int i = 0; i < reSplit.Length; i += 2) {
             // 팀방에서 떠날때 그 팀의 팀장일 경우 
-            if(PhotonNetwork.CurrentRoom.Name == reSplit[i] && reSplit[i + 1].Equals("1")) {
+            if(PhotonNetwork.CurrentRoom.Name == reSplit[i] && reSplit[i + 1]=="1") {
                 // hashtable를 사용하여 커스텀 프로퍼티를 만든다. 
                 ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
                 // isKicked 이라는 변수에 true 값을 추가 
@@ -887,7 +888,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             }
             // 팀방에서 떠날 때 그 팀의 팀원일 경우 
             // 그냥 Leave Room 만 동작하면 된다.
-            else if (PhotonNetwork.CurrentRoom.Name == reSplit[i] && reSplit[i + 1].Equals("0")) {
+            else if (PhotonNetwork.CurrentRoom.Name == reSplit[i] && reSplit[i + 1]=="0") {
                 if (PhotonNetwork.InRoom)
                     PhotonNetwork.LeaveRoom();
                 else if (PhotonNetwork.InLobby)

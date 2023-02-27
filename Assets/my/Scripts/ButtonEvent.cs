@@ -2,6 +2,7 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonEvent : MonoBehaviour
 {
@@ -47,6 +48,10 @@ public class ButtonEvent : MonoBehaviour
 
     //====================================================================//
     public GameObject option;
+    public GameObject soundPanel;
+    bool soundOptionCheck = false;
+
+
     public GameObject Lobby;
     public GameObject roomPanel;
     bool optionCheck = false;
@@ -264,6 +269,19 @@ public class ButtonEvent : MonoBehaviour
             smoothFollow.turnOff = false;
         }
     }
+
+    public void SoundOption()
+    {
+        soundPanel.SetActive(true);
+        soundOptionCheck = true;
+        MusicControl musicControl = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<MusicControl>();
+        musicControl.audioSlider = GameObject.Find("BackGorundSoundSlide").GetComponent<Slider>();;
+    }
+    public void SoundOptionClose()
+    {
+        soundPanel.SetActive(false);
+        soundOptionCheck = false;
+    }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true && !optionCheck) {
@@ -289,22 +307,32 @@ public class ButtonEvent : MonoBehaviour
         else if(optionCheck && Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true) {
             Lobbyplayerthird lobbyplayerthird = GameObject.Find("Female1").GetComponent<Lobbyplayerthird>();
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
-            option.SetActive(false);
-            optionCheck = false;
-            lobbyplayerthird.MoveSpeed = 100f;
-            lobbyplayerthird.SprintSpeed = 150f;
-            lobbyplayerthird.turnStop = false;
-            smoothFollow.turnOff = false;
+            if (soundOptionCheck) {
+                SoundOptionClose();
+            }
+            else {
+                option.SetActive(false);
+                optionCheck = false;
+                lobbyplayerthird.MoveSpeed = 100f;
+                lobbyplayerthird.SprintSpeed = 150f;
+                lobbyplayerthird.turnStop = false;
+                smoothFollow.turnOff = false;
+            }
         }
         else if (optionCheck && Input.GetKeyDown(KeyCode.Escape) && roomPanel.activeSelf == true && Lobby.activeSelf == false) {
             ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
-            option.SetActive(false);
-            optionCheck = false;
-            thirdPersonController.MoveSpeed = 100f;
-            thirdPersonController.SprintSpeed = 150f;
-            thirdPersonController.turnStop = false;
-            smoothFollow.turnOff = false;
+            if (soundOptionCheck) {
+                SoundOptionClose();
+            }
+            else {
+                option.SetActive(false);
+                optionCheck = false;
+                thirdPersonController.MoveSpeed = 100f;
+                thirdPersonController.SprintSpeed = 150f;
+                thirdPersonController.turnStop = false;
+                smoothFollow.turnOff = false;
+            }
         }
     }
 }
