@@ -146,7 +146,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // Lobby에 몇명이 있는지 확인하는 text
         // 전체Player 중에서 Room에 들어가 있는 사람은 제외 하고 로비에 몇명이 있는지 확인 
-        LobbyInfoText.text = (PhotonNetwork.CountOfPlayers - PhotonNetwork.CountOfPlayersInRooms) + "로비 / " + PhotonNetwork.CountOfPlayers + "접속";
+        LobbyInfoText.text = "<color=#0000ff>" + (PhotonNetwork.CountOfPlayers - PhotonNetwork.CountOfPlayersInRooms)  + "로비 / " + PhotonNetwork.CountOfPlayers + "접속" + "</color>";
 
         // Enter를 눌렀을 때 채팅창에 입력할 수 있게 하기 위한 로직 
         // Enter를 누르고 방에 입장 하였을 때 캐릭터를 멈추고 채팅을 칠 수 있게 함 
@@ -282,7 +282,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         
 
         // 로비 Panel에서 접속시 생성되는 문구 
-        WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "님 환영합니다";
+        WelcomeText.text = "<color=#0000ff>" + PhotonNetwork.LocalPlayer.NickName + "</color>" + "님 환영합니다";
+        
 
         // 받아온 값이 admin 계정일 때 
         // 관리자와 사용자의 화면을 구별하여 각각 버튼 활성화의 값을 다르게 줌 
