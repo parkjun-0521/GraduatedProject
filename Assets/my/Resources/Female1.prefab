@@ -2276,8 +2276,6 @@ GameObject:
   - component: {fileID: 2506671448636557952}
   - component: {fileID: 2506671448636557954}
   - component: {fileID: -3737999207576324901}
-  - component: {fileID: 304603154}
-  - component: {fileID: 304603161}
   - component: {fileID: 1160424298145471129}
   - component: {fileID: 355429415503493882}
   - component: {fileID: 1989423838541025729}
@@ -2416,73 +2414,12 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 2506671448636557954}
-  - {fileID: 304603161}
   - {fileID: 1160424298145471129}
   - {fileID: 1989423838541025729}
   - {fileID: -6525440272989312658}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &304603154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6838918357233240622}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51b52e0155f8d784a964f5b3f0205c68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
-  speed: 3
-  turnStop: 0
-  PV: {fileID: 0}
-  rotateSpeed: 500
---- !u!114 &304603161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6838918357233240622}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c259d3e32ed54041a2cfccc55ecce96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 100
-  SprintSpeed: 150
-  RotationSmoothTime: 0.12
-  SpeedChangeRate: 10
-  LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
-  FootstepAudioClips: []
-  FootstepAudioVolume: 0.5
-  JumpHeight: 1.2
-  JumpPower: -10
-  Gravity: -15
-  JumpTimeout: 0.5
-  FallTimeout: 0.15
-  Grounded: 1
-  GroundedOffset: -0.14
-  GroundedRadius: 0.28
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  Camspeed: 2
-  TopClamp: 70
-  BottomClamp: -30
-  CameraAngleOverride: 0
-  LockCameraPosition: 0
-  hairs: {fileID: 0}
-  hairs2: {fileID: 0}
-  _animator: {fileID: 4785949954890687140}
-  turnStop: 0
-  PV: {fileID: -3737999207576324901}
-  rotateSpeed: 500
-  JumpCheck: 0
-  webViewPrefab: {fileID: 0}
 --- !u!114 &1160424298145471129
 MonoBehaviour:
   m_ObjectHideFlags: 0

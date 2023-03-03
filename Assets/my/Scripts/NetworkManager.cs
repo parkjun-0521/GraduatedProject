@@ -279,14 +279,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 닉네임을 받아와서 변수에 저장 
         NickNameText.text = reSplit[0];
         PhotonNetwork.LocalPlayer.NickName = reSplit[0];
+        
 
-        // 로비 Panel에서 접속시 생서되는 문구 
+        // 로비 Panel에서 접속시 생성되는 문구 
         WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "님 환영합니다";
 
         // 받아온 값이 admin 계정일 때 
         // 관리자와 사용자의 화면을 구별하여 각각 버튼 활성화의 값을 다르게 줌 
         // 공개방 생성 버튼만 만듬 ( 추후 관리자도 공개방에 입장하기 버튼을 활성화 할 예정 ) 
-        if (reSplit[1]==("1")) {
+        if (reSplit[1].Equals("1")) {
             adminCheck = true;
             ConnectServerObj.SetActive(false);          // 관리자 서버 연결 화면 비활성화 
             Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
@@ -303,7 +304,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
         // 받아온 값이 user 계정일 때 
         // 공개방 입장 버튼만 만듬 
-        else if (reSplit[1] == "0" ) {
+        else if (reSplit[1].Equals("0") ) {
             adminCheck = false;
             UserConnectServerObj.SetActive(false);      // 사용자 서버 연결 화면 비활성화       
             Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
