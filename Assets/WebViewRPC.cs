@@ -33,8 +33,8 @@ public class WebViewRPC : MonoBehaviour
             Debug.Log("[SimpleWebViewDemo] URL changed: " + eventArgs.Url);
             OnURLEvent(eventArgs.Url);
         };
-
     }
+
 
     [PunRPC]
     public void SetURL()
