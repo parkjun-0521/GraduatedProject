@@ -62,9 +62,6 @@ public class LobbyPlayer : MonoBehaviourPunCallbacks {
             buttonEvent.TeamCreate_Women();
             for (int i = 0; i < buttonEvent.TeamCreate_Women_Men.Length; i++)
                 buttonEvent.TeamCreate_Women_Men[i].SetActive(true);
-            for (int i = 0; i < buttonEvent.CreateMap.Length; i++)
-                buttonEvent.CreateMap[i].SetActive(false);
-            buttonEvent.TeamCreate_NextButton.SetActive(true);
             buttonEvent.TeamCreate_PreviousButton.SetActive(false);
             buttonEvent.CreateplayerBackGround.SetActive(true);
             buttonEvent.TeamCreateNext.SetActive(false);
@@ -79,7 +76,6 @@ public class LobbyPlayer : MonoBehaviourPunCallbacks {
             buttonEvent.TeamInput_Women();
             for (int i = 0; i < buttonEvent.TeamInput_Women_Men.Length; i++)
                 buttonEvent.TeamInput_Women_Men[i].SetActive(true);
-            buttonEvent.TeamInput_NextButton.SetActive(true);
             buttonEvent.TeamInput_PreviousButton.SetActive(false);
             buttonEvent.TeamInputNext.SetActive(false);
             buttonEvent.TeamInputPrevious.SetActive(false);

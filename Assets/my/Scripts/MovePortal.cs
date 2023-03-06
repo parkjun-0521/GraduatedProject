@@ -6,7 +6,7 @@ public class MovePortal : MonoBehaviour
 {
     public GameObject[] uiGroup;
     public GameObject serverObj;
-    
+
     public void Enter()
     {
         serverObj.SetActive(false);
@@ -25,7 +25,7 @@ public class MovePortal : MonoBehaviour
             buttonEvent.PublicInputRoomPrevious();
 
         buttonEvent.RoomCreate_Input.SetActive(false);
-        buttonEvent.LobbyPanel_NextButton.SetActive(true);
+        //buttonEvent.LobbyPanel_NextButton.SetActive(true);
         buttonEvent.LobbyPanel_PreviousButton.SetActive(false);
     }
 
@@ -45,18 +45,19 @@ public class MovePortal : MonoBehaviour
             buttonEvent.Women_Men[i].SetActive(true);
         buttonEvent.PublicCreateRoomPrevious();
         buttonEvent.RoomCreate_Input.SetActive(false);
-        buttonEvent.LobbyPanel_NextButton.SetActive(true);
+        //buttonEvent.LobbyPanel_NextButton.SetActive(true);
         buttonEvent.LobbyPanel_PreviousButton.SetActive(false);
 
         // ∆¿πÊ ¿‘¿Â
         buttonEvent.TeamInput_Women();
         for (int i = 0; i < buttonEvent.TeamInput_Women_Men.Length; i++)
             buttonEvent.TeamInput_Women_Men[i].SetActive(true);
-        buttonEvent.TeamInput_NextButton.SetActive(true);
         buttonEvent.TeamInput_PreviousButton.SetActive(false);
         buttonEvent.TeamInputNext.SetActive(false);
         buttonEvent.TeamInputPrevious.SetActive(false);
         buttonEvent.playerBackGround.SetActive(true);
+
+        buttonEvent.TeamRoomCreate.SetActive(false);
 
         networkManager.curPage = 0;
         networkManager.endPage = 0;

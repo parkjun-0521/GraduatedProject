@@ -10,6 +10,10 @@ public class MusicControl : MonoBehaviour
     public AudioMixer masterMixer;
     public Slider audioSlider;
 
+    public void Start()
+    {
+        audioSlider.value = -20f;
+    }
     public void AudioControl()
     {
         float sound = audioSlider.value;

@@ -182,13 +182,14 @@ public class LoginManager : MonoBehaviour
             buttonEvent.Women_Men[i].SetActive(true);
         buttonEvent.PublicCreateRoomPrevious();
         buttonEvent.RoomCreate_Input.SetActive(false);
-        buttonEvent.LobbyPanel_NextButton.SetActive(true);
+        //buttonEvent.LobbyPanel_NextButton.SetActive(true);
         buttonEvent.LobbyPanel_PreviousButton.SetActive(false);
 
         buttonEvent.TeamInput_Women();
         for (int i = 0; i < buttonEvent.TeamInput_Women_Men.Length; i++)
             buttonEvent.TeamInput_Women_Men[i].SetActive(true);
-        buttonEvent.TeamInput_NextButton.SetActive(true);
+        for (int i = 0; i < buttonEvent.TeamInput_NextButton.Length; i++)
+            buttonEvent.TeamInput_NextButton[i].SetActive(true);
         buttonEvent.TeamInput_PreviousButton.SetActive(false);
         buttonEvent.TeamInputNext.SetActive(false);
         buttonEvent.TeamInputPrevious.SetActive(false);

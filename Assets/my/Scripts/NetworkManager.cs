@@ -202,7 +202,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         StartCoroutine(UserNick());
         Screen.SetResolution(1920, 1080, true);
         // 로비 캐릭터의 위치를 0, 3, 0으로 초기화
-        LobbyMainPlayer.transform.position = new Vector3(0.27f,-7.44f,-10.49f);
+        LobbyMainPlayer.transform.position = new Vector3(0.62f, -6.12f, -20.13f);
 
         // 성공적으로 접속이 될 시 바로 로비로 이동 
         PhotonNetwork.JoinLobby();
@@ -288,7 +288,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 받아온 값이 admin 계정일 때 
         // 관리자와 사용자의 화면을 구별하여 각각 버튼 활성화의 값을 다르게 줌 
         // 공개방 생성 버튼만 만듬 ( 추후 관리자도 공개방에 입장하기 버튼을 활성화 할 예정 ) 
-        if (reSplit[1].Equals("1")) {
+        if (reSplit[1] == "1") {
             adminCheck = true;
             ConnectServerObj.SetActive(false);          // 관리자 서버 연결 화면 비활성화 
             Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
@@ -305,7 +305,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
         // 받아온 값이 user 계정일 때 
         // 공개방 입장 버튼만 만듬 
-        else if (reSplit[1].Equals("0") ) {
+        else if (reSplit[1] == "0" ) {
             adminCheck = false;
             UserConnectServerObj.SetActive(false);      // 사용자 서버 연결 화면 비활성화       
             Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
