@@ -13,6 +13,8 @@ public class PortalManager : MonoBehaviour
     public Transform portal2;
     public Transform portal3;
     public Transform portal4;
+    public Transform portal5;
+    public Transform portal6;
 
     // Start is called before the first frame update
     public void Start()
