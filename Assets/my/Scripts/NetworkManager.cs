@@ -39,6 +39,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public GameObject Server;               // 닉네임, 상태, 인원, 로그아웃 관련 UI 
     public GameObject LoginPanelObj;        // 로그인 UI Panel 오브젝트 
     public GameObject LobbyPanelObj;        // 로비 UI Panel 오브젝트 
+    public GameObject TeamCreateObj;
+    public GameObject TeamInputObj;
+    public GameObject OptionObj;
 
     // 관리자 
     [Header("Admin")]
@@ -218,12 +221,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public override void OnJoinedLobby()
     {
         print("로비접속완료");
-        // 방 생성과 동일하게 계정의 닉네임을 가져온다 
-        StartCoroutine(UserNick());
+
         RoomPanel.SetActive(false);             // Room Panel 비활성화 
         Lobby.SetActive(true);                  // 로비 Floor 활성화 
         //webView.SetActive(true);
-
+        StartCoroutine(cTeam());            // 팀방 생성 관련 코루틴 
+        StartCoroutine(iTeam());            // 팀방 입장하기 코루틴 
 
         // player 오브젝트를 찾아서 그 안의 Start 함수를 실행 
         // 카메라가 방에서 나왔을 시 로비 캐릭터를 잡게 만들기 위해서 Start 함수를 실행 하는 것 이다. 
@@ -329,12 +332,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public void Disconnect()
     {
         // 서버를 끊을 때 ( 로그아웃이 될 때 )
-        StartCoroutine(Logout());                       
+        StartCoroutine(Logout());
+        // 버튼을 끄기 위함 코루틴 ( 팀방 생성하기, 팀방 입장하기 버튼 )  
+        StartCoroutine(TeamButtonOff());
+        StartCoroutine(TeamInputButtonOff());
 
         LoginPanelObj.SetActive(true);                  // 로그인 Panel 활성화 
         ConnectServerObj.SetActive(false);              // 관리자 서버 연결 Panel 비활성화 
         UserConnectServerObj.SetActive(false);          // 사용자 서버 연결 Panel 비활성화
         LobbyPanelObj.SetActive(false);                 // 로비 Panel 비활성화 
+        TeamCreateObj.SetActive(false);
+        TeamInputObj.SetActive(false);
+        OptionObj.SetActive(false);
         Server.SetActive(false);                        // 닉네임 Panel 비활성화 
         Lobby.SetActive(false);
         //webView.SetActive(false);
@@ -368,9 +377,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         wwwData = UnityWebRequest.Post(LogoutURL, form);
         yield return wwwData.SendWebRequest();
-        
-        // 버튼을 끄기 위함 코루틴 ( 팀방 생성하기, 팀방 입장하기 버튼 ) 
-        StartCoroutine(TeamButtonOff());     
+
     }
     IEnumerator TeamButtonOff()
     {
@@ -402,7 +409,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 createTeamRoom[i].SetActive(false);
         }
 
+    }
+
+    IEnumerator TeamInputButtonOff()
+    {
         //--------------------------------------------- 팀방 입장하기 버튼 끄기 ---------------------------------------------// 
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        form.AddField("id", loginManager.IDInputField.text);
+
         wwwData_2 = UnityWebRequest.Post(UserTeamData, form);
         yield return wwwData_2.SendWebRequest();
 
