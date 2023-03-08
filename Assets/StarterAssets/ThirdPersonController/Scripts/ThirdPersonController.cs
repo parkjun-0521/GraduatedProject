@@ -512,18 +512,14 @@ namespace StarterAssets
 
         private void elevatoruse(string raytag)     // 엘리베이터 작동
         {
-            if (raytag == "elebtn" && !Elevator.elevator.isup && Input.GetButtonDown("interact"))
+            if (raytag == "elebtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
             {
                 Elevator.elevator.Eledooropen1f();
             }
-            else if (raytag == "elebtn" && Elevator.elevator.isup && Input.GetButtonDown("interact"))
+            else if (raytag == "elebtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
             {
                 Elevator.elevator.Eledooropen2f();
             }
-           /* else if (raytag == "upbtn" && !Elevator.elevator.isup && Input.GetButtonDown("interact"))
-            {
-                Elevator.elevator.Eleup();
-            }*/
             else if (raytag == "upbtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
             {
                 Elevator.elevator.Eleup();
@@ -531,11 +527,7 @@ namespace StarterAssets
             else if (raytag == "upbtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
             {
                 Elevator.elevator.Eledown();
-            }
-            /*else if (raytag == "upbtn" && Elevator.elevator.isup && Input.GetButtonDown("interact"))
-            {
-                Elevator.elevator.Eledown();
-            }*/
+            }    
         }
 
         /*private void portaluse(string raytag)

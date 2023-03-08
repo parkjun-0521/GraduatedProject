@@ -25,7 +25,6 @@ public class Elevator : MonoBehaviour
 
     public Animator[] evanim;
 
-    public bool isup = false;
 
     // Start is called before the first frame update
     void Start()
@@ -52,13 +51,11 @@ public class Elevator : MonoBehaviour
     public void Eleup()
     {
         evanim[4].SetTrigger("Up");
-        isup = true;
     }
 
     public void Eledown()
     {
         evanim[4].SetTrigger("Down");
-        isup = false;
     }
 }
 
