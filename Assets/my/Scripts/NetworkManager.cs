@@ -112,6 +112,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public bool UserCheck = false;
 
     public static NetworkManager Instance;
+
+    public GameObject lodingPanel;
+
+    public bool checkRoom = false;
     //--------------------------------------------- 빌드 화면 크기 ---------------------------------------------// 
     void Awake()
     {
@@ -201,6 +205,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 사용자의 데이터를 가져온다 
         StartCoroutine(UserNick());
         Screen.SetResolution(1920, 1080, true);
+
+        lodingPanel.SetActive(true);
         // 로비 캐릭터의 위치를 0, 3, 0으로 초기화
         LobbyMainPlayer.transform.position = new Vector3(0.62f, -6.12f, -20.13f);
 
@@ -219,7 +225,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         print("로비접속완료");
         // 방 생성과 동일하게 계정의 닉네임을 가져온다 
-        StartCoroutine(UserNick());
+        //StartCoroutine(UserNick());
         RoomPanel.SetActive(false);             // Room Panel 비활성화 
         Lobby.SetActive(true);                  // 로비 Floor 활성화 
         //webView.SetActive(true);
@@ -291,7 +297,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         if (reSplit[1] == "1") {
             adminCheck = true;
             ConnectServerObj.SetActive(false);          // 관리자 서버 연결 화면 비활성화 
-            Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
+            //Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
             createTeam.SetActive(false);                // 팀방 만들기 버튼 비활성화 
             inputTeam.SetActive(false);                 // 팀방 입장하기 버튼 비활성화 
             for (int i = 0; i < createRoom.Length; i++) {
@@ -308,7 +314,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         else if (reSplit[1] == "0" ) {
             adminCheck = false;
             UserConnectServerObj.SetActive(false);      // 사용자 서버 연결 화면 비활성화       
-            Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
+            //Server.SetActive(true);                     // 닉네임을 가지고 있는 Panel 활성화 
             createTeam.SetActive(false);                // 팀방 만들기 버튼 비활성화 
             inputTeam.SetActive(false);                 // 팀방 입장하기 버튼 비활성화 
             for (int i = 0; i < createRoom.Length; i++) {
@@ -825,6 +831,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public void LeaveRoom()
     {
         // 모든 팀의 정보를 가져와 방장이 나가면 방이 파괴되도록 만듬 
+        lodingPanel.SetActive(true);
+        checkRoom = false;
+
         UserCheck = false;
         StartCoroutine(AllTeam());
 
@@ -988,7 +997,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     //--------------------------------------------- 방 입장이 완료되었을 때 함수 ---------------------------------------------// 
     public override void OnJoinedRoom()
-    {   
+    {
+        lodingPanel.SetActive(true);
         print("방참가완료");
         Server.SetActive(false);                // server UI 비활성화
         LobbyPanel.SetActive(false);            // 로비 Panel 비활성화 
@@ -996,7 +1006,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         inputTeam.SetActive(false);             // 팀방 입장 UI 비활성화 
         Lobby.SetActive(false);                 // 로비 비활성화 
 
-        RoomPanel.SetActive(true);              // 방 Panel 활
+        checkRoom = true;
+        //RoomPanel.SetActive(true);              // 방 Panel 활
 
         // 프리팹 생성 및 플레이어 동기화 
         // 캐릭터 이름을 받아서 캐릭터 생성 

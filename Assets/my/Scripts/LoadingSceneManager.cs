@@ -5,41 +5,44 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LoadingSceneManager : MonoBehaviour {
-    public static string nextScene;
+
+    public GameObject lodingPanel;
+
     [SerializeField] 
     Image progressBar;
+    
+    public float timer = 0.0f;
 
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(LoadScene());
+        timer += Time.deltaTime;
+        if (progressBar.fillAmount < 0.4f) {
+            progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 0.6f, timer);
+        }
+        else if(progressBar.fillAmount >= 0.4f && progressBar.fillAmount < 0.7f) {
+            progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 0.8f, timer);
+        }
+        else if (progressBar.fillAmount >= 0.7f && progressBar.fillAmount < 0.98f) {
+            progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 1f, timer);
+        }
+        else {
+            progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 2f, timer);
+            StartCoroutine(CloseLoding());
+        }
     }
-
-    public static void LoadScene(string sceneName)
+    IEnumerator CloseLoding()
     {
-        nextScene = sceneName;
-        SceneManager.LoadScene("LoadingScene");
-    }
+        yield return new WaitForSeconds(0.8f);
+        if(progressBar.fillAmount == 1) {
+            NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+            timer = 0.0f;
+            progressBar.fillAmount = 0.0f;
+            lodingPanel.SetActive(false);
+            networkManager.Server.SetActive(true);
 
-    IEnumerator LoadScene()
-    {
-        AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
-        op.allowSceneActivation = false;
-        float timer = 0.0f;
-        while (!op.isDone) {
-            yield return null;
-            timer += Time.deltaTime;
-            if (op.progress < 0.9f) {
-                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, op.progress, timer);
-                if (progressBar.fillAmount >= op.progress) {
-                    timer = 0f;
-                }
-            }
-            else {
-                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 1f, timer);
-                if (progressBar.fillAmount == 1.0f) {
-                    op.allowSceneActivation = true;
-                    yield break;
-                }
+            if (networkManager.checkRoom) {
+                networkManager.RoomPanel.SetActive(true);
+                networkManager.Server.SetActive(false);
             }
         }
     }
