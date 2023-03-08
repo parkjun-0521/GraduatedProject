@@ -10,7 +10,6 @@ namespace SojaExiles
 	{
 
 		public Animator openandclose1;
-		public Animator autodoor;
 		public bool open = false;
 		public GameObject[] Player;
 
@@ -27,7 +26,6 @@ namespace SojaExiles
 		void Update()
 		{
 			dooropen();
-			autodooropen();
 		}
 
 		public void dooropen()
@@ -46,22 +44,6 @@ namespace SojaExiles
 				}
 			}
 		}
-        public void autodooropen()
-        {
-            for (int i = 0; i < Player.Length; i++)
-            {
-                float dist = Vector3.Distance(Player[i].transform.position, transform.position);
-                if (dist <= 2)
-                {
-                    PV.RPC("aopening", RpcTarget.All);
-                }
-                else
-                {
-                    PV.RPC("aclosing", RpcTarget.All);
-                }
-
-            }
-        }
 
         [PunRPC]
 		public void opening()
@@ -75,15 +57,5 @@ namespace SojaExiles
 			openandclose1.SetBool(anime, false);
 			open = false;
 		}
-        [PunRPC]
-        public void aopening()
-        {          
-            autodoor.SetFloat("rev",1.0f);
-        }
-        [PunRPC]
-        public void aclosing()
-        {
-            autodoor.SetFloat("rev", -1.0f);
-        }
     }
 }

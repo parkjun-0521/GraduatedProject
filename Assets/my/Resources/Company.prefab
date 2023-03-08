@@ -9444,7 +9444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 3775296210743509841}
-  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 3188306738804452915}
@@ -16798,9 +16797,9 @@ GameObject:
   - component: {fileID: 3281277173297158652}
   - component: {fileID: 8258335948138099338}
   - component: {fileID: 533634425119693804}
-  - component: {fileID: 1399038895614354123}
   - component: {fileID: 1692963007447695716}
   - component: {fileID: 3251164390176239572}
+  - component: {fileID: 6858929714273472565}
   m_Layer: 0
   m_Name: autodoor_left
   m_TagString: Untagged
@@ -17151,24 +17150,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1399038895614354123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2841780497505242897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b5e0617227fa4743be84f23d9e5cb42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openandclose1: {fileID: 533634425119693804}
-  autodoor: {fileID: 533634425119693804}
-  open: 0
-  Player: []
-  PV: {fileID: 1692963007447695716}
-  anime: 0
 --- !u!114 &1692963007447695716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17208,6 +17189,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &6858929714273472565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2841780497505242897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d825998f9d644c14aae827555b53e775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autodoor: {fileID: 533634425119693804}
+  Player: []
+  PV: {fileID: 1692963007447695716}
+  adoor: 0
 --- !u!1 &2851495578157464325
 GameObject:
   m_ObjectHideFlags: 0
@@ -22719,7 +22716,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2962970824042403258}
-  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 3194015430287140425}
@@ -26020,7 +26016,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2962970824249142577}
-  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 1277490639918149265}
@@ -29049,7 +29044,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2962970824447439713}
-  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 4226186309681531402}
@@ -42684,7 +42678,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2962970825277401199}
-  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 1199222090258331629}
@@ -61743,7 +61736,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2320192030138907656}
-  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 8017025221927196790}
@@ -72371,9 +72363,9 @@ GameObject:
   - component: {fileID: 8204893509594156081}
   - component: {fileID: 8317475280280800657}
   - component: {fileID: 4183118500502668904}
-  - component: {fileID: 118920213149751046}
   - component: {fileID: 8110371949212108459}
   - component: {fileID: 2179897393154747222}
+  - component: {fileID: 4525622918968233548}
   m_Layer: 0
   m_Name: autodoor_right
   m_TagString: Untagged
@@ -72724,24 +72716,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &118920213149751046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5696099644325608688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b5e0617227fa4743be84f23d9e5cb42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openandclose1: {fileID: 4183118500502668904}
-  autodoor: {fileID: 4183118500502668904}
-  open: 0
-  Player: []
-  PV: {fileID: 8110371949212108459}
-  anime: 0
 --- !u!114 &8110371949212108459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72781,6 +72755,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &4525622918968233548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5696099644325608688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d825998f9d644c14aae827555b53e775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autodoor: {fileID: 4183118500502668904}
+  Player: []
+  PV: {fileID: 8110371949212108459}
+  adoor: 0
 --- !u!1 &5699393249893225103
 GameObject:
   m_ObjectHideFlags: 0
