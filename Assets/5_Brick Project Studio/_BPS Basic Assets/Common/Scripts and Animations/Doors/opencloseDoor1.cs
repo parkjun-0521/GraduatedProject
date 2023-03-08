@@ -10,6 +10,7 @@ namespace SojaExiles
 	{
 
 		public Animator openandclose1;
+		public Animator autodoor;
 		public bool open = false;
 		public GameObject[] Player;
 
@@ -26,13 +27,14 @@ namespace SojaExiles
 		void Update()
 		{
 			dooropen();
+			autodooropen();
 		}
 
 		public void dooropen()
 		{
 			for (int i = 0; i < Player.Length; i++) {
 				float dist = Vector3.Distance(Player[i].transform.position, transform.position);
-				if (dist <= 2) {
+				if (dist <= 2) {				
 					if (open == false) {
 						if (Input.GetButtonDown("interact"))
 							PV.RPC("opening", RpcTarget.All);
@@ -40,24 +42,48 @@ namespace SojaExiles
 					else {
 						if (Input.GetButtonDown("interact"))
 							PV.RPC("closing", RpcTarget.All);
-					}
+					}					
 				}
 			}
 		}
+        public void autodooropen()
+        {
+            for (int i = 0; i < Player.Length; i++)
+            {
+                float dist = Vector3.Distance(Player[i].transform.position, transform.position);
+                if (dist <= 2)
+                {
+                    PV.RPC("aopening", RpcTarget.All);
+                }
+                else
+                {
+                    PV.RPC("aclosing", RpcTarget.All);
+                }
 
-		[PunRPC]
+            }
+        }
+
+        [PunRPC]
 		public void opening()
-		{
-			//print("you are opening the door");
+		{			
 			openandclose1.SetBool(anime, true);
 			open = true;
 		}
 		[PunRPC]
 		public void closing()
-		{
-			//print("you are closing the door");
+		{		
 			openandclose1.SetBool(anime, false);
 			open = false;
 		}
-	}
+        [PunRPC]
+        public void aopening()
+        {          
+            autodoor.SetFloat("rev",1.0f);
+        }
+        [PunRPC]
+        public void aclosing()
+        {
+            autodoor.SetFloat("rev", -1.0f);
+        }
+    }
 }

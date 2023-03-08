@@ -520,14 +520,22 @@ namespace StarterAssets
             {
                 Elevator.elevator.Eledooropen2f();
             }
-            else if (raytag == "upbtn" && !Elevator.elevator.isup && Input.GetButtonDown("interact"))
+           /* else if (raytag == "upbtn" && !Elevator.elevator.isup && Input.GetButtonDown("interact"))
+            {
+                Elevator.elevator.Eleup();
+            }*/
+            else if (raytag == "upbtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
             {
                 Elevator.elevator.Eleup();
             }
-            else if (raytag == "upbtn" && Elevator.elevator.isup && Input.GetButtonDown("interact"))
+            else if (raytag == "upbtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
             {
                 Elevator.elevator.Eledown();
             }
+            /*else if (raytag == "upbtn" && Elevator.elevator.isup && Input.GetButtonDown("interact"))
+            {
+                Elevator.elevator.Eledown();
+            }*/
         }
 
         /*private void portaluse(string raytag)

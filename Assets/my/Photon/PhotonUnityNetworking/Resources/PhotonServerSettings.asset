@@ -51,6 +51,8 @@ MonoBehaviour:
   - _handleUrlChanged
   - SetURL
   - OnURLEvent
+  - aopening
+  - aclosing
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

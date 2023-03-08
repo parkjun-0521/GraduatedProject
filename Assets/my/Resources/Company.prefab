@@ -9444,6 +9444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 3775296210743509841}
+  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 3188306738804452915}
@@ -17163,6 +17164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 533634425119693804}
+  autodoor: {fileID: 533634425119693804}
   open: 0
   Player: []
   PV: {fileID: 1692963007447695716}
@@ -22717,6 +22719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2962970824042403258}
+  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 3194015430287140425}
@@ -26017,6 +26020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2962970824249142577}
+  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 1277490639918149265}
@@ -29045,6 +29049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2962970824447439713}
+  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 4226186309681531402}
@@ -42679,6 +42684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2962970825277401199}
+  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 1199222090258331629}
@@ -61737,6 +61743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 2320192030138907656}
+  autodoor: {fileID: 0}
   open: 0
   Player: []
   PV: {fileID: 8017025221927196790}
@@ -72730,6 +72737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openandclose1: {fileID: 4183118500502668904}
+  autodoor: {fileID: 4183118500502668904}
   open: 0
   Player: []
   PV: {fileID: 8110371949212108459}
