@@ -34,7 +34,7 @@ public class SmoothFollow : MonoBehaviour {
 
             xRotate = xRotate + xRotateMove;
 
-            xRotate = Mathf.Clamp(xRotate, -90, 90); // 위, 아래 고정
+            xRotate = Mathf.Clamp(xRotate, -80, 80); // 위, 아래 고정
 
             transform.eulerAngles = new Vector3(xRotate, yRotate, 0);
         }

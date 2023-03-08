@@ -174,8 +174,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         else if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && RoomPanel.activeSelf == true && chatCheck) {
             // 속도를 50 주고 회전을 풀음 
             ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
-            thirdPersonController.MoveSpeed = 100.0f;
-            thirdPersonController.SprintSpeed = 150.0f;
+            thirdPersonController.MoveSpeed = 50.0f;
+            thirdPersonController.SprintSpeed = 80.0f;
             thirdPersonController.turnStop = false;
             thirdPersonController.JumpCheck = false;
 

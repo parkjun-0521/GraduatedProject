@@ -76,6 +76,7 @@ public class ButtonEvent : MonoBehaviour
     public Sprite changeSpekerSprite;   //바뀌어질 이미지
     public Sprite changeCurSpekerSprite;
 
+    //=====================================================================//
     public void WithRium_Move()
     {
         Application.OpenURL("http://withrium.com/"); // 링크 걸 사이트 주소
@@ -295,8 +296,8 @@ public class ButtonEvent : MonoBehaviour
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             option.SetActive(false);
             optionCheck = false;
-            lobbyplayerthird.MoveSpeed = 100f;
-            lobbyplayerthird.SprintSpeed = 150f;
+            lobbyplayerthird.MoveSpeed = 50f;
+            lobbyplayerthird.SprintSpeed = 80f;
             lobbyplayerthird.turnStop = false;
             smoothFollow.turnOff = false;
         }
@@ -305,8 +306,8 @@ public class ButtonEvent : MonoBehaviour
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             option.SetActive(false);
             optionCheck = false;
-            thirdPersonController.MoveSpeed = 100f;
-            thirdPersonController.SprintSpeed = 150f;
+            thirdPersonController.MoveSpeed = 50f;
+            thirdPersonController.SprintSpeed = 80f;
             thirdPersonController.turnStop = false;
             smoothFollow.turnOff = false;
         }
@@ -327,13 +328,13 @@ public class ButtonEvent : MonoBehaviour
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true && !optionCheck) {
-            Lobbyplayerthird lobbyplayerthird = GameObject.Find("Female1").GetComponent<Lobbyplayerthird>();
+            ThirdPersonController thirdPersonController = GameObject.Find("Female1").GetComponent<ThirdPersonController>();
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             option.SetActive(true);
             optionCheck = true;
-            lobbyplayerthird.MoveSpeed = 0f;
-            lobbyplayerthird.SprintSpeed = 0f;
-            lobbyplayerthird.turnStop = true;
+            thirdPersonController.MoveSpeed = 0f;
+            thirdPersonController.SprintSpeed = 0f;
+            thirdPersonController.turnStop = true;
             smoothFollow.turnOff = true;
         }
         else if(Input.GetKeyDown(KeyCode.Escape) && roomPanel.activeSelf == true && Lobby.activeSelf == false && !optionCheck) {
@@ -347,7 +348,7 @@ public class ButtonEvent : MonoBehaviour
             smoothFollow.turnOff = true;
         }
         else if(optionCheck && Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true) {
-            Lobbyplayerthird lobbyplayerthird = GameObject.Find("Female1").GetComponent<Lobbyplayerthird>();
+            ThirdPersonController thirdPersonController = GameObject.Find("Female1").GetComponent<ThirdPersonController>();
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             if (soundOptionCheck) {
                 SoundOptionClose();
@@ -355,9 +356,9 @@ public class ButtonEvent : MonoBehaviour
             else {
                 option.SetActive(false);
                 optionCheck = false;
-                lobbyplayerthird.MoveSpeed = 100f;
-                lobbyplayerthird.SprintSpeed = 150f;
-                lobbyplayerthird.turnStop = false;
+                thirdPersonController.MoveSpeed = 50f;
+                thirdPersonController.SprintSpeed = 80f;
+                thirdPersonController.turnStop = false;
                 smoothFollow.turnOff = false;
             }
         }
@@ -370,8 +371,8 @@ public class ButtonEvent : MonoBehaviour
             else {
                 option.SetActive(false);
                 optionCheck = false;
-                thirdPersonController.MoveSpeed = 100f;
-                thirdPersonController.SprintSpeed = 150f;
+                thirdPersonController.MoveSpeed = 50f;
+                thirdPersonController.SprintSpeed = 80f;
                 thirdPersonController.turnStop = false;
                 smoothFollow.turnOff = false;
             }
@@ -384,13 +385,17 @@ public class ButtonEvent : MonoBehaviour
             NetworkVoiceManager.TransmitEnabled = false;
             micCount++;
             curImage.sprite = changeSprite;
-            // 마이크 버튼의 이미지 바꾸기 
+            
         }
         else if (micCount == 1){
             NetworkVoiceManager.TransmitEnabled = true;
             micCount = 0;
             curImage.sprite = changeCurSprite;
-            // 마이크 버튼의 이미지 바꾸기 
+
+            punVoiceClient.GetComponent<PunVoiceClient>().enabled = true;
+            spekerCount = 0;
+            curSpekerImage.sprite = changeCurSpekerSprite;
+            
         }
     }
 
@@ -400,11 +405,19 @@ public class ButtonEvent : MonoBehaviour
             punVoiceClient.GetComponent<PunVoiceClient>().enabled = false;
             spekerCount++;
             curSpekerImage.sprite = changeSpekerSprite;
+
+            NetworkVoiceManager.TransmitEnabled = false;
+            micCount++;
+            curImage.sprite = changeSprite;
         }
         else if (spekerCount == 1) {
             punVoiceClient.GetComponent<PunVoiceClient>().enabled = true;
             spekerCount = 0;
             curSpekerImage.sprite = changeCurSpekerSprite;
+
+            NetworkVoiceManager.TransmitEnabled = true;
+            micCount = 0;
+            curImage.sprite = changeCurSprite;
         }
     }
 }
