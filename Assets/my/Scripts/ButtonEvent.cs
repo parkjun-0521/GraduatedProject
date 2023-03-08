@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Voice.Unity;
+using Photon.Voice.PUN;
 
 public class ButtonEvent : MonoBehaviour
 {
@@ -56,6 +59,22 @@ public class ButtonEvent : MonoBehaviour
     public GameObject Lobby;
     public GameObject roomPanel;
     bool optionCheck = false;
+
+    //====================================================================//
+    public Button Mic;
+    public Button Speker;
+    public Recorder NetworkVoiceManager;
+    public PunVoiceClient punVoiceClient;
+
+    int micCount = 0;
+    public Image curImage;     //기존에 존제하는 이미지
+    public Sprite changeSprite;   //바뀌어질 이미지
+    public Sprite changeCurSprite;
+
+    int spekerCount = 0;
+    public Image curSpekerImage;     //기존에 존제하는 이미지
+    public Sprite changeSpekerSprite;   //바뀌어질 이미지
+    public Sprite changeCurSpekerSprite;
 
     public void WithRium_Move()
     {
@@ -356,6 +375,36 @@ public class ButtonEvent : MonoBehaviour
                 thirdPersonController.turnStop = false;
                 smoothFollow.turnOff = false;
             }
+        }
+    }
+
+    public void Micblock()
+    {
+        if (micCount == 0) {
+            NetworkVoiceManager.TransmitEnabled = false;
+            micCount++;
+            curImage.sprite = changeSprite;
+            // 마이크 버튼의 이미지 바꾸기 
+        }
+        else if (micCount == 1){
+            NetworkVoiceManager.TransmitEnabled = true;
+            micCount = 0;
+            curImage.sprite = changeCurSprite;
+            // 마이크 버튼의 이미지 바꾸기 
+        }
+    }
+
+    public void SpekerBlock()
+    {
+        if (spekerCount == 0) {
+            punVoiceClient.GetComponent<PunVoiceClient>().enabled = false;
+            spekerCount++;
+            curSpekerImage.sprite = changeSpekerSprite;
+        }
+        else if (spekerCount == 1) {
+            punVoiceClient.GetComponent<PunVoiceClient>().enabled = true;
+            spekerCount = 0;
+            curSpekerImage.sprite = changeCurSpekerSprite;
         }
     }
 }
