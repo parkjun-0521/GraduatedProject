@@ -140,7 +140,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     //--------------------------------------------- 사용자의 상태, 로비의 인원, 채팅창 관련 로직 ---------------------------------------------// 
     void Update() 
-    { 
+    {
         // 상태를 나타내는 text
         StatusText.text = PhotonNetwork.NetworkClientState.ToString();
 
