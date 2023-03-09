@@ -12,50 +12,45 @@ namespace SojaExiles
         public GameObject[] Player;
 
         public PhotonView PV;
-        public float adoor;
 
         void Start()
         {
             Player = GameObject.FindGameObjectsWithTag("Player");
-           // adoor = Animator.StringToHash("rev");
+            autodoor = GetComponent<Animator>();
         }
 
         void Update()
         {
-            autodoorwork();
+            
         }
 
-        public void autodoorwork()
+        public void OnTriggerEnter(Collider other)
         {
-            for (int i = 0; i < Player.Length; i++)
+            if(other.tag == "Player")
             {
-                float dist = Vector3.Distance(Player[i].transform.position, this.transform.position);
-                print(dist);
-                if (dist <= 4.5)
-                {
-                    PV.RPC("aopening", RpcTarget.All);
-                }
-                else if (dist >= 9)
-                {
-                    PV.RPC("aclosing", RpcTarget.All);
-                }
+                PV.RPC("aopen", RpcTarget.All);
+            }
+        }
 
+      
+        public void OnTriggerExit(Collider other)
+        {
+            if (other.tag == "Player")
+            {
+                PV.RPC("aclose", RpcTarget.All);
             }
         }
 
         [PunRPC]
-        public void aopening()
+        public void aopen()
         {
-            autodoor.SetFloat("open",1.0f);
-            autodoor.SetFloat("open2",1.0f);
-            autodoor.SetFloat("rev", 1.0f);          
+            autodoor.SetBool("isopen", true);
         }
+
         [PunRPC]
-        public void aclosing()
+        public void aclose()
         {
-            autodoor.SetFloat("open", -1.0f);
-            autodoor.SetFloat("open2",-1.0f);
-            autodoor.SetFloat("rev", -1.0f);
+            autodoor.SetBool("isopen", false);
         }
     }
 }

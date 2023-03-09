@@ -530,6 +530,12 @@ namespace StarterAssets
             }    
         }
 
+        public void OnTriggerEnter(Collider other)
+        {   
+
+        }
+
+
         /*private void portaluse(string raytag)
         {
             if (raytag == "portal1" && Input.GetButtonDown("interact") && portalcool >= 1.0f)
