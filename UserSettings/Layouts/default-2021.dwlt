@@ -14,21 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 41
     y: 51
     width: 1865
     height: 974
   m_ShowMode: 4
   m_Title: Inspector
-=======
-    x: 32
-    y: 57
-    width: 1865
-    height: 974
-  m_ShowMode: 4
-  m_Title: Hierarchy
->>>>>>> parent of 06b89b2 (map)
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 521}
   m_MaxSize: {x: 10000, y: 10000}
@@ -148,11 +139,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
     width: 1553
-=======
-    width: 1538
->>>>>>> parent of 06b89b2 (map)
     height: 924
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
@@ -178,11 +165,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
     width: 1553
-=======
-    width: 1538
->>>>>>> parent of 06b89b2 (map)
     height: 633
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
@@ -205,11 +188,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
     width: 1117
-=======
-    width: 1106
->>>>>>> parent of 06b89b2 (map)
     height: 633
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
@@ -236,11 +215,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 1117
-=======
-    x: 1106
->>>>>>> parent of 06b89b2 (map)
     y: 0
     width: 127
     height: 633
@@ -266,15 +241,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 1244
     y: 0
     width: 309
-=======
-    x: 1253
-    y: 0
-    width: 285
->>>>>>> parent of 06b89b2 (map)
     height: 633
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
@@ -302,20 +271,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 633
-<<<<<<< HEAD
     width: 1553
-=======
-    width: 1538
->>>>>>> parent of 06b89b2 (map)
     height: 291
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-<<<<<<< HEAD
   controlID: 162
-=======
-  controlID: 100
->>>>>>> parent of 06b89b2 (map)
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -333,11 +294,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
     width: 1114
-=======
-    width: 1105
->>>>>>> parent of 06b89b2 (map)
     height: 291
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
@@ -364,15 +321,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 1114
     y: 0
     width: 439
-=======
-    x: 1105
-    y: 0
-    width: 433
->>>>>>> parent of 06b89b2 (map)
     height: 291
   m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
@@ -396,15 +347,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 1553
     y: 0
     width: 312
-=======
-    x: 1538
-    y: 0
-    width: 327
->>>>>>> parent of 06b89b2 (map)
     height: 924
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
@@ -433,15 +378,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 41
     y: 81
     width: 1116
-=======
-    x: 32
-    y: 87
-    width: 1105
->>>>>>> parent of 06b89b2 (map)
     height: 612
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -644,15 +583,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-<<<<<<< HEAD
     m_Target: {x: 948.3883, y: 590.59595, z: -153.63538}
     speed: 2
     m_Value: {x: 948.3883, y: 590.59595, z: -153.63538}
-=======
-    m_Target: {x: 943.177, y: 598.8022, z: -153.04773}
-    speed: 2
-    m_Value: {x: 943.177, y: 598.8022, z: -153.04773}
->>>>>>> parent of 06b89b2 (map)
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -699,7 +632,6 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-<<<<<<< HEAD
     m_Target: {x: 0.028546827, y: 0.0065542622, z: 0.00012863135, w: 0.9995686}
     speed: 2
     m_Value: {x: 0.028546896, y: 0.006554278, z: 0.00012863165, w: 0.99957097}
@@ -707,15 +639,6 @@ MonoBehaviour:
     m_Target: 728.17914
     speed: 2
     m_Value: 728.17914
-=======
-    m_Target: {x: 0.019547192, y: -0.0024448312, z: 0.00036351912, w: 0.9998042}
-    speed: 2
-    m_Value: {x: 0.019547226, y: -0.0024448354, z: 0.00036351974, w: 0.99980587}
-  m_Size:
-    m_Target: 632.2165
-    speed: 2
-    m_Value: 604.9919
->>>>>>> parent of 06b89b2 (map)
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -903,15 +826,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 48
     y: 81
     width: 1114
-=======
-    x: 23
-    y: 85
-    width: 1105
->>>>>>> parent of 06b89b2 (map)
     height: 612
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -959,24 +876,16 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-<<<<<<< HEAD
       width: 1114
       height: 591
     m_Scale: {x: 0.5472222, y: 0.5472222}
     m_Translation: {x: 557, y: 295.5}
-=======
-      width: 1105
-      height: 591
-    m_Scale: {x: 0.5472222, y: 0.5472222}
-    m_Translation: {x: 552.5, y: 295.5}
->>>>>>> parent of 06b89b2 (map)
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-<<<<<<< HEAD
       x: -1017.86804
       y: -540
       width: 2035.7361
@@ -984,15 +893,6 @@ MonoBehaviour:
     m_MinimalGUI: 1
   m_defaultScale: 0.5472222
   m_LastWindowPixelSize: {x: 1114, y: 612}
-=======
-      x: -1009.6447
-      y: -540
-      width: 2019.2894
-      height: 1080
-    m_MinimalGUI: 1
-  m_defaultScale: 0.5472222
-  m_LastWindowPixelSize: {x: 1105, y: 612}
->>>>>>> parent of 06b89b2 (map)
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -1018,15 +918,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 1158
     y: 81
     width: 125
-=======
-    x: 1138
-    y: 87
-    width: 145
->>>>>>> parent of 06b89b2 (map)
     height: 612
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1053,13 +947,8 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 1285
-<<<<<<< HEAD
     y: 81
     width: 307
-=======
-    y: 87
-    width: 283
->>>>>>> parent of 06b89b2 (map)
     height: 612
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1068,29 +957,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-<<<<<<< HEAD
       m_SelectedIDs: fe3bfeff
       m_LastClickedID: -115714
       m_ExpandedIDs: 8c44feff9644fefffa49feff765afefff25afeffe66bfeff3c6cfeff7a81feffc698feff1699feffc4a9feff76bfffff0efbfffff4ffffffb86b0000926d0000f66f0000bc700000327400004c820100128301005e2d0300c8360300
-=======
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: a050fcff0efbffff00470900
->>>>>>> parent of 06b89b2 (map)
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: LodingText
-        m_OriginalName: LodingText
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -20952
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -1120,15 +1003,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 41
     y: 714
     width: 1113
-=======
-    x: 0
-    y: 19
-    width: 1104
->>>>>>> parent of 06b89b2 (map)
     height: 270
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1147,37 +1024,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-<<<<<<< HEAD
     - Assets/my/Scripts
-=======
-    - Assets/my/Resources
->>>>>>> parent of 06b89b2 (map)
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 53
   m_LastFolders:
-<<<<<<< HEAD
   - Assets/my/Scripts
-=======
-  - Assets/my/Resources
->>>>>>> parent of 06b89b2 (map)
   m_LastFoldersGridSize: 53
   m_LastProjectPath: C:\Users\parkj\Desktop\GraduatedProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-<<<<<<< HEAD
     scrollPos: {x: 0, y: 524}
     m_SelectedIDs: 388f0000
     m_LastClickedID: 36664
     m_ExpandedIDs: 00000000c28b0000c48b0000c68b0000c88b0000ca8b0000cc8b0000ce8b0000d08b0000d28b0000d48b0000d68b0000d88b0000da8b0000dc8b0000de8b0000e08b0000e48b0000e88b0000f08b000000ca9a3b
-=======
-    scrollPos: {x: 0, y: 494}
-    m_SelectedIDs: 488f0000
-    m_LastClickedID: 36680
-    m_ExpandedIDs: 00000000f88b0000fa8b0000fc8b0000fe8b0000008c0000028c0000048c0000068c0000088c00000a8c00000c8c00000e8c0000108c0000128c0000148c0000168c0000188c00001c8c000000ca9a3b
->>>>>>> parent of 06b89b2 (map)
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1205,11 +1067,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-<<<<<<< HEAD
     m_ExpandedIDs: 00000000c28b0000c48b0000c68b0000c88b0000ca8b0000cc8b0000ce8b0000d08b0000d28b0000d48b0000d68b0000d88b0000da8b0000dc8b0000de8b0000e08b0000e28b0000e48b0000e68b0000e88b0000ea8b0000ec8b0000ee8b0000f08b0000
-=======
-    m_ExpandedIDs: 00000000f88b0000fa8b0000fc8b0000fe8b0000008c0000028c0000048c0000068c0000088c00000a8c00000c8c00000e8c0000108c0000128c0000148c0000168c0000188c00001a8c00001c8c0000
->>>>>>> parent of 06b89b2 (map)
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1295,11 +1153,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-<<<<<<< HEAD
   m_LastSelectedObjectID: -113524
-=======
-  m_LastSelectedObjectID: 27610
->>>>>>> parent of 06b89b2 (map)
 --- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1551,15 +1405,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 1155
     y: 714
     width: 437
-=======
-    x: 1106
-    y: 19
-    width: 431
->>>>>>> parent of 06b89b2 (map)
     height: 270
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1585,15 +1433,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
     x: 1594
     y: 81
     width: 311
-=======
-    x: 1570
-    y: 87
-    width: 326
->>>>>>> parent of 06b89b2 (map)
     height: 903
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
