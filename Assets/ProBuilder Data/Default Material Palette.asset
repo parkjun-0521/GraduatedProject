@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   array:
   - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+<<<<<<< HEAD
   - {fileID: 2100000, guid: a1e97cbf2538241b691aae8243b5fb10, type: 2}
   - {fileID: 2100000, guid: bbb235fff4f48426b863b36058ab66d2, type: 2}
   - {fileID: 2100000, guid: 8cb4d6fee77fd4ee6895f08b240d625f, type: 2}
@@ -21,6 +22,15 @@ MonoBehaviour:
   - {fileID: 2100000, guid: aceec14a00995924b88aec0853110efe, type: 2}
   - {fileID: 2100000, guid: 10c8542d4324afc4bb4d61e51e00800e, type: 2}
   - {fileID: 2100000, guid: cca629179fca3a14ab08d0f1cc0ecce3, type: 2}
+=======
+  - {fileID: 2100000, guid: 5932f2760d420ff4da6d82bd54fe830d, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+>>>>>>> parent of 06b89b2 (map)
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
