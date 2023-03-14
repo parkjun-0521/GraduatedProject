@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using System.Linq;
+using StarterAssets;
 
 public class LoginManager : MonoBehaviour
 {
@@ -194,5 +195,9 @@ public class LoginManager : MonoBehaviour
         buttonEvent.TeamInputNext.SetActive(false);
         buttonEvent.TeamInputPrevious.SetActive(false);
         buttonEvent.playerBackGround.SetActive(true);
+
+        ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
+        thirdPersonController.MoveSpeed = 50f;
+        thirdPersonController.SprintSpeed = 80f;
     }
 }
