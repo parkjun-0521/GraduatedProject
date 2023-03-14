@@ -208,7 +208,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         lodingPanel.SetActive(true);
         // 로비 캐릭터의 위치를 0, 3, 0으로 초기화
-        LobbyMainPlayer.transform.position = new Vector3(-2f, -0.6f, -9f);
+        LobbyMainPlayer.transform.position = new Vector3(0f, 1f, -9f);
 
         // 성공적으로 접속이 될 시 바로 로비로 이동 
         PhotonNetwork.JoinLobby();

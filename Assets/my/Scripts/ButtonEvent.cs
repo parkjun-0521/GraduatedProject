@@ -395,7 +395,15 @@ public class ButtonEvent : MonoBehaviour
             punVoiceClient.GetComponent<PunVoiceClient>().enabled = true;
             spekerCount = 0;
             curSpekerImage.sprite = changeCurSpekerSprite;
-            
+        }
+        else {
+            NetworkVoiceManager.TransmitEnabled = true;
+            micCount = 0;
+            curImage.sprite = changeCurSprite;
+
+            punVoiceClient.GetComponent<PunVoiceClient>().enabled = true;
+            spekerCount = 0;
+            curSpekerImage.sprite = changeCurSpekerSprite;
         }
     }
 
