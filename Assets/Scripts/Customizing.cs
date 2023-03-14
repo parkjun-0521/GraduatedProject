@@ -11,8 +11,8 @@ public class Customizing : MonoBehaviour
 
 
     // color
-    private Color[] color = new Color[9];
-    private int colors = 0;
+   // private Color[] color = new Color[9];
+   // private int colors = 0;
 
 
     // Start is called before the first frame update
