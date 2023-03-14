@@ -292,13 +292,13 @@ public class ButtonEvent : MonoBehaviour
     public void OptionClose()
     {
         if (Lobby.activeSelf == true) {
-            Lobbyplayerthird lobbyplayerthird = GameObject.Find("Female1").GetComponent<Lobbyplayerthird>();
+            ThirdPersonController thirdPersonController = GameObject.Find("Female1").GetComponent<ThirdPersonController>();
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             option.SetActive(false);
             optionCheck = false;
-            lobbyplayerthird.MoveSpeed = 50f;
-            lobbyplayerthird.SprintSpeed = 80f;
-            lobbyplayerthird.turnStop = false;
+            thirdPersonController.MoveSpeed = 50f;
+            thirdPersonController.SprintSpeed = 80f;
+            thirdPersonController.turnStop = false;
             smoothFollow.turnOff = false;
         }
         else {
