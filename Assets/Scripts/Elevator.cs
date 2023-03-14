@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 //using UnityEditor.Animations;
 using UnityEngine;
+using Photon.Pun;
 
 public class Elevator : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class Elevator : MonoBehaviour
 
     public Animator[] evanim;
 
+    public PhotonView PV;
 
     // Start is called before the first frame update
     void Start()
@@ -37,22 +39,29 @@ public class Elevator : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+       
+    }
+
+    [PunRPC]
     public void Eledooropen1f()
     {
         evanim[0].SetTrigger("isClick");
         evanim[1].SetTrigger("isleft");
     }
+    [PunRPC]
     public void Eledooropen2f()
     {
         evanim[2].SetTrigger("isClick");
         evanim[3].SetTrigger("isleft");
     }
-
+    [PunRPC]
     public void Eleup()
     {
         evanim[4].SetTrigger("Up");
     }
-
+    [PunRPC]
     public void Eledown()
     {
         evanim[4].SetTrigger("Down");
