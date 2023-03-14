@@ -118,6 +118,7 @@ namespace StarterAssets
         // ray
         private string raytag;
         private float portalcool = 0.0f;
+        private float sradius = 2.0f;
 
         // customizing
         private Color[] color = new Color[9];
@@ -468,24 +469,74 @@ namespace StarterAssets
             }
         }
 
-        private void PlayerRay()
+        private void PlayerRay()    // 플레이어 레이
         {
-            if (gameObject.activeSelf == true && !JumpCheck)
+            // ray 시작점
+            Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
+            RaycastHit hitinfo;
+
+            if (gameObject.activeSelf == true)
             {
-                Ray plray = new Ray(gameObject.transform.position + new Vector3(0f, 0.5f, 0f), transform.up * -1);
-                RaycastHit hitinfo;
-                Debug.DrawRay(gameObject.transform.position + new Vector3(0f, 0.5f, 0f), transform.up * -1, new Color(1, 0, 0));
-
-
-                if (Physics.Raycast(plray, out hitinfo, 1f))
+                // Sphere형으로 ray를 쏨
+                if (Physics.SphereCast(raypos, sradius, transform.forward , out hitinfo, 1.0f))
                 {
                     raytag = hitinfo.collider.tag;
-                    portaluse(raytag);
+                    Debug.Log(raytag);
+                    //portaluse(raytag);        //포탈사용
+                    elevatoruse(raytag);
                 }
             }
         }
 
-        private void portaluse(string raytag)
+        private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
+        {
+            Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
+            Gizmos.color = Color.red;
+            float sphereScale = Mathf.Max(sradius, transform.lossyScale.y, transform.lossyScale.z);
+
+            // 함수 파라미터 : 현재 위치 , sphere반지름, Ray의 방향, RaycastHit 결과, Sphere의 회전값, SphereCast를 진행할 거리
+            if (true == Physics.SphereCast(raypos, sradius, transform.forward, out RaycastHit hitinfo, 1.0f))
+            {
+                // Hit된 지점까지 ray를 그려준다.
+                Gizmos.DrawRay(raypos, transform.forward * hitinfo.distance);
+
+                // Hit된 지점에 Sphere를 그려준다.
+                Gizmos.DrawWireSphere(raypos + transform.forward * hitinfo.distance, sradius);
+            }
+            else
+            {
+                // Hit가 되지 않았으면 최대 검출 거리로 ray를 그려준다.
+                Gizmos.DrawRay(raypos, transform.forward * 0.0f);
+            }
+        }
+
+        private void elevatoruse(string raytag)     // 엘리베이터 작동
+        {
+            if (raytag == "elebtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
+            {
+                Elevator.elevator.Eledooropen1f();
+            }
+            else if (raytag == "elebtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
+            {
+                Elevator.elevator.Eledooropen2f();
+            }
+            else if (raytag == "upbtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
+            {
+                Elevator.elevator.Eleup();
+            }
+            else if (raytag == "upbtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
+            {
+                Elevator.elevator.Eledown();
+            }    
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {   
+
+        }
+
+
+        /*private void portaluse(string raytag)
         {
             if (raytag == "portal1" && Input.GetButtonDown("interact") && portalcool >= 1.0f)
             {
@@ -512,7 +563,7 @@ namespace StarterAssets
                 portalcool = 0.0f;
             }
 
-        }
+        }*/
 
         private void cooldown()
         {
