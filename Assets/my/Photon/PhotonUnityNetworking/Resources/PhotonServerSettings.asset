@@ -51,6 +51,17 @@ MonoBehaviour:
   - _handleUrlChanged
   - SetURL
   - OnURLEvent
+  - aopening
+  - aclosing
+  - OnTriggerEnter
+  - OnTriggerExit
+  - aclose
+  - aopen
+  - chsky
+  - chsky2
+  - changemorning
+  - changenight
+  - movesky
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
