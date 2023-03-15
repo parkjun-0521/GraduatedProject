@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 namespace PW
 {
@@ -60,6 +61,7 @@ namespace PW
         //the position where the cup will be placed on instantiate
         public Transform fillCupSpot;
 
+        public PhotonView PV;
 
         #region private variables
         private float totalProcess;
