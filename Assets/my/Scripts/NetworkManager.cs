@@ -224,6 +224,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public override void OnJoinedLobby()
     {
         print("로비접속완료");
+       
         // 방 생성과 동일하게 계정의 닉네임을 가져온다 
         //StartCoroutine(UserNick());
         RoomPanel.SetActive(false);             // Room Panel 비활성화 
@@ -607,7 +608,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로       
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
         if (mapname != "" && playername != "") {
-            PhotonNetwork.CreateRoom(room[0] == "" ? "Room" + Random.Range(0, 100) : room[0], new RoomOptions { MaxPlayers = 21 });
+            PhotonNetwork.CreateRoom(room[0] == "" ? "Room" + Random.Range(0, 100) : room[0], new RoomOptions { MaxPlayers = 20 });
         }
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
@@ -619,7 +620,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
         if (mapname != "" && playername != "")
-            PhotonNetwork.CreateRoom(room[1] == "" ? "Room" + Random.Range(0, 100) : room[1], new RoomOptions { MaxPlayers = 21 });
+            PhotonNetwork.CreateRoom(room[1] == "" ? "Room" + Random.Range(0, 100) : room[1], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
     }
@@ -630,7 +631,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로 
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
         if (mapname != "" && playername != "")
-            PhotonNetwork.CreateRoom(room[2] == "" ? "Room" + Random.Range(0, 100) : room[2], new RoomOptions { MaxPlayers = 21 });
+            PhotonNetwork.CreateRoom(room[2] == "" ? "Room" + Random.Range(0, 100) : room[2], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
     }
@@ -641,7 +642,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로 
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
         if (mapname != "" && playername != "")
-            PhotonNetwork.CreateRoom(room[3] == "" ? "Room" + Random.Range(0, 100) : room[3], new RoomOptions { MaxPlayers = 21 });
+            PhotonNetwork.CreateRoom(room[3] == "" ? "Room" + Random.Range(0, 100) : room[3], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
     }
