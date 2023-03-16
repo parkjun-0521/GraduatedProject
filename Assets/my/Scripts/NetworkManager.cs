@@ -208,7 +208,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         lodingPanel.SetActive(true);
         // 로비 캐릭터의 위치를 0, 3, 0으로 초기화
-        LobbyMainPlayer.transform.position = new Vector3(-2f, -0.6f, -9f);
+        LobbyMainPlayer.transform.position = new Vector3(0f, 1f, -9f);
 
         // 성공적으로 접속이 될 시 바로 로비로 이동 
         PhotonNetwork.JoinLobby();
@@ -606,8 +606,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // A방 생성, 방의 인원은 최대 21명 ( 관리자 한명 무조건 포함 ) 
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로       
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
-        if (mapname != "" && playername != "")
+        if (mapname != "" && playername != "") {
             PhotonNetwork.CreateRoom(room[0] == "" ? "Room" + Random.Range(0, 100) : room[0], new RoomOptions { MaxPlayers = 21 });
+        }
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
     }
