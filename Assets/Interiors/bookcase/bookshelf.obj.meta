@@ -1,0 +1,451 @@
+fileFormatVersion: 2
+guid: 6f82643eed1439d4ca8961d44914e2e9
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.001_Cube.002_bookcovver.001Mat
+    second: {fileID: 2100000, guid: 37a2e045f5864364f9eb52f46e0ed564, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.001_Cube.002_bookleaf.001Mat
+    second: {fileID: 2100000, guid: ee0ebdf95bdb0774aaedab034addc8f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.002_Cube.003_bookcovver.002Mat
+    second: {fileID: 2100000, guid: e343822437d1882478206a3fd2398f84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.002_Cube.003_bookleaf.002Mat
+    second: {fileID: 2100000, guid: 8f403dd005a67364bbeaf4bb0c319cff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.003_Cube.004_bookcovver.003Mat
+    second: {fileID: 2100000, guid: 18cf9bd714ffaa64eb55debbe3dac93d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.003_Cube.004_bookleaf.003Mat
+    second: {fileID: 2100000, guid: cc63f0417dd0068479d738b2ab19827d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.004_Cube.005_bookcovverMat
+    second: {fileID: 2100000, guid: 87144f38d52881146b643f82edd878d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.004_Cube.005_bookleafMat
+    second: {fileID: 2100000, guid: 8cf50a31a6052cb4aa34744fd3ca9f27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.005_Cube.006_bookcovver.001Mat
+    second: {fileID: 2100000, guid: 3825e72478d6ff143bd4b0dc256a00b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.005_Cube.006_bookleaf.001Mat
+    second: {fileID: 2100000, guid: 9db62562c8556e74b864c4d6e0125d8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.006_Cube.007_Material.001Mat
+    second: {fileID: 2100000, guid: 5d409d72fa3f8e44686956b324e7a00f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.006_Cube.007_bookcovver.002Mat
+    second: {fileID: 2100000, guid: da4b332f6ce2bf445abc00b7d7087ff5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.006_Cube.007_bookleaf.002Mat
+    second: {fileID: 2100000, guid: 7dd3b00bac2ae2b4f851be9eb244b3a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.007_Cube.008_bookcovver.003Mat
+    second: {fileID: 2100000, guid: c8090693285f55045b885d0f35d4800c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.007_Cube.008_bookleaf.003Mat
+    second: {fileID: 2100000, guid: e253bc2237f8bc649a00ac1b395f91fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.008_Cube.009_bookcovverMat
+    second: {fileID: 2100000, guid: 19a01732a9659bb43b24e4847f422ca2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.008_Cube.009_bookleafMat
+    second: {fileID: 2100000, guid: e07483105e5470348af731ac6a540ff1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.009_Cube.010_bookcovver.001Mat
+    second: {fileID: 2100000, guid: 3ee04b85af0464646b0b5ef025ee467d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.009_Cube.010_bookleaf.001Mat
+    second: {fileID: 2100000, guid: 9bdae8c18d893884e821c2cd18466d99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.010_Cube.011_Material.001Mat
+    second: {fileID: 2100000, guid: 4ac740331d5fa4b44a7d9bc0647f1ec2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.010_Cube.011_bookcovver.002Mat
+    second: {fileID: 2100000, guid: 9c2ccb6cab566d34f91cfc25fbacad52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.010_Cube.011_bookleaf.002Mat
+    second: {fileID: 2100000, guid: e3f76f3f66e73a344a30cc2408d7683f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.011_Cube.012_bookcovver.003Mat
+    second: {fileID: 2100000, guid: f3adff609e405e14a804f613d5993c37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.011_Cube.012_bookleaf.003Mat
+    second: {fileID: 2100000, guid: f4f66bdaaf312a24fb2aba252fca66c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.012_Cube.013_bookcovverMat
+    second: {fileID: 2100000, guid: 4973e9269469bae44b906a4ea1a366b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.012_Cube.013_bookleafMat
+    second: {fileID: 2100000, guid: 6009e6710ca489942ab8808331f39fcf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.013_Cube.014_bookcovver.001Mat
+    second: {fileID: 2100000, guid: 3ca7154b68dc55a4ea6eff3c75c117fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.013_Cube.014_bookleaf.001Mat
+    second: {fileID: 2100000, guid: ff2e38b0141d5ad4688e03c85c5d770a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.014_Cube.015_Material.001Mat
+    second: {fileID: 2100000, guid: 07bf6d1546fb0ca42aa38e3d02a6e63a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.014_Cube.015_bookcovver.002Mat
+    second: {fileID: 2100000, guid: a6c243fa9173e8e47baea69b0653b32e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.014_Cube.015_bookleaf.002Mat
+    second: {fileID: 2100000, guid: eb6fcfc1127aac0499de36c2ecdcc85c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.015_Cube.016_bookcovver.003Mat
+    second: {fileID: 2100000, guid: 75eafcae20eef7c4d83d84dc0bc42708, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.015_Cube.016_bookleaf.003Mat
+    second: {fileID: 2100000, guid: 36c2f4b162f676f4fb7dd5e9947df5b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.016_Cube.017_bookcovverMat
+    second: {fileID: 2100000, guid: 7445a12bce1bc254a939ee8ff028751b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.016_Cube.017_bookleafMat
+    second: {fileID: 2100000, guid: 2552e6e0ed02c0f438a54092e31608c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.017_Cube.018_bookcovver.001Mat
+    second: {fileID: 2100000, guid: 186ff707dc3241f448a63f9ee56e9809, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.017_Cube.018_bookleaf.001Mat
+    second: {fileID: 2100000, guid: f86facd533e15a84eb726a518159714d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.018_Cube.019_Material.001Mat
+    second: {fileID: 2100000, guid: 40ef614572c40d64991e8121756b85c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.018_Cube.019_bookcovver.002Mat
+    second: {fileID: 2100000, guid: 15ec0cc19bd150e47936a0426e7a8675, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.018_Cube.019_bookleaf.002Mat
+    second: {fileID: 2100000, guid: 7091d98d9bc8e34478febab275d64c6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.019_Cube.020_bookcovver.003Mat
+    second: {fileID: 2100000, guid: 988e1433f799ab145a8cc81d2fc2d33b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.019_Cube.020_bookleaf.003Mat
+    second: {fileID: 2100000, guid: c1440766415133247bc8b079b192c9bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.020_Cube.021_bookcovverMat
+    second: {fileID: 2100000, guid: 5291fbfacab69e140bf2dd7e2cdb749d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.020_Cube.021_bookleafMat
+    second: {fileID: 2100000, guid: 74b5bdaf697046c42a57f177d2dd6397, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.021_Cube.022_bookcovver.001Mat
+    second: {fileID: 2100000, guid: 609493695f8c2ee47bfbe2d42d4f8606, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.021_Cube.022_bookleaf.001Mat
+    second: {fileID: 2100000, guid: 34b5230e9f9d2b246a169f0c31b8cab4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.022_Cube.023_bookcovver.002Mat
+    second: {fileID: 2100000, guid: d696246b62bc3c84280f0a601ab2557a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.022_Cube.023_bookleaf.002Mat
+    second: {fileID: 2100000, guid: 36d052b110e06284ebbaf04d1d9dfc8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.023_Cube.024_bookcovver.003Mat
+    second: {fileID: 2100000, guid: 785449eb596e51f468a7d2ac5e467bf7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.023_Cube.024_bookleaf.003Mat
+    second: {fileID: 2100000, guid: 6be8a700e88c2c54d9127f5559c8b49b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.024_Cube.025_bookcovverMat
+    second: {fileID: 2100000, guid: bc833f7f08856e245a3660d036250849, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.024_Cube.025_bookleafMat
+    second: {fileID: 2100000, guid: d1a8eb68ae87e9948b8925bd9e77c413, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.025_Cube.026_bookcovver.001Mat
+    second: {fileID: 2100000, guid: f9f89d55dc7a6524692617afb27d2640, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.025_Cube.026_bookleaf.001Mat
+    second: {fileID: 2100000, guid: 0e9e8f347a67cdc4990e768745f653d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.026_Cube.027_bookcovver.002Mat
+    second: {fileID: 2100000, guid: 56999ac9b03984b4e8d25908b89701bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.026_Cube.027_bookleaf.002Mat
+    second: {fileID: 2100000, guid: 9b6643d287b9a0e4f8ca56240733d680, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.027_Cube.028_bookcovver.003Mat
+    second: {fileID: 2100000, guid: a0cf381d48b25414fa131ccc350764b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.027_Cube.028_bookleaf.003Mat
+    second: {fileID: 2100000, guid: 47c1dbe3bd5396b46953258a9ff7511d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.028_Cube.029_bookcovverMat
+    second: {fileID: 2100000, guid: f6cc0cf87927c1d49b92f84ca7d9b49b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.028_Cube.029_bookleafMat
+    second: {fileID: 2100000, guid: f8cc500793c2ec942987f90e6e59b5ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.029_Cube.030_bookcovver.001Mat
+    second: {fileID: 2100000, guid: e2a7e4f651b63b042a38bfcd3d18194f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.029_Cube.030_bookleaf.001Mat
+    second: {fileID: 2100000, guid: 26d99c294fb5039449615187043e6dab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.030_Cube.031_bookcovver.002Mat
+    second: {fileID: 2100000, guid: b414f52e7b68f3741bead208f750f0c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.030_Cube.031_bookleaf.002Mat
+    second: {fileID: 2100000, guid: 3ccd8d1c328a52944a9b589547c7a43e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.031_Cube.032_bookcovver.003Mat
+    second: {fileID: 2100000, guid: a1124f54eda48a94c9c0a854dfa75843, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1.031_Cube.032_bookleaf.003Mat
+    second: {fileID: 2100000, guid: 002db1d73759a5f4a812156383fa1d8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1_Cube.001_bookcovverMat
+    second: {fileID: 2100000, guid: f7cf36745316b934baa585f10dccc803, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book1_Cube.001_bookleafMat
+    second: {fileID: 2100000, guid: aace9bf43c56de844a2b7f74e930b8e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bookshelf_Cube_Material.002Mat
+    second: {fileID: 2100000, guid: af0d83f2e34a48146a8f141263354c09, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
