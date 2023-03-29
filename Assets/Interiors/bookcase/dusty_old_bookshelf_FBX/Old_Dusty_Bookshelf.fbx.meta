@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Old_Dusty_Bookshelf_Mat
-    second: {fileID: 2100000, guid: a76d0fbd39a95934f956427404b5adc4, type: 2}
+    second: {fileID: 2100000, guid: 193214f93ce95ac4eadd41a61f4a72f1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Old_Dusty_Bookshelf_Spiderwebs_Mat
-    second: {fileID: 2100000, guid: e9494d251722ab54ebf27aacc4fdf818, type: 2}
+    second: {fileID: 2100000, guid: 8da3ad4233780a84db697a7e61432783, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

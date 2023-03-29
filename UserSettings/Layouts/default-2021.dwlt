@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 108
+  controlID: 87
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 15
+  controlID: 196
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 16
+  controlID: 163
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 17
+  controlID: 164
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -451,22 +451,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Interiors/bookcase
+    - Assets/Interiors/bookcase/dusty_old_bookshelf_FBX/Dusty_Old_Bookshelf_PNG_2048
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Interiors/bookcase
+  - Assets/Interiors/bookcase/dusty_old_bookshelf_FBX/Dusty_Old_Bookshelf_PNG_2048
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\kang6\Desktop\photonpj\GraduatedProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 321}
-    m_SelectedIDs: ba3b0300
-    m_LastClickedID: 211898
-    m_ExpandedIDs: 00000000748d00009090000092900000b29d0100b49d0100fe9d0100009e0100029e0100ba3b0300ae940300bc94030000ca9a3b
+    m_SelectedIDs: 0a7f0100
+    m_LastClickedID: 98058
+    m_ExpandedIDs: 00000000488400005a8700005c87000070870000848700007a8a00007e8a0000808a0000de8c0000368d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -494,7 +494,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000748d0000
+    m_ExpandedIDs: 0000000048840000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -624,7 +624,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 38f0ffff
+      m_ExpandedIDs: 0efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 51.187813, y: -1.3985043, z: -44.538883}
     speed: 2
-    m_Value: {x: -135.99258, y: 0.09144646, z: -43.828175}
+    m_Value: {x: -127.66629, y: 4.4485993, z: -57.73295}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -924,11 +924,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.03916795, y: -0.08202977, z: 0.0032326232, w: 0.9958634}
     speed: 2
-    m_Value: {x: 0.03305186, y: 0.02416739, z: -0.000125161, w: 0.9991614}
+    m_Value: {x: 0.07936668, y: -0.53196895, z: 0.051138543, w: 0.8414837}
   m_Size:
     m_Target: 0.8660254
     speed: 2
-    m_Value: 4.8499107
+    m_Value: 4.1775136
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -946,7 +946,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_LastSceneViewRotation: {x: -0.103234984, y: 0.16195144, z: 0.017763695, w: 0.98115987}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
