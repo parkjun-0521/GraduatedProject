@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace SojaExiles
 
@@ -9,64 +10,54 @@ namespace SojaExiles
 	{
 
 		public Animator openandclose1;
-		public bool open;
-		public Transform Player;
+		public bool open = false;
+		public GameObject[] Player;
+
+		public PhotonView PV;
+		public int anime;
 
 		void Start()
 		{
 			open = false;
+			Player = GameObject.FindGameObjectsWithTag("Player");
+			anime = Animator.StringToHash("isopen");
 		}
 
-		void OnMouseOver()
+		void Update()
 		{
-			{
-				if (Player)
-				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 15)
-					{
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
+			dooropen();
+		}
 
-						}
-
+		public void dooropen()
+		{
+			for (int i = 0; i < Player.Length; i++) {
+				float dist = Vector3.Distance(Player[i].transform.position, transform.position);
+				if (dist <= 2) {
+					if (open == false) {
+						if (Input.GetButtonDown("interact"))
+							PV.RPC("opening", RpcTarget.All);
+					}
+					else {
+						if (Input.GetButtonDown("interact"))
+							PV.RPC("closing", RpcTarget.All);
 					}
 				}
-
 			}
-
 		}
 
-		IEnumerator opening()
+		[PunRPC]
+		public void opening()
 		{
-			print("you are opening the door");
-			openandclose1.Play("Opening 1");
+			//print("you are opening the door");
+			openandclose1.SetBool(anime, true);
 			open = true;
-			yield return new WaitForSeconds(.5f);
 		}
-
-		IEnumerator closing()
+		[PunRPC]
+		public void closing()
 		{
-			print("you are closing the door");
-			openandclose1.Play("Closing 1");
+			//print("you are closing the door");
+			openandclose1.SetBool(anime, false);
 			open = false;
-			yield return new WaitForSeconds(.5f);
 		}
-
-
 	}
 }
