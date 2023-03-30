@@ -77,6 +77,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     [Header("Lobby")]
     public GameObject Lobby;
     public GameObject LobbyMainPlayer;      // 로비의 Player 오브젝트 
+    public Material lobbySkyBox;
     //public GameObject webView;              // 로비의 webView 오브젝트 
 
 
@@ -116,6 +117,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public GameObject lodingPanel;
 
     public bool checkRoom = false;
+
+
+    public Material skyBoxSpring;
+    public Material skyBoxSummer;
+    public Material skyBoxAutumn;
+    public Material skyBoxWinter;
     //--------------------------------------------- 빌드 화면 크기 ---------------------------------------------// 
     void Awake()
     {
@@ -229,7 +236,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         RoomPanel.SetActive(false);             // Room Panel 비활성화 
         Lobby.SetActive(true);                  // 로비 Floor 활성화 
         //webView.SetActive(true);
-
+        RenderSettings.skybox = lobbySkyBox;
+        RenderSettings.reflectionIntensity = 1f;
 
         // player 오브젝트를 찾아서 그 안의 Start 함수를 실행 
         // 카메라가 방에서 나왔을 시 로비 캐릭터를 잡게 만들기 위해서 Start 함수를 실행 하는 것 이다. 
@@ -603,44 +611,52 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     string[] room = {"A", "B", "C", "D"};    
     public void CreateRoomA() 
     {
+        RenderSettings.skybox = skyBoxSpring;
+        RenderSettings.reflectionIntensity = 1f;
         // A방 생성, 방의 인원은 최대 21명 ( 관리자 한명 무조건 포함 ) 
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로       
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
         if (mapname != "" && playername != "")
-            PhotonNetwork.CreateRoom(room[0] == "" ? "Room" + Random.Range(0, 100) : room[0], new RoomOptions { MaxPlayers = 21 });
+            PhotonNetwork.CreateRoom(room[0] == "" ? "Room" + Random.Range(0, 100) : room[0], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
     }
 
     public void CreateRoomB()
     {
+        RenderSettings.skybox = skyBoxSummer;
+        RenderSettings.reflectionIntensity = 0.5f;
         // B방 생성, 방의 인원은 최대 21명 
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
         if (mapname != "" && playername != "")
-            PhotonNetwork.CreateRoom(room[1] == "" ? "Room" + Random.Range(0, 100) : room[1], new RoomOptions { MaxPlayers = 21 });
+            PhotonNetwork.CreateRoom(room[1] == "" ? "Room" + Random.Range(0, 100) : room[1], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
     }
 
     public void CreateRoomC()
     {
+        RenderSettings.skybox = skyBoxAutumn;
+        RenderSettings.reflectionIntensity = 0f;
         // C방 생성, 방의 인원은 최대 21명 
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로 
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
         if (mapname != "" && playername != "")
-            PhotonNetwork.CreateRoom(room[2] == "" ? "Room" + Random.Range(0, 100) : room[2], new RoomOptions { MaxPlayers = 21 });
+            PhotonNetwork.CreateRoom(room[2] == "" ? "Room" + Random.Range(0, 100) : room[2], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
     }
 
     public void CreateRoomD()
     {
+        RenderSettings.skybox = skyBoxWinter;
+        RenderSettings.reflectionIntensity = 0.5f;
         // C방 생성, 방의 인원은 최대 21명 
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로 
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
         if (mapname != "" && playername != "")
-            PhotonNetwork.CreateRoom(room[3] == "" ? "Room" + Random.Range(0, 100) : room[3], new RoomOptions { MaxPlayers = 21 });
+            PhotonNetwork.CreateRoom(room[3] == "" ? "Room" + Random.Range(0, 100) : room[3], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
             Debug.Log("캐릭터를 선택해 주세요");
     }
@@ -968,7 +984,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 맵 관련 프리팹 생성 
         // mapname는 맵 버튼을 누를 때 발생하는 함수에서 값이 들어감 ( MapValue() 함수 ) 
-        map = PhotonNetwork.Instantiate(mapname, new Vector3(0,0,20), Quaternion.identity);
+        map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-4f,0), Quaternion.identity);
         Quaternion rot = Quaternion.Euler(0, 270, 0);
         web = PhotonNetwork.Instantiate("WebViewPrefab", new Vector3(4.4f, -4f, -0.073f), rot);
         keybo = PhotonNetwork.Instantiate("Keyboard", new Vector3(4f, -5f, -0.073f), rot);
