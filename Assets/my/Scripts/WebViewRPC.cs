@@ -39,6 +39,7 @@ public class WebViewRPC : MonoBehaviour
     [PunRPC]
     public void SetURL()
     {
+        _WebViewPrefab.WebView.Reload();
         _WebViewPrefab?.WebView?.LoadUrl(currentURL);
     }
 

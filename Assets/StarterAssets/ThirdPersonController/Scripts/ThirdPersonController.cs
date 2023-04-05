@@ -147,6 +147,7 @@ namespace StarterAssets
         public bool JumpCheck = false;
 
         public BaseWebViewPrefab webViewPrefab;
+
         private bool IsCurrentDeviceMouse
         {
             get

@@ -126,9 +126,9 @@ public class ButtonEvent : MonoBehaviour
 
     public void PublicCreateRoomNext()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
             publicCreateRoom[i].SetActive(false);
-        for (int i = 3; i < publicCreateRoom.Length; i++)
+        for (int i = 2; i < publicCreateRoom.Length; i++)
             publicCreateRoom[i].SetActive(true);
 
         for (int i = 0; i < publicCreateRoom.Length; i++)
@@ -137,9 +137,9 @@ public class ButtonEvent : MonoBehaviour
 
     public void PublicCreateRoomPrevious()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
             publicCreateRoom[i].SetActive(true);
-        for (int i = 3; i < publicCreateRoom.Length; i++)
+        for (int i = 2; i < publicCreateRoom.Length; i++)
             publicCreateRoom[i].SetActive(false);
 
         for (int i = 0; i < publicCreateRoom.Length; i++)
@@ -148,9 +148,9 @@ public class ButtonEvent : MonoBehaviour
     
     public void PublicInputRoomNext()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
             publicInputRoom[i].SetActive(false);
-        for (int i = 3; i < publicCreateRoom.Length; i++)
+        for (int i = 2; i < publicCreateRoom.Length; i++)
             publicInputRoom[i].SetActive(true);
 
         for (int i = 0; i < publicCreateRoom.Length; i++)
@@ -159,9 +159,9 @@ public class ButtonEvent : MonoBehaviour
 
     public void PublicInputRoomPrevious()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
             publicInputRoom[i].SetActive(true);
-        for (int i = 3; i < publicCreateRoom.Length; i++)
+        for (int i = 2; i < publicCreateRoom.Length; i++)
             publicInputRoom[i].SetActive(false);
 
         for (int i = 0; i < publicCreateRoom.Length; i++)
