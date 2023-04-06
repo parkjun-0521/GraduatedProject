@@ -515,19 +515,19 @@ namespace StarterAssets
         {
             if (raytag == "elebtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
             {
-                Elevator.elevator.Eledooropen1f();
+                PV.RPC("Elevator.elevator.Eledooropen1f",RpcTarget.All);
             }
             else if (raytag == "elebtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
             {
-                Elevator.elevator.Eledooropen2f();
+                PV.RPC("Elevator.elevator.Eledooropen2f", RpcTarget.All);
             }
             else if (raytag == "upbtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
             {
-                Elevator.elevator.Eleup();
+                PV.RPC("Elevator.elevator.Eleup", RpcTarget.All);
             }
             else if (raytag == "upbtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
             {
-                Elevator.elevator.Eledown();
+                PV.RPC("Elevator.elevator.Eledown", RpcTarget.All);
             }    
         }
 

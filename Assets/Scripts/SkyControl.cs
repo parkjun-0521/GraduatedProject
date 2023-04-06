@@ -9,8 +9,10 @@ public class SkyControl : MonoBehaviour
 
     public Material morningmat;
     public Material nightmat;
+    public Material sunsetmat;
     public GameObject morning;
     public GameObject night;
+    public GameObject sunset;
 
   //  public Color morningfog;
   //  public Color nightfog;
@@ -56,20 +58,39 @@ public class SkyControl : MonoBehaviour
     [PunRPC]
     public void changemorning()
     {
-        RenderSettings.skybox = morningmat;
-      //  RenderSettings.fogColor = morningfog;
-        morning.SetActive(true);
-        night.SetActive(false);
-        ismorning = true;
+        if(RenderSettings.skybox == nightmat)
+        {
+            RenderSettings.skybox = morningmat;
+          //  RenderSettings.fogColor = morningfog;
+            morning.SetActive(true);
+            night.SetActive(false);
+            sunset.SetActive(false);
+            ismorning = true;
+        }
+    }
+
+    public void changesunset()
+    {
+        if(RenderSettings.skybox == morningmat)
+        {
+            RenderSettings.skybox = sunsetmat;
+            sunset.SetActive(true);
+            morning.SetActive(false);
+            night.SetActive(false);
+        }       
     }
 
     [PunRPC]
     public void changenight()
     {
-        RenderSettings.skybox = nightmat;
-      //  RenderSettings.fogColor = nightfog;
-        morning.SetActive(false);
-        night.SetActive(true);
-        ismorning = false;
+        if(RenderSettings.skybox == sunsetmat)
+        {
+            RenderSettings.skybox = nightmat;
+          //  RenderSettings.fogColor = nightfog;
+            morning.SetActive(false);
+            night.SetActive(true);
+            sunset.SetActive(false);
+            ismorning = false;
+        }
     }
 }
