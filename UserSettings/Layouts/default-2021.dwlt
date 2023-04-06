@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 138
+  controlID: 57
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 81
+  controlID: 15
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 82
+  controlID: 16
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 83
+  controlID: 17
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -404,8 +404,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 1611
-    height: 926
+    width: 1221
+    height: 665
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -439,7 +439,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_SearchFilter:
-    m_NameFilter: material 187
+    m_NameFilter: 
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -451,22 +451,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Interiors/Free_classic_FENCEfbx/Free_classic_FENCE
+    - Assets/Interiors
     m_Globs: []
-    m_OriginalText: material 187
+    m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Interiors/Free_classic_FENCEfbx/Free_classic_FENCE
+  - Assets/Interiors
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\kang6\Desktop\photonpj\GraduatedProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 500}
-    m_SelectedIDs: c2780500
-    m_LastClickedID: 358594
-    m_ExpandedIDs: 00000000488400006684000074840000768400008c8400008e840000a0840000b66603009a780500c278050000ca9a3b
+    scrollPos: {x: 0, y: 383}
+    m_SelectedIDs: 5a870000
+    m_LastClickedID: 34650
+    m_ExpandedIDs: 00000000488400005a8700005c8700007287000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 51.187813, y: -1.3985043, z: -44.538883}
     speed: 2
-    m_Value: {x: -98.239944, y: 13.912263, z: -65.26669}
+    m_Value: {x: -107.708496, y: 2.8511658, z: -77.104996}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -924,11 +924,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.03916795, y: -0.08202977, z: 0.0032326232, w: 0.9958634}
     speed: 2
-    m_Value: {x: 0.23177052, y: -0.3113623, z: 0.07951773, w: 0.91815734}
+    m_Value: {x: -0.11399351, y: -0.7793091, z: -0.14741802, w: 0.5982899}
   m_Size:
     m_Target: 0.8660254
     speed: 2
-    m_Value: 1.4684796
+    m_Value: 1.6271293
   m_Ortho:
     m_Target: 0
     speed: 2
