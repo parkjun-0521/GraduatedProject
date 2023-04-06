@@ -44,6 +44,11 @@ public class ButtonEvent : MonoBehaviour
     public GameObject TeamRoomCreate;
 
     public GameObject CreateplayerBackGround;
+    public GameObject CreateItemBackGround;
+
+    public GameObject CreateItemList;
+    public GameObject CreateTeamNextSelect;
+    public GameObject CreateTeamPreSelect;
 
     public GameObject TeamCreateRoom;
     public GameObject TeamCreateNext;
@@ -217,19 +222,30 @@ public class ButtonEvent : MonoBehaviour
                 TeamCreate_Player[i].SetActive(false);
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(false);
-            TeamRoomCreate.SetActive(true);
+            TeamRoomCreate.SetActive(false);
             TeamCreateRoomPrevious();
             TeamCreate_PreviousButton.SetActive(true);
             CreateplayerBackGround.SetActive(true);
+            CreateItemBackGround.SetActive(false);
+            CreateTeamNextSelect.SetActive(true);
+            CreateTeamPreSelect.SetActive(true);
             count++;
         }
         else if(count == 1) {
+            TeamRoomCreate.SetActive(true);
+            CreateItemList.SetActive(false);
+            CreateTeamNextSelect.SetActive(false);
+            CreateTeamPreSelect.SetActive(true);
+            count++;
+        }
+        else if(count == 2) {
             CreateplayerBackGround.SetActive(false);
             for(int i =0; i<TeamCreate_NextButton.Length; i++)
                 TeamCreate_NextButton[i].SetActive(false);
             TeamRoomCreate.SetActive(false);
             TeamCreateNext.SetActive(true);
             TeamCreatePrevious.SetActive(true);
+            CreateTeamPreSelect.SetActive(true);
             count++;
         }
     }
@@ -242,12 +258,21 @@ public class ButtonEvent : MonoBehaviour
                 TeamCreate_Women_Men[i].SetActive(true);
             TeamRoomCreate.SetActive(false);
             TeamCreate_PreviousButton.SetActive(false);
+            CreateItemBackGround.SetActive(true);
+            CreateTeamNextSelect.SetActive(false);
+            CreateTeamPreSelect.SetActive(false);
             count--;
         }
-        else if(count == 2) {
+        else if (count == 2) {
+            TeamRoomCreate.SetActive(false);
+            CreateItemList.SetActive(true);
+            CreateTeamNextSelect.SetActive(true);
+            count--;
+        }
+        else if (count == 3) {
             CreateplayerBackGround.SetActive(true);
             for (int i = 0; i < TeamCreate_NextButton.Length; i++)
-                TeamCreate_NextButton[i].SetActive(true);
+                TeamCreate_NextButton[i].SetActive(false);
             TeamRoomCreate.SetActive(true);
             TeamCreateNext.SetActive(false);
             TeamCreatePrevious.SetActive(false);

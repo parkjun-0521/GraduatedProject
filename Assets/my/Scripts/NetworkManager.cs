@@ -27,6 +27,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public string UserTeamData;             // 사용자 팀전체 정보 URL ( 사용자의 팀 이름을 받아온다 ) 
     public string AllTeamData;              // 모든 팀의 정보 URL ( 팀에 속한 모든 사용자의 데이터를 가져옴 ) 
     public string ChatLogData;              // 채팅 로그를 넘기는 URL 
+    public string ItemInputData;            // 아바타 아이템을 가져오는 URL
     UnityWebRequest wwwData;                // 요청한 값을 받아서 저장하는 변수 
     UnityWebRequest wwwData_2;              // 요청한 값을 받아서 저장하는 변수 
 
@@ -65,6 +66,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public GameObject inputTeam;            // 팀원이 입장할 방 UI Panel
     public GameObject[] createTeamRoom;     // 방을 만들 버튼 배열 ( 한 페이지에 최대 10개만 띄움 ) 
     public GameObject[] inputTeamRoom;      // 방에 들어갈 버튼 배열 ( 한 페이지에 최대 10개만 띄움 ) 
+    public GameObject[] ItemTeamColor;      
+    public GameObject[] ItemTeamHat;       
+    public GameObject[] ItemTeamTop;       
+    public GameObject[] ItemTeamPants;       
+    public GameObject[] ItemTeamShoes;       
+    public GameObject[] ItemTeamBag;       
 
     [Header("Test Map")]
     public GameObject map;                  // 맵 프리팹 ( 각 맵에 이름만 지정 해주면 됨 ) 
@@ -80,6 +87,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public Material lobbySkyBox;
     //public GameObject webView;              // 로비의 webView 오브젝트 
 
+    
 
     [Header("-----실시간 채팅 시스템 구현-----")]
     [Header("LobbyPanel")]
@@ -144,6 +152,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         TeamData = "http://223.131.75.181:1356/Metaverse_war_exploded/TeamData.jsp";
         UserTeamData = "http://223.131.75.181:1356/Metaverse_war_exploded/UserTeamData.jsp";
         AllTeamData = "http://223.131.75.181:1356/Metaverse_war_exploded/TeamAllData.jsp";
+        
+        // 아바타를 가져오는 URL
+        ItemInputData = "http://localhost:8080/Metaverse_war_exploded/ItemInput.jsp";  
 
         // 채팅로그 가져오기
         ChatLogData = "http://223.131.75.181:1356/Metaverse_war_exploded/ChatLog.jsp";
@@ -494,6 +505,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         inputTeam.SetActive(false);         // 팀방 입장하기 UI 비활성화 
         Server.SetActive(false);            // server에 있는 UI 비활성화 
         StartCoroutine(cTeam());            // 팀방 생성 관련 코루틴 
+        
     }
     
     IEnumerator cTeam()
@@ -573,10 +585,59 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 endPage = (reSplit.Length % 10 == 0) ? (reSplit.Length / 10) * 10 : (reSplit.Length / 10 + 1) * 10;
             }
         }
-        
+        StartCoroutine(cItem());            // 팀방 생성 관련 코루틴 
+        // 메모리 누수 방지 
+        // wwwData.Dispose();
+    }
+
+    IEnumerator cItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+ 
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        ItemFor(reSplit, ItemTeamColor, "color");
+        ItemFor(reSplit, ItemTeamHat, "hat");
+        ItemFor(reSplit, ItemTeamTop, "top");
+        ItemFor(reSplit, ItemTeamPants, "pants");
+        ItemFor(reSplit, ItemTeamShoes, "shoes");
+        ItemFor(reSplit, ItemTeamBag, "bag");
+
         // 메모리 누수 방지 
         wwwData.Dispose();
     }
+
+    public void ItemFor(string[] ItemID,GameObject[] ItemName, string name)
+    {
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {
+                Debug.Log(name + i + "를 찾았습니다.");
+                ItemName[i].SetActive(true);
+
+                ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
+                ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
+                buttonValues.Name = name + i;
+            }
+        }
+    }
+
     public void CreateTeamRoom()
     {
         // 버튼에 알맞는 팀 방 생성 

@@ -66,6 +66,8 @@ public class LobbyPlayer : MonoBehaviourPunCallbacks {
             buttonEvent.CreateplayerBackGround.SetActive(true);
             buttonEvent.TeamCreateNext.SetActive(false);
             buttonEvent.TeamCreatePrevious.SetActive(false);
+            buttonEvent.CreateItemList.SetActive(true);
+            buttonEvent.CreateItemBackGround.SetActive(true);
             buttonEvent.count = 0;
         }
         else if (other.tag == "InputPortal") {

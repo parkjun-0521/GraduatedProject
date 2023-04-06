@@ -23,7 +23,6 @@ public class MovePortal : MonoBehaviour
             buttonEvent.PublicCreateRoomPrevious();
         else if(!networkManager.adminCheck)
             buttonEvent.PublicInputRoomPrevious();
-
         buttonEvent.RoomCreate_Input.SetActive(false);
         //buttonEvent.LobbyPanel_NextButton.SetActive(true);
         buttonEvent.LobbyPanel_PreviousButton.SetActive(false);
