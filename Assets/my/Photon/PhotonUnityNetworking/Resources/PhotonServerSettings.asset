@@ -66,6 +66,7 @@ MonoBehaviour:
   - Eledooropen2f
   - Eledown
   - Eleup
+  - customizing
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -2464,6 +2464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6993222848114512882}
   - component: {fileID: 5654396334794048666}
+  - component: {fileID: 7373760093146961276}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -2625,12 +2626,84 @@ SkinnedMeshRenderer:
   - {fileID: 7976619960959373402}
   - {fileID: 834542369164258487}
   - {fileID: 918748650150156059}
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   m_RootBone: {fileID: 7725495217526328686}
   m_AABB:
     m_Center: {x: -0.000000006519258, y: -0.001178123, z: 0.00005543651}
     m_Extent: {x: 0.007499983, y: 0.009152047, z: 0.0021262262}
   m_DirtyAABB: 0
+--- !u!114 &7373760093146961276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766903146837589408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7cf950cfb31044490375003191bf4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character_body: {fileID: 0}
+  color: []
+  body_mat: []
+  hair_mat: {fileID: 0}
+  cloth_mat: {fileID: 0}
+  PV: {fileID: 0}
 --- !u!1 &5916849935605214208
 GameObject:
   m_ObjectHideFlags: 0
@@ -4309,6 +4382,10 @@ PrefabInstance:
     - target: {fileID: 163976, guid: 2912ebbc698b35c4aa2cc05b6864290a, type: 3}
       propertyPath: m_Name
       value: Toy_Snowman_Hat
+      objectReference: {fileID: 0}
+    - target: {fileID: 163976, guid: 2912ebbc698b35c4aa2cc05b6864290a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 442748, guid: 2912ebbc698b35c4aa2cc05b6864290a, type: 3}
       propertyPath: m_RootOrder
