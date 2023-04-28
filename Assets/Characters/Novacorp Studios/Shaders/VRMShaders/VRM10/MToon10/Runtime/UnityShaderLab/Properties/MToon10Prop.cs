@@ -29,7 +29,6 @@
         EmissiveTexture,
 
         // Rim Lighting
-        MatcapColorFactor,
         MatcapTexture,
         ParametricRimColorFactor,
         ParametricRimFresnelPowerFactor,

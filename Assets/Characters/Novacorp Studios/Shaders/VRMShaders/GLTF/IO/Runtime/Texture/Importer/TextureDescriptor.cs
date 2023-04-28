@@ -52,10 +52,6 @@ namespace VRMShaders
             GetTextureBytesAsync i4,
             GetTextureBytesAsync i5)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
             UnityObjectName = name;
             Offset = offset;
             Scale = scale;

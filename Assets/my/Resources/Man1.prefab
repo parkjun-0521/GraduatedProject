@@ -2698,12 +2698,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7cf950cfb31044490375003191bf4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character_body: {fileID: 5766903146837589408}
-  cloth:
-  - {fileID: 2100000, guid: e15aa06e83a0a494a8229ff0aea9beb1, type: 2}
-  - {fileID: 2100000, guid: a1d2946251e48f24381984d2afb88526, type: 2}
-  - {fileID: 2100000, guid: 28d41dd797309434fba18c19c7d3385b, type: 2}
-  PV: {fileID: -4342168869226430551}
+  character_body: {fileID: 0}
+  color: []
+  body_mat: []
+  hair_mat: {fileID: 0}
+  cloth_mat: {fileID: 0}
+  PV: {fileID: 0}
 --- !u!1 &5916849935605214208
 GameObject:
   m_ObjectHideFlags: 0
@@ -4483,15 +4483,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.124999955
+      value: 0.1999998
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000011920929
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5000002
+      value: -4.0000014
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: m_LocalRotation.w

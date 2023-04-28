@@ -23,7 +23,5 @@ namespace VRMShaders
         {
             return Task.FromResult(action());
         }
-
-        public Task NextFrameIfTimedOut() => NextFrame();
     }
 }

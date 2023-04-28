@@ -10,23 +10,14 @@ namespace VRMShaders
     public sealed class RuntimeOnlyAwaitCaller : IAwaitCaller
     {
         private readonly NextFrameTaskScheduler _scheduler;
-        private readonly float                  _timeOutInSeconds;
-        private          float                  _lastTimeoutBaseTime;
 
-        /// <summary>
-        /// タイムアウト指定可能なコンストラクタ
-        /// </summary>
-        /// <param name="timeOutInSeconds">NextFrameIfTimedOutがタイムアウトと見なす時間(秒単位)</param>
-        public RuntimeOnlyAwaitCaller(float timeOutInSeconds = 1f / 1000f)
+        public RuntimeOnlyAwaitCaller()
         {
             _scheduler = new NextFrameTaskScheduler();
-            _timeOutInSeconds = timeOutInSeconds;
-            ResetLastTimeoutBaseTime();
         }
 
         public Task NextFrame()
         {
-            ResetLastTimeoutBaseTime();
             var tcs = new TaskCompletionSource<object>();
             _scheduler.Enqueue(() => tcs.SetResult(default));
             return tcs.Task;
@@ -40,22 +31,6 @@ namespace VRMShaders
         public Task<T> Run<T>(Func<T> action)
         {
             return Task.Run(action);
-        }
-
-        public Task NextFrameIfTimedOut() => CheckTimeout() ? NextFrame() : Task.CompletedTask;
-
-        private void ResetLastTimeoutBaseTime() => _lastTimeoutBaseTime = 0f;
-
-        private bool LastTimeoutBaseTimeNeedsReset => _lastTimeoutBaseTime == 0f;
-
-        private bool CheckTimeout()
-        {
-            float t = UnityEngine.Time.realtimeSinceStartup;
-            if (LastTimeoutBaseTimeNeedsReset)
-            {
-                _lastTimeoutBaseTime = t;
-            }
-            return (t - _lastTimeoutBaseTime) >= _timeOutInSeconds;
         }
     }
 }

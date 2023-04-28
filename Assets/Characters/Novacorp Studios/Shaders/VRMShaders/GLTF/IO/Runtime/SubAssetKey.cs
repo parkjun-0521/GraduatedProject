@@ -55,14 +55,9 @@ namespace VRMShaders
 
         public SubAssetKey(Type type, string name)
         {
-            if (type == null)
+            if (type == null || string.IsNullOrEmpty(name))
             {
-                throw new System.ArgumentNullException("type");
-            }
-
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException();
             }
 
             if (!type.IsSubclassOf(typeof(UnityEngine.Object)))
