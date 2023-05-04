@@ -26,6 +26,8 @@ public class MovePortal : MonoBehaviour
         buttonEvent.RoomCreate_Input.SetActive(false);
         //buttonEvent.LobbyPanel_NextButton.SetActive(true);
         buttonEvent.LobbyPanel_PreviousButton.SetActive(false);
+
+        StartCoroutine(networkManager.pItem());
     }
 
    

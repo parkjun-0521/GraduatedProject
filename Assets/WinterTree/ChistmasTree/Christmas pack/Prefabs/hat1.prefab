@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3385308}
   - 23: {fileID: 2372016}
   m_Layer: 0
-  m_Name: Toy_Snowman_Hat
+  m_Name: hat1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

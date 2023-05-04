@@ -58,6 +58,8 @@ public class LobbyPlayer : MonoBehaviourPunCallbacks {
             NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
             networkManager.CreateTeam();
 
+            
+
             ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
             buttonEvent.TeamCreate_Women();
             for (int i = 0; i < buttonEvent.TeamCreate_Women_Men.Length; i++)

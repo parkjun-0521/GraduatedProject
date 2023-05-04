@@ -105,14 +105,20 @@ public class LoginManager : MonoBehaviour
             // 로그인 성공시 ( 관리자 계정이다 ) 
             // 로그인 Panel은 비활성화, 관리자 서버 연결 Panel은 활성화 
             LoginPanelObj.SetActive(false);
-            ConnectServerObj.SetActive(true);
+           // ConnectServerObj.SetActive(true);
+            NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+            networkManager.Connect();
+            networkManager.lodingPanel.SetActive(true);
         }
         else if (re == "0") {
             Debug.Log("로그인 성공");
             // 로그인 성공시 ( 사용자 계정이다 ) 
             // 로그인 Panel은 비활성화, 사용자 서버 연결 Panel은 활성화 
             LoginPanelObj.SetActive(false);
-            UserRoomServerObj.SetActive(true);
+            //UserRoomServerObj.SetActive(true);
+            NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+            networkManager.Connect();
+            networkManager.lodingPanel.SetActive(true);
         }
         else {
             Debug.Log("로그인 실패");

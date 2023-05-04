@@ -66,12 +66,51 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public GameObject inputTeam;            // 팀원이 입장할 방 UI Panel
     public GameObject[] createTeamRoom;     // 방을 만들 버튼 배열 ( 한 페이지에 최대 10개만 띄움 ) 
     public GameObject[] inputTeamRoom;      // 방에 들어갈 버튼 배열 ( 한 페이지에 최대 10개만 띄움 ) 
-    public GameObject[] ItemTeamColor;      
-    public GameObject[] ItemTeamHat;       
-    public GameObject[] ItemTeamTop;       
-    public GameObject[] ItemTeamPants;       
-    public GameObject[] ItemTeamShoes;       
-    public GameObject[] ItemTeamBag;       
+
+    public string[] itemName = new string[6];
+
+    public GameObject[] itemPublicColor;
+    public GameObject[] itemPublicHat;
+    public GameObject[] itemPublicTop;
+    public GameObject[] itemPublicPants;
+    public GameObject[] itemPublicShoes;
+    public GameObject[] itemPublicBag;
+
+    public ToggleGroup publicColor;
+    public ToggleGroup publicHat;
+    public ToggleGroup publicTop;
+    public ToggleGroup publicPants;
+    public ToggleGroup publicShoes;
+    public ToggleGroup publicBag;
+
+
+    public GameObject[] ItemTeamColor;
+    public GameObject[] ItemTeamHat;
+    public GameObject[] ItemTeamTop;
+    public GameObject[] ItemTeamPants;
+    public GameObject[] ItemTeamShoes;
+    public GameObject[] ItemTeamBag;
+
+    public ToggleGroup Color;
+    public ToggleGroup Hat;
+    public ToggleGroup Top;
+    public ToggleGroup Pants;
+    public ToggleGroup Shoes;
+    public ToggleGroup Bag;
+
+    public GameObject[] ItemTeamInputColor;
+    public GameObject[] ItemTeamInputHat;
+    public GameObject[] ItemTeamInputTop;
+    public GameObject[] ItemTeamInputPants;
+    public GameObject[] ItemTeamInputShoes;
+    public GameObject[] ItemTeamInputBag;
+
+    public ToggleGroup InputColor;
+    public ToggleGroup InputHat;
+    public ToggleGroup InputTop;
+    public ToggleGroup InputPants;
+    public ToggleGroup InputShoes;
+    public ToggleGroup InputBag;
 
     [Header("Test Map")]
     public GameObject map;                  // 맵 프리팹 ( 각 맵에 이름만 지정 해주면 됨 ) 
@@ -86,6 +125,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public GameObject LobbyMainPlayer;      // 로비의 Player 오브젝트 
     public Material lobbySkyBox;
     //public GameObject webView;              // 로비의 webView 오브젝트 
+
+    public GameObject optionPanel;
 
     
 
@@ -131,6 +172,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public Material skyBoxSummer;
     public Material skyBoxAutumn;
     public Material skyBoxWinter;
+
     //--------------------------------------------- 빌드 화면 크기 ---------------------------------------------// 
     void Awake()
     {
@@ -158,6 +200,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 채팅로그 가져오기
         ChatLogData = "http://223.131.75.181:1356/Metaverse_war_exploded/ChatLog.jsp";
+
+        for (int i = 0; i < itemName.Length; i++) {
+            itemName[i] = null;
+        }
     }
 
     //--------------------------------------------- 사용자의 상태, 로비의 인원, 채팅창 관련 로직 ---------------------------------------------// 
@@ -224,7 +270,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         StartCoroutine(UserNick());
         Screen.SetResolution(1920, 1080, true);
 
-        lodingPanel.SetActive(true);
         // 로비 캐릭터의 위치를 0, 3, 0으로 초기화
         LobbyMainPlayer.transform.position = new Vector3(0f, 1f, -9f);
 
@@ -345,9 +390,131 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 Input_Next_Previous[i].SetActive(true);
             }
         }
-      
+        
         // 메모리 누수 방지를 위해 
         wwwData.Dispose();
+    }
+
+    public IEnumerator pItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        PublicItemFor(reSplit, itemPublicColor, "color");
+        yield return new WaitForSeconds(0.1f);
+        PublicItemFor(reSplit, itemPublicHat, "hat");
+        yield return new WaitForSeconds(0.1f);
+        PublicItemFor(reSplit, itemPublicTop, "top");
+        yield return new WaitForSeconds(0.1f);
+        PublicItemFor(reSplit, itemPublicPants, "pants");
+        yield return new WaitForSeconds(0.1f);
+        PublicItemFor(reSplit, itemPublicShoes, "shoes");
+        yield return new WaitForSeconds(0.1f);
+        PublicItemFor(reSplit, itemPublicBag, "bag");
+
+
+        Debug.Log(playername);
+
+        // 메모리 누수 방지 
+        wwwData.Dispose();
+    }
+
+    public void PublicItemFor(string[] ItemID, GameObject[] ItemName, string name)
+    {
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {
+                Debug.Log(name + i + "를 찾았습니다.");
+                ItemName[i].SetActive(true);
+
+                ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
+                ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
+                buttonValues.Name = "Item" + name + i;
+            }
+        }
+    }
+    public void ColorPublicAvatar()
+    {
+
+        Toggle selectedColorToggle = publicColor.ActiveToggles().FirstOrDefault();
+        if (selectedColorToggle != null)
+            itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[0] = null;
+
+    }
+    public void HatPublicAvatar()
+    {
+        Toggle selectedHatToggle = publicHat.ActiveToggles().FirstOrDefault();
+        if (selectedHatToggle != null)
+            itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[1] = null;
+
+    }
+    public void TopPublicAvatar()
+    {
+
+
+        Toggle selectedTopToggle = publicTop.ActiveToggles().FirstOrDefault();
+        if (selectedTopToggle != null)
+            itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[2] = null;
+
+    }
+    public void PantsPublicAvatar()
+    {
+
+        Toggle selectedPantsToggle = publicPants.ActiveToggles().FirstOrDefault();
+        if (selectedPantsToggle != null)
+            itemName[3] = selectedPantsToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[3] = null;
+
+    }
+    public void ShoesPublicAvatar()
+    {
+
+        Toggle selectedShoesoggle = publicShoes.ActiveToggles().FirstOrDefault();
+        if (selectedShoesoggle != null)
+            itemName[4] = selectedShoesoggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[4] = null;
+
+    }
+    public void BagPublicAvatar()
+    {
+
+        Toggle selectedBagToggle = publicBag.ActiveToggles().FirstOrDefault();
+        if (selectedBagToggle != null)
+            itemName[5] = selectedBagToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[5] = null;
+
+    }
+    public void ItemSelect()
+    {
+        for (int i = 0; i < itemName.Length; i++) {
+            Debug.Log(itemName[i]);
+        }
     }
 
     //--------------------------------------------- 서버 연결을 끊을 때 함수 ---------------------------------------------// 
@@ -362,6 +529,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         LobbyPanelObj.SetActive(false);                 // 로비 Panel 비활성화 
         Server.SetActive(false);                        // 닉네임 Panel 비활성화 
         Lobby.SetActive(false);
+        optionPanel.SetActive(false);
         //webView.SetActive(false);
         NickNameText.text = null;                       // 닉네임창 초기화 
         UserCheck = false;
@@ -500,12 +668,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     //--------------------------------------------- 팀방 생성 함수 ---------------------------------------------// 
     public void CreateTeam()
     {
+
         LobbyPanel.SetActive(false);        // 로비 Panel 비활성화 
         createTeam.SetActive(true);         // 팀방 생성 UI 활성화 
         inputTeam.SetActive(false);         // 팀방 입장하기 UI 비활성화 
         Server.SetActive(false);            // server에 있는 UI 비활성화 
         StartCoroutine(cTeam());            // 팀방 생성 관련 코루틴 
-        
     }
     
     IEnumerator cTeam()
@@ -587,7 +755,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
         StartCoroutine(cItem());            // 팀방 생성 관련 코루틴 
         // 메모리 누수 방지 
-        // wwwData.Dispose();
+        //wwwData.Dispose();
     }
 
     IEnumerator cItem()
@@ -614,11 +782,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             Debug.Log(reSplit[i]);
 
         ItemFor(reSplit, ItemTeamColor, "color");
+        yield return new WaitForSeconds(0.1f);
         ItemFor(reSplit, ItemTeamHat, "hat");
+        yield return new WaitForSeconds(0.1f);
         ItemFor(reSplit, ItemTeamTop, "top");
+        yield return new WaitForSeconds(0.1f);
         ItemFor(reSplit, ItemTeamPants, "pants");
+        yield return new WaitForSeconds(0.1f);
         ItemFor(reSplit, ItemTeamShoes, "shoes");
+        yield return new WaitForSeconds(0.1f);
         ItemFor(reSplit, ItemTeamBag, "bag");
+
+        
+        Debug.Log(playername);
 
         // 메모리 누수 방지 
         wwwData.Dispose();
@@ -633,11 +809,72 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
-                buttonValues.Name = name + i;
+                buttonValues.Name = "Item" + name + i;
             }
         }
     }
+    public void ColorAvatar()
+    {
+        
+        Toggle selectedColorToggle = Color.ActiveToggles().FirstOrDefault();
+        if (selectedColorToggle != null)
+            itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[0] = null;
 
+    }
+    public void HatAvatar()
+    {
+     
+
+        Toggle selectedHatToggle = Hat.ActiveToggles().FirstOrDefault();
+        if (selectedHatToggle != null)
+            itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[1] = null;
+
+    }
+    public void TopAvatar()
+    {
+       
+
+        Toggle selectedTopToggle = Top.ActiveToggles().FirstOrDefault();
+        if (selectedTopToggle != null)
+            itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[2] = null;
+
+    }
+    public void PantsAvatar()
+    {  
+
+        Toggle selectedPantsToggle = Pants.ActiveToggles().FirstOrDefault();
+        if (selectedPantsToggle != null)
+            itemName[3] = selectedPantsToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[3] = null;
+
+    }
+    public void ShoesAvatar()
+    {
+       
+        Toggle selectedShoesoggle = Shoes.ActiveToggles().FirstOrDefault();
+        if (selectedShoesoggle != null)
+            itemName[4] = selectedShoesoggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[4] = null;
+
+    }
+    public void BagAvatar()
+    {
+
+        Toggle selectedBagToggle = Bag.ActiveToggles().FirstOrDefault();
+        if (selectedBagToggle != null)
+            itemName[5] = selectedBagToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[5] = null;
+
+    }
     public void CreateTeamRoom()
     {
         // 버튼에 알맞는 팀 방 생성 
@@ -828,7 +1065,124 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
 
         // 메모리 누수 방지 
+        StartCoroutine(iItem());
+    }
+    IEnumerator iItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        InputItemFor(reSplit, ItemTeamInputColor, "color");
+        yield return new WaitForSeconds(0.1f);
+        InputItemFor(reSplit, ItemTeamInputHat, "hat");
+        yield return new WaitForSeconds(0.1f);
+        InputItemFor(reSplit, ItemTeamInputTop, "top");
+        yield return new WaitForSeconds(0.1f);
+        InputItemFor(reSplit, ItemTeamInputPants, "pants");
+        yield return new WaitForSeconds(0.1f);
+        InputItemFor(reSplit, ItemTeamInputShoes, "shoes");
+        yield return new WaitForSeconds(0.1f);
+        InputItemFor(reSplit, ItemTeamInputBag, "bag");
+
+
+        Debug.Log(playername);
+
+        // 메모리 누수 방지 
         wwwData.Dispose();
+    }
+
+    public void InputItemFor(string[] ItemID, GameObject[] ItemName, string name)
+    {
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {
+                Debug.Log(name + i + "를 찾았습니다.");
+                ItemName[i].SetActive(true);
+
+                ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
+                ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
+                buttonValues.Name = "Item" + name + i;
+            }
+        }
+    }
+    public void InputColorAvatar()
+    {
+
+        Toggle selectedColorToggle = InputColor.ActiveToggles().FirstOrDefault();
+        if (selectedColorToggle != null)
+            itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[0] = null;
+
+    }
+    public void InputHatAvatar()
+    {
+
+
+        Toggle selectedHatToggle = InputHat.ActiveToggles().FirstOrDefault();
+        if (selectedHatToggle != null)
+            itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[1] = null;
+
+    }
+    public void InputTopAvatar()
+    {
+
+
+        Toggle selectedTopToggle = InputTop.ActiveToggles().FirstOrDefault();
+        if (selectedTopToggle != null)
+            itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[2] = null;
+
+    }
+    public void InputPantsAvatar()
+    {
+
+        Toggle selectedPantsToggle = InputPants.ActiveToggles().FirstOrDefault();
+        if (selectedPantsToggle != null)
+            itemName[3] = selectedPantsToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[3] = null;
+
+    }
+    public void InputShoesAvatar()
+    {
+
+        Toggle selectedShoesoggle = InputShoes.ActiveToggles().FirstOrDefault();
+        if (selectedShoesoggle != null)
+            itemName[4] = selectedShoesoggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[4] = null;
+
+    }
+    public void InputBagAvatar()
+    {
+
+        Toggle selectedBagToggle = InputBag.ActiveToggles().FirstOrDefault();
+        if (selectedBagToggle != null)
+            itemName[5] = selectedBagToggle.GetComponentInChildren<Text>().text;
+        else
+            itemName[5] = null;
+
     }
 
     public void InputTeamRoom()
@@ -1091,6 +1445,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
         smoothFollow.roteta();
         player = PhotonNetwork.Instantiate(playername, Vector3.zero, Quaternion.identity);
+
 
         // 현재 방의 정보를 text로 표시 
         // 최대 몇명까지 현재 몇명이 있는지

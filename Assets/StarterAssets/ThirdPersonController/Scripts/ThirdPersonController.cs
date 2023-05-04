@@ -247,8 +247,8 @@ namespace StarterAssets
 
         private void FixedUpdate()
         {
-            if (PV.IsMine) 
-                PlayerRay();
+            //if (PV.IsMine) 
+            //    PlayerRay();
         }
 
         private void AssignAnimationIDs()
@@ -469,7 +469,7 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
-
+        /*
         private void PlayerRay()    // 플레이어 레이
         {
             // ray 시작점
@@ -488,6 +488,7 @@ namespace StarterAssets
                 }
             }
         }
+        */
 
         private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
         {
