@@ -20,6 +20,14 @@ public class ButtonEvent : MonoBehaviour
     public GameObject[] publicCreateRoom;
     public GameObject[] publicInputRoom;
 
+    public GameObject publicplayerBackGround;
+    public GameObject publicItemBackGround;
+
+    public GameObject publicItemList;
+    public GameObject publicNextButton;
+    public GameObject publicPreviousButton;
+
+    public int pCount = 0;
     //====================================================================//
     public GameObject[] TeamInput_Player;
     public GameObject[] TeamInput_NextButton;
@@ -33,6 +41,12 @@ public class ButtonEvent : MonoBehaviour
     public GameObject TeamInputNext;
     public GameObject TeamInputPrevious;
 
+    public GameObject InputplayerBackGround;
+    public GameObject InputItemBackGround;
+
+    public GameObject InputItemList;
+    public GameObject inputNextButton;
+    public int iCount = 0;
     //====================================================================//
     public GameObject[] TeamCreate_Player;
     public GameObject[] TeamCreate_NextButton;
@@ -44,6 +58,11 @@ public class ButtonEvent : MonoBehaviour
     public GameObject TeamRoomCreate;
 
     public GameObject CreateplayerBackGround;
+    public GameObject CreateItemBackGround;
+
+    public GameObject CreateItemList;
+    public GameObject CreateTeamNextSelect;
+    public GameObject CreateTeamPreSelect;
 
     public GameObject TeamCreateRoom;
     public GameObject TeamCreateNext;
@@ -93,20 +112,49 @@ public class ButtonEvent : MonoBehaviour
             LobbyPanel_Player[i].SetActive(false);
         for (int i = 0; i < Women_Men.Length; i++)
             Women_Men[i].SetActive(false);
-        RoomCreate_Input.SetActive(true);
         for(int i =0;i< LobbyPanel_NextButton.Length; i++)    
             LobbyPanel_NextButton[i].SetActive(false);
         LobbyPanel_PreviousButton.SetActive(true);
+        publicplayerBackGround.SetActive(false);
+        publicNextButton.SetActive(true);
+        publicPreviousButton.SetActive(true);
+        pCount++;
+    }
+
+    public void LobbyPanel_Next_Button()
+    {
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        for (int i = 0; i < networkManager.itemName.Length; i++) {
+            Debug.Log(networkManager.itemName[i]);
+        }
+        publicItemBackGround.SetActive(false);
+        publicItemList.SetActive(false);
+        RoomCreate_Input.SetActive(true);
+        publicNextButton.SetActive(false);
+        pCount++;
     }
 
     public void LobbyPanel_Select_Previous()
     {
-        Women();
-        for (int i = 0; i < Women_Men.Length; i++)
-            Women_Men[i].SetActive(true);
-        RoomCreate_Input.SetActive(false);
-        //LobbyPanel_NextButton.SetActive(true);
-        LobbyPanel_PreviousButton.SetActive(false);
+        if (pCount == 1) {
+            Women();
+            for (int i = 0; i < Women_Men.Length; i++)
+                Women_Men[i].SetActive(true);
+            RoomCreate_Input.SetActive(false);
+            //LobbyPanel_NextButton.SetActive(true);
+            LobbyPanel_PreviousButton.SetActive(false);
+            publicPreviousButton.SetActive(false);
+            publicplayerBackGround.SetActive(true);
+            publicNextButton.SetActive(false);
+            pCount--;
+        }
+        else if(pCount == 2) {
+            publicItemBackGround.SetActive(true);
+            publicItemList.SetActive(true);
+            RoomCreate_Input.SetActive(false);
+            publicNextButton.SetActive(true);
+            pCount--;
+        }
     }
 
     public void Women()
@@ -177,22 +225,51 @@ public class ButtonEvent : MonoBehaviour
         for (int i = 0; i < TeamInput_NextButton.Length; i++) 
             TeamInput_NextButton[i].SetActive(false);
         TeamInput_PreviousButton.SetActive(true);
-        TeamInputNext.SetActive(true);
-        TeamInputPrevious.SetActive(true);
         playerBackGround.SetActive(false);
+        InputplayerBackGround.SetActive(false);
+        inputNextButton.SetActive(true);
+
+        iCount++;
+    }
+
+    public void TeamInput_Select_Next_Button()
+    {
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        for (int i = 0; i < networkManager.itemName.Length; i++) {
+            Debug.Log(networkManager.itemName[i]);
+        }
+        InputItemList.SetActive(false);
+        InputItemBackGround.SetActive(false);
+        TeamInputPrevious.SetActive(true);
+        TeamInputNext.SetActive(true);
+
+        inputNextButton.SetActive(false);
+        iCount++;
     }
 
     public void TeamInput_Select_Previous()
     {
-        TeamInput_Women();
-        for (int i = 0; i < TeamInput_Women_Men.Length; i++)
-            TeamInput_Women_Men[i].SetActive(true);
-        for (int i = 0; i < TeamInput_NextButton.Length; i++)
-            TeamInput_NextButton[i].SetActive(true);
-        TeamInput_PreviousButton.SetActive(false);
-        TeamInputNext.SetActive(false);
-        TeamInputPrevious.SetActive(false);
-        playerBackGround.SetActive(true);
+        if (iCount == 1) {
+            TeamInput_Women();
+            for (int i = 0; i < TeamInput_Women_Men.Length; i++)
+                TeamInput_Women_Men[i].SetActive(true);
+
+            TeamInput_PreviousButton.SetActive(false);
+            TeamInputNext.SetActive(false);
+            TeamInputPrevious.SetActive(false);
+            playerBackGround.SetActive(true);
+            inputNextButton.SetActive(false);
+            iCount--;
+        }
+        else if(iCount == 2) {
+            InputItemList.SetActive(true);
+            InputItemBackGround.SetActive(true);
+            inputNextButton.SetActive(true);
+
+            TeamInputPrevious.SetActive(false);
+            TeamInputNext.SetActive(false);
+            iCount--;
+        }
     }
 
     public void TeamInput_Women()
@@ -217,19 +294,34 @@ public class ButtonEvent : MonoBehaviour
                 TeamCreate_Player[i].SetActive(false);
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(false);
-            TeamRoomCreate.SetActive(true);
+            TeamRoomCreate.SetActive(false);
             TeamCreateRoomPrevious();
             TeamCreate_PreviousButton.SetActive(true);
             CreateplayerBackGround.SetActive(true);
+            CreateItemBackGround.SetActive(false);
+            CreateTeamNextSelect.SetActive(true);
+            CreateTeamPreSelect.SetActive(true);
             count++;
         }
         else if(count == 1) {
+            NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+            for (int i = 0; i < networkManager.itemName.Length; i++) {
+                Debug.Log(networkManager.itemName[i]);
+            }
+            TeamRoomCreate.SetActive(true);
+            CreateItemList.SetActive(false);
+            CreateTeamNextSelect.SetActive(false);
+            CreateTeamPreSelect.SetActive(true);
+            count++;
+        }
+        else if(count == 2) {
             CreateplayerBackGround.SetActive(false);
             for(int i =0; i<TeamCreate_NextButton.Length; i++)
                 TeamCreate_NextButton[i].SetActive(false);
             TeamRoomCreate.SetActive(false);
             TeamCreateNext.SetActive(true);
             TeamCreatePrevious.SetActive(true);
+            CreateTeamPreSelect.SetActive(true);
             count++;
         }
     }
@@ -242,12 +334,21 @@ public class ButtonEvent : MonoBehaviour
                 TeamCreate_Women_Men[i].SetActive(true);
             TeamRoomCreate.SetActive(false);
             TeamCreate_PreviousButton.SetActive(false);
+            CreateItemBackGround.SetActive(true);
+            CreateTeamNextSelect.SetActive(false);
+            CreateTeamPreSelect.SetActive(false);
             count--;
         }
-        else if(count == 2) {
+        else if (count == 2) {
+            TeamRoomCreate.SetActive(false);
+            CreateItemList.SetActive(true);
+            CreateTeamNextSelect.SetActive(true);
+            count--;
+        }
+        else if (count == 3) {
             CreateplayerBackGround.SetActive(true);
             for (int i = 0; i < TeamCreate_NextButton.Length; i++)
-                TeamCreate_NextButton[i].SetActive(true);
+                TeamCreate_NextButton[i].SetActive(false);
             TeamRoomCreate.SetActive(true);
             TeamCreateNext.SetActive(false);
             TeamCreatePrevious.SetActive(false);
