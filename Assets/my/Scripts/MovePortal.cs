@@ -26,11 +26,55 @@ public class MovePortal : MonoBehaviour
         buttonEvent.RoomCreate_Input.SetActive(false);
         //buttonEvent.LobbyPanel_NextButton.SetActive(true);
         buttonEvent.LobbyPanel_PreviousButton.SetActive(false);
-
+        buttonEvent.publicItemList.SetActive(true);
+        buttonEvent.publicplayerBackGround.SetActive(true);
+        buttonEvent.publicItemBackGround.SetActive(true);
+        buttonEvent.publicNextButton.SetActive(false);
+        buttonEvent.publicPreviousButton.SetActive(false);
+        buttonEvent.pCount = 0;
+        buttonEvent.publicRoomCount = 0;
         StartCoroutine(networkManager.pItem());
     }
 
-   
+    public void CreateEnter()
+    {
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        networkManager.CreateTeam();
+        StartCoroutine(networkManager.cItem());
+
+        ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
+        buttonEvent.TeamCreate_Women();
+        for (int i = 0; i < buttonEvent.TeamCreate_Women_Men.Length; i++)
+            buttonEvent.TeamCreate_Women_Men[i].SetActive(true);
+        buttonEvent.TeamCreate_PreviousButton.SetActive(false);
+        buttonEvent.CreateplayerBackGround.SetActive(true);
+        buttonEvent.TeamCreateNext.SetActive(false);
+        buttonEvent.TeamCreatePrevious.SetActive(false);
+        buttonEvent.CreateItemList.SetActive(true);
+        buttonEvent.CreateItemBackGround.SetActive(true);
+        
+        buttonEvent.count = 0;
+    }
+
+    public void InputEnter()
+    {
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        networkManager.InputTeam();
+        StartCoroutine(networkManager.iItem());
+
+        ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
+        buttonEvent.TeamInput_Women();
+        for (int i = 0; i < buttonEvent.TeamInput_Women_Men.Length; i++)
+            buttonEvent.TeamInput_Women_Men[i].SetActive(true);
+        buttonEvent.TeamInput_PreviousButton.SetActive(false);
+        buttonEvent.TeamInputNext.SetActive(false);
+        buttonEvent.TeamInputPrevious.SetActive(false);
+        buttonEvent.playerBackGround.SetActive(true);
+
+        buttonEvent.iCount = 0;
+}
+
+
     public void Exit()
     {
         NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();

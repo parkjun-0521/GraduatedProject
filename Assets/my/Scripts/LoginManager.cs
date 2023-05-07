@@ -44,7 +44,7 @@ public class LoginManager : MonoBehaviour
     public GameObject publicPortal;
     public GameObject CreateTeamPortal;
     public GameObject InputTeamPortal;
-
+    
     // DB관련 변수 
     [Header("Database")]
     UnityWebRequest wwwData;                    // 데이터베이스로 정보를 관리하기 위해 선언한 변수
@@ -53,6 +53,9 @@ public class LoginManager : MonoBehaviour
     public string LoginUrl;                     // 백서버와 통신할 로그인 URL
     public string CreateUrl;                    // 백서버와 통신할 계정생성 URL
     // Use this for initialization
+
+    public GameObject loginErrorMessage;
+    public RectTransform rectLogin;
     //--------------------------------------------- URL 초기화 ---------------------------------------------//
     void Start()
     {
@@ -61,6 +64,8 @@ public class LoginManager : MonoBehaviour
         LoginUrl = "http://223.131.75.181:1356//Metaverse_war_exploded/Login.jsp";
         // 계정생성 URL 
         CreateUrl = "http://223.131.75.181:1356/Metaverse_war_exploded/NewUserCreate.jsp";
+
+        rectLogin = loginErrorMessage.GetComponent<RectTransform>();
 
     }
 
@@ -121,6 +126,7 @@ public class LoginManager : MonoBehaviour
             networkManager.lodingPanel.SetActive(true);
         }
         else {
+            rectLogin.anchoredPosition = new Vector2(0,0);
             Debug.Log("로그인 실패");
         }
         // 메모리 누수 방지를 위한 메모리 관리 

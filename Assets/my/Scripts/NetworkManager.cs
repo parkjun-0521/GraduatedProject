@@ -30,6 +30,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public string ItemInputData;            // 아바타 아이템을 가져오는 URL
     UnityWebRequest wwwData;                // 요청한 값을 받아서 저장하는 변수 
     UnityWebRequest wwwData_2;              // 요청한 값을 받아서 저장하는 변수 
+    UnityWebRequest wwwData_3;              // 요청한 값을 받아서 저장하는 변수 
 
     [Header("Text")]
     public Text NickNameText = null;        // 닉네임을 받아오기위한 Text
@@ -539,7 +540,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         loginManager.IDInputField.text = "";
         loginManager.PWInputField.text = "";
         // 실제로 포톤서버의 네트워크를 끊기 
-        PhotonNetwork.Disconnect();                 
+        PhotonNetwork.Disconnect();
+        Application.Quit();
     }
 
     public override void OnDisconnected( DisconnectCause cause )
@@ -563,7 +565,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         yield return wwwData.SendWebRequest();
         
         // 버튼을 끄기 위함 코루틴 ( 팀방 생성하기, 팀방 입장하기 버튼 ) 
-        StartCoroutine(TeamButtonOff());     
+        StartCoroutine(TeamButtonOff());
     }
     IEnumerator TeamButtonOff()
     {
@@ -619,6 +621,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 inputTeamRoom[i].SetActive(false);
         }
         wwwData.Dispose();
+        wwwData_2.Dispose();
     }
 
     //--------------------------------------------- 팀방 만들기 버튼의 제한을 없애기 위한 함수 ---------------------------------------------// 
@@ -668,7 +671,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     //--------------------------------------------- 팀방 생성 함수 ---------------------------------------------// 
     public void CreateTeam()
     {
-
         LobbyPanel.SetActive(false);        // 로비 Panel 비활성화 
         createTeam.SetActive(true);         // 팀방 생성 UI 활성화 
         inputTeam.SetActive(false);         // 팀방 입장하기 UI 비활성화 
@@ -753,23 +755,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 endPage = (reSplit.Length % 10 == 0) ? (reSplit.Length / 10) * 10 : (reSplit.Length / 10 + 1) * 10;
             }
         }
-        StartCoroutine(cItem());            // 팀방 생성 관련 코루틴 
+        //StartCoroutine(cItem());            // 팀방 생성 관련 코루틴 
         // 메모리 누수 방지 
-        //wwwData.Dispose();
+        wwwData.Dispose();
     }
 
-    IEnumerator cItem()
+    public IEnumerator cItem()
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
         // ID가 키값이므로 ID의 값만 가져온다. 
         form.AddField("id", loginManager.IDInputField.text);
 
-        wwwData = UnityWebRequest.Post(ItemInputData, form);
-        yield return wwwData.SendWebRequest();
+        wwwData_3 = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData_3.SendWebRequest();
 
         // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
-        string str = wwwData.downloadHandler.text;
+        string str = wwwData_3.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
         // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
         re = re.TrimEnd(',');
@@ -797,7 +799,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         Debug.Log(playername);
 
         // 메모리 누수 방지 
-        wwwData.Dispose();
+        wwwData_3.Dispose();
     }
 
     public void ItemFor(string[] ItemID,GameObject[] ItemName, string name)
@@ -1063,22 +1065,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 endPage = (reSplit.Length % 10 == 0) ? (reSplit.Length / 10) * 10 : (reSplit.Length / 10 + 1) * 10;
             }
         }
-
         // 메모리 누수 방지 
-        StartCoroutine(iItem());
+        //StartCoroutine(iItem());
+        // 메모리 누수 방지 
+        wwwData.Dispose();
     }
-    IEnumerator iItem()
+    public IEnumerator iItem()
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
         // ID가 키값이므로 ID의 값만 가져온다. 
         form.AddField("id", loginManager.IDInputField.text);
 
-        wwwData = UnityWebRequest.Post(ItemInputData, form);
-        yield return wwwData.SendWebRequest();
+        wwwData_3 = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData_3.SendWebRequest();
 
         // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
-        string str = wwwData.downloadHandler.text;
+        string str = wwwData_3.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
         // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
         re = re.TrimEnd(',');
@@ -1106,7 +1109,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         Debug.Log(playername);
 
         // 메모리 누수 방지 
-        wwwData.Dispose();
+        wwwData_3.Dispose();
     }
 
     public void InputItemFor(string[] ItemID, GameObject[] ItemName, string name)
@@ -1362,6 +1365,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 메모리 누수 방지 
         wwwData.Dispose();
+        wwwData_2.Dispose();
     }
 
     //--------------------------------------------- 팀장 또는 관리자가 방을 떠날때 각 유저들에서 부여한 프로퍼티 삭제후 방 내보내기 ---------------------------------------------// 

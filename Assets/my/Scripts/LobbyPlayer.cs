@@ -55,35 +55,12 @@ public class LobbyPlayer : MonoBehaviourPunCallbacks {
             movePortal.Enter();
         }
         else if (other.tag == "CreatePortal") {
-            NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-            networkManager.CreateTeam();
-
-            
-
-            ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
-            buttonEvent.TeamCreate_Women();
-            for (int i = 0; i < buttonEvent.TeamCreate_Women_Men.Length; i++)
-                buttonEvent.TeamCreate_Women_Men[i].SetActive(true);
-            buttonEvent.TeamCreate_PreviousButton.SetActive(false);
-            buttonEvent.CreateplayerBackGround.SetActive(true);
-            buttonEvent.TeamCreateNext.SetActive(false);
-            buttonEvent.TeamCreatePrevious.SetActive(false);
-            buttonEvent.CreateItemList.SetActive(true);
-            buttonEvent.CreateItemBackGround.SetActive(true);
-            buttonEvent.count = 0;
+            MovePortal movePortal = GameObject.Find("PublicZoon").GetComponent<MovePortal>();
+            movePortal.CreateEnter();
         }
         else if (other.tag == "InputPortal") {
-            NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-            networkManager.InputTeam();
-
-            ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
-            buttonEvent.TeamInput_Women();
-            for (int i = 0; i < buttonEvent.TeamInput_Women_Men.Length; i++)
-                buttonEvent.TeamInput_Women_Men[i].SetActive(true);
-            buttonEvent.TeamInput_PreviousButton.SetActive(false);
-            buttonEvent.TeamInputNext.SetActive(false);
-            buttonEvent.TeamInputPrevious.SetActive(false);
-            buttonEvent.playerBackGround.SetActive(true);
+            MovePortal movePortal = GameObject.Find("PublicZoon").GetComponent<MovePortal>();
+            movePortal.InputEnter();
         }
     }
 

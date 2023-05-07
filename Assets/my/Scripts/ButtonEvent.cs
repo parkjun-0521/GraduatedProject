@@ -28,6 +28,7 @@ public class ButtonEvent : MonoBehaviour
     public GameObject publicPreviousButton;
 
     public int pCount = 0;
+    public int publicRoomCount = 0;
     //====================================================================//
     public GameObject[] TeamInput_Player;
     public GameObject[] TeamInput_NextButton;
@@ -41,7 +42,7 @@ public class ButtonEvent : MonoBehaviour
     public GameObject TeamInputNext;
     public GameObject TeamInputPrevious;
 
-    public GameObject InputplayerBackGround;
+    public GameObject InputplayerTeaminput;
     public GameObject InputItemBackGround;
 
     public GameObject InputItemList;
@@ -59,6 +60,8 @@ public class ButtonEvent : MonoBehaviour
 
     public GameObject CreateplayerBackGround;
     public GameObject CreateItemBackGround;
+    public GameObject CreateItemSelectBackGround;
+    public GameObject CreateRoomBackGround;
 
     public GameObject CreateItemList;
     public GameObject CreateTeamNextSelect;
@@ -69,6 +72,7 @@ public class ButtonEvent : MonoBehaviour
     public GameObject TeamCreatePrevious;
     public int count = 0;
 
+    public int roomCount = 0;
     //====================================================================//
     public GameObject option;
     public GameObject soundPanel;
@@ -131,6 +135,11 @@ public class ButtonEvent : MonoBehaviour
         publicItemList.SetActive(false);
         RoomCreate_Input.SetActive(true);
         publicNextButton.SetActive(false);
+        if(pCount == 1) {
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[0].SetActive(true);
+        }
         pCount++;
     }
 
@@ -153,6 +162,9 @@ public class ButtonEvent : MonoBehaviour
             publicItemList.SetActive(true);
             RoomCreate_Input.SetActive(false);
             publicNextButton.SetActive(true);
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[0].SetActive(true);
             pCount--;
         }
     }
@@ -174,32 +186,92 @@ public class ButtonEvent : MonoBehaviour
 
     public void PublicCreateRoomNext()
     {
-        for (int i = 0; i < 2; i++)
-            publicCreateRoom[i].SetActive(false);
-        for (int i = 2; i < publicCreateRoom.Length; i++)
-            publicCreateRoom[i].SetActive(true);
+        if (publicRoomCount == 0) {
+            publicRoomCount++;
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 1) {
+            publicRoomCount++;
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 2) {
+            publicRoomCount++;
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 3) {
+            publicRoomCount = 0;
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
 
-        for (int i = 0; i < publicCreateRoom.Length; i++)
+        for (int i = 0; i < publicInputRoom.Length; i++)
             publicInputRoom[i].SetActive(false);
     }
 
     public void PublicCreateRoomPrevious()
     {
-        for (int i = 0; i < 2; i++)
-            publicCreateRoom[i].SetActive(true);
-        for (int i = 2; i < publicCreateRoom.Length; i++)
-            publicCreateRoom[i].SetActive(false);
+        if (publicRoomCount == 0) {
+            publicRoomCount = 3;
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 1) {
+            publicRoomCount--;
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 2) {
+            publicRoomCount--;
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 3) {
+            publicRoomCount--;
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
 
-        for (int i = 0; i < publicCreateRoom.Length; i++)
+        for (int i = 0; i < publicInputRoom.Length; i++)
             publicInputRoom[i].SetActive(false);
     }
     
     public void PublicInputRoomNext()
     {
-        for (int i = 0; i < 2; i++)
-            publicInputRoom[i].SetActive(false);
-        for (int i = 2; i < publicCreateRoom.Length; i++)
-            publicInputRoom[i].SetActive(true);
+        if (publicRoomCount == 0) {
+            publicRoomCount++;
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 1) {
+            publicRoomCount++;
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 2) {
+            publicRoomCount++;
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 3) {
+            publicRoomCount = 0;
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
 
         for (int i = 0; i < publicCreateRoom.Length; i++)
             publicCreateRoom[i].SetActive(false);
@@ -207,10 +279,31 @@ public class ButtonEvent : MonoBehaviour
 
     public void PublicInputRoomPrevious()
     {
-        for (int i = 0; i < 2; i++)
-            publicInputRoom[i].SetActive(true);
-        for (int i = 2; i < publicCreateRoom.Length; i++)
-            publicInputRoom[i].SetActive(false);
+        if (publicRoomCount == 0) {
+            publicRoomCount = 3;
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 1) {
+            publicRoomCount--;
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 2) {
+            publicRoomCount--;
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
+        else if (publicRoomCount == 3) {
+            publicRoomCount--;
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
+
 
         for (int i = 0; i < publicCreateRoom.Length; i++)
             publicCreateRoom[i].SetActive(false);
@@ -226,9 +319,7 @@ public class ButtonEvent : MonoBehaviour
             TeamInput_NextButton[i].SetActive(false);
         TeamInput_PreviousButton.SetActive(true);
         playerBackGround.SetActive(false);
-        InputplayerBackGround.SetActive(false);
         inputNextButton.SetActive(true);
-
         iCount++;
     }
 
@@ -243,6 +334,7 @@ public class ButtonEvent : MonoBehaviour
         TeamInputPrevious.SetActive(true);
         TeamInputNext.SetActive(true);
 
+        InputplayerTeaminput.SetActive(true);
         inputNextButton.SetActive(false);
         iCount++;
     }
@@ -265,7 +357,7 @@ public class ButtonEvent : MonoBehaviour
             InputItemList.SetActive(true);
             InputItemBackGround.SetActive(true);
             inputNextButton.SetActive(true);
-
+            InputplayerTeaminput.SetActive(false);
             TeamInputPrevious.SetActive(false);
             TeamInputNext.SetActive(false);
             iCount--;
@@ -308,14 +400,20 @@ public class ButtonEvent : MonoBehaviour
             for (int i = 0; i < networkManager.itemName.Length; i++) {
                 Debug.Log(networkManager.itemName[i]);
             }
+            CreateplayerBackGround.SetActive(false);
             TeamRoomCreate.SetActive(true);
             CreateItemList.SetActive(false);
             CreateTeamNextSelect.SetActive(false);
             CreateTeamPreSelect.SetActive(true);
+            CreateItemSelectBackGround.SetActive(true);
             count++;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[0].SetActive(true);
+            roomCount = 0;
         }
         else if(count == 2) {
-            CreateplayerBackGround.SetActive(false);
+            CreateItemSelectBackGround.SetActive(false);
             for(int i =0; i<TeamCreate_NextButton.Length; i++)
                 TeamCreate_NextButton[i].SetActive(false);
             TeamRoomCreate.SetActive(false);
@@ -323,6 +421,7 @@ public class ButtonEvent : MonoBehaviour
             TeamCreatePrevious.SetActive(true);
             CreateTeamPreSelect.SetActive(true);
             count++;
+            CreateRoomBackGround.SetActive(true);
         }
     }
 
@@ -343,15 +442,22 @@ public class ButtonEvent : MonoBehaviour
             TeamRoomCreate.SetActive(false);
             CreateItemList.SetActive(true);
             CreateTeamNextSelect.SetActive(true);
+            CreateplayerBackGround.SetActive(true);
+            CreateItemSelectBackGround.SetActive(false);
             count--;
         }
         else if (count == 3) {
-            CreateplayerBackGround.SetActive(true);
+            CreateItemSelectBackGround.SetActive(true);
             for (int i = 0; i < TeamCreate_NextButton.Length; i++)
                 TeamCreate_NextButton[i].SetActive(false);
             TeamRoomCreate.SetActive(true);
             TeamCreateNext.SetActive(false);
             TeamCreatePrevious.SetActive(false);
+            CreateRoomBackGround.SetActive(false);
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[0].SetActive(true);
+            roomCount = 0;
             count--;
         }
     }
@@ -372,19 +478,58 @@ public class ButtonEvent : MonoBehaviour
 
     public void TeamCreateRoomNext()
     {
-        for (int i = 0; i < 3; i++)
-            TeamCreateMap[i].SetActive(false);
-        for (int i = 3; i < TeamCreateMap.Length; i++)
-            TeamCreateMap[i].SetActive(true);
-
+        if (roomCount == 0) {
+            roomCount++;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[roomCount].SetActive(true);
+        }
+        else if (roomCount == 1) {
+            roomCount++;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[roomCount].SetActive(true);
+        }
+        else if (roomCount == 2) {
+            roomCount++;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[roomCount].SetActive(true);
+        }
+        else if (roomCount == 3) {
+            roomCount=0;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[roomCount].SetActive(true);
+        }
     }
 
     public void TeamCreateRoomPrevious()
     {
-        for (int i = 0; i < 3; i++)
-            TeamCreateMap[i].SetActive(true);
-        for (int i = 3; i < TeamCreateMap.Length; i++)
-            TeamCreateMap[i].SetActive(false);
+        if (roomCount == 0) {
+            roomCount = 3;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[roomCount].SetActive(true);
+        }
+        else if (roomCount == 1) {
+            roomCount--;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[roomCount].SetActive(true);
+        }
+        else if (roomCount == 2) {
+            roomCount--;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[roomCount].SetActive(true);
+        }
+        else if (roomCount == 3) {
+            roomCount--;
+            for (int i = 0; i < TeamCreateMap.Length; i++)
+                TeamCreateMap[i].SetActive(false);
+            TeamCreateMap[roomCount].SetActive(true);
+        }
 
     }
 
@@ -429,24 +574,10 @@ public class ButtonEvent : MonoBehaviour
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true && !optionCheck) {
-            ThirdPersonController thirdPersonController = GameObject.Find("Female1").GetComponent<ThirdPersonController>();
-            SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
-            option.SetActive(true);
-            optionCheck = true;
-            thirdPersonController.MoveSpeed = 0f;
-            thirdPersonController.SprintSpeed = 0f;
-            thirdPersonController.turnStop = true;
-            smoothFollow.turnOff = true;
+            OptionOpen();
         }
         else if(Input.GetKeyDown(KeyCode.Escape) && roomPanel.activeSelf == true && Lobby.activeSelf == false && !optionCheck) {
-            ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
-            SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
-            option.SetActive(true);
-            optionCheck = true;
-            thirdPersonController.MoveSpeed = 0f;
-            thirdPersonController.SprintSpeed = 0f;
-            thirdPersonController.turnStop = true;
-            smoothFollow.turnOff = true;
+            OptionOpen();
         }
         else if(optionCheck && Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true) {
             ThirdPersonController thirdPersonController = GameObject.Find("Female1").GetComponent<ThirdPersonController>();
@@ -480,6 +611,17 @@ public class ButtonEvent : MonoBehaviour
         }
     }
 
+    public void OptionOpen()
+    {
+        ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
+        SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
+        option.SetActive(true);
+        optionCheck = true;
+        thirdPersonController.MoveSpeed = 0f;
+        thirdPersonController.SprintSpeed = 0f;
+        thirdPersonController.turnStop = true;
+        smoothFollow.turnOff = true;
+    }
     public void Micblock()
     {
         if (micCount == 0) {
@@ -528,5 +670,14 @@ public class ButtonEvent : MonoBehaviour
             micCount = 0;
             curImage.sprite = changeCurSprite;
         }
+    }
+
+    //-----------------------------------------------------------------------------------//
+
+    public void LoginErrorMessageClose()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+
+        loginManager.rectLogin.anchoredPosition = new Vector2(400, 400);
     }
 }
