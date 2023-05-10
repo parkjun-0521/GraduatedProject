@@ -28,7 +28,7 @@ public class ButtonEvent : MonoBehaviour
     public GameObject publicPreviousButton;
 
     public int pCount = 0;
-    public int publicRoomCount = 0;
+    public int publicRoomCount = 3;
     //====================================================================//
     public GameObject[] TeamInput_Player;
     public GameObject[] TeamInput_NextButton;
@@ -135,11 +135,7 @@ public class ButtonEvent : MonoBehaviour
         publicItemList.SetActive(false);
         RoomCreate_Input.SetActive(true);
         publicNextButton.SetActive(false);
-        if(pCount == 1) {
-            for (int i = 0; i < publicCreateRoom.Length; i++)
-                publicCreateRoom[i].SetActive(false);
-            publicCreateRoom[0].SetActive(true);
-        }
+        publicRoomCount = 3;
         pCount++;
     }
 
@@ -162,9 +158,6 @@ public class ButtonEvent : MonoBehaviour
             publicItemList.SetActive(true);
             RoomCreate_Input.SetActive(false);
             publicNextButton.SetActive(true);
-            for (int i = 0; i < publicCreateRoom.Length; i++)
-                publicCreateRoom[i].SetActive(false);
-            publicCreateRoom[0].SetActive(true);
             pCount--;
         }
     }

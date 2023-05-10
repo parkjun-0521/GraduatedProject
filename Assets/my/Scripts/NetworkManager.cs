@@ -165,6 +165,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public static NetworkManager Instance;
 
     public GameObject lodingPanel;
+    public GameObject LoginlodingPanel;
 
     public bool checkRoom = false;
 
@@ -226,7 +227,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             thirdPersonController.MoveSpeed = 0.0f;
             thirdPersonController.SprintSpeed = 0.0f;
             thirdPersonController.turnStop = true;
-            thirdPersonController.JumpCheck = true;
+            thirdPersonController.EnterCheck = false;
 
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             smoothFollow.turnOff = true;
@@ -246,7 +247,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             thirdPersonController.MoveSpeed = 50.0f;
             thirdPersonController.SprintSpeed = 80.0f;
             thirdPersonController.turnStop = false;
-            thirdPersonController.JumpCheck = false;
+            thirdPersonController.EnterCheck = true;
+
 
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             smoothFollow.turnOff = false;
@@ -1403,7 +1405,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 맵 관련 프리팹 생성 
         // mapname는 맵 버튼을 누를 때 발생하는 함수에서 값이 들어감 ( MapValue() 함수 ) 
-        map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-4f,0), Quaternion.identity);
+        if (mapname.Equals("Cafe"))
+            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
+        else 
+            map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-2.5f,5), Quaternion.identity);
         Quaternion rot = Quaternion.Euler(0, 270, 0);
         web = PhotonNetwork.Instantiate("WebViewPrefab", new Vector3(4.4f, -4f, -0.073f), rot);
         keybo = PhotonNetwork.Instantiate("Keyboard", new Vector3(4f, -5f, -0.073f), rot);
@@ -1448,7 +1453,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 캐릭터 이름을 받아서 캐릭터 생성 
         SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
         smoothFollow.roteta();
-        player = PhotonNetwork.Instantiate(playername, Vector3.zero, Quaternion.identity);
+        player = PhotonNetwork.Instantiate(playername, new Vector3(0, 0, 0), Quaternion.identity);
 
 
         // 현재 방의 정보를 text로 표시 

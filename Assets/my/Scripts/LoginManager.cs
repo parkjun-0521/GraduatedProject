@@ -113,7 +113,7 @@ public class LoginManager : MonoBehaviour
            // ConnectServerObj.SetActive(true);
             NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
             networkManager.Connect();
-            networkManager.lodingPanel.SetActive(true);
+            networkManager.LoginlodingPanel.SetActive(true);
         }
         else if (re == "0") {
             Debug.Log("로그인 성공");
@@ -123,7 +123,7 @@ public class LoginManager : MonoBehaviour
             //UserRoomServerObj.SetActive(true);
             NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
             networkManager.Connect();
-            networkManager.lodingPanel.SetActive(true);
+            networkManager.LoginlodingPanel.SetActive(true);
         }
         else {
             rectLogin.anchoredPosition = new Vector2(0,0);

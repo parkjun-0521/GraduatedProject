@@ -32,7 +32,7 @@ public class MovePortal : MonoBehaviour
         buttonEvent.publicNextButton.SetActive(false);
         buttonEvent.publicPreviousButton.SetActive(false);
         buttonEvent.pCount = 0;
-        buttonEvent.publicRoomCount = 0;
+        buttonEvent.publicRoomCount = 3;
         StartCoroutine(networkManager.pItem());
     }
 

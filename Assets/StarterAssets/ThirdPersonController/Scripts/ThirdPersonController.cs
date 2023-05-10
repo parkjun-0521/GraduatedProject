@@ -144,7 +144,7 @@ namespace StarterAssets
         private Transform tr;
         private float yRotate, yRotateMove;
         public float rotateSpeed = 500.0f;
-        public bool JumpCheck = false;
+        public bool EnterCheck = true;
 
         public BaseWebViewPrefab webViewPrefab;
 
@@ -368,6 +368,7 @@ namespace StarterAssets
             }
         }
 
+        // 점프
         private void JumpAndGravity()
         {
 
@@ -379,7 +380,6 @@ namespace StarterAssets
                 if (_hasAnimator) {
                     _animator.SetBool(_animIDJump, false);
                     _animator.SetBool(_animIDFreeFall, false);
-                    JumpCheck = true;
                 }
 
                 // stop our velocity dropping infinitely when grounded
@@ -388,14 +388,13 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f) {
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f && EnterCheck) {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * JumpPower * Gravity);
 
                     // update animator if using character
                     if (_hasAnimator) {
                         _animator.SetBool(_animIDJump, true);
-                        JumpCheck = false;
                     }
                 }
 
