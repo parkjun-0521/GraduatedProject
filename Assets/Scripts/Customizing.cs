@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
+//using UnityEngine.ProBuilder.Shapes;
 using Photon.Pun;
 
 public class Customizing : MonoBehaviour
@@ -12,6 +12,7 @@ public class Customizing : MonoBehaviour
     [Tooltip("Customizing your character")]
     private Material[] body_mat;
     private Material hair_mat;
+    private Material hair_mat2;
     public Material cloth_mat;
     public Texture[] cloth = new Texture[3];
 
@@ -24,6 +25,7 @@ public class Customizing : MonoBehaviour
         character_body = this.gameObject;
         body_mat = character_body.GetComponent<SkinnedMeshRenderer>().materials;
         hair_mat = body_mat[0];
+        hair_mat2 = body_mat[7];
         // cloth_mat = Instantiate(body_mat[8]);
         cloth_mat = body_mat[8];
 
@@ -44,6 +46,7 @@ public class Customizing : MonoBehaviour
             if (this.hair_mat.color == color[0])
             {
                 this.hair_mat.color = color[1];
+                this.hair_mat2.color = color[1];
             }
             else if (this.hair_mat.color == color[1])
             {
