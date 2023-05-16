@@ -118,9 +118,6 @@ namespace StarterAssets {
         private string raytag;
         private float portalcool = 0.0f;
 
-        // customizing
-        private Color[] color = new Color[9];
-        private int colors;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -186,16 +183,7 @@ namespace StarterAssets {
                 if (PV.IsMine)
                     Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
             }
-            colors = 0;
-            color[0] = Color.white;
-            color[1] = Color.red;
-            color[2] = Color.yellow;
-            color[3] = Color.green;
-            color[4] = Color.blue;
-            color[5] = Color.cyan;
-            color[6] = Color.magenta;
-            color[7] = Color.black;
-            color[8] = Color.gray;
+        
 
 
         }
@@ -494,18 +482,6 @@ namespace StarterAssets {
             portalcool += Time.deltaTime;
         }
 
-        public void customizing()
-        {
-            if (colors < 8) {
-                hairs.color = color[++colors];
-                if (hairs2 != null) {
-                    hairs2.color = color[++colors];
-                }
-            }
-            else {
-                colors = 0;
-
-            }
-        }
+      
     }
 }

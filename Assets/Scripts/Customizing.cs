@@ -10,11 +10,13 @@ public class Customizing : MonoBehaviour
     private Color[] color = new Color[5];
     [Header("Materials")]
     [Tooltip("Customizing your character")]
-    private Material[] body_mat;
+    public Material[] body_mat;
     private Material hair_mat;
     private Material hair_mat2;
-    public Material cloth_mat;
-    public Texture[] cloth = new Texture[3];
+    private Color hair_def;
+    private Color hair_def2;
+   // public Material cloth_mat;
+  //  public Texture[] cloth = new Texture[3];
 
     public PhotonView PV;
 
@@ -25,9 +27,14 @@ public class Customizing : MonoBehaviour
         character_body = this.gameObject;
         body_mat = character_body.GetComponent<SkinnedMeshRenderer>().materials;
         hair_mat = body_mat[0];
-        hair_mat2 = body_mat[7];
+        hair_def = hair_mat.color;
+        if(body_mat.Length > 14)
+        {
+            hair_mat2 = body_mat[1];
+            hair_def2 = hair_mat2.color;
+        }
         // cloth_mat = Instantiate(body_mat[8]);
-        cloth_mat = body_mat[8];
+        //cloth_mat = body_mat[8];
 
 
         color[0] = new Color(150 / 255f, 0f, 0f);  // red
@@ -51,24 +58,39 @@ public class Customizing : MonoBehaviour
             else if (this.hair_mat.color == color[1])
             {
                 this.hair_mat.color = color[2];
+                this.hair_mat2.color = color[2];
             }
             else if (this.hair_mat.color == color[2])
             {
                 this.hair_mat.color = color[3];
+                this.hair_mat2.color = color[3];
             }
             else if (this.hair_mat.color == color[3])
             {
                 this.hair_mat.color = color[4];
+                this.hair_mat2.color = color[4];
             }
             else if (this.hair_mat.color == color[4])
             {
-                this.hair_mat.color = new Color(0f, 0f, 0f, 255f);
+                if(body_mat.Length > 14)
+                {
+                    this.hair_mat.color = hair_def;
+                    this.hair_mat2.color = hair_def2;
+                }
+                else
+                {
+                    this.hair_mat.color = new Color(0f, 0f, 0f, 255f);
+                    this.hair_mat2.color = new Color(0f, 0f, 0f, 255f);
+                }
             }
             else
+            {
                 this.hair_mat.color = color[0];
+                this.hair_mat2.color = color[0];
+            }              
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
+      /*  if (Input.GetKeyDown(KeyCode.G))
         {
             if (this.body_mat[8] == cloth[0])
             {
@@ -85,11 +107,11 @@ public class Customizing : MonoBehaviour
                 this.body_mat[8].SetTexture("_MainTex", cloth[0]);
                // cloth_mat.SetTexture("_MainTex", cloth[0]);
             }
-        }
+        }*/
 
         //  PV.RPC("customizing", RpcTarget.All);
         Debug.Log(this.hair_mat.color);
-        Debug.Log(this.cloth_mat);
+        //Debug.Log(this.cloth_mat);
         Debug.Log(this.body_mat[8]);
     }
 
