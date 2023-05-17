@@ -74,7 +74,7 @@ AimConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_RotationAtRest: {x: 8.558266, y: -91.218605, z: 96.299805}
-  m_RotationOffset: {x: 68.28135, y: -114.189384, z: -111.32458}
+  m_RotationOffset: {x: 68.281265, y: -114.18929, z: -111.32457}
   m_AimVector: {x: 0, y: 0, z: 1}
   m_UpVector: {x: 0, y: 1, z: 0}
   m_WorldUpVector: {x: 0, y: 1, z: 0}
@@ -6575,6 +6575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7105486546701930905}
   - component: {fileID: 4845985378481602499}
+  - component: {fileID: 2591154442904974999}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -6788,6 +6789,21 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00000017881393, y: -0.11171344, z: 0.008932933}
     m_Extent: {x: 0.6924079, y: 0.86608875, z: 0.20560847}
   m_DirtyAABB: 0
+--- !u!114 &2591154442904974999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363060293890535817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7cf950cfb31044490375003191bf4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character_body: {fileID: 0}
+  body_mat: []
+  PV: {fileID: -3737999207576324901}
 --- !u!1 &7420960029156144028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7964,7 +7980,7 @@ AimConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_RotationAtRest: {x: -75.56761, y: 81.121704, z: -71.37215}
-  m_RotationOffset: {x: 21.04838, y: -98.31324, z: -92.7728}
+  m_RotationOffset: {x: 21.048351, y: -98.3132, z: -92.77285}
   m_AimVector: {x: 0, y: 0, z: 1}
   m_UpVector: {x: 0, y: 1, z: 0}
   m_WorldUpVector: {x: 0, y: 1, z: 0}

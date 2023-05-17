@@ -236,7 +236,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5084597165061305551}
   - component: {fileID: 4691245940404818734}
-  - component: {fileID: 4691245940404818721}
   m_Layer: 0
   m_Name: Hat1
   m_TagString: Untagged
@@ -252,8 +251,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5610304819431452277}
   m_LocalRotation: {x: 0.0056034033, y: 0.00000011920772, z: -6.679814e-10, w: 0.9999843}
-  m_LocalPosition: {x: -0, y: 0.2207, z: -0.0019}
-  m_LocalScale: {x: 0.87715584, y: 1.2778281, z: 0.9983322}
+  m_LocalPosition: {x: -0.00001, y: 0.002017, z: -0.000029}
+  m_LocalScale: {x: 0.011934231, y: 0.015116613, z: 0.0126841515}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4188571388497634385}
@@ -273,6 +272,15 @@ MonoBehaviour:
   m_Script: {fileID: 1661641543, guid: 2a2c05204084d904aa4945ccff20d8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foldout_transforms: 1
+  foldout_forces: 1
+  foldout_collision: 1
+  foldout_stretchsquish: 1
+  foldout_limits: 1
+  foldout_grabpose: 1
+  foldout_options: 1
+  foldout_gizmos: 0
+  version: 0
   integrationType: 0
   rootTransform: {fileID: 1659437523071401414}
   ignoreTransforms: []
@@ -384,130 +392,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isAnimated: 0
-  resetWhenDisabled: 0
-  parameter: 
-  showGizmos: 1
-  boneOpacity: 0.5
-  limitOpacity: 0.5
---- !u!114 &4691245940404818721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5610304819431452277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1661641543, guid: 2a2c05204084d904aa4945ccff20d8e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  integrationType: 0
-  rootTransform: {fileID: 5914456753668123706}
-  ignoreTransforms: []
-  endpointPosition: {x: 0, y: 0, z: 0}
-  multiChildType: 0
-  pull: 0.17
-  pullCurve:
+  maxSquish: 0
+  maxSquishCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  spring: 0.17
-  springCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  stiffness: 0.2
-  stiffnessCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  gravity: 0.08
-  gravityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  gravityFalloff: 1
-  gravityFalloffCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  immobileType: 0
-  immobile: 0.5
-  immobileCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  allowCollision: 1
-  collisionFilter:
-    allowSelf: 1
-    allowOthers: 1
-  radius: 0.02
-  radiusCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  colliders: []
-  limitType: 0
-  maxAngleX: 45
-  maxAngleXCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxAngleZ: 45
-  maxAngleZCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  limitRotation: {x: 0, y: 0, z: 0}
-  limitRotationXCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  limitRotationYCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  limitRotationZCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  allowGrabbing: 1
-  grabFilter:
-    allowSelf: 1
-    allowOthers: 1
-  allowPosing: 1
-  poseFilter:
-    allowSelf: 1
-    allowOthers: 1
-  snapToHand: 0
-  grabMovement: 0.5
-  maxStretch: 0
-  maxStretchCurve:
+  stretchMotion: 0
+  stretchMotionCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2

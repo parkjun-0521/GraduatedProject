@@ -45,6 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 1661641543, guid: 2a2c05204084d904aa4945ccff20d8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foldout_transforms: 1
+  foldout_forces: 1
+  foldout_collision: 1
+  foldout_stretchsquish: 1
+  foldout_limits: 1
+  foldout_grabpose: 1
+  foldout_options: 1
+  foldout_gizmos: 0
+  version: 0
   integrationType: 0
   rootTransform: {fileID: 8064935470231868074}
   ignoreTransforms: []
@@ -151,6 +160,20 @@ MonoBehaviour:
   grabMovement: 0.5
   maxStretch: 0
   maxStretchCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSquish: 0
+  maxSquishCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  stretchMotion: 0
+  stretchMotionCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
@@ -282,16 +305,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509620528161858961}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.002, y: 0.1228, z: 0.0115}
-  m_LocalScale: {x: 0.9614, y: 1.1448619, z: 1}
+  m_LocalRotation: {x: 0.0056034033, y: 0.00000011920772, z: -6.679814e-10, w: 0.9999843}
+  m_LocalPosition: {x: 0, y: 0.00105, z: 0.00005}
+  m_LocalScale: {x: 0.008920239, y: 0.012950403, z: 0.010797173}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6257647918499138610}
   - {fileID: 8756188086788671678}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.642, y: 0, z: 0}
 --- !u!1 &4012455901333217488
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +360,15 @@ MonoBehaviour:
   m_Script: {fileID: 1661641543, guid: 2a2c05204084d904aa4945ccff20d8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foldout_transforms: 1
+  foldout_forces: 1
+  foldout_collision: 1
+  foldout_stretchsquish: 1
+  foldout_limits: 1
+  foldout_grabpose: 1
+  foldout_options: 1
+  foldout_gizmos: 0
+  version: 0
   integrationType: 0
   rootTransform: {fileID: 3163531880489309738}
   ignoreTransforms: []
@@ -443,6 +475,20 @@ MonoBehaviour:
   grabMovement: 0.5
   maxStretch: 0
   maxStretchCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSquish: 0
+  maxSquishCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  stretchMotion: 0
+  stretchMotionCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
@@ -716,6 +762,15 @@ MonoBehaviour:
   m_Script: {fileID: 1661641543, guid: 2a2c05204084d904aa4945ccff20d8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foldout_transforms: 1
+  foldout_forces: 1
+  foldout_collision: 1
+  foldout_stretchsquish: 1
+  foldout_limits: 1
+  foldout_grabpose: 1
+  foldout_options: 1
+  foldout_gizmos: 0
+  version: 0
   integrationType: 0
   rootTransform: {fileID: 8725239994710250997}
   ignoreTransforms: []
@@ -822,6 +877,20 @@ MonoBehaviour:
   grabMovement: 0.5
   maxStretch: 0
   maxStretchCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSquish: 0
+  maxSquishCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  stretchMotion: 0
+  stretchMotionCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
