@@ -198,7 +198,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         AllTeamData = "http://223.131.75.181:1356/Metaverse_war_exploded/TeamAllData.jsp";
         
         // 아바타를 가져오는 URL
-        ItemInputData = "http://localhost:8080/Metaverse_war_exploded/ItemInput.jsp";  
+        ItemInputData = "http://223.131.75.181:1356/Metaverse_war_exploded/ItemInput.jsp";  
 
         // 채팅로그 가져오기
         ChatLogData = "http://223.131.75.181:1356/Metaverse_war_exploded/ChatLog.jsp";
@@ -450,6 +450,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
+            }
+            else
+            {
+                Debug.Log("아이템찾지못함");
             }
         }
     }

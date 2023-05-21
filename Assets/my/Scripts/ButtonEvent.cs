@@ -90,7 +90,7 @@ public class ButtonEvent : MonoBehaviour
     public PunVoiceClient punVoiceClient;
 
     int micCount = 0;
-    public Image curImage;     //기존에 존제하는 이미지
+    public Image curImage;     //기존에 존재하는 이미지
     public Sprite changeSprite;   //바뀌어질 이미지
     public Sprite changeCurSprite;
 
@@ -98,6 +98,15 @@ public class ButtonEvent : MonoBehaviour
     public Image curSpekerImage;     //기존에 존제하는 이미지
     public Sprite changeSpekerSprite;   //바뀌어질 이미지
     public Sprite changeCurSpekerSprite;
+
+    //=====================================================================//
+    public GameObject preimg;
+    public GameObject pre_female1;
+    public GameObject pre_female2;
+    public GameObject pre_female3;
+    public GameObject pre_man1;
+    public GameObject pre_man2;
+    public GameObject pre_man3;
 
     //=====================================================================//
     public void WithRium_Move()
@@ -524,6 +533,20 @@ public class ButtonEvent : MonoBehaviour
             TeamCreateMap[roomCount].SetActive(true);
         }
 
+    }
+
+    //-----------------------------------------------------------------------------------//
+    public void female1_preview()
+    {
+        for (int i = 1; i < 4;)
+        {
+            ButtonValues buttonValues = GameObject.Find("Female" + i + "_pre").GetComponent<ButtonValues>();
+            buttonValues.gameObject.SetActive(false);
+            buttonValues = GameObject.Find("Man" + i + "_pre").GetComponent<ButtonValues>();
+            buttonValues.gameObject.SetActive(false);
+        }
+        pre_female1.SetActive(true);
+        preimg.SetActive(true);
     }
 
     //-----------------------------------------------------------------------------------//

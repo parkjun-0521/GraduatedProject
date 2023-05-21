@@ -74,7 +74,7 @@ AimConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_RotationAtRest: {x: 8.558266, y: -91.218605, z: 96.299805}
-  m_RotationOffset: {x: 68.281265, y: -114.18929, z: -111.32457}
+  m_RotationOffset: {x: 68.28113, y: -114.189156, z: -111.32457}
   m_AimVector: {x: 0, y: 0, z: 1}
   m_UpVector: {x: 0, y: 1, z: 0}
   m_WorldUpVector: {x: 0, y: 1, z: 0}
@@ -417,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843697543903299793}
   m_LocalRotation: {x: -0, y: -1.065814e-14, z: 5.3290722e-15, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0.3}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.319}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6091,13 +6091,11 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  hairs: {fileID: 0}
-  hairs2: {fileID: 0}
   _animator: {fileID: 0}
   turnStop: 0
   PV: {fileID: -3737999207576324901}
   rotateSpeed: 500
-  JumpCheck: 0
+  EnterCheck: 1
   webViewPrefab: {fileID: 0}
 --- !u!1 &6975916539745375702
 GameObject:
@@ -7980,7 +7978,7 @@ AimConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_RotationAtRest: {x: -75.56761, y: 81.121704, z: -71.37215}
-  m_RotationOffset: {x: 21.048351, y: -98.3132, z: -92.77285}
+  m_RotationOffset: {x: 21.048477, y: -98.31328, z: -92.77297}
   m_AimVector: {x: 0, y: 0, z: 1}
   m_UpVector: {x: 0, y: 1, z: 0}
   m_WorldUpVector: {x: 0, y: 1, z: 0}

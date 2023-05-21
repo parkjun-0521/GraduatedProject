@@ -86,9 +86,9 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-        [Tooltip("Customizing hair color")]
+/*        [Tooltip("Customizing hair color")]
         public Material hairs;
-        public Material hairs2;
+        public Material hairs2;*/
    
 
 
@@ -191,17 +191,6 @@ namespace StarterAssets
                 if (PV.IsMine)
                     Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
             }
-            colors = 0;
-            color[0] = Color.white;
-            color[1] = Color.red;
-            color[2] = Color.yellow;
-            color[3] = Color.green;
-            color[4] = Color.blue;
-            color[5] = Color.cyan;
-            color[6] = Color.magenta;
-            color[7] = Color.black;
-            color[8] = Color.gray;
-
             
         }
 
@@ -571,7 +560,7 @@ namespace StarterAssets
             portalcool += Time.deltaTime;
         }
 
-        public void customizing()
+       /* public void customizing()
         {
             if(colors < 8 )
             {              
@@ -586,6 +575,6 @@ namespace StarterAssets
                 colors = 0;
                 
             }
-        }
+        }*/
     }
 }

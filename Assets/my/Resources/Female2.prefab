@@ -1284,8 +1284,6 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  hairs: {fileID: 0}
-  hairs2: {fileID: 0}
   _animator: {fileID: 0}
   turnStop: 0
   PV: {fileID: 5660682367128626602}
