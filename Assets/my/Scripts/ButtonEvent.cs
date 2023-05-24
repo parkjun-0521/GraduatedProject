@@ -101,12 +101,7 @@ public class ButtonEvent : MonoBehaviour
 
     //=====================================================================//
     public GameObject preimg;
-    public GameObject pre_female1;
-    public GameObject pre_female2;
-    public GameObject pre_female3;
-    public GameObject pre_man1;
-    public GameObject pre_man2;
-    public GameObject pre_man3;
+    public GameObject[] preava;
 
     //=====================================================================//
     public void WithRium_Move()
@@ -363,6 +358,7 @@ public class ButtonEvent : MonoBehaviour
             TeamInputPrevious.SetActive(false);
             TeamInputNext.SetActive(false);
             iCount--;
+            
         }
     }
 
@@ -385,9 +381,12 @@ public class ButtonEvent : MonoBehaviour
     {
         if (count == 0) {
             for (int i = 0; i < TeamCreate_Player.Length; i++)
+            {
                 TeamCreate_Player[i].SetActive(false);
+            }
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(false);
+            preimg.SetActive(false);
             TeamRoomCreate.SetActive(false);
             TeamCreateRoomPrevious();
             TeamCreate_PreviousButton.SetActive(true);
@@ -408,6 +407,7 @@ public class ButtonEvent : MonoBehaviour
             CreateTeamNextSelect.SetActive(false);
             CreateTeamPreSelect.SetActive(true);
             CreateItemSelectBackGround.SetActive(true);
+            preimg.SetActive(false);
             count++;
             for (int i = 0; i < TeamCreateMap.Length; i++)
                 TeamCreateMap[i].SetActive(false);
@@ -429,15 +429,19 @@ public class ButtonEvent : MonoBehaviour
 
     public void TeamCreate_Select_Previous()
     {
+        
         if (count == 1) {
             TeamCreate_Women();
-            for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
+            for (int i = 0; i < TeamCreate_Women_Men.Length; i++) {
                 TeamCreate_Women_Men[i].SetActive(true);
+                preava[i].SetActive(false);
+            }
             TeamRoomCreate.SetActive(false);
             TeamCreate_PreviousButton.SetActive(false);
             CreateItemBackGround.SetActive(true);
             CreateTeamNextSelect.SetActive(false);
             CreateTeamPreSelect.SetActive(false);
+            preimg.SetActive(false);
             count--;
         }
         else if (count == 2) {
@@ -446,6 +450,7 @@ public class ButtonEvent : MonoBehaviour
             CreateTeamNextSelect.SetActive(true);
             CreateplayerBackGround.SetActive(true);
             CreateItemSelectBackGround.SetActive(false);
+            preimg.SetActive(true);
             count--;
         }
         else if (count == 3) {
@@ -460,8 +465,10 @@ public class ButtonEvent : MonoBehaviour
                 TeamCreateMap[i].SetActive(false);
             TeamCreateMap[0].SetActive(true);
             roomCount = 0;
+            preimg.SetActive(false);
             count--;
         }
+        
     }
     public void TeamCreate_Women()
     {
@@ -538,14 +545,37 @@ public class ButtonEvent : MonoBehaviour
     //-----------------------------------------------------------------------------------//
     public void female1_preview()
     {
-        for (int i = 1; i < 4;)
-        {
-            ButtonValues buttonValues = GameObject.Find("Female" + i + "_pre").GetComponent<ButtonValues>();
-            buttonValues.gameObject.SetActive(false);
-            buttonValues = GameObject.Find("Man" + i + "_pre").GetComponent<ButtonValues>();
-            buttonValues.gameObject.SetActive(false);
-        }
-        pre_female1.SetActive(true);
+        preava[0].SetActive(true);
+        preimg.SetActive(true);
+    }
+
+    public void female2_preview()
+    {
+        preava[1].SetActive(true);
+        preimg.SetActive(true);
+    }
+
+    public void female3_preview()
+    {
+        preava[2].SetActive(true);
+        preimg.SetActive(true);
+    }
+
+    public void man1_preview()
+    {
+        preava[3].SetActive(true);
+        preimg.SetActive(true);
+    }
+
+    public void man2_preview()
+    {
+        preava[4].SetActive(true);
+        preimg.SetActive(true);
+    }
+
+    public void man3_preview()
+    {
+        preava[5].SetActive(true);
         preimg.SetActive(true);
     }
 

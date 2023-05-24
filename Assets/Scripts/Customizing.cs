@@ -48,7 +48,7 @@ public class Customizing : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetButtonDown("interact"))
+     /*   if (Input.GetButtonDown("interact"))
         {
             if (this.hair_mat.color == color[0])
             {
@@ -88,7 +88,7 @@ public class Customizing : MonoBehaviour
                 this.hair_mat.color = color[0];
                 this.hair_mat2.color = color[0];
             }              
-        }
+        }*/
 
       /*  if (Input.GetKeyDown(KeyCode.G))
         {
