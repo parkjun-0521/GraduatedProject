@@ -2346,13 +2346,11 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  hairs: {fileID: 0}
-  hairs2: {fileID: 0}
   _animator: {fileID: 0}
   turnStop: 0
   PV: {fileID: 192012034650557382}
   rotateSpeed: 500
-  JumpCheck: 0
+  EnterCheck: 1
   webViewPrefab: {fileID: 0}
 --- !u!114 &163681887184438050
 MonoBehaviour:
@@ -3310,7 +3308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5930551985058053309, guid: 3ae238aa9d12c8d488afce560a740f8a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ae238aa9d12c8d488afce560a740f8a, type: 3}
@@ -3480,6 +3478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bag2
       objectReference: {fileID: 0}
+    - target: {fileID: 7921868460472758848, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
 --- !u!4 &1983676534368359793 stripped
@@ -3494,6 +3496,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 535169423669887841}
     m_Modifications:
+    - target: {fileID: -2109534599189092159, guid: ca4b3260527e43544a04497cabd04a0d, type: 3}
+      propertyPath: lipSync
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5084597165061305551, guid: ca4b3260527e43544a04497cabd04a0d, type: 3}
       propertyPath: m_RootOrder
       value: 11
