@@ -396,8 +396,8 @@ GameObject:
   - component: {fileID: 7531105891220175153}
   - component: {fileID: 8001037905415560912}
   - component: {fileID: 8001037905415560927}
-  - component: {fileID: 9133976941919280758}
-  - component: {fileID: -3231017232341273937}
+  - component: {fileID: -1436768549911289545}
+  - component: {fileID: 8529417061769418474}
   m_Layer: 0
   m_Name: Rabbit_Hat
   m_TagString: Untagged
@@ -726,7 +726,7 @@ MonoBehaviour:
   showGizmos: 1
   boneOpacity: 0.5
   limitOpacity: 0.5
---- !u!114 &9133976941919280758
+--- !u!114 &-1436768549911289545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -746,9 +746,24 @@ MonoBehaviour:
   lipSyncJawBone: {fileID: 0}
   lipSyncJawClosed: {x: 0, y: 0, z: 0, w: 1}
   lipSyncJawOpen: {x: 0, y: 0, z: 0, w: 1}
-  VisemeSkinnedMesh: {fileID: 0}
+  VisemeSkinnedMesh: {fileID: 2548537798682554397}
   MouthOpenBlendShapeName: Facial_Blends.Jaw_Down
-  VisemeBlendShapes: []
+  VisemeBlendShapes:
+  - -none-
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   unityVersion: 
   portraitCameraPositionOffset: {x: 0, y: 0, z: 0}
   portraitCameraRotationOffset: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -985,7 +1000,7 @@ MonoBehaviour:
     height: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
---- !u!114 &-3231017232341273937
+--- !u!114 &8529417061769418474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1447856564583340248}
   - component: {fileID: 1447856564579948792}
   - component: {fileID: 1447856564580915768}
-  - component: {fileID: -2266477211548079130}
-  - component: {fileID: -7185573552680790777}
+  - component: {fileID: -4215433256428609962}
+  - component: {fileID: -631375469446388574}
   m_Layer: 0
   m_Name: BucketHat
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-2266477211548079130
+--- !u!114 &-4215433256428609962
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -344,7 +344,7 @@ MonoBehaviour:
     height: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
---- !u!114 &-7185573552680790777
+--- !u!114 &-631375469446388574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
