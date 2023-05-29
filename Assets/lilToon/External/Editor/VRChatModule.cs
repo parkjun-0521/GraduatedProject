@@ -4,10 +4,10 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using VRC.SDKBase.Editor.BuildPipeline;
+//using VRC.SDKBase.Editor.BuildPipeline;
 
 namespace lilToon.External
-{
+{/*
     //------------------------------------------------------------------------------------------------------------------------------
     // VRChat
     public class VRChatModule : IVRCSDKBuildRequestedCallback, IVRCSDKPreprocessAvatarCallback, IVRCSDKPostprocessAvatarCallback
@@ -191,6 +191,6 @@ namespace lilToon.External
                 return Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<VRC.SDK3.Avatars.Components.VRCAvatarDescriptor>() != null;
             }
         #endif
-    }
+    }*/
 }
 #endif
