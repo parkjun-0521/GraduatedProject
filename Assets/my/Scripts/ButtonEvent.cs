@@ -102,6 +102,8 @@ public class ButtonEvent : MonoBehaviour
     //=====================================================================//
     public GameObject preimg;
     public GameObject[] preava;
+    public Camera precam;
+    NetworkManager netManager;
 
     //=====================================================================//
     public void WithRium_Move()
@@ -114,6 +116,8 @@ public class ButtonEvent : MonoBehaviour
     }
 
     //====================================================================//
+
+   
     public void LobbyPanel_Select_Next()
     {
         for(int i = 0; i < LobbyPanel_Player.Length; i++) 
@@ -386,7 +390,7 @@ public class ButtonEvent : MonoBehaviour
             }
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(false);
-            preimg.SetActive(false);
+            preimg.SetActive(true);
             TeamRoomCreate.SetActive(false);
             TeamCreateRoomPrevious();
             TeamCreate_PreviousButton.SetActive(true);
@@ -432,10 +436,8 @@ public class ButtonEvent : MonoBehaviour
         
         if (count == 1) {
             TeamCreate_Women();
-            for (int i = 0; i < TeamCreate_Women_Men.Length; i++) {
+            for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(true);
-                preava[i].SetActive(false);
-            }
             TeamRoomCreate.SetActive(false);
             TeamCreate_PreviousButton.SetActive(false);
             CreateItemBackGround.SetActive(true);
@@ -545,37 +547,38 @@ public class ButtonEvent : MonoBehaviour
     //-----------------------------------------------------------------------------------//
     public void female1_preview()
     {
-        preava[0].SetActive(true);
+        precam.transform.localPosition = new Vector3(-980.6f, -538.5f, 19.5f);
         preimg.SetActive(true);
+  //      netManager.createcharacter();
     }
 
     public void female2_preview()
     {
-        preava[1].SetActive(true);
+        precam.transform.localPosition = new Vector3(-980.6f, -538.5f, 15.5f);
         preimg.SetActive(true);
     }
 
     public void female3_preview()
     {
-        preava[2].SetActive(true);
+        precam.transform.localPosition = new Vector3(-980.6f, -538.5f, 11.5f);
         preimg.SetActive(true);
     }
 
     public void man1_preview()
     {
-        preava[3].SetActive(true);
+        precam.transform.localPosition = new Vector3(-980.6f, -538.5f, 7.5f);
         preimg.SetActive(true);
     }
 
     public void man2_preview()
     {
-        preava[4].SetActive(true);
+        precam.transform.localPosition = new Vector3(-980.6f, -538.5f, 3.5f);
         preimg.SetActive(true);
     }
 
     public void man3_preview()
     {
-        preava[5].SetActive(true);
+        precam.transform.localPosition = new Vector3(-980.6f, -538.5f, -1.5f);
         preimg.SetActive(true);
     }
 

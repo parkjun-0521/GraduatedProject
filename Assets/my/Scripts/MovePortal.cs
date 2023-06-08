@@ -81,6 +81,7 @@ public class MovePortal : MonoBehaviour
         for (int i = 0; i < uiGroup.Length; i++)
             uiGroup[i].SetActive(false);
         serverObj.SetActive(true);
+        
 
         ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
 
@@ -107,5 +108,8 @@ public class MovePortal : MonoBehaviour
         networkManager.curPage = 0;
         networkManager.endPage = 0;
         networkManager.pageCount = 1;
+
+        // 버튼 안누르고 그냥 꺼질 때
+        buttonEvent.preimg.SetActive(false);
     }
 }

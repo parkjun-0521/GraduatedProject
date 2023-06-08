@@ -1472,6 +1472,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     }
 
+    public void createcharacter()
+    {
+        player = PhotonNetwork.Instantiate(playername, new Vector3(-29, 0, 14), Quaternion.identity);
+    }
+
     //--------------------------------------------- 캐릭터를 선택할 때 캐릭터의 이름을 저장하는 함수 ---------------------------------------------// 
     public void PlayerNameValue()
     {

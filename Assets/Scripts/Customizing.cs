@@ -110,9 +110,9 @@ public class Customizing : MonoBehaviour
         }*/
 
         //  PV.RPC("customizing", RpcTarget.All);
-        Debug.Log(this.hair_mat.color);
+//        Debug.Log(this.hair_mat.color);
         //Debug.Log(this.cloth_mat);
-        Debug.Log(this.body_mat[8]);
+ //       Debug.Log(this.body_mat[8]);
     }
 
     [PunRPC]

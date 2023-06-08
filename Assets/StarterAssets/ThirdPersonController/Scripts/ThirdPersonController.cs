@@ -454,10 +454,10 @@ namespace StarterAssets
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+           //     AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
-        /*
+        
         private void PlayerRay()    // 플레이어 레이
         {
             // ray 시작점
@@ -476,7 +476,7 @@ namespace StarterAssets
                 }
             }
         }
-        */
+        
 
         private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
         {
