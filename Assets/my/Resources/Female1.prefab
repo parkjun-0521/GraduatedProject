@@ -2411,7 +2411,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
   - {fileID: 2506671448636557954}
@@ -2525,7 +2525,7 @@ MonoBehaviour:
   turnStop: 0
   PV: {fileID: -3737999207576324901}
   rotateSpeed: 500
-  JumpCheck: 0
+  EnterCheck: 1
   webViewPrefab: {fileID: 0}
 --- !u!1 &7001080767722236647
 GameObject:

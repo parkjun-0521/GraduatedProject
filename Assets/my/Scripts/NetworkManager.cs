@@ -198,7 +198,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         AllTeamData = "http://223.131.75.181:1356/Metaverse_war_exploded/TeamAllData.jsp";
         
         // 아바타를 가져오는 URL
-        ItemInputData = "http://localhost:8080/Metaverse_war_exploded/ItemInput.jsp";  
+        ItemInputData = "http://223.131.75.181:1356/Metaverse_war_exploded/ItemInput.jsp";  
 
         // 채팅로그 가져오기
         ChatLogData = "http://223.131.75.181:1356/Metaverse_war_exploded/ChatLog.jsp";
@@ -220,7 +220,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // Enter를 눌렀을 때 채팅창에 입력할 수 있게 하기 위한 로직 
         // Enter를 누르고 방에 입장 하였을 때 캐릭터를 멈추고 채팅을 칠 수 있게 함 
-        if (Input.GetButtonDown("ChatStart") && RoomPanel.activeSelf == true) {
+       
+        if (Input.GetButtonDown("ChatStart") && RoomPanel.activeSelf == true ) {
             Debug.Log("enter 누름");
             // Player 태그의 오브젝트의 속도를 줄이고 회전을 막음 
             ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
@@ -525,6 +526,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         // 서버를 끊을 때 ( 로그아웃이 될 때 )
         StartCoroutine(Logout());                       
+        StartCoroutine(AllTeam());                       
 
         LoginPanelObj.SetActive(true);                  // 로그인 Panel 활성화 
         ConnectServerObj.SetActive(false);              // 관리자 서버 연결 Panel 비활성화 
@@ -914,7 +916,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public void CreateRoomA() 
     {
         RenderSettings.skybox = skyBoxSpring;
-        RenderSettings.reflectionIntensity = 1f;
+        RenderSettings.reflectionIntensity = 1.5f;
         // A방 생성, 방의 인원은 최대 21명 ( 관리자 한명 무조건 포함 ) 
         // 만약 방의 이름이 없다면 랜덤숫자로 + Room으로 방이름이 정해지고 아니면 내가 입력한 방이름으로       
         // 캐릭터와 맵을 선택하지 않으면 오류 메시지 
@@ -1203,8 +1205,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 방 입장시 맵은 선택하지 않고 캐릭터만 선택하기 때문에 캐릭터를 선택하지 않고 입장하면 에러 발생 
         for (int i = 0; i < 10; i++) {
             if (index == i) {
-                if (playername != "")
+                if (playername != "") { 
                     PhotonNetwork.JoinRoom(TeamName);
+                }
                 else
                     Debug.Log("캐릭터를 선택해 주세요");
             }
@@ -1409,9 +1412,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
         else 
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-2.5f,5), Quaternion.identity);
-        Quaternion rot = Quaternion.Euler(0, 270, 0);
-        web = PhotonNetwork.Instantiate("WebViewPrefab", new Vector3(4.4f, -4f, -0.073f), rot);
-        keybo = PhotonNetwork.Instantiate("Keyboard", new Vector3(4f, -5f, -0.073f), rot);
+
         OnWebviewCreate();
 
     }
@@ -1455,10 +1456,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         smoothFollow.roteta();
         player = PhotonNetwork.Instantiate(playername, new Vector3(0, 0, 0), Quaternion.identity);
 
+        //GameObject cubeObject = GameObject.Find("Cube");
+
 
         // 현재 방의 정보를 text로 표시 
         // 최대 몇명까지 현재 몇명이 있는지
         RoomRenewal();
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) 
+            Debug.Log(PhotonNetwork.PlayerList[i].NickName + ":" + PhotonNetwork.PlayerList[i].ActorNumber);
 
         ChatInput.text = "";                // 채팅 입력 창을 초기화 
 
@@ -1466,6 +1471,58 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         for (int i = 0; i < ChatText.Length; i++) 
             ChatText[i].text = "";
 
+        StartCoroutine(MapCreateInformation());
+    }
+
+    IEnumerator MapCreateInformation()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        PV.RPC("WebViewSetActive", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void WebViewSetActive() {
+        string localPlayerNickname = PhotonNetwork.NickName;
+
+        WebViewArrangement CompanywebView = GameObject.Find("Company(Clone)").GetComponentInChildren<WebViewArrangement>();
+        if (CompanywebView != null)
+            MapViewViewActivate(localPlayerNickname, CompanywebView);
+        else
+            return;
+        WebViewArrangement CafewebView = GameObject.Find("Cafe(Clone)").GetComponentInChildren<WebViewArrangement>();
+        if(CafewebView != null) 
+            MapViewViewActivate(localPlayerNickname, CafewebView);
+        else
+            return;
+
+        WebViewArrangement LibrarywebView = GameObject.Find("Library(Clone)").GetComponentInChildren<WebViewArrangement>();
+        if (LibrarywebView != null) 
+            MapViewViewActivate(localPlayerNickname, LibrarywebView);
+        else
+            return;
+
+        WebViewArrangement RoomMapwebView = GameObject.Find("RoomMap(Clone)").GetComponentInChildren<WebViewArrangement>();
+        if (RoomMapwebView != null) 
+            MapViewViewActivate(localPlayerNickname, RoomMapwebView);
+        else
+            return;
+    }  
+
+    public void MapViewViewActivate(string localPlayerNickname, WebViewArrangement mapView)
+    {
+        for (int i = 0; i < mapView.webViewObject.Length; i++) {
+            mapView.webViewObject[i].SetActive(false);
+        }
+        for (int i = 0; i < mapView.webViewObject.Length; i++) {
+            mapView.webViewObject[i].SetActive(true);
+        }
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
+            if (player != null && PhotonNetwork.PlayerList[i].NickName == localPlayerNickname) {
+                mapView.webViewScreen[i].SetActive(true);
+                break;
+            }
+        }
     }
 
     //--------------------------------------------- 캐릭터를 선택할 때 캐릭터의 이름을 저장하는 함수 ---------------------------------------------// 
@@ -1510,7 +1567,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             print("현재 방 최대인원수 : " + PhotonNetwork.CurrentRoom.MaxPlayers);
 
             string playerStr = "방에 있는 플레이어 목록 : ";
-            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) playerStr += PhotonNetwork.PlayerList[i].NickName + ", ";
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+                playerStr += PhotonNetwork.PlayerList[i].NickName + ", ";
             print(playerStr);
         }
         else {
