@@ -39,12 +39,15 @@ public class customizing : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        netmgr.ColorAvatar();
-        netmgr.HatAvatar();
-        netmgr.TopAvatar();
-        netmgr.PantsAvatar();
-        netmgr.BagAvatar();
-        avatar_fe1();
+        if (netmgr.itemName[0] != null)
+        {
+            netmgr.ColorAvatar();
+            netmgr.HatAvatar();
+            netmgr.TopAvatar();
+            netmgr.PantsAvatar();
+            netmgr.BagAvatar();
+            avatar_fe1();
+        }
     }
 
     // body_mat과 hair_mat들을 선택된 캐릭터에 맞게 바꿔주기

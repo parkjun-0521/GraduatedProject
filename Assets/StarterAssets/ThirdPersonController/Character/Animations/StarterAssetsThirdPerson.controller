@@ -105,7 +105,7 @@ AnimatorStateMachine:
     m_Position: {x: 690, y: 550, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6025695595913331437}
-    m_Position: {x: 470, y: 810, z: 0}
+    m_Position: {x: 470, y: 820, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2088895788557290427}
     m_Position: {x: 1030, y: 790, z: 0}
@@ -123,7 +123,7 @@ AnimatorStateMachine:
     m_Position: {x: 426.3993, y: 714.01416, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7854563221877446826}
-    m_Position: {x: 791.35315, y: 781.9775, z: 0}
+    m_Position: {x: 790, y: 780, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6302266803388801247}
     m_Position: {x: 598.63513, y: 874.14667, z: 0}
@@ -540,31 +540,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Jump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Grounded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: FreeFall
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: MotionSpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

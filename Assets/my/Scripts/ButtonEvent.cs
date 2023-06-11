@@ -131,6 +131,7 @@ public class ButtonEvent : MonoBehaviour
         publicNextButton.SetActive(true);
         publicPreviousButton.SetActive(true);
         pCount++;
+        
     }
 
     public void LobbyPanel_Next_Button()
@@ -145,6 +146,7 @@ public class ButtonEvent : MonoBehaviour
         publicNextButton.SetActive(false);
         publicRoomCount = 3;
         pCount++;
+        preimg.SetActive(false);
     }
 
     public void LobbyPanel_Select_Previous()
@@ -160,6 +162,7 @@ public class ButtonEvent : MonoBehaviour
             publicplayerBackGround.SetActive(true);
             publicNextButton.SetActive(false);
             pCount--;
+            preimg.SetActive(false);
         }
         else if(pCount == 2) {
             publicItemBackGround.SetActive(true);
@@ -167,6 +170,7 @@ public class ButtonEvent : MonoBehaviour
             RoomCreate_Input.SetActive(false);
             publicNextButton.SetActive(true);
             pCount--;
+            preimg.SetActive(true);
         }
     }
 
@@ -322,6 +326,7 @@ public class ButtonEvent : MonoBehaviour
         playerBackGround.SetActive(false);
         inputNextButton.SetActive(true);
         iCount++;
+        preimg.SetActive(false);
     }
 
     public void TeamInput_Select_Next_Button()
@@ -338,6 +343,7 @@ public class ButtonEvent : MonoBehaviour
         InputplayerTeaminput.SetActive(true);
         inputNextButton.SetActive(false);
         iCount++;
+        preimg.SetActive(false);
     }
 
     public void TeamInput_Select_Previous()
@@ -353,6 +359,7 @@ public class ButtonEvent : MonoBehaviour
             playerBackGround.SetActive(true);
             inputNextButton.SetActive(false);
             iCount--;
+            preimg.SetActive(false);
         }
         else if(iCount == 2) {
             InputItemList.SetActive(true);
@@ -362,7 +369,7 @@ public class ButtonEvent : MonoBehaviour
             TeamInputPrevious.SetActive(false);
             TeamInputNext.SetActive(false);
             iCount--;
-            
+            preimg.SetActive(true);
         }
     }
 
