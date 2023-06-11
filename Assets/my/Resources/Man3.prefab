@@ -2329,7 +2329,7 @@ MonoBehaviour:
   turnStop: 0
   PV: {fileID: 192012034650557382}
   rotateSpeed: 500
-  JumpCheck: 0
+  EnterCheck: 1
   webViewPrefab: {fileID: 0}
 --- !u!114 &163681887184438050
 MonoBehaviour:

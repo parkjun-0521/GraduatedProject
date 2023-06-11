@@ -912,7 +912,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     //--------------------------------------------- 공개방 생성 함수 ---------------------------------------------// 
     // 공개방의 이름을 A, B, C 로 선언 
-    string[] room = {"A", "B", "C", "D"};    
+    string[] room = {"A", "B", "C", "D"};
     public void CreateRoomA() 
     {
         RenderSettings.skybox = skyBoxSpring;
@@ -1217,8 +1217,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     //--------------------------------------------- 공개방 입장하기 함수 ---------------------------------------------// 
     public void JoinRoomA()
     {
+        RenderSettings.skybox = skyBoxSpring;
+        RenderSettings.reflectionIntensity = 1.5f;
         // A방 입장
         // 캐릭터를 선택하지 않을 때 오류 메시지 
+        PV.RPC("SkyBoxRender", RpcTarget.All, skyBoxSpring, 1.5f);
         if (playername != "")
             PhotonNetwork.JoinRoom(room[0]);
         else
@@ -1227,6 +1230,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     public void JoinRoomB()
     {
+        RenderSettings.skybox = skyBoxSummer;
+        RenderSettings.reflectionIntensity = 0.5f;
         // B방 입장
         // 캐릭터를 선택하지 않을 때 오류 메시지 
         if (playername != "")
@@ -1237,6 +1242,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     public void JoinRoomC()
     {
+        RenderSettings.skybox = skyBoxAutumn;
+        RenderSettings.reflectionIntensity = 0f;
         // C방 입장
         // 캐릭터를 선택하지 않을 때 오류 메시지 
         if (playername != "")
@@ -1246,6 +1253,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     }
     public void JoinRoomD()
     {
+        RenderSettings.skybox = skyBoxWinter;
+        RenderSettings.reflectionIntensity = 0.5f;
         // C방 입장
         // 캐릭터를 선택하지 않을 때 오류 메시지 
         if (playername != "")
@@ -1413,6 +1422,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         else 
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-2.5f,5), Quaternion.identity);
 
+      
         OnWebviewCreate();
 
     }
@@ -1474,55 +1484,63 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         StartCoroutine(MapCreateInformation());
     }
 
-    IEnumerator MapCreateInformation()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        PV.RPC("WebViewSetActive", RpcTarget.All);
-    }
 
     [PunRPC]
-    public void WebViewSetActive() {
-        string localPlayerNickname = PhotonNetwork.NickName;
+    public void WebViewSetActive(string localPlayerNickname)
+    {
+        WebViewArrangement[] webViews = FindObjectsOfType<WebViewArrangement>();
+        foreach (WebViewArrangement webView in webViews) {
+            MapViewViewActivate(localPlayerNickname, webView);
+        }
+    }
+    //public void WebViewSetActive() {
+    //    string localPlayerNickname = PhotonNetwork.NickName;
 
-        WebViewArrangement CompanywebView = GameObject.Find("Company(Clone)").GetComponentInChildren<WebViewArrangement>();
-        if (CompanywebView != null)
-            MapViewViewActivate(localPlayerNickname, CompanywebView);
-        else
-            return;
-        WebViewArrangement CafewebView = GameObject.Find("Cafe(Clone)").GetComponentInChildren<WebViewArrangement>();
-        if(CafewebView != null) 
-            MapViewViewActivate(localPlayerNickname, CafewebView);
-        else
-            return;
+    //    WebViewArrangement CompanywebView = GameObject.Find("Company(Clone)").GetComponentInChildren<WebViewArrangement>();
+    //    if (CompanywebView != null)
+    //        MapViewViewActivate(localPlayerNickname, CompanywebView);
+    //    else
+    //        return;
+    //    WebViewArrangement CafewebView = GameObject.Find("Cafe(Clone)").GetComponentInChildren<WebViewArrangement>();
+    //    if(CafewebView != null) 
+    //        MapViewViewActivate(localPlayerNickname, CafewebView);
+    //    else
+    //        return;
 
-        WebViewArrangement LibrarywebView = GameObject.Find("Library(Clone)").GetComponentInChildren<WebViewArrangement>();
-        if (LibrarywebView != null) 
-            MapViewViewActivate(localPlayerNickname, LibrarywebView);
-        else
-            return;
+    //    WebViewArrangement LibrarywebView = GameObject.Find("Library(Clone)").GetComponentInChildren<WebViewArrangement>();
+    //    if (LibrarywebView != null) 
+    //        MapViewViewActivate(localPlayerNickname, LibrarywebView);
+    //    else
+    //        return;
 
-        WebViewArrangement RoomMapwebView = GameObject.Find("RoomMap(Clone)").GetComponentInChildren<WebViewArrangement>();
-        if (RoomMapwebView != null) 
-            MapViewViewActivate(localPlayerNickname, RoomMapwebView);
-        else
-            return;
-    }  
+    //    WebViewArrangement RoomMapwebView = GameObject.Find("RoomMap(Clone)").GetComponentInChildren<WebViewArrangement>();
+    //    if (RoomMapwebView != null) 
+    //        MapViewViewActivate(localPlayerNickname, RoomMapwebView);
+    //    else
+    //        return;
+    //}  
 
     public void MapViewViewActivate(string localPlayerNickname, WebViewArrangement mapView)
     {
-        for (int i = 0; i < mapView.webViewObject.Length; i++) {
-            mapView.webViewObject[i].SetActive(false);
-        }
-        for (int i = 0; i < mapView.webViewObject.Length; i++) {
-            mapView.webViewObject[i].SetActive(true);
-        }
+        PV = GetComponent<PhotonView>();
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
             if (player != null && PhotonNetwork.PlayerList[i].NickName == localPlayerNickname) {
+                PhotonView photonView = mapView.webViewScreen[i].GetComponent<PhotonView>();
+                PhotonView photonViewObject = mapView.webViewObject[i].GetComponent<PhotonView>();
+                photonView.TransferOwnership(PV.ViewID);
+                photonViewObject.TransferOwnership(PV.ViewID);
+                Debug.Log(photonView);
+                Debug.Log(PV.ViewID);
                 mapView.webViewScreen[i].SetActive(true);
                 break;
             }
         }
+    }
+    IEnumerator MapCreateInformation()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        PV.RPC("WebViewSetActive", RpcTarget.All, PhotonNetwork.NickName);
     }
 
     //--------------------------------------------- 캐릭터를 선택할 때 캐릭터의 이름을 저장하는 함수 ---------------------------------------------// 

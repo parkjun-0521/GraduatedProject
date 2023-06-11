@@ -3,16 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class WebViewOwner : MonoBehaviourPunCallbacks 
-{
-    // 캐럭터가 입장시 권한을 넘겨줌 
-    // 2번째 캐릭터 입장 시 2번째 웹뷰를 넘겨주고 웹뷰 카메라 활성화 // 방 나갈시 웹뷰 카메라 끄기 
-    // 3번째 캐릭터 입장 시 3번째 웹뷰를 넘겨줌 
+public class WebViewOwner : MonoBehaviourPun, IPunObservable {
 
-    public GameObject[] webViewCam;
+        private Camera mainCamera;
 
-    void Start()
-    {
-        
-    }
+        private void Awake()
+        {
+            mainCamera = GetComponent<Camera>();
+        }
+
+        private void Update()
+        {
+            if (!photonView.IsMine) return;
+
+            // 카메라 제어 로직
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting) {
+                // 카메라 시점 정보를 스트림에 쓰기
+                stream.SendNext(mainCamera.transform.position);
+                stream.SendNext(mainCamera.transform.rotation);
+            }
+            else {
+                // 다른 플레이어에게 전달된 카메라 시점 정보 읽기
+                Vector3 position = (Vector3)stream.ReceiveNext();
+                Quaternion rotation = (Quaternion)stream.ReceiveNext();
+
+                // 시점 정보를 적용
+                mainCamera.transform.position = position;
+                mainCamera.transform.rotation = rotation;
+            }
+        }
 }
