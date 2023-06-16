@@ -7,8 +7,7 @@ using Photon.Pun;
 using Photon.Voice.Unity;
 using Photon.Voice.PUN;
 
-public class ButtonEvent : MonoBehaviour
-{
+public class ButtonEvent : MonoBehaviourPunCallbacks {
     //====================================================================//
     public GameObject RoomCreate_Input;
     public GameObject[] LobbyPanel_Player;

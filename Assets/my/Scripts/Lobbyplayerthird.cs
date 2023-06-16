@@ -469,15 +469,12 @@ namespace StarterAssets
             }
 
         }
-<<<<<<< HEAD
 
-        private void cooldown()
-        {
-            portalcool += Time.deltaTime;
-        }
+        //private void cooldown()
+        //{
+        //    portalcool += Time.deltaTime;
+        //}
 
       
-=======
->>>>>>> WebView
     }
 }

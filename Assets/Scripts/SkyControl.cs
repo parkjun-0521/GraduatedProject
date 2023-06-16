@@ -51,7 +51,7 @@ public class SkyControl : MonoBehaviour
     [PunRPC]
     public void movesky()
     {
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.6f);
+        //RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.6f);
     }
 
 
