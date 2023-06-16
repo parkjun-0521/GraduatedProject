@@ -56,6 +56,8 @@ public class LoginManager : MonoBehaviour
 
     public GameObject loginErrorMessage;
     public RectTransform rectLogin;
+
+    public int managerIndex = 0;
     //--------------------------------------------- URL 초기화 ---------------------------------------------//
     void Start()
     {
@@ -114,6 +116,7 @@ public class LoginManager : MonoBehaviour
             NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
             networkManager.Connect();
             networkManager.LoginlodingPanel.SetActive(true);
+            managerIndex = 1;
         }
         else if (re == "0") {
             Debug.Log("로그인 성공");
@@ -124,6 +127,7 @@ public class LoginManager : MonoBehaviour
             NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
             networkManager.Connect();
             networkManager.LoginlodingPanel.SetActive(true);
+            managerIndex = 0;
         }
         else {
             rectLogin.anchoredPosition = new Vector2(0,0);
@@ -208,8 +212,6 @@ public class LoginManager : MonoBehaviour
         buttonEvent.TeamInputPrevious.SetActive(false);
         buttonEvent.playerBackGround.SetActive(true);
 
-        ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
-        thirdPersonController.MoveSpeed = 50f;
-        thirdPersonController.SprintSpeed = 80f;
+       
     }
 }

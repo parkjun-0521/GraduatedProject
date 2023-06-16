@@ -13,7 +13,8 @@ using Vuplex.WebView;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
-namespace StarterAssets {
+namespace StarterAssets 
+{
     [RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
@@ -212,22 +213,20 @@ namespace StarterAssets {
 
         private void Update()
         {
-                _hasAnimator = TryGetComponent(out _animator);
-
-                JumpAndGravity();
-                GroundedCheck();
-                Move();
-                cooldown();
+            _hasAnimator = TryGetComponent(out _animator);
+            JumpAndGravity();
+            GroundedCheck();
+            Move();
         }
 
         private void LateUpdate()
         {
-                CameraRotation();
+            CameraRotation();
         }
 
         private void FixedUpdate()
         {
-                PlayerRay();
+            PlayerRay();
         }
 
         private void AssignAnimationIDs()
@@ -352,7 +351,6 @@ namespace StarterAssets {
                 if (_hasAnimator) {
                     _animator.SetBool(_animIDJump, false);
                     _animator.SetBool(_animIDFreeFall, false);
-                    JumpCheck = true;
                 }
 
                 // stop our velocity dropping infinitely when grounded
@@ -368,7 +366,6 @@ namespace StarterAssets {
                     // update animator if using character
                     if (_hasAnimator) {
                         _animator.SetBool(_animIDJump, true);
-                        JumpCheck = false;
                     }
                 }
 
@@ -432,14 +429,10 @@ namespace StarterAssets {
             }
         }
 
-        private void OnLand(AnimationEvent animationEvent)
-        {
-            
-        }
 
         private void PlayerRay()
         {
-            if (gameObject.activeSelf == true && !JumpCheck) {
+            if (gameObject.activeSelf == true) {
                 Ray plray = new Ray(gameObject.transform.position + new Vector3(0f, 0.5f, 0f), transform.up * -1);
                 RaycastHit hitinfo;
                 Debug.DrawRay(gameObject.transform.position + new Vector3(0f, 0.5f, 0f), transform.up * -1, new Color(1, 0, 0));
@@ -476,6 +469,7 @@ namespace StarterAssets {
             }
 
         }
+<<<<<<< HEAD
 
         private void cooldown()
         {
@@ -483,5 +477,7 @@ namespace StarterAssets {
         }
 
       
+=======
+>>>>>>> WebView
     }
 }

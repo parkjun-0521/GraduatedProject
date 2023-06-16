@@ -135,6 +135,9 @@ public class ButtonEvent : MonoBehaviour
 
     public void LobbyPanel_Next_Button()
     {
+        publicRoomCount = 0;
+        Debug.Log(publicRoomCount);
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         for (int i = 0; i < networkManager.itemName.Length; i++) {
             Debug.Log(networkManager.itemName[i]);
@@ -143,7 +146,16 @@ public class ButtonEvent : MonoBehaviour
         publicItemList.SetActive(false);
         RoomCreate_Input.SetActive(true);
         publicNextButton.SetActive(false);
-        publicRoomCount = 3;
+        if (loginManager.managerIndex == 1) {
+            for (int i = 0; i < publicCreateRoom.Length; i++)
+                publicCreateRoom[i].SetActive(false);
+            publicCreateRoom[publicRoomCount].SetActive(true);
+        }
+        else if(loginManager.managerIndex == 0) {
+            for (int i = 0; i < publicInputRoom.Length; i++)
+                publicInputRoom[i].SetActive(false);
+            publicInputRoom[publicRoomCount].SetActive(true);
+        }
         pCount++;
     }
 
