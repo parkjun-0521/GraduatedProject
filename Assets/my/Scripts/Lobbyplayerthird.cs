@@ -10,8 +10,6 @@ using Random = UnityEngine.Random;
 using Photon.Pun;
 using Photon.Realtime;
 using Vuplex.WebView;
-/* Note: animations are called via the controller for both the character and capsule using animator null checks
- */
 
 namespace StarterAssets 
 {
