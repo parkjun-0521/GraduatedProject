@@ -5,67 +5,43 @@ using Photon.Pun;
 using Photon.Realtime;
 
 public class LobbyPlayer : MonoBehaviourPunCallbacks {
-    public float moveSpeed;
-    public float speed = 3f;
 
-    Rigidbody charRigidbody;
     public bool turnStop = false;
-
+    public float rotateSpeed = 500.0f;
     public PhotonView PV;
-
     private Transform tr;
 
-    private float yRotate, yRotateMove;
-    public float rotateSpeed = 500.0f;
     public void Start()
     {
-        //charRigidbody = GetComponent<Rigidbody>();
+        // 로비캐릭터의 CamPivot 오브젝트를 카메라에 target 변수에 저장 
+        // 이로써 로비캐릭터에 회전하는 카메라를 부착
         tr = GetComponent<Transform>();
         Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
         transform.localRotation = Quaternion.identity;
     }
 
-    void Update()
-    {
-    //    // ISMine 상태인것 만 움직이도록 설정 
-    //    // 내 컴퓨터에서 접속을 하면 내가 IsMine 상태이다 
-    //    // 하지만 상태의 컴퓨터에서는 IsMine 상태가 아니기 때문에 만약 if 조건문이 없다면 내가 움직일때 다른사람도 같이 움직인다
-    //    // 따라서 IsMine인 상태에서만 움직이도록 하면 내 컴퓨터에서는 나만 움직인다. 
-    //    float hAxis = Input.GetAxisRaw("Horizontal");
-    //    float vAxis = Input.GetAxisRaw("Vertical");
-
-    //    Vector3 inputDir = new Vector3(hAxis, 0, vAxis).normalized;
-
-        //if (Input.GetMouseButton(0)) {
-        //    yRotateMove = Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed;
-
-        //    yRotate = transform.eulerAngles.y + yRotateMove;
-
-        //    transform.eulerAngles = new Vector3(0, yRotate, 0);
-        //}
-
-    //    inputDir = Camera.main.transform.TransformDirection(inputDir);
-    //    charRigidbody.velocity = inputDir * moveSpeed;
-    }
-
+    // 충돌했을 때 
     public void OnTriggerEnter(Collider other)
     {
+        // 로비맵에 있는 3개의 포탈에 각각 입장하였을 때 
         if (other.tag == "Portal") {
             MovePortal movePortal = GameObject.Find("PublicZoon").GetComponent<MovePortal>();
             movePortal.Enter();
         }
         else if (other.tag == "CreatePortal") {
-            MovePortal movePortal = GameObject.Find("PublicZoon").GetComponent<MovePortal>();
+            MovePortal movePortal = GameObject.Find("CreateTeamZoon").GetComponent<MovePortal>();
             movePortal.CreateEnter();
         }
         else if (other.tag == "InputPortal") {
-            MovePortal movePortal = GameObject.Find("PublicZoon").GetComponent<MovePortal>();
+            MovePortal movePortal = GameObject.Find("InputTeamZoon").GetComponent<MovePortal>();
             movePortal.InputEnter();
         }
     }
 
+    // 충돌범위에서 나왔을 때 
     public void OnTriggerExit(Collider other)
     {
+        // 로비맵에 있는 3개의 포탈 범위에서 벗어났을 때 
         if (other.tag == "Portal") {
             MovePortal movePortal = GameObject.Find("PublicZoon").GetComponent<MovePortal>();
             movePortal.Exit();

@@ -372,8 +372,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             InputplayerTeaminput.SetActive(false);
             TeamInputPrevious.SetActive(false);
             TeamInputNext.SetActive(false);
-            iCount--;
-            
+            iCount--;        
         }
     }
 

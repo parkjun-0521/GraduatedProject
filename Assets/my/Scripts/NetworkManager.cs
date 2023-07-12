@@ -1145,8 +1145,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     }
     public void InputHatAvatar()
     {
-
-
         Toggle selectedHatToggle = InputHat.ActiveToggles().FirstOrDefault();
         if (selectedHatToggle != null)
             itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
@@ -1426,15 +1424,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         else 
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-2.5f,5), Quaternion.identity);
 
-      
-        OnWebviewCreate();
-
-    }
-
-    public void OnWebviewCreate()
-    {
-        WebViewRPC.Instance._Prefab = web;
-        WebViewRPC.Instance.Initalize();
     }
     //--------------------------------------------- 맵 생성할때 맵의 이름을 저장하는 함수 ---------------------------------------------// 
     public void MapValue()
@@ -1497,32 +1486,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             MapViewViewActivate(localPlayerNickname, webView);
         }
     }
-    //public void WebViewSetActive() {
-    //    string localPlayerNickname = PhotonNetwork.NickName;
-
-    //    WebViewArrangement CompanywebView = GameObject.Find("Company(Clone)").GetComponentInChildren<WebViewArrangement>();
-    //    if (CompanywebView != null)
-    //        MapViewViewActivate(localPlayerNickname, CompanywebView);
-    //    else
-    //        return;
-    //    WebViewArrangement CafewebView = GameObject.Find("Cafe(Clone)").GetComponentInChildren<WebViewArrangement>();
-    //    if(CafewebView != null) 
-    //        MapViewViewActivate(localPlayerNickname, CafewebView);
-    //    else
-    //        return;
-
-    //    WebViewArrangement LibrarywebView = GameObject.Find("Library(Clone)").GetComponentInChildren<WebViewArrangement>();
-    //    if (LibrarywebView != null) 
-    //        MapViewViewActivate(localPlayerNickname, LibrarywebView);
-    //    else
-    //        return;
-
-    //    WebViewArrangement RoomMapwebView = GameObject.Find("RoomMap(Clone)").GetComponentInChildren<WebViewArrangement>();
-    //    if (RoomMapwebView != null) 
-    //        MapViewViewActivate(localPlayerNickname, RoomMapwebView);
-    //    else
-    //        return;
-    //}  
 
     public void MapViewViewActivate(string localPlayerNickname, WebViewArrangement mapView)
     {

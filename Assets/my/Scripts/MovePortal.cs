@@ -70,7 +70,8 @@ public class MovePortal : MonoBehaviour
         buttonEvent.TeamInputNext.SetActive(false);
         buttonEvent.TeamInputPrevious.SetActive(false);
         buttonEvent.playerBackGround.SetActive(true);
-
+        buttonEvent.InputItemList.SetActive(true); 
+        buttonEvent.InputItemBackGround.SetActive(true);
         buttonEvent.iCount = 0;
 }
 
@@ -81,7 +82,6 @@ public class MovePortal : MonoBehaviour
         for (int i = 0; i < uiGroup.Length; i++)
             uiGroup[i].SetActive(false);
         serverObj.SetActive(true);
-        
 
         ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
 
