@@ -1126,23 +1126,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             if (ItemID.Contains(name + i)) {
                 Debug.Log(name + i + "를 찾았습니다.");
                 ItemName[i].SetActive(true);
-
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
             }
         }
     }
+
     public void InputColorAvatar()
     {
-
         Toggle selectedColorToggle = InputColor.ActiveToggles().FirstOrDefault();
         if (selectedColorToggle != null)
             itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
         else
             itemName[0] = null;
-
     }
+
     public void InputHatAvatar()
     {
         Toggle selectedHatToggle = InputHat.ActiveToggles().FirstOrDefault();
@@ -1150,12 +1149,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
         else
             itemName[1] = null;
-
     }
+
     public void InputTopAvatar()
     {
-
-
         Toggle selectedTopToggle = InputTop.ActiveToggles().FirstOrDefault();
         if (selectedTopToggle != null)
             itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;

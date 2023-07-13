@@ -20,9 +20,6 @@ public class WebViewRPC : MonoBehaviour
     }
     async public void Initalize()
     {
-        //if (_Prefab != null) {
-        //    _WebViewPrefab = _Prefab.GetComponent<WebViewPrefab>();
-        //}
 
         _WebViewPrefab = _Prefab?.GetComponent<WebViewPrefab>();
  
