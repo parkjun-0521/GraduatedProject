@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MovePortal : MonoBehaviour
 {
-    public GameObject[] uiGroup;
-    public GameObject serverObj;
+    public GameObject[] uiGroup;        // 포탈 종류 저장 변수 
+    public GameObject serverObj;        // 서버의 기본 UI 
 
+    // 포탈에 닿았을 때 
     public void Enter()
     {
         serverObj.SetActive(false);
@@ -36,6 +37,7 @@ public class MovePortal : MonoBehaviour
         StartCoroutine(networkManager.pItem());
     }
 
+    // 팀 방 생성 포탈에 들어갔을 때 
     public void CreateEnter()
     {
         NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
@@ -56,6 +58,7 @@ public class MovePortal : MonoBehaviour
         buttonEvent.count = 0;
     }
 
+    // 팀방 입장 포탈에 들어갔을 때 
     public void InputEnter()
     {
         NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
