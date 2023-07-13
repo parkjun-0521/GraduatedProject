@@ -680,9 +680,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public void CreateTeam()
     {
         LobbyPanel.SetActive(false);        // 로비 Panel 비활성화 
-        createTeam.SetActive(true);         // 팀방 생성 UI 활성화 
         inputTeam.SetActive(false);         // 팀방 입장하기 UI 비활성화 
         Server.SetActive(false);            // server에 있는 UI 비활성화 
+        createTeam.SetActive(true);         // 팀방 생성 UI 활성화 
         StartCoroutine(cTeam());            // 팀방 생성 관련 코루틴 
     }
     
