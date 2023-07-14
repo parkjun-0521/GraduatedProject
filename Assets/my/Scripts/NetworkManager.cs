@@ -422,6 +422,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         for (int i = 0; i < reSplit.Length; i += 2)
             Debug.Log(reSplit[i]);
 
+        // 아바타를 가져온다. ( 각 아바타를 가져오는데 0.1초의 간격을 두고 가져온다 ) 
         PublicItemFor(reSplit, itemPublicColor, "color");
         yield return new WaitForSeconds(0.1f);
         PublicItemFor(reSplit, itemPublicHat, "hat");
@@ -443,17 +444,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     public void PublicItemFor(string[] ItemID, GameObject[] ItemName, string name)
     {
+        // 각 아바타에 맞는 체크박스를 활성화 한다. 
         for (int i = 0; i < ItemName.Length; i++) {
-            if (ItemID.Contains(name + i)) {
-                Debug.Log(name + i + "를 찾았습니다.");
-                ItemName[i].SetActive(true);
+            if (ItemID.Contains(name + i)) {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
+                Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
+                ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
 
+                // 체크 박스의 이름을 name에 숫자만 붙여서 임시적으로 표기 
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
             }
-            else
-            {
+            else{
                 Debug.Log("아이템찾지못함");
             }
         }
@@ -680,9 +682,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public void CreateTeam()
     {
         LobbyPanel.SetActive(false);        // 로비 Panel 비활성화 
-        createTeam.SetActive(true);         // 팀방 생성 UI 활성화 
         inputTeam.SetActive(false);         // 팀방 입장하기 UI 비활성화 
         Server.SetActive(false);            // server에 있는 UI 비활성화 
+        createTeam.SetActive(true);         // 팀방 생성 UI 활성화 
         StartCoroutine(cTeam());            // 팀방 생성 관련 코루틴 
     }
     
@@ -1126,23 +1128,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             if (ItemID.Contains(name + i)) {
                 Debug.Log(name + i + "를 찾았습니다.");
                 ItemName[i].SetActive(true);
-
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
             }
         }
     }
+
     public void InputColorAvatar()
     {
-
         Toggle selectedColorToggle = InputColor.ActiveToggles().FirstOrDefault();
         if (selectedColorToggle != null)
             itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
         else
             itemName[0] = null;
-
     }
+
     public void InputHatAvatar()
     {
         Toggle selectedHatToggle = InputHat.ActiveToggles().FirstOrDefault();
@@ -1150,12 +1151,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
         else
             itemName[1] = null;
-
     }
+
     public void InputTopAvatar()
     {
-
-
         Toggle selectedTopToggle = InputTop.ActiveToggles().FirstOrDefault();
         if (selectedTopToggle != null)
             itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
@@ -1474,6 +1473,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         for (int i = 0; i < ChatText.Length; i++) 
             ChatText[i].text = "";
 
+        // 웹뷰 동기화 구간 ( 현재 개발 중에 있긴한데 ) 
         StartCoroutine(MapCreateInformation());
     }
 
