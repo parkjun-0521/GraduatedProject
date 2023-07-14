@@ -345,61 +345,69 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     //=============================== 팀방 입장 포탈에서 할 수 있는 Button 이벤트 ===============================//
     public void TeamInput_Select_Next()
     {
+        // 팀방 입장에서 다음버튼을 눌렀을때 
         for (int i = 0; i < TeamInput_Player.Length; i++)
-            TeamInput_Player[i].SetActive(false);
+            TeamInput_Player[i].SetActive(false);                   // 캐릭터 선택 버튼 비활성화
         for (int i = 0; i < TeamInput_Women_Men.Length; i++)
-            TeamInput_Women_Men[i].SetActive(false);
+            TeamInput_Women_Men[i].SetActive(false);                // 남여 선택 버튼 비활성화 
         for (int i = 0; i < TeamInput_NextButton.Length; i++) 
-            TeamInput_NextButton[i].SetActive(false);
-        TeamInput_PreviousButton.SetActive(true);
-        playerBackGround.SetActive(false);
-        inputNextButton.SetActive(true);
-        iCount++;
+            TeamInput_NextButton[i].SetActive(false);               // 다음 버튼 비활성화 ( 캐릭터에 있는 다음 버튼을 비활성화 ) 
+        playerBackGround.SetActive(false);                          // 캐릭터 선택 뒤 배경 비활성화 
+
+        TeamInput_PreviousButton.SetActive(true);                   // 이전 버튼 활성화 
+        inputNextButton.SetActive(true);                            // 다음 버튼 활성화 ( 아바타 선택후 맵 선택으로 넘어가는 다음 버튼 ) 
+
+        iCount++;                                                   // 페이지를 확인하기 위한 Flag 변수 ( flag == 1 ) 
     }
 
     public void TeamInput_Select_Next_Button()
     {
-        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        // 아바타 선택 이후 다음 버튼을 눌렀을 때 
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();           // NetworkManager 스크립트가 있는 오브젝트를 가져온다. 
         for (int i = 0; i < networkManager.itemName.Length; i++) {
-            Debug.Log(networkManager.itemName[i]);
+            Debug.Log(networkManager.itemName[i]);                  // 아바타 리스트을 제대로 가져왔는지 확인 ( 디버그 )
         }
-        InputItemList.SetActive(false);
-        InputItemBackGround.SetActive(false);
-        TeamInputPrevious.SetActive(true);
-        TeamInputNext.SetActive(true);
+        InputItemList.SetActive(false);                             // 아바타 체크박스 비활성화 
+        InputItemBackGround.SetActive(false);                       // 아바타 선택 뒤 배경 비활성화 
+        TeamInputPrevious.SetActive(true);                          // 방 선택 이전 버튼 활성화 
+        TeamInputNext.SetActive(true);                              // 방 선택 다음 버튼 활성화 
 
-        InputplayerTeaminput.SetActive(true);
-        inputNextButton.SetActive(false);
-        iCount++;
+        InputplayerTeaminput.SetActive(true);                       // 방 입장 UI 활성화 
+        inputNextButton.SetActive(false);                           // 다음 버튼 비활성화 
+        iCount++;                                                   // 페이지를 확인하기 위한 Flag 변수 ( flag == 2 ) 
     }
 
     public void TeamInput_Select_Previous()
     {
+        // 이전 버튼을 눌렀을 때 발생하는 이벤트 
+        // 아바타 선택창에서 이전 버튼을 눌렀을 때 
         if (iCount == 1) {
             TeamInput_Women();
             for (int i = 0; i < TeamInput_Women_Men.Length; i++)
-                TeamInput_Women_Men[i].SetActive(true);
+                TeamInput_Women_Men[i].SetActive(true);             // 남여 선택 버튼 활성화 
 
-            TeamInput_PreviousButton.SetActive(false);
-            TeamInputNext.SetActive(false);
-            TeamInputPrevious.SetActive(false);
-            playerBackGround.SetActive(true);
-            inputNextButton.SetActive(false);
-            iCount--;
+            TeamInput_PreviousButton.SetActive(false);              // 이전 버튼 비활성화 
+            TeamInputPrevious.SetActive(false);                     // 이전 버튼 비활성화
+            TeamInputNext.SetActive(false);                         // 다음 버튼 비활성화 
+            inputNextButton.SetActive(false);                       // 다음 버튼 비활성화
+            playerBackGround.SetActive(true);                       // 캐릭터 선택 뒤 배경 활성화 
+            iCount--;                                               // 페이지 확인을 위한 Flag 변수 ( flag == 0 됨 ) 
         }
-        else if(iCount == 2) {
-            InputItemList.SetActive(true);
-            InputItemBackGround.SetActive(true);
-            inputNextButton.SetActive(true);
-            InputplayerTeaminput.SetActive(false);
-            TeamInputPrevious.SetActive(false);
-            TeamInputNext.SetActive(false);
-            iCount--;        
+        // 맵 선택에서 이전 버튼을 눌렀을 때 
+        else if(iCount == 2) {                          
+            InputItemList.SetActive(true);                          // 아바타 체크박스 활성화 
+            InputItemBackGround.SetActive(true);                    // 아바타 뒤 배경 활성화 
+            inputNextButton.SetActive(true);                        // 다음 버튼 활성화 
+            InputplayerTeaminput.SetActive(false);                  // 방입장 UI 비활성화 
+            TeamInputPrevious.SetActive(false);                     // 방 선택 이전 버튼 비활성화 
+            TeamInputNext.SetActive(false);                         // 방 선택 다음 버튼 비활성화 
+            iCount--;                                               // 페이지 확인을 위한 Flag 변수 ( flag == 1 됨 )        
         }
     }
 
     public void TeamInput_Women()
     {
+        // 여자 캐릭터 버튼만 등장하도록 함 
         for (int i = 0; i < 3; i++) {
             TeamInput_Player[i].SetActive(true);
             TeamInput_Player[i + 3].SetActive(false);
@@ -407,6 +415,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     }
     public void TeamInput_Men()
     {
+        // 남자 캐릭터 버튼만 등장하도록 함 
         for (int i = 0; i < 3; i++) {
             TeamInput_Player[i].SetActive(false);
             TeamInput_Player[i + 3].SetActive(true);
