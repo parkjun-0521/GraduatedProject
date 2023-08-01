@@ -1477,7 +1477,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         StartCoroutine(MapCreateInformation());
     }
 
-
+    // 웹뷰 동기화 만드는 중 
     [PunRPC]
     public void WebViewSetActive(string localPlayerNickname)
     {
