@@ -64,7 +64,7 @@ public class LoginManager : MonoBehaviour
     {
         // 버튼을 눌렀을 때 이동할 URL (인텔리제이에서 jsp 파일을 실행시켰을 때의 URL을 입력)
         // 로그인 URL
-        LoginUrl = "http://223.131.75.181:1356//Metaverse_war_exploded/Login.jsp";
+        LoginUrl = "http://223.131.75.181:1356/Metaverse_war_exploded/Login.jsp";
         // 계정생성 URL 
         CreateUrl = "http://223.131.75.181:1356/Metaverse_war_exploded/NewUserCreate.jsp";
 

@@ -105,6 +105,11 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     public Sprite changeSpekerSprite;           // 바뀌어질 이미지
     public Sprite changeCurSpekerSprite;        // 바뀐 현재 이미지 ( 이미지를 바꾸고 현재 이미지를 저장 ) 
 
+    //================================== 그림판 관련 변수 선언 ==================================//
+    [Header("--------그림판--------")]
+    public GameObject DrawPanel;
+    public GameObject mainCamera;
+
     //=====================================================================//
     public GameObject preimg;
     public GameObject[] preava;
@@ -761,6 +766,20 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         }
     }
 
+    //=============================== 그림판 관련 함수 ===============================//
+    public void SetDrawPanel()
+    {
+        DrawPanel.SetActive(true);
+        mainCamera.SetActive(false);
+        roomPanel.SetActive(false);
+    }
+
+    public void ExitDrawPanel()
+    {
+        DrawPanel.SetActive(false);
+        mainCamera.SetActive(true);
+        roomPanel.SetActive(true);
+    }
     //=============================== 로그인 실패시 에러 문구 출력 ===============================//
 
     public void LoginErrorMessageClose()
