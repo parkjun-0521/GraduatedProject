@@ -667,13 +667,16 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true && !optionCheck) {
+        if (Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true && !optionCheck && !DrawPanel.activeSelf) {
             OptionOpen();
         }
-        else if(Input.GetKeyDown(KeyCode.Escape) && roomPanel.activeSelf == true && Lobby.activeSelf == false && !optionCheck) {
+        else if(Input.GetKeyDown(KeyCode.Escape) && roomPanel.activeSelf == true && Lobby.activeSelf == false && !optionCheck && !DrawPanel.activeSelf) {
             OptionOpen();
         }
-        else if(optionCheck && Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true) {
+        else if (Input.GetKeyDown(KeyCode.Escape) && DrawPanel.activeSelf) {
+            ExitDrawPanel();
+        }
+        else if(optionCheck && Input.GetKeyDown(KeyCode.Escape) && Lobby.activeSelf == true && !DrawPanel.activeSelf) {
             ThirdPersonController thirdPersonController = GameObject.Find("Female1").GetComponent<ThirdPersonController>();
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             if (soundOptionCheck) {
