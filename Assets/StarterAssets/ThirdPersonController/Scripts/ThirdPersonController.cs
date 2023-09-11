@@ -43,6 +43,7 @@ namespace StarterAssets
         public float JumpHeight = 1.2f;
         [Tooltip("player Jump Power")]
         public float JumpPower = -10f;
+        public bool JumpFlag = false;
 
         [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
         public float Gravity = -15.0f;
@@ -185,11 +186,13 @@ namespace StarterAssets
         {
             tr = GetComponent<Transform>();
             // get a reference to our main camera
-            
+
             if (_mainCamera == null) {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-                if (PV.IsMine)
+                if (PV.IsMine) {
                     Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
+
+                }
             }
             
         }
@@ -361,7 +364,7 @@ namespace StarterAssets
         private void JumpAndGravity()
         {
 
-            if (Grounded) { 
+            if (Grounded && !JumpFlag) { 
                     // reset the fall timeout timer
                     _fallTimeoutDelta = FallTimeout;
 

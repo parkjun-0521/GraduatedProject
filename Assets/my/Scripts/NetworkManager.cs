@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-// PhotonÀ» »ç¿ëÇÏ±â À§ÇÔ
+// Photonì„ ì‚¬ìš©í•˜ê¸° ìœ„í•¨
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
@@ -10,63 +10,65 @@ using UnityEngine.Networking;
 using UnityEditor;
 using System.Linq;
 using Photon.Pun.Demo.Cockpit;
-// ÀÚÃ¼ÀûÀ¸·Î Photon¿¡ ±ÔÄ¢À» ÁÖ±â À§ÇÔ 
+// ìì²´ì ìœ¼ë¡œ Photonì— ê·œì¹™ì„ ì£¼ê¸° ìœ„í•¨ 
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using StarterAssets;
 using Vuplex.WebView;
+using TMPro;
 
-// Æ÷Åæ ¼­¹ö¸¦ È°¿ëÇÑ ¸ÖÆ¼ ½Ã½ºÅÛ ±¸Çö 
+// í¬í†¤ ì„œë²„ë¥¼ í™œìš©í•œ ë©€í‹° ì‹œìŠ¤í…œ êµ¬í˜„ 
 public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCallback
 {
-    // UserÀÇ µ¥ÀÌÅÍ¸¦ °¡Á®¿À±â À§ÇØ DB¿Í Åë½Å 
+    // Userì˜ ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¤ê¸° ìœ„í•´ DBì™€ í†µì‹  
     [Header("Url")]
-    public string UserData;                 // »ç¿ëÀÚÀÇ µ¥ÀÌÅÍ URL ( ´Ğ³×ÀÓ°ú °ü¸®ÀÚ ¿©ºÎ¸¦ ¹Ş¾Æ¿Â´Ù ) 
-    public string LogoutURL;                // »ç¿ëÀÚ ·Î±×¾Æ¿ô URL ( ·Î±×¾Æ¿ô ½Ã login_state = 0 À¸·Î ¸¸µë ) 
-    public string LoginUrl;                 // »ç¿ëÀÚ ·Î±×ÀÎ URL ( ¿ø·¡´Â ·Î±×ÀÎ ½Ã login_state = 1 ·Î º¯°æ ÇÏ¿´´Âµ¥ ±â¼úÀûÀÎ ¹®Á¦·Î º¸·ù ) 
-    public string TeamData;                 // ÆÀÁ¤º¸ URL ( ÆÀÅ×ÀÌºí¿¡¼­ ÆÀÀÇ ÀÌ¸§À» ¹Ş¾Æ¿Â´Ù ) 
-    public string UserTeamData;             // »ç¿ëÀÚ ÆÀÀüÃ¼ Á¤º¸ URL ( »ç¿ëÀÚÀÇ ÆÀ ÀÌ¸§À» ¹Ş¾Æ¿Â´Ù ) 
-    public string AllTeamData;              // ¸ğµç ÆÀÀÇ Á¤º¸ URL ( ÆÀ¿¡ ¼ÓÇÑ ¸ğµç »ç¿ëÀÚÀÇ µ¥ÀÌÅÍ¸¦ °¡Á®¿È ) 
-    public string ChatLogData;              // Ã¤ÆÃ ·Î±×¸¦ ³Ñ±â´Â URL 
-    public string ItemInputData;            // ¾Æ¹ÙÅ¸ ¾ÆÀÌÅÛÀ» °¡Á®¿À´Â URL
-    UnityWebRequest wwwData;                // ¿äÃ»ÇÑ °ªÀ» ¹Ş¾Æ¼­ ÀúÀåÇÏ´Â º¯¼ö 
-    UnityWebRequest wwwData_2;              // ¿äÃ»ÇÑ °ªÀ» ¹Ş¾Æ¼­ ÀúÀåÇÏ´Â º¯¼ö 
-    UnityWebRequest wwwData_3;              // ¿äÃ»ÇÑ °ªÀ» ¹Ş¾Æ¼­ ÀúÀåÇÏ´Â º¯¼ö 
+    public string UserData;                 // ì‚¬ìš©ìì˜ ë°ì´í„° URL ( ë‹‰ë„¤ì„ê³¼ ê´€ë¦¬ì ì—¬ë¶€ë¥¼ ë°›ì•„ì˜¨ë‹¤ ) 
+    public string LogoutURL;                // ì‚¬ìš©ì ë¡œê·¸ì•„ì›ƒ URL ( ë¡œê·¸ì•„ì›ƒ ì‹œ login_state = 0 ìœ¼ë¡œ ë§Œë“¬ ) 
+    public string LoginUrl;                 // ì‚¬ìš©ì ë¡œê·¸ì¸ URL ( ì›ë˜ëŠ” ë¡œê·¸ì¸ ì‹œ login_state = 1 ë¡œ ë³€ê²½ í•˜ì˜€ëŠ”ë° ê¸°ìˆ ì ì¸ ë¬¸ì œë¡œ ë³´ë¥˜ ) 
+    public string TeamData;                 // íŒ€ì •ë³´ URL ( íŒ€í…Œì´ë¸”ì—ì„œ íŒ€ì˜ ì´ë¦„ì„ ë°›ì•„ì˜¨ë‹¤ ) 
+    public string UserTeamData;             // ì‚¬ìš©ì íŒ€ì „ì²´ ì •ë³´ URL ( ì‚¬ìš©ìì˜ íŒ€ ì´ë¦„ì„ ë°›ì•„ì˜¨ë‹¤ ) 
+    public string AllTeamData;              // ëª¨ë“  íŒ€ì˜ ì •ë³´ URL ( íŒ€ì— ì†í•œ ëª¨ë“  ì‚¬ìš©ìì˜ ë°ì´í„°ë¥¼ ê°€ì ¸ì˜´ ) 
+    public string ChatLogData;              // ì±„íŒ… ë¡œê·¸ë¥¼ ë„˜ê¸°ëŠ” URL 
+    public string ItemInputData;            // ì•„ë°”íƒ€ ì•„ì´í…œì„ ê°€ì ¸ì˜¤ëŠ” URL
+    UnityWebRequest wwwData;                // ìš”ì²­í•œ ê°’ì„ ë°›ì•„ì„œ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ 
+    UnityWebRequest wwwData_2;              // ìš”ì²­í•œ ê°’ì„ ë°›ì•„ì„œ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ 
+
+    UnityWebRequest wwwData_3;              // ìš”ì²­í•œ ê°’ì„ ë°›ì•„ì„œ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ 
 
     [Header("Text")]
-    public Text NickNameText = null;        // ´Ğ³×ÀÓÀ» ¹Ş¾Æ¿À±âÀ§ÇÑ Text
-    public Text StatusText;                 // ÇöÀç °èÁ¤ÀÇ Á¢¼Ó »óÅÂ¸¦ È®ÀÎÇÏ±â À§ÇÑ Text
+    public Text NickNameText = null;        // ë‹‰ë„¤ì„ì„ ë°›ì•„ì˜¤ê¸°ìœ„í•œ Text
+    public Text StatusText;                 // í˜„ì¬ ê³„ì •ì˜ ì ‘ì† ìƒíƒœë¥¼ í™•ì¸í•˜ê¸° ìœ„í•œ Text
 
-    // °ø¿ë Panel
+    // ê³µìš© Panel
     [Header("Public")]
-    public GameObject Server;               // ´Ğ³×ÀÓ, »óÅÂ, ÀÎ¿ø, ·Î±×¾Æ¿ô °ü·Ã UI 
-    public GameObject LoginPanelObj;        // ·Î±×ÀÎ UI Panel ¿ÀºêÁ§Æ® 
-    public GameObject LobbyPanelObj;        // ·Îºñ UI Panel ¿ÀºêÁ§Æ® 
+    public GameObject Server;               // ë‹‰ë„¤ì„, ìƒíƒœ, ì¸ì›, ë¡œê·¸ì•„ì›ƒ ê´€ë ¨ UI 
+    public GameObject LoginPanelObj;        // ë¡œê·¸ì¸ UI Panel ì˜¤ë¸Œì íŠ¸ 
+    public GameObject LobbyPanelObj;        // ë¡œë¹„ UI Panel ì˜¤ë¸Œì íŠ¸ 
 
-    // °ü¸®ÀÚ 
+    // ê´€ë¦¬ì 
     [Header("Admin")]
-    public GameObject ConnectServerObj;     // °ü¸®ÀÚ ¼­¹ö Á¢¼Ó ¿ÀºêÁ§Æ® ( »ç¿ëÀÚ¿Í ±¸º°ÇÏ±â À§ÇØ ¸¸µë ) 
+    public GameObject ConnectServerObj;     // ê´€ë¦¬ì ì„œë²„ ì ‘ì† ì˜¤ë¸Œì íŠ¸ ( ì‚¬ìš©ìì™€ êµ¬ë³„í•˜ê¸° ìœ„í•´ ë§Œë“¬ ) 
 
-    // »ç¿ëÀÚ
+    // ì‚¬ìš©ì
     [Header("User")]
-    public GameObject UserConnectServerObj; // »ç¿ëÀÚ ¼­¹ö Á¢¼Ó ¿ÀºêÁ§Æ® ( °ü¸®ÀÚ¿Í ±¸º°ÇÏ±â À§ÇØ ¸¸µë ) 
+    public GameObject UserConnectServerObj; // ì‚¬ìš©ì ì„œë²„ ì ‘ì† ì˜¤ë¸Œì íŠ¸ ( ê´€ë¦¬ìì™€ êµ¬ë³„í•˜ê¸° ìœ„í•´ ë§Œë“¬ ) 
 
     [Header("AdminCheck")]
     public bool adminCheck = false;
 
-    // ¹öÆ° 
+    // ë²„íŠ¼ 
     [Header("CreateRoomButton")]
-    public GameObject[] createRoom;          // °ü¸®ÀÚ°¡ »ı¼ºÇÏ´Â °ø°³¹æ A 
+    public GameObject[] createRoom;          // ê´€ë¦¬ìê°€ ìƒì„±í•˜ëŠ” ê³µê°œë°© A 
     public GameObject[] Create_Next_Previous;
 
     [Header("InputRoomButton")]
-    public GameObject[] inputRoom;           // »ç¿ëÀÚ°¡ ÀÔÀåÇÏ´Â °ø°³¹æ A 
+    public GameObject[] inputRoom;           // ì‚¬ìš©ìê°€ ì…ì¥í•˜ëŠ” ê³µê°œë°© A 
     public GameObject[] Input_Next_Previous;
 
     [Header("CreateTeamRoom")]
-    public GameObject createTeam;           // ÆÀÀåÀÌ ¸¸µé ¹æ UI Panel
-    public GameObject inputTeam;            // ÆÀ¿øÀÌ ÀÔÀåÇÒ ¹æ UI Panel
-    public GameObject[] createTeamRoom;     // ¹æÀ» ¸¸µé ¹öÆ° ¹è¿­ ( ÇÑ ÆäÀÌÁö¿¡ ÃÖ´ë 10°³¸¸ ¶ç¿ò ) 
-    public GameObject[] inputTeamRoom;      // ¹æ¿¡ µé¾î°¥ ¹öÆ° ¹è¿­ ( ÇÑ ÆäÀÌÁö¿¡ ÃÖ´ë 10°³¸¸ ¶ç¿ò ) 
+    public GameObject createTeam;           // íŒ€ì¥ì´ ë§Œë“¤ ë°© UI Panel
+    public GameObject inputTeam;            // íŒ€ì›ì´ ì…ì¥í•  ë°© UI Panel
+    public GameObject[] createTeamRoom;     // ë°©ì„ ë§Œë“¤ ë²„íŠ¼ ë°°ì—´ ( í•œ í˜ì´ì§€ì— ìµœëŒ€ 10ê°œë§Œ ë„ì›€ ) 
+    public GameObject[] inputTeamRoom;      // ë°©ì— ë“¤ì–´ê°ˆ ë²„íŠ¼ ë°°ì—´ ( í•œ í˜ì´ì§€ì— ìµœëŒ€ 10ê°œë§Œ ë„ì›€ ) 
 
     public string[] itemName = new string[6];
 
@@ -114,51 +116,52 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public ToggleGroup InputBag;
 
     [Header("Test Map")]
-    public GameObject map;                  // ¸Ê ÇÁ¸®ÆÕ ( °¢ ¸Ê¿¡ ÀÌ¸§¸¸ ÁöÁ¤ ÇØÁÖ¸é µÊ ) 
-    public GameObject player;               // ÇÃ·¹ÀÌ¾î ÇÁ¸®ÆÕ ( °¢ Ä³¸¯ÅÍ¿¡ ÀÌ¸§¸¸ ÁöÁ¤ ÇØÁÖ¸é µÊ ) 
+    public GameObject map;                  // ë§µ í”„ë¦¬íŒ¹ ( ê° ë§µì— ì´ë¦„ë§Œ ì§€ì • í•´ì£¼ë©´ ë¨ ) 
+    public GameObject player;               // í”Œë ˆì´ì–´ í”„ë¦¬íŒ¹ ( ê° ìºë¦­í„°ì— ì´ë¦„ë§Œ ì§€ì • í•´ì£¼ë©´ ë¨ ) 
     public GameObject web;                  // 
     public GameObject keybo;                  // 
-    public string playername;               // ¹öÆ°À» ´­·¶À» ¶§ ±× ¹öÆ°ÀÇ Name °ªÀ» ÀúŸöÇÏ±â À§ÇÑ º¯¼ö ( Ä³¸¯ÅÍ ÀÌ¸§À» ÀúÀå ) 
-    public string mapname;                  // ¹öÆ°À» ´­·¶À» ¶§ ±× ¹öÆ°ÀÇ Namw °ªÀ» ÀúÀåÇÏ±â À§ÇÑ º¯¼ö ( ¸Ê ÀÌ¸§À» ÀúÀå ) 
+    public string playername;               // ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ê·¸ ë²„íŠ¼ì˜ Name ê°’ì„ ì €ì«í•˜ê¸° ìœ„í•œ ë³€ìˆ˜ ( ìºë¦­í„° ì´ë¦„ì„ ì €ì¥ ) 
+    public string mapname;                  // ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ê·¸ ë²„íŠ¼ì˜ Namw ê°’ì„ ì €ì¥í•˜ê¸° ìœ„í•œ ë³€ìˆ˜ ( ë§µ ì´ë¦„ì„ ì €ì¥ ) 
 
     [Header("Lobby")]
     public GameObject Lobby;
-    public GameObject LobbyMainPlayer;      // ·ÎºñÀÇ Player ¿ÀºêÁ§Æ® 
+    public GameObject LobbyMainPlayer;      // ë¡œë¹„ì˜ Player ì˜¤ë¸Œì íŠ¸ 
     public Material lobbySkyBox;
-    //public GameObject webView;              // ·ÎºñÀÇ webView ¿ÀºêÁ§Æ® 
+    //public GameObject webView;              // ë¡œë¹„ì˜ webView ì˜¤ë¸Œì íŠ¸ 
 
     public GameObject optionPanel;
 
     
 
-    [Header("-----½Ç½Ã°£ Ã¤ÆÃ ½Ã½ºÅÛ ±¸Çö-----")]
+    [Header("-----ì‹¤ì‹œê°„ ì±„íŒ… ì‹œìŠ¤í…œ êµ¬í˜„-----")]
     [Header("LobbyPanel")]
-    public GameObject LobbyPanel;           // ·Îºñ Panel
-    public Text WelcomeText;                // ´Ğ³×ÀÓ + È¯¿µÇÕ´Ï´Ù Text
-    public Text LobbyInfoText;              // ÇöÀç ·ÎºñÀÇ ÀÎ¿ø¼ö Text
-    public Button[] CellBtn;                // ¹æÀ» Ã£±â À§ÇÑ n°³ÀÇ ¹æ ¹öÆ° 
-    public Button PreviousBtn;              // ¹æ ¸®½ºÆ® ¾ÕÀ¸·Î °¡±â ¹öÆ° 
-    public Button NextBtn;                  // ¹æ ¸®½ºÆ® µÚ·Î °¡±â ¹öÆ° 
+    public GameObject LobbyPanel;           // ë¡œë¹„ Panel
+    public Text WelcomeText;                // ë‹‰ë„¤ì„ + í™˜ì˜í•©ë‹ˆë‹¤ Text
+    public Text LobbyInfoText;              // í˜„ì¬ ë¡œë¹„ì˜ ì¸ì›ìˆ˜ Text
+    public Button[] CellBtn;                // ë°©ì„ ì°¾ê¸° ìœ„í•œ nê°œì˜ ë°© ë²„íŠ¼ 
+    public Button PreviousBtn;              // ë°© ë¦¬ìŠ¤íŠ¸ ì•ìœ¼ë¡œ ê°€ê¸° ë²„íŠ¼ 
+    public Button NextBtn;                  // ë°© ë¦¬ìŠ¤íŠ¸ ë’¤ë¡œ ê°€ê¸° ë²„íŠ¼ 
 
     [Header("RoomPanel")]
-    public GameObject ChatSystem;           // Ã¤ÆÃ UI ¿ÀºêÁ§Æ® 
-    public GameObject RoomPanel;            // Ã¤ÆÃ + ¸ÊÀÌ ÀÖ´Â Room ¿ÀºêÁ§Æ® 
-    public Text ListText;                   // ÇöÀç Á¢¼ÓÇØ ÀÖ´Â À¯ÀúÀÇ ÀÌ¸§ Ç¥½Ã 
-    public Text RoomInfoText;               // ¹æÀÌ¸§, ÇöÀç ÀÎ¿ø, ÃÖ´ë ÀÎ¿ø Ç¥½Ã 
-    public Text[] ChatText;                 // Ã¤ÆÃÃ¢ÀÇ ÁÙÀ» ¸îÁÙ·Î ÁöÁ¤ÇÒ Áö TextFieldÀÇ °³¼ö¸¦ ÁöÁ¤ 
-    public InputField ChatInput;            // Ã¤ÆÃÀ» ÀÔ·ÂÇÒ InputField 
+    public GameObject ChatSystem;           // ì±„íŒ… UI ì˜¤ë¸Œì íŠ¸ 
+    public GameObject ChatMax;              // ì±„íŒ…ì°½ ë‹«ê¸° í–ˆì„ ë•Œ ë³´ì—¬ì§€ëŠ” UI
+    public GameObject RoomPanel;            // ì±„íŒ… + ë§µì´ ìˆëŠ” Room ì˜¤ë¸Œì íŠ¸ 
+    public Text ListText;                   // í˜„ì¬ ì ‘ì†í•´ ìˆëŠ” ìœ ì €ì˜ ì´ë¦„ í‘œì‹œ 
+    public Text RoomInfoText;               // ë°©ì´ë¦„, í˜„ì¬ ì¸ì›, ìµœëŒ€ ì¸ì› í‘œì‹œ 
+    public Text[] ChatText;                 // ì±„íŒ…ì°½ì˜ ì¤„ì„ ëª‡ì¤„ë¡œ ì§€ì •í•  ì§€ TextFieldì˜ ê°œìˆ˜ë¥¼ ì§€ì • 
+    public InputField ChatInput;            // ì±„íŒ…ì„ ì…ë ¥í•  InputField 
     public bool chatCheck = false;
 
     [Header("ETC")]
-    public PhotonView PV;                   // ÇöÀç ÀÚ±â ÀÚ½ÅÀÇ PhotonView¸¦ ³ÖÀ½ 
+    public PhotonView PV;                   // í˜„ì¬ ìê¸° ìì‹ ì˜ PhotonViewë¥¼ ë„£ìŒ 
 
-    List<RoomInfo> myList = new List<RoomInfo>();       // ¹æ ¸®½ºÆ® °»½ÅÀ» À§ÇÑ List Å¸ÀÔ º¯¼ö 
-    int currentPage = 1, maxPage, multiple;             // ¹æ ¸®½ºÆ® ³Ñ±â±â ¹öÆ° °ü·Ã º¯¼ö ( ÇöÀç ÆäÀÌÁö, ÃÖ´ë ÆäÀÌÁö, ¸îÆäÁö±îÁö ÀÖ´ÂÁö ) 
+    List<RoomInfo> myList = new List<RoomInfo>();       // ë°© ë¦¬ìŠ¤íŠ¸ ê°±ì‹ ì„ ìœ„í•œ List íƒ€ì… ë³€ìˆ˜ 
+    int currentPage = 1, maxPage, multiple;             // ë°© ë¦¬ìŠ¤íŠ¸ ë„˜ê¸°ê¸° ë²„íŠ¼ ê´€ë ¨ ë³€ìˆ˜ ( í˜„ì¬ í˜ì´ì§€, ìµœëŒ€ í˜ì´ì§€, ëª‡í˜ì§€ê¹Œì§€ ìˆëŠ”ì§€ ) 
 
-    // ÆÀ¹æ °ü·Ã ¹æ Á¦ÇÑ Ç®±â À§ÇÑ º¯¼ö
-    public int curPage = 0;                 // ÇöÀç ÆäÀÌÁö ÀúÀå º¯¼ö
-    public int endPage = 0;                 // ¸¶Áö¸· ÆäÀÌÁö ÀúÀå º¯¼ö 
-    public int pageCount = 1;               // ÆäÀÌÁö ³Ñ¾î°¥ ¶§ÀÇ º¯¼ö 
+    // íŒ€ë°© ê´€ë ¨ ë°© ì œí•œ í’€ê¸° ìœ„í•œ ë³€ìˆ˜
+    public int curPage = 0;                 // í˜„ì¬ í˜ì´ì§€ ì €ì¥ ë³€ìˆ˜
+    public int endPage = 0;                 // ë§ˆì§€ë§‰ í˜ì´ì§€ ì €ì¥ ë³€ìˆ˜ 
+    public int pageCount = 1;               // í˜ì´ì§€ ë„˜ì–´ê°ˆ ë•Œì˜ ë³€ìˆ˜ 
 
     public bool UserCheck = false;
 
@@ -169,38 +172,37 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     public bool checkRoom = false;
 
-
     public Material skyBoxSpring;
     public Material skyBoxSummer;
     public Material skyBoxAutumn;
     public Material skyBoxWinter;
 
-    //--------------------------------------------- ºôµå È­¸é Å©±â ---------------------------------------------// 
+    //--------------------------------------------- ë¹Œë“œ í™”ë©´ í¬ê¸° ---------------------------------------------// 
     void Awake()
     {
-        // ºôµåÇßÀ» ¶§ È­¸é ºñÀ² 
+        // ë¹Œë“œí–ˆì„ ë•Œ í™”ë©´ ë¹„ìœ¨ 
         Screen.SetResolution(362, 530, false);
     }
 
-    //--------------------------------------------- ¹é Á¢±Ù URL ---------------------------------------------//  
+    //--------------------------------------------- ë°± ì ‘ê·¼ URL ---------------------------------------------//  
     void Start()
     {
-        // ¹öÆ°À» ´­·¶À» ¶§ ÀÌµ¿ÇÒ URL 
-        // (ÀÎÅÚ¸®Á¦ÀÌ¿¡¼­ jsp ÆÄÀÏÀ» ½ÇÇà½ÃÄ×À» ¶§ÀÇ URLÀ» ÀÔ·Â)
-        // Æ÷Æ®Æ÷¿öµùÀ» ÀÌ¿ëÇÏ¿© ¿ÜºÎ¿¡¼­µµ Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï ÇÔ 
+        // ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì´ë™í•  URL 
+        // (ì¸í…”ë¦¬ì œì´ì—ì„œ jsp íŒŒì¼ì„ ì‹¤í–‰ì‹œì¼°ì„ ë•Œì˜ URLì„ ì…ë ¥)
+        // í¬íŠ¸í¬ì›Œë”©ì„ ì´ìš©í•˜ì—¬ ì™¸ë¶€ì—ì„œë„ ì ‘ê·¼í•  ìˆ˜ ìˆë„ë¡ í•¨ 
         LoginUrl = "http://223.131.75.181:1356/Metaverse_war_exploded/Login.jsp";
         UserData = "http://223.131.75.181:1356/Metaverse_war_exploded/UserData.jsp";
         LogoutURL = "http://223.131.75.181:1356/Metaverse_war_exploded/Logout.jsp";
 
-        // ÆÀ µ¥ÀÌÅÍ °¡Á®¿À±â À§ÇÑ URL
+        // íŒ€ ë°ì´í„° ê°€ì ¸ì˜¤ê¸° ìœ„í•œ URL
         TeamData = "http://223.131.75.181:1356/Metaverse_war_exploded/TeamData.jsp";
         UserTeamData = "http://223.131.75.181:1356/Metaverse_war_exploded/UserTeamData.jsp";
         AllTeamData = "http://223.131.75.181:1356/Metaverse_war_exploded/TeamAllData.jsp";
         
-        // ¾Æ¹ÙÅ¸¸¦ °¡Á®¿À´Â URL
+        // ì•„ë°”íƒ€ë¥¼ ê°€ì ¸ì˜¤ëŠ” URL
         ItemInputData = "http://223.131.75.181:1356/Metaverse_war_exploded/ItemInput.jsp";  
 
-        // Ã¤ÆÃ·Î±× °¡Á®¿À±â
+        // ì±„íŒ…ë¡œê·¸ ê°€ì ¸ì˜¤ê¸°
         ChatLogData = "http://223.131.75.181:1356/Metaverse_war_exploded/ChatLog.jsp";
 
         for (int i = 0; i < itemName.Length; i++) {
@@ -208,48 +210,52 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
     }
 
-    //--------------------------------------------- »ç¿ëÀÚÀÇ »óÅÂ, ·ÎºñÀÇ ÀÎ¿ø, Ã¤ÆÃÃ¢ °ü·Ã ·ÎÁ÷ ---------------------------------------------// 
+    //--------------------------------------------- ì‚¬ìš©ìì˜ ìƒíƒœ, ë¡œë¹„ì˜ ì¸ì›, ì±„íŒ…ì°½ ê´€ë ¨ ë¡œì§ ---------------------------------------------// 
     void Update() 
     {
-        // »óÅÂ¸¦ ³ªÅ¸³»´Â text
+        // ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” text
         StatusText.text = PhotonNetwork.NetworkClientState.ToString();
 
-        // Lobby¿¡ ¸î¸íÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ´Â text
-        // ÀüÃ¼Player Áß¿¡¼­ Room¿¡ µé¾î°¡ ÀÖ´Â »ç¶÷Àº Á¦¿Ü ÇÏ°í ·Îºñ¿¡ ¸î¸íÀÌ ÀÖ´ÂÁö È®ÀÎ 
-        LobbyInfoText.text = "<color=#0000ff>" + (PhotonNetwork.CountOfPlayers - PhotonNetwork.CountOfPlayersInRooms)  + "·Îºñ / " + PhotonNetwork.CountOfPlayers + "Á¢¼Ó" + "</color>";
+        // Lobbyì— ëª‡ëª…ì´ ìˆëŠ”ì§€ í™•ì¸í•˜ëŠ” text
+        // ì „ì²´Player ì¤‘ì—ì„œ Roomì— ë“¤ì–´ê°€ ìˆëŠ” ì‚¬ëŒì€ ì œì™¸ í•˜ê³  ë¡œë¹„ì— ëª‡ëª…ì´ ìˆëŠ”ì§€ í™•ì¸ 
+        LobbyInfoText.text = "<color=#0000ff>" + (PhotonNetwork.CountOfPlayers - PhotonNetwork.CountOfPlayersInRooms)  + "ë¡œë¹„ / " + PhotonNetwork.CountOfPlayers + "ì ‘ì†" + "</color>";
 
-        // Enter¸¦ ´­·¶À» ¶§ Ã¤ÆÃÃ¢¿¡ ÀÔ·ÂÇÒ ¼ö ÀÖ°Ô ÇÏ±â À§ÇÑ ·ÎÁ÷ 
-        // Enter¸¦ ´©¸£°í ¹æ¿¡ ÀÔÀå ÇÏ¿´À» ¶§ Ä³¸¯ÅÍ¸¦ ¸ØÃß°í Ã¤ÆÃÀ» Ä¥ ¼ö ÀÖ°Ô ÇÔ 
-        if (Input.GetButtonDown("ChatStart") && RoomPanel.activeSelf == true) {
-            Debug.Log("enter ´©¸§");
-            // Player ÅÂ±×ÀÇ ¿ÀºêÁ§Æ®ÀÇ ¼Óµµ¸¦ ÁÙÀÌ°í È¸ÀüÀ» ¸·À½ 
+        // Enterë¥¼ ëˆŒë €ì„ ë•Œ ì±„íŒ…ì°½ì— ì…ë ¥í•  ìˆ˜ ìˆê²Œ í•˜ê¸° ìœ„í•œ ë¡œì§ 
+        // Enterë¥¼ ëˆ„ë¥´ê³  ë°©ì— ì…ì¥ í•˜ì˜€ì„ ë•Œ ìºë¦­í„°ë¥¼ ë©ˆì¶”ê³  ì±„íŒ…ì„ ì¹  ìˆ˜ ìˆê²Œ í•¨ 
+       
+        if (Input.GetButtonDown("ChatStart") && RoomPanel.activeSelf == true || Input.GetMouseButtonUp(0) && ChatInput.isFocused) {
+            Debug.Log("enter ëˆ„ë¦„");
+            // Player íƒœê·¸ì˜ ì˜¤ë¸Œì íŠ¸ì˜ ì†ë„ë¥¼ ì¤„ì´ê³  íšŒì „ì„ ë§‰ìŒ 
             ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
             thirdPersonController.MoveSpeed = 0.0f;
             thirdPersonController.SprintSpeed = 0.0f;
             thirdPersonController.turnStop = true;
             thirdPersonController.EnterCheck = false;
-
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             smoothFollow.turnOff = true;
 
             chatCheck = true;
-            // Ã¤ÆÃÃ¢ UI¸¦ È°¼ºÈ­ 
+            // ì±„íŒ…ì°½ UIë¥¼ í™œì„±í™” 
             ChatSystem.SetActive(true);
-            // Ã¤ÆÃÃ¢ÀÇ InputField¸¦ È°¼ºÈ­ ÇÏ¿© ¹Ù·Î Ã¤ÆÃÀ» Ä¥ ¼ö ÀÖµµ·Ï ÇÔ 
+            ChatMax.SetActive(false);
+            // ì±„íŒ…ì°½ì˜ InputFieldë¥¼ í™œì„±í™” í•˜ì—¬ ë°”ë¡œ ì±„íŒ…ì„ ì¹  ìˆ˜ ìˆë„ë¡ í•¨ 
             ChatInput.ActivateInputField();
-            // º¸³»´Â ÇÔ¼ö 
+            // ë³´ë‚´ëŠ” í•¨ìˆ˜ 
             Send();
+
+            thirdPersonController.JumpFlag = true;
         }
-        // ´Ù½Ã ¿òÁ÷ÀÌ°í ½ÍÀ¸¸é ¹æ¿¡¼­ ¸¶¿ì½º¸¦ Å¬¸¯ÇÏ¸é ¿òÁ÷ÀÏ ¼ö ÀÖµµ·Ï ÇÔ 
+        // ë‹¤ì‹œ ì›€ì§ì´ê³  ì‹¶ìœ¼ë©´ ë°©ì—ì„œ ë§ˆìš°ìŠ¤ë¥¼ í´ë¦­í•˜ë©´ ì›€ì§ì¼ ìˆ˜ ìˆë„ë¡ í•¨ 
         else if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && RoomPanel.activeSelf == true && chatCheck) {
-            // ¼Óµµ¸¦ 50 ÁÖ°í È¸ÀüÀ» Ç®À½ 
+            // ì†ë„ë¥¼ 50 ì£¼ê³  íšŒì „ì„ í’€ìŒ 
             ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
             thirdPersonController.MoveSpeed = 50.0f;
             thirdPersonController.SprintSpeed = 80.0f;
             thirdPersonController.turnStop = false;
             thirdPersonController.EnterCheck = true;
+            thirdPersonController.JumpFlag = false;
 
-
+            Invoke("PlayerJump",0.5f);
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             smoothFollow.turnOff = false;
 
@@ -257,49 +263,49 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
     }
 
-    //--------------------------------------------- ¼­¹ö Á¢¼Ó ÇÔ¼ö  ---------------------------------------------//  
+    //--------------------------------------------- ì„œë²„ ì ‘ì† í•¨ìˆ˜  ---------------------------------------------//  
     public void Connect()
     {
-        // ³×Æ®¿öÅ©¿¡ Á¢¼ÓÀÌ µÇ¾úÀ» ¶§ 
+        // ë„¤íŠ¸ì›Œí¬ì— ì ‘ì†ì´ ë˜ì—ˆì„ ë•Œ 
         PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
     {
-        // ¼­¹ö Á¢¼ÓÀÌ ¼º°øÀûÀ¸·Î µÇ¾úÀ» ¶§ 
-        print("¼­¹öÁ¢¼Ó¿Ï·á");
+        // ì„œë²„ ì ‘ì†ì´ ì„±ê³µì ìœ¼ë¡œ ë˜ì—ˆì„ ë•Œ 
+        print("ì„œë²„ì ‘ì†ì™„ë£Œ");
         NickNameText.text = null;
-        // »ç¿ëÀÚÀÇ µ¥ÀÌÅÍ¸¦ °¡Á®¿Â´Ù 
+        // ì‚¬ìš©ìì˜ ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¨ë‹¤ 
         StartCoroutine(UserNick());
         Screen.SetResolution(1920, 1080, true);
 
-        // ·Îºñ Ä³¸¯ÅÍÀÇ À§Ä¡¸¦ 0, 3, 0À¸·Î ÃÊ±âÈ­
+        // ë¡œë¹„ ìºë¦­í„°ì˜ ìœ„ì¹˜ë¥¼ 0, 3, 0ìœ¼ë¡œ ì´ˆê¸°í™”
         LobbyMainPlayer.transform.position = new Vector3(0f, 1f, -9f);
 
-        // ¼º°øÀûÀ¸·Î Á¢¼ÓÀÌ µÉ ½Ã ¹Ù·Î ·Îºñ·Î ÀÌµ¿ 
+        // ì„±ê³µì ìœ¼ë¡œ ì ‘ì†ì´ ë  ì‹œ ë°”ë¡œ ë¡œë¹„ë¡œ ì´ë™ 
         PhotonNetwork.JoinLobby();
     }
 
-    //--------------------------------------------- Lobby ÀÔÀå ÇÔ¼ö  ---------------------------------------------// 
+    //--------------------------------------------- Lobby ì…ì¥ í•¨ìˆ˜  ---------------------------------------------// 
     public void JoinLobby()
     {
-        // ·Îºñ Âü°¡ 
+        // ë¡œë¹„ ì°¸ê°€ 
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
-        print("·ÎºñÁ¢¼Ó¿Ï·á");
-        // ¹æ »ı¼º°ú µ¿ÀÏÇÏ°Ô °èÁ¤ÀÇ ´Ğ³×ÀÓÀ» °¡Á®¿Â´Ù 
+        print("ë¡œë¹„ì ‘ì†ì™„ë£Œ");
+        // ë°© ìƒì„±ê³¼ ë™ì¼í•˜ê²Œ ê³„ì •ì˜ ë‹‰ë„¤ì„ì„ ê°€ì ¸ì˜¨ë‹¤ 
         //StartCoroutine(UserNick());
-        RoomPanel.SetActive(false);             // Room Panel ºñÈ°¼ºÈ­ 
-        Lobby.SetActive(true);                  // ·Îºñ Floor È°¼ºÈ­ 
+        RoomPanel.SetActive(false);             // Room Panel ë¹„í™œì„±í™” 
+        Lobby.SetActive(true);                  // ë¡œë¹„ Floor í™œì„±í™” 
         //webView.SetActive(true);
         RenderSettings.skybox = lobbySkyBox;
         RenderSettings.reflectionIntensity = 1f;
 
-        // player ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¼­ ±× ¾ÈÀÇ Start ÇÔ¼ö¸¦ ½ÇÇà 
-        // Ä«¸Ş¶ó°¡ ¹æ¿¡¼­ ³ª¿ÔÀ» ½Ã ·Îºñ Ä³¸¯ÅÍ¸¦ Àâ°Ô ¸¸µé±â À§ÇØ¼­ Start ÇÔ¼ö¸¦ ½ÇÇà ÇÏ´Â °Í ÀÌ´Ù. 
+        // player ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•„ì„œ ê·¸ ì•ˆì˜ Start í•¨ìˆ˜ë¥¼ ì‹¤í–‰ 
+        // ì¹´ë©”ë¼ê°€ ë°©ì—ì„œ ë‚˜ì™”ì„ ì‹œ ë¡œë¹„ ìºë¦­í„°ë¥¼ ì¡ê²Œ ë§Œë“¤ê¸° ìœ„í•´ì„œ Start í•¨ìˆ˜ë¥¼ ì‹¤í–‰ í•˜ëŠ” ê²ƒ ì´ë‹¤. 
         LobbyPlayer lobbyPlayer = GameObject.Find("Female1").GetComponent<LobbyPlayer>();
         lobbyPlayer.Start();
 
@@ -311,9 +317,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         buttonEvent.SoundOptionClose();
 
 
-        // ¹æ¿¡¼­ ³ª°¡°í ·Îºñ·Î µ¹¾Æ¿ÔÀ»¶§ 
-        // ¸®½ºÆ®¸¦ ÃÊ±âÈ­¸¦ ÇØÁà¾ß ¹ö±×°¡ ¹ß»ıÇÏÁö ¾Ê´Â´Ù. 
-        // ÀÌ·¸°Ô ÇØ¾ß Áß°£¿¡ ºó¹æÀÌ »ı±âÁö ¾Ê´Â´Ù. 
+        // ë°©ì—ì„œ ë‚˜ê°€ê³  ë¡œë¹„ë¡œ ëŒì•„ì™”ì„ë•Œ 
+        // ë¦¬ìŠ¤íŠ¸ë¥¼ ì´ˆê¸°í™”ë¥¼ í•´ì¤˜ì•¼ ë²„ê·¸ê°€ ë°œìƒí•˜ì§€ ì•ŠëŠ”ë‹¤. 
+        // ì´ë ‡ê²Œ í•´ì•¼ ì¤‘ê°„ì— ë¹ˆë°©ì´ ìƒê¸°ì§€ ì•ŠëŠ”ë‹¤. 
         myList.Clear();
     }
 
@@ -327,46 +333,46 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
        
     }
 
-    //--------------------------------------------- NickName¸¦ °¡Á®¿À´Â ÄÚ·çÆ¾ ---------------------------------------------// 
+    //--------------------------------------------- NickNameë¥¼ ê°€ì ¸ì˜¤ëŠ” ì½”ë£¨í‹´ ---------------------------------------------// 
     IEnumerator UserNick()
     {
-        // ¿ÜºÎ ½ºÅ©¸³Æ®¸¦ °¡Á®¿À±âÀ§ÇØ Find¸¦ »ç¿ë 
+        // ì™¸ë¶€ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì ¸ì˜¤ê¸°ìœ„í•´ Findë¥¼ ì‚¬ìš© 
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
-        // ID°¡ Å°°ªÀÌ¹Ç·Î IDÀÇ °ª¸¸ °¡Á®¿Â´Ù. 
+        // IDê°€ í‚¤ê°’ì´ë¯€ë¡œ IDì˜ ê°’ë§Œ ê°€ì ¸ì˜¨ë‹¤. 
         form.AddField("id", loginManager.IDInputField.text);
 
         wwwData = UnityWebRequest.Post(UserData, form);
         yield return wwwData.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str = wwwData.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
-        // ¹Ş¾Æ¿Â ¹®ÀÚ¿­À» ,¸¦ ±âÁØÀ¸·Î ³ª´©¾î ¹è¿­·Î ÀúÀå 
+        // ë°›ì•„ì˜¨ ë¬¸ìì—´ì„ ,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°°ì—´ë¡œ ì €ì¥ 
         string[] reSplit = re.Split(',');
-        // ¹è¿­¿¡ ¹®ÀÚ¿­ÀÌ Àß µé¾î°¬´ÂÁö È®ÀÎ 
-        // °á°ú [0] : ´Ğ³×ÀÓ [1] : 1 ¶Ç´Â 0 ( 1Àº admin 0Àº user ) 
+        // ë°°ì—´ì— ë¬¸ìì—´ì´ ì˜ ë“¤ì–´ê°”ëŠ”ì§€ í™•ì¸ 
+        // ê²°ê³¼ [0] : ë‹‰ë„¤ì„ [1] : 1 ë˜ëŠ” 0 ( 1ì€ admin 0ì€ user ) 
         for (int i = 0; i < reSplit.Length; i++)
             Debug.Log(reSplit[i]);
 
-        // ´Ğ³×ÀÓÀ» ¹Ş¾Æ¿Í¼­ º¯¼ö¿¡ ÀúÀå 
+        // ë‹‰ë„¤ì„ì„ ë°›ì•„ì™€ì„œ ë³€ìˆ˜ì— ì €ì¥ 
         NickNameText.text = reSplit[0];
         PhotonNetwork.LocalPlayer.NickName = reSplit[0];
         
 
-        // ·Îºñ Panel¿¡¼­ Á¢¼Ó½Ã »ı¼ºµÇ´Â ¹®±¸ 
-        WelcomeText.text = "<color=#0000ff>" + PhotonNetwork.LocalPlayer.NickName + "</color>" + "´Ô È¯¿µÇÕ´Ï´Ù";
+        // ë¡œë¹„ Panelì—ì„œ ì ‘ì†ì‹œ ìƒì„±ë˜ëŠ” ë¬¸êµ¬ 
+        WelcomeText.text = "<color=#0000ff>" + PhotonNetwork.LocalPlayer.NickName + "</color>" + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤";
         
 
-        // ¹Ş¾Æ¿Â °ªÀÌ admin °èÁ¤ÀÏ ¶§ 
-        // °ü¸®ÀÚ¿Í »ç¿ëÀÚÀÇ È­¸éÀ» ±¸º°ÇÏ¿© °¢°¢ ¹öÆ° È°¼ºÈ­ÀÇ °ªÀ» ´Ù¸£°Ô ÁÜ 
-        // °ø°³¹æ »ı¼º ¹öÆ°¸¸ ¸¸µë ( ÃßÈÄ °ü¸®ÀÚµµ °ø°³¹æ¿¡ ÀÔÀåÇÏ±â ¹öÆ°À» È°¼ºÈ­ ÇÒ ¿¹Á¤ ) 
+        // ë°›ì•„ì˜¨ ê°’ì´ admin ê³„ì •ì¼ ë•Œ 
+        // ê´€ë¦¬ìì™€ ì‚¬ìš©ìì˜ í™”ë©´ì„ êµ¬ë³„í•˜ì—¬ ê°ê° ë²„íŠ¼ í™œì„±í™”ì˜ ê°’ì„ ë‹¤ë¥´ê²Œ ì¤Œ 
+        // ê³µê°œë°© ìƒì„± ë²„íŠ¼ë§Œ ë§Œë“¬ ( ì¶”í›„ ê´€ë¦¬ìë„ ê³µê°œë°©ì— ì…ì¥í•˜ê¸° ë²„íŠ¼ì„ í™œì„±í™” í•  ì˜ˆì • ) 
         if (reSplit[1] == "1") {
             adminCheck = true;
-            ConnectServerObj.SetActive(false);          // °ü¸®ÀÚ ¼­¹ö ¿¬°á È­¸é ºñÈ°¼ºÈ­ 
-            //Server.SetActive(true);                     // ´Ğ³×ÀÓÀ» °¡Áö°í ÀÖ´Â Panel È°¼ºÈ­ 
-            createTeam.SetActive(false);                // ÆÀ¹æ ¸¸µé±â ¹öÆ° ºñÈ°¼ºÈ­ 
-            inputTeam.SetActive(false);                 // ÆÀ¹æ ÀÔÀåÇÏ±â ¹öÆ° ºñÈ°¼ºÈ­ 
+            ConnectServerObj.SetActive(false);          // ê´€ë¦¬ì ì„œë²„ ì—°ê²° í™”ë©´ ë¹„í™œì„±í™” 
+            //Server.SetActive(true);                     // ë‹‰ë„¤ì„ì„ ê°€ì§€ê³  ìˆëŠ” Panel í™œì„±í™” 
+            createTeam.SetActive(false);                // íŒ€ë°© ë§Œë“¤ê¸° ë²„íŠ¼ ë¹„í™œì„±í™” 
+            inputTeam.SetActive(false);                 // íŒ€ë°© ì…ì¥í•˜ê¸° ë²„íŠ¼ ë¹„í™œì„±í™” 
             for (int i = 0; i < createRoom.Length; i++) {
                 inputRoom[i].SetActive(false);
                 createRoom[i].SetActive(true);
@@ -376,14 +382,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 Input_Next_Previous[i].SetActive(false);
             }
         }
-        // ¹Ş¾Æ¿Â °ªÀÌ user °èÁ¤ÀÏ ¶§ 
-        // °ø°³¹æ ÀÔÀå ¹öÆ°¸¸ ¸¸µë 
+        // ë°›ì•„ì˜¨ ê°’ì´ user ê³„ì •ì¼ ë•Œ 
+        // ê³µê°œë°© ì…ì¥ ë²„íŠ¼ë§Œ ë§Œë“¬ 
         else if (reSplit[1] == "0" ) {
             adminCheck = false;
-            UserConnectServerObj.SetActive(false);      // »ç¿ëÀÚ ¼­¹ö ¿¬°á È­¸é ºñÈ°¼ºÈ­       
-            //Server.SetActive(true);                     // ´Ğ³×ÀÓÀ» °¡Áö°í ÀÖ´Â Panel È°¼ºÈ­ 
-            createTeam.SetActive(false);                // ÆÀ¹æ ¸¸µé±â ¹öÆ° ºñÈ°¼ºÈ­ 
-            inputTeam.SetActive(false);                 // ÆÀ¹æ ÀÔÀåÇÏ±â ¹öÆ° ºñÈ°¼ºÈ­ 
+            UserConnectServerObj.SetActive(false);      // ì‚¬ìš©ì ì„œë²„ ì—°ê²° í™”ë©´ ë¹„í™œì„±í™”       
+            //Server.SetActive(true);                     // ë‹‰ë„¤ì„ì„ ê°€ì§€ê³  ìˆëŠ” Panel í™œì„±í™” 
+            createTeam.SetActive(false);                // íŒ€ë°© ë§Œë“¤ê¸° ë²„íŠ¼ ë¹„í™œì„±í™” 
+            inputTeam.SetActive(false);                 // íŒ€ë°© ì…ì¥í•˜ê¸° ë²„íŠ¼ ë¹„í™œì„±í™” 
             for (int i = 0; i < createRoom.Length; i++) {
                 inputRoom[i].SetActive(true);
                 createRoom[i].SetActive(false);
@@ -394,7 +400,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             }
         }
         
-        // ¸Ş¸ğ¸® ´©¼ö ¹æÁö¸¦ À§ÇØ 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ë°©ì§€ë¥¼ ìœ„í•´ 
         wwwData.Dispose();
     }
 
@@ -402,25 +408,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
-        // ID°¡ Å°°ªÀÌ¹Ç·Î IDÀÇ °ª¸¸ °¡Á®¿Â´Ù. 
+        // IDê°€ í‚¤ê°’ì´ë¯€ë¡œ IDì˜ ê°’ë§Œ ê°€ì ¸ì˜¨ë‹¤. 
         form.AddField("id", loginManager.IDInputField.text);
 
         wwwData = UnityWebRequest.Post(ItemInputData, form);
         yield return wwwData.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str = wwwData.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
-        // ¸¶Áö¸· ,µµ °¡Á®¿À°Ô µÇ¸é \n °ªµµ Ãß°¡°¡ µÇ±â¶§¹®¿¡ ¸¶Áö¸· ,´Â Áö¿öÁØ´Ù
+        // ë§ˆì§€ë§‰ ,ë„ ê°€ì ¸ì˜¤ê²Œ ë˜ë©´ \n ê°’ë„ ì¶”ê°€ê°€ ë˜ê¸°ë•Œë¬¸ì— ë§ˆì§€ë§‰ ,ëŠ” ì§€ì›Œì¤€ë‹¤
         re = re.TrimEnd(',');
         Debug.Log(re);
-        // ¹Ş¾Æ¿Â ¹®ÀÚ¿­À» ,¸¦ ±âÁØÀ¸·Î ³ª´©¾î ¹è¿­·Î ÀúÀå
+        // ë°›ì•„ì˜¨ ë¬¸ìì—´ì„ ,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°°ì—´ë¡œ ì €ì¥
 
         string[] reSplit = re.Split(',');
 
         for (int i = 0; i < reSplit.Length; i += 2)
             Debug.Log(reSplit[i]);
 
+        // ì•„ë°”íƒ€ë¥¼ ê°€ì ¸ì˜¨ë‹¤. ( ê° ì•„ë°”íƒ€ë¥¼ ê°€ì ¸ì˜¤ëŠ”ë° 0.1ì´ˆì˜ ê°„ê²©ì„ ë‘ê³  ê°€ì ¸ì˜¨ë‹¤ ) 
         PublicItemFor(reSplit, itemPublicColor, "color");
         yield return new WaitForSeconds(0.1f);
         PublicItemFor(reSplit, itemPublicHat, "hat");
@@ -436,30 +443,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         Debug.Log(playername);
 
-        // ¸Ş¸ğ¸® ´©¼ö ¹æÁö 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ë°©ì§€ 
         wwwData.Dispose();
     }
 
     public void PublicItemFor(string[] ItemID, GameObject[] ItemName, string name)
     {
+        // ê° ì•„ë°”íƒ€ì— ë§ëŠ” ì²´í¬ë°•ìŠ¤ë¥¼ í™œì„±í™” í•œë‹¤. 
         for (int i = 0; i < ItemName.Length; i++) {
-            if (ItemID.Contains(name + i)) {
-                Debug.Log(name + i + "¸¦ Ã£¾Ò½À´Ï´Ù.");
-                ItemName[i].SetActive(true);
+            if (ItemID.Contains(name + i)) {                // Contains : ë¬¸ìì—´ ì•ˆì— ì§€ì •í•œ ë¬¸ìê°€ ìˆëŠ”ì§€ í™•ì¸
+                Debug.Log(name + i + "ë¥¼ ì°¾ì•˜ìŠµë‹ˆë‹¤.");      // ì•„ì´í…œì´ ìˆëŠ”ì§€ ë””ë²„ê·¸
+                ItemName[i].SetActive(true);                // ì•„ë°”íƒ€ ì²´í¬ ë°•ìŠ¤ í™œì„±í™” 
 
+                // ì²´í¬ ë°•ìŠ¤ì˜ ì´ë¦„ì„ nameì— ìˆ«ìë§Œ ë¶™ì—¬ì„œ ì„ì‹œì ìœ¼ë¡œ í‘œê¸° 
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
             }
-            else
-            {
-                Debug.Log("¾ÆÀÌÅÛÃ£Áö¸øÇÔ");
+            else{
+                Debug.Log("ì•„ì´í…œì°¾ì§€ëª»í•¨");
             }
         }
     }
     public void ColorPublicAvatar()
     {
-
         Toggle selectedColorToggle = publicColor.ActiveToggles().FirstOrDefault();
         if (selectedColorToggle != null)
             itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
@@ -478,8 +485,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     }
     public void TopPublicAvatar()
     {
-
-
         Toggle selectedTopToggle = publicTop.ActiveToggles().FirstOrDefault();
         if (selectedTopToggle != null)
             itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
@@ -524,43 +529,44 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
     }
 
-    //--------------------------------------------- ¼­¹ö ¿¬°áÀ» ²÷À» ¶§ ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- ì„œë²„ ì—°ê²°ì„ ëŠì„ ë•Œ í•¨ìˆ˜ ---------------------------------------------// 
     public void Disconnect()
     {
-        // ¼­¹ö¸¦ ²÷À» ¶§ ( ·Î±×¾Æ¿ôÀÌ µÉ ¶§ )
+        // ì„œë²„ë¥¼ ëŠì„ ë•Œ ( ë¡œê·¸ì•„ì›ƒì´ ë  ë•Œ )
         StartCoroutine(Logout());                       
+        StartCoroutine(AllTeam());                       
 
-        LoginPanelObj.SetActive(true);                  // ·Î±×ÀÎ Panel È°¼ºÈ­ 
-        ConnectServerObj.SetActive(false);              // °ü¸®ÀÚ ¼­¹ö ¿¬°á Panel ºñÈ°¼ºÈ­ 
-        UserConnectServerObj.SetActive(false);          // »ç¿ëÀÚ ¼­¹ö ¿¬°á Panel ºñÈ°¼ºÈ­
-        LobbyPanelObj.SetActive(false);                 // ·Îºñ Panel ºñÈ°¼ºÈ­ 
-        Server.SetActive(false);                        // ´Ğ³×ÀÓ Panel ºñÈ°¼ºÈ­ 
+        LoginPanelObj.SetActive(true);                  // ë¡œê·¸ì¸ Panel í™œì„±í™” 
+        ConnectServerObj.SetActive(false);              // ê´€ë¦¬ì ì„œë²„ ì—°ê²° Panel ë¹„í™œì„±í™” 
+        UserConnectServerObj.SetActive(false);          // ì‚¬ìš©ì ì„œë²„ ì—°ê²° Panel ë¹„í™œì„±í™”
+        LobbyPanelObj.SetActive(false);                 // ë¡œë¹„ Panel ë¹„í™œì„±í™” 
+        Server.SetActive(false);                        // ë‹‰ë„¤ì„ Panel ë¹„í™œì„±í™” 
         Lobby.SetActive(false);
         optionPanel.SetActive(false);
         //webView.SetActive(false);
-        NickNameText.text = null;                       // ´Ğ³×ÀÓÃ¢ ÃÊ±âÈ­ 
+        NickNameText.text = null;                       // ë‹‰ë„¤ì„ì°½ ì´ˆê¸°í™” 
         UserCheck = false;
 
         Screen.SetResolution(362, 530, false);
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         loginManager.IDInputField.text = "";
         loginManager.PWInputField.text = "";
-        // ½ÇÁ¦·Î Æ÷Åæ¼­¹öÀÇ ³×Æ®¿öÅ©¸¦ ²÷±â 
+        // ì‹¤ì œë¡œ í¬í†¤ì„œë²„ì˜ ë„¤íŠ¸ì›Œí¬ë¥¼ ëŠê¸° 
         PhotonNetwork.Disconnect();
         Application.Quit();
     }
 
     public override void OnDisconnected( DisconnectCause cause )
     {
-        // Disconnect() ÇÔ¼ö°¡ ½ÇÇàµÉ ¶§ 
-        print("¿¬°á²÷±è");
-        // ·Îºñ Panel°ú ¹æ PanelÀ» ºñÈ°¼ºÈ­ 
+        // Disconnect() í•¨ìˆ˜ê°€ ì‹¤í–‰ë  ë•Œ 
+        print("ì—°ê²°ëŠê¹€");
+        // ë¡œë¹„ Panelê³¼ ë°© Panelì„ ë¹„í™œì„±í™” 
         LobbyPanel.SetActive(false);
         RoomPanel.SetActive(false);
     }
 
-    //--------------------------------------------- Logout °ªÀ» °¡Á®¿À´Â ÄÚ·çÆ¾ ---------------------------------------------// 
-    // ·Î±×ÀÎ »óÅÂ¸¦ 0À¸·Î ¸¸µé¾î ÁÖ´Â LogOut ¹é¼­¹ö¸¦ ºÒ·¯¿È 
+    //--------------------------------------------- Logout ê°’ì„ ê°€ì ¸ì˜¤ëŠ” ì½”ë£¨í‹´ ---------------------------------------------// 
+    // ë¡œê·¸ì¸ ìƒíƒœë¥¼ 0ìœ¼ë¡œ ë§Œë“¤ì–´ ì£¼ëŠ” LogOut ë°±ì„œë²„ë¥¼ ë¶ˆëŸ¬ì˜´ 
     IEnumerator Logout()
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
@@ -570,12 +576,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         wwwData = UnityWebRequest.Post(LogoutURL, form);
         yield return wwwData.SendWebRequest();
         
-        // ¹öÆ°À» ²ô±â À§ÇÔ ÄÚ·çÆ¾ ( ÆÀ¹æ »ı¼ºÇÏ±â, ÆÀ¹æ ÀÔÀåÇÏ±â ¹öÆ° ) 
+        // ë²„íŠ¼ì„ ë„ê¸° ìœ„í•¨ ì½”ë£¨í‹´ ( íŒ€ë°© ìƒì„±í•˜ê¸°, íŒ€ë°© ì…ì¥í•˜ê¸° ë²„íŠ¼ ) 
         StartCoroutine(TeamButtonOff());
     }
     IEnumerator TeamButtonOff()
     {
-        //------------------------------------- ÆÀ¹æ ¸¸µé±â ¹öÆ° ²ô±â -------------------------------------//
+        //------------------------------------- íŒ€ë°© ë§Œë“¤ê¸° ë²„íŠ¼ ë„ê¸° -------------------------------------//
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
         form.AddField("id", loginManager.IDInputField.text);
@@ -583,45 +589,45 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         wwwData = UnityWebRequest.Post(TeamData, form);
         yield return wwwData.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str = wwwData.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
-        // ¸¶Áö¸· ,µµ °¡Á®¿À°Ô µÇ¸é \n °ªµµ Ãß°¡°¡ µÇ±â¶§¹®¿¡ ¸¶Áö¸· ,´Â Áö¿öÁØ´Ù
+        // ë§ˆì§€ë§‰ ,ë„ ê°€ì ¸ì˜¤ê²Œ ë˜ë©´ \n ê°’ë„ ì¶”ê°€ê°€ ë˜ê¸°ë•Œë¬¸ì— ë§ˆì§€ë§‰ ,ëŠ” ì§€ì›Œì¤€ë‹¤
         re = re.TrimEnd(',');
         Debug.Log(re);
         string[] reSplit = re.Split(',');
 
-        // ¹è¿­À» ³Ñ¾î°¡´Â ¿¡·¯¸¦ Àâ±âÀ§ÇÑ ·ÎÁ÷ 
-        // »ı¼ºµÈ ¹öÆ°ÀÇ °³¼ö°¡ 10°³º¸´Ù ¸¹À¸¸é ÀüÃ¼ 10°³ÀÇ ¹öÆ°À» ºñÈ°¼ºÈ­ 
+        // ë°°ì—´ì„ ë„˜ì–´ê°€ëŠ” ì—ëŸ¬ë¥¼ ì¡ê¸°ìœ„í•œ ë¡œì§ 
+        // ìƒì„±ëœ ë²„íŠ¼ì˜ ê°œìˆ˜ê°€ 10ê°œë³´ë‹¤ ë§ìœ¼ë©´ ì „ì²´ 10ê°œì˜ ë²„íŠ¼ì„ ë¹„í™œì„±í™” 
         if(reSplit.Length > 10) {
             for (int i = 0; i < 10; i++) 
                 createTeamRoom[i].SetActive(false);
         }
-        // »ı¼ºµÈ ¹öÆ°ÀÇ °³¼ö°¡ 10°³ º¸´Ù ÀûÀ¸¸é »ı¼ºµÈ ¸¸Å­¸¸ ºñÈ°¼ºÈ­ 
+        // ìƒì„±ëœ ë²„íŠ¼ì˜ ê°œìˆ˜ê°€ 10ê°œ ë³´ë‹¤ ì ìœ¼ë©´ ìƒì„±ëœ ë§Œí¼ë§Œ ë¹„í™œì„±í™” 
         else {
             for (int i = 0; i < reSplit.Length; i++) 
                 createTeamRoom[i].SetActive(false);
         }
 
-        //--------------------------------------------- ÆÀ¹æ ÀÔÀåÇÏ±â ¹öÆ° ²ô±â ---------------------------------------------// 
+        //--------------------------------------------- íŒ€ë°© ì…ì¥í•˜ê¸° ë²„íŠ¼ ë„ê¸° ---------------------------------------------// 
         wwwData_2 = UnityWebRequest.Post(UserTeamData, form);
         yield return wwwData_2.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str_2 = wwwData.downloadHandler.text;
         string re_2 = string.Concat(str_2.Where(x => !char.IsWhiteSpace(x)));
-        // ¸¶Áö¸· ,µµ °¡Á®¿À°Ô µÇ¸é \n °ªµµ Ãß°¡°¡ µÇ±â¶§¹®¿¡ ¸¶Áö¸· ,´Â Áö¿öÁØ´Ù
+        // ë§ˆì§€ë§‰ ,ë„ ê°€ì ¸ì˜¤ê²Œ ë˜ë©´ \n ê°’ë„ ì¶”ê°€ê°€ ë˜ê¸°ë•Œë¬¸ì— ë§ˆì§€ë§‰ ,ëŠ” ì§€ì›Œì¤€ë‹¤
         re_2 = re_2.TrimEnd(',');
         Debug.Log(re_2);
         string[] reSplit_2 = re_2.Split(',');
 
-        // ¹è¿­À» ³Ñ¾î°¡´Â ¿¡·¯¸¦ Àâ±âÀ§ÇÑ ·ÎÁ÷ 
-        // »ı¼ºµÈ ¹öÆ°ÀÇ °³¼ö°¡ 10°³º¸´Ù ¸¹À¸¸é ÀüÃ¼ 10°³ÀÇ ¹öÆ°À» ºñÈ°¼ºÈ­
+        // ë°°ì—´ì„ ë„˜ì–´ê°€ëŠ” ì—ëŸ¬ë¥¼ ì¡ê¸°ìœ„í•œ ë¡œì§ 
+        // ìƒì„±ëœ ë²„íŠ¼ì˜ ê°œìˆ˜ê°€ 10ê°œë³´ë‹¤ ë§ìœ¼ë©´ ì „ì²´ 10ê°œì˜ ë²„íŠ¼ì„ ë¹„í™œì„±í™”
         if (reSplit_2.Length > 10) {
             for (int i = 0; i < 10; i++) 
                 inputTeamRoom[i].SetActive(false);
         }
-        // »ı¼ºµÈ ¹öÆ°ÀÇ °³¼ö°¡ 10°³ º¸´Ù ÀûÀ¸¸é »ı¼ºµÈ ¸¸Å­¸¸ ºñÈ°¼ºÈ­ 
+        // ìƒì„±ëœ ë²„íŠ¼ì˜ ê°œìˆ˜ê°€ 10ê°œ ë³´ë‹¤ ì ìœ¼ë©´ ìƒì„±ëœ ë§Œí¼ë§Œ ë¹„í™œì„±í™” 
         else {
             for (int i = 0; i < reSplit_2.Length; i++)
                 inputTeamRoom[i].SetActive(false);
@@ -630,101 +636,101 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         wwwData_2.Dispose();
     }
 
-    //--------------------------------------------- ÆÀ¹æ ¸¸µé±â ¹öÆ°ÀÇ Á¦ÇÑÀ» ¾ø¾Ö±â À§ÇÑ ÇÔ¼ö ---------------------------------------------// 
-    // ¢¸¹öÆ° -2 , ¢º¹öÆ° -1
+    //--------------------------------------------- íŒ€ë°© ë§Œë“¤ê¸° ë²„íŠ¼ì˜ ì œí•œì„ ì—†ì• ê¸° ìœ„í•œ í•¨ìˆ˜ ---------------------------------------------// 
+    // â—€ë²„íŠ¼ -2 , â–¶ë²„íŠ¼ -1
     public void TeamListClick(int num)
     {
-        // ÀÌÀü ¹öÆ°À» ´­·¶À» ¶§ 
+        // ì´ì „ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ 
         if (num == -2) {
-            // ÀüÃ¼ÀûÀ¸·Î ¹öÆ°À» ´Ù ºñÈ°¼ºÈ­ 
+            // ì „ì²´ì ìœ¼ë¡œ ë²„íŠ¼ì„ ë‹¤ ë¹„í™œì„±í™” 
             for (int i = 0; i < 10; i++)
                 createTeamRoom[i].SetActive(false);
-            // ÀÌÈÄ ´Ù½Ã È°¼ºÈ­
+            // ì´í›„ ë‹¤ì‹œ í™œì„±í™”
             CreateTeam();
-            // ÇöÀç ÆäÀÌÁö°¡ 0º¸´Ù Å©¸é ´ÙÀ½ ÆäÀÌÁö·Î ³Ñ¾î°¬´Ù´Â °Í 
-            // µû¶ó¼­ ÀÌÀüÀ¸·Î µ¹¾Æ¿À°Ô ÇÏ±â À§ÇØ¼­ Count¸¦ ÁÙÀÌ°í ¹è¿­ÀÇ °ªÀ» 10 °¨¼Ò
-            // ¹öÆ°À» Å¬¸¯½Ã reSplitÀÇ ¹è¿­ °ªÀ» 10 °¨¼Ò ½ÃÅ´ 
+            // í˜„ì¬ í˜ì´ì§€ê°€ 0ë³´ë‹¤ í¬ë©´ ë‹¤ìŒ í˜ì´ì§€ë¡œ ë„˜ì–´ê°”ë‹¤ëŠ” ê²ƒ 
+            // ë”°ë¼ì„œ ì´ì „ìœ¼ë¡œ ëŒì•„ì˜¤ê²Œ í•˜ê¸° ìœ„í•´ì„œ Countë¥¼ ì¤„ì´ê³  ë°°ì—´ì˜ ê°’ì„ 10 ê°ì†Œ
+            // ë²„íŠ¼ì„ í´ë¦­ì‹œ reSplitì˜ ë°°ì—´ ê°’ì„ 10 ê°ì†Œ ì‹œí‚´ 
             if (curPage > 0) {
                 pageCount--;
                 curPage -= 10;
             }
-            // ÇöÀç ÆäÀÌÁö°¡ 0º¸´Ù ÀÛ°Å³ª °°À¸¸é ÆäÀÌÁö¸¦ ³Ñ±ä ÀûÀÌ ¾ø´Ù´Â °ÍÀÌ¹Ç·Î 
-            // °ªÀ» 0À¸·Î ÃÊ±âÈ­ ÇÏ¿© ¹è¿­À» ÃÊ°úÇÏ´Â ¿¡·¯¸¦ ¸·´Â´Ù. 
+            // í˜„ì¬ í˜ì´ì§€ê°€ 0ë³´ë‹¤ ì‘ê±°ë‚˜ ê°™ìœ¼ë©´ í˜ì´ì§€ë¥¼ ë„˜ê¸´ ì ì´ ì—†ë‹¤ëŠ” ê²ƒì´ë¯€ë¡œ 
+            // ê°’ì„ 0ìœ¼ë¡œ ì´ˆê¸°í™” í•˜ì—¬ ë°°ì—´ì„ ì´ˆê³¼í•˜ëŠ” ì—ëŸ¬ë¥¼ ë§‰ëŠ”ë‹¤. 
             else if (curPage <= 0)
                 curPage = 0;
         }
-        // ´ÙÀ½ ¹öÆ°À» ´­·¶À» ¶§ 
+        // ë‹¤ìŒ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ 
         else if (num == -1) {
-            // ÀüÃ¼ ¹öÆ°À» ºñÈ°¼ºÈ­ ÈÄ ´Ù½Ã È°¼ºÈ­ 
+            // ì „ì²´ ë²„íŠ¼ì„ ë¹„í™œì„±í™” í›„ ë‹¤ì‹œ í™œì„±í™” 
             for (int i = 0; i < 10; i++)
                 createTeamRoom[i].SetActive(false);
             CreateTeam();
-            // ÇöÀç ÆäÀÌÁö°¡ 0º¸´Ù Å©°Å³ª °°°í ÇöÀçÆäÀÌÁö + 10 ÇÑ °ªÀÌ ¸¶Áö¸· ÆäÀÌÁö °ªº¸´Ù ÀÛÀ¸¸é ´ÙÀ½ ÆäÀÌÁö·Î ³Ñ±æ ¼ö ÀÖ°Ô ÇÔ 
-            // ÇöÀç ÆäÀÌÁö´Â 0 ºÎÅÍ ½ÃÀÛÇÏ°í ¸¶Áö¸· ÆäÀÌÁö´Â ±âº» °ªÀÌ 10ºÎÅÍ ½ÃÀÛÇÏ¿© 10¸¸Å­ °ªÀÌ Â÷ÀÌ°¡ ³­´Ù 
-            // ÇöÀç ÆäÀÌÁö°¡ ¸¶Áö¸· ÆäÀÌÁö ÀÎ°ÍÀ» È®ÀÎÇÏ·Á¸é 10À» ´õÇØÁà¼­ ±× °ªÀÌ °°ÀºÁö È®ÀÎ ÇÏ¿©¾ß ÇÑ´Ù
-            // ¹öÆ°À» Å¬¸¯½Ã reSplitÀÇ ¹è¿­ °ªÀ» 10 Áõ°¡ ½ÃÅ´ 
+            // í˜„ì¬ í˜ì´ì§€ê°€ 0ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ê³  í˜„ì¬í˜ì´ì§€ + 10 í•œ ê°’ì´ ë§ˆì§€ë§‰ í˜ì´ì§€ ê°’ë³´ë‹¤ ì‘ìœ¼ë©´ ë‹¤ìŒ í˜ì´ì§€ë¡œ ë„˜ê¸¸ ìˆ˜ ìˆê²Œ í•¨ 
+            // í˜„ì¬ í˜ì´ì§€ëŠ” 0 ë¶€í„° ì‹œì‘í•˜ê³  ë§ˆì§€ë§‰ í˜ì´ì§€ëŠ” ê¸°ë³¸ ê°’ì´ 10ë¶€í„° ì‹œì‘í•˜ì—¬ 10ë§Œí¼ ê°’ì´ ì°¨ì´ê°€ ë‚œë‹¤ 
+            // í˜„ì¬ í˜ì´ì§€ê°€ ë§ˆì§€ë§‰ í˜ì´ì§€ ì¸ê²ƒì„ í™•ì¸í•˜ë ¤ë©´ 10ì„ ë”í•´ì¤˜ì„œ ê·¸ ê°’ì´ ê°™ì€ì§€ í™•ì¸ í•˜ì—¬ì•¼ í•œë‹¤
+            // ë²„íŠ¼ì„ í´ë¦­ì‹œ reSplitì˜ ë°°ì—´ ê°’ì„ 10 ì¦ê°€ ì‹œí‚´ 
             if (curPage >= 0 && (curPage + 10) < endPage) {
                 pageCount++;
                 curPage += 10;
             }
-            // ¸¶Áö¸· ÆäÀÌÁö¶ó¸é ÇöÀç ÆäÀÌÁö¿¡ ¸¶Áö¸·ÆäÀÌÁö -10 °ªÀ» ´ëÀÔ 
-            // Â÷ÀÌ°¡ 10¸¸Å­ ³ª±â ¶§¹®¿¡ -10 °ªÀ» ³Ö¾îÁÖ¾î ¹è¿­À» ÃÊ°úÇÏ´Â ¿¡·¯¸¦ ¸·´Â´Ù.
+            // ë§ˆì§€ë§‰ í˜ì´ì§€ë¼ë©´ í˜„ì¬ í˜ì´ì§€ì— ë§ˆì§€ë§‰í˜ì´ì§€ -10 ê°’ì„ ëŒ€ì… 
+            // ì°¨ì´ê°€ 10ë§Œí¼ ë‚˜ê¸° ë•Œë¬¸ì— -10 ê°’ì„ ë„£ì–´ì£¼ì–´ ë°°ì—´ì„ ì´ˆê³¼í•˜ëŠ” ì—ëŸ¬ë¥¼ ë§‰ëŠ”ë‹¤.
             else if (curPage + 10 >= endPage)
                 curPage = endPage - 10;
         }
     }
 
-    //--------------------------------------------- ÆÀ¹æ »ı¼º ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- íŒ€ë°© ìƒì„± í•¨ìˆ˜ ---------------------------------------------// 
     public void CreateTeam()
     {
-        LobbyPanel.SetActive(false);        // ·Îºñ Panel ºñÈ°¼ºÈ­ 
-        createTeam.SetActive(true);         // ÆÀ¹æ »ı¼º UI È°¼ºÈ­ 
-        inputTeam.SetActive(false);         // ÆÀ¹æ ÀÔÀåÇÏ±â UI ºñÈ°¼ºÈ­ 
-        Server.SetActive(false);            // server¿¡ ÀÖ´Â UI ºñÈ°¼ºÈ­ 
-        StartCoroutine(cTeam());            // ÆÀ¹æ »ı¼º °ü·Ã ÄÚ·çÆ¾ 
+        LobbyPanel.SetActive(false);        // ë¡œë¹„ Panel ë¹„í™œì„±í™” 
+        inputTeam.SetActive(false);         // íŒ€ë°© ì…ì¥í•˜ê¸° UI ë¹„í™œì„±í™” 
+        Server.SetActive(false);            // serverì— ìˆëŠ” UI ë¹„í™œì„±í™” 
+        createTeam.SetActive(true);         // íŒ€ë°© ìƒì„± UI í™œì„±í™” 
+        StartCoroutine(cTeam());            // íŒ€ë°© ìƒì„± ê´€ë ¨ ì½”ë£¨í‹´ 
     }
     
     IEnumerator cTeam()
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
-        // ID°¡ Å°°ªÀÌ¹Ç·Î IDÀÇ °ª¸¸ °¡Á®¿Â´Ù. 
+        // IDê°€ í‚¤ê°’ì´ë¯€ë¡œ IDì˜ ê°’ë§Œ ê°€ì ¸ì˜¨ë‹¤. 
         form.AddField("id", loginManager.IDInputField.text);
 
         wwwData = UnityWebRequest.Post(TeamData, form);
         yield return wwwData.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str = wwwData.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x))); 
-        // ¸¶Áö¸· ,µµ °¡Á®¿À°Ô µÇ¸é \n °ªµµ Ãß°¡°¡ µÇ±â¶§¹®¿¡ ¸¶Áö¸· ,´Â Áö¿öÁØ´Ù
+        // ë§ˆì§€ë§‰ ,ë„ ê°€ì ¸ì˜¤ê²Œ ë˜ë©´ \n ê°’ë„ ì¶”ê°€ê°€ ë˜ê¸°ë•Œë¬¸ì— ë§ˆì§€ë§‰ ,ëŠ” ì§€ì›Œì¤€ë‹¤
         re = re.TrimEnd(',');
         Debug.Log(re);
-        // ¹Ş¾Æ¿Â ¹®ÀÚ¿­À» ,¸¦ ±âÁØÀ¸·Î ³ª´©¾î ¹è¿­·Î ÀúÀå
+        // ë°›ì•„ì˜¨ ë¬¸ìì—´ì„ ,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°°ì—´ë¡œ ì €ì¥
         
         string[] reSplit = re.Split(',');
 
         for (int i = 0; i < reSplit.Length; i += 2)
             Debug.Log(reSplit[i]);
 
-        // ÆÀÀÌ ÀÖÀ» ¶§¸¸ ¹öÆ°À» È°¼ºÈ­ ÇÏ±â À§ÇÑ if¹® 
+        // íŒ€ì´ ìˆì„ ë•Œë§Œ ë²„íŠ¼ì„ í™œì„±í™” í•˜ê¸° ìœ„í•œ ifë¬¸ 
         if (re != "") {
-            // °¢ ¹öÆ°¿¡ ¾Ë¸Â´Â ÆÀ ÀÌ¸§ ³Ö±â 
+            // ê° ë²„íŠ¼ì— ì•Œë§ëŠ” íŒ€ ì´ë¦„ ë„£ê¸° 
             for (int i = 0; i < reSplit.Length; i++) {
-                // ÆÀÀÌ 10°³°¡ ³ÑÀ» ¶§ 
+                // íŒ€ì´ 10ê°œê°€ ë„˜ì„ ë•Œ 
                 if (reSplit.Length > 10) {
-                    // ÆäÀÌÁö Count¸¸Å­ ( ¸ò¸¸Å­ ÆäÀÌÁö¸¦ ¸¸µé°í ³ª¸ÓÁö´Â else¹®¿¡¼­ ¸¸µë ) 
-                    // ¿¹·Î ÆÀÀÌ 33°³°¡ ÀÖ´Ù¸é pageCount´Â 3±îÁö¸¸ ¿Ã¶ó°£´Ù.
-                    // µû¶ó¼­ 3ÆäÀÌÁö ±îÁö´Â ÃÑ 10°³ÀÇ ¹öÆ°À» È°¼ºÈ­ ÇÑ´Ù. ( ÀÌ·Ğ»ó ÃÑ 30°³ÀÇ ¹öÆ°À» È°¼ºÈ­ ÇÏ°Ô µÊ ) 
-                    // ÇÏÁö¸¸ ÆäÀÌÁö´Â ÃÑ 4°³ÀÌ±â ¶§¹®¿¡ 4¹øÂ° ÆäÀÌÁö´Â 
-                    // else ¹®¿¡¼­ Ã³¸®¸¦ ÇÏ°Ô µÈ´Ù. 
-                    // else ¹®Àº ´ç¿¬ÇÏ°Ô ³ª¸ÓÁö·Î Ã³¸®ÇÏ¿© ¹öÆ°À» È°¼ºÈ­ ÇÑ´Ù. 33À» 10À¸·Î ³ª´« ³ª¸ÓÁö°¡ 3ÀÌ±â ¶§¹®¿¡ 3°³ÀÇ ¹öÆ°À» È°¼ºÈ­ÇÔ 
-                    // µû¶ó¼­ ÃÖ´ë ÆÀÀÇ °³¼ö¿¡ ¸Â°Ô ¹æÀÇ ¹öÆ°µéÀÌ È°¼ºÈ­°¡ µÈ´Ù. 
+                    // í˜ì´ì§€ Countë§Œí¼ ( ëª«ë§Œí¼ í˜ì´ì§€ë¥¼ ë§Œë“¤ê³  ë‚˜ë¨¸ì§€ëŠ” elseë¬¸ì—ì„œ ë§Œë“¬ ) 
+                    // ì˜ˆë¡œ íŒ€ì´ 33ê°œê°€ ìˆë‹¤ë©´ pageCountëŠ” 3ê¹Œì§€ë§Œ ì˜¬ë¼ê°„ë‹¤.
+                    // ë”°ë¼ì„œ 3í˜ì´ì§€ ê¹Œì§€ëŠ” ì´ 10ê°œì˜ ë²„íŠ¼ì„ í™œì„±í™” í•œë‹¤. ( ì´ë¡ ìƒ ì´ 30ê°œì˜ ë²„íŠ¼ì„ í™œì„±í™” í•˜ê²Œ ë¨ ) 
+                    // í•˜ì§€ë§Œ í˜ì´ì§€ëŠ” ì´ 4ê°œì´ê¸° ë•Œë¬¸ì— 4ë²ˆì§¸ í˜ì´ì§€ëŠ” 
+                    // else ë¬¸ì—ì„œ ì²˜ë¦¬ë¥¼ í•˜ê²Œ ëœë‹¤. 
+                    // else ë¬¸ì€ ë‹¹ì—°í•˜ê²Œ ë‚˜ë¨¸ì§€ë¡œ ì²˜ë¦¬í•˜ì—¬ ë²„íŠ¼ì„ í™œì„±í™” í•œë‹¤. 33ì„ 10ìœ¼ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ê°€ 3ì´ê¸° ë•Œë¬¸ì— 3ê°œì˜ ë²„íŠ¼ì„ í™œì„±í™”í•¨ 
+                    // ë”°ë¼ì„œ ìµœëŒ€ íŒ€ì˜ ê°œìˆ˜ì— ë§ê²Œ ë°©ì˜ ë²„íŠ¼ë“¤ì´ í™œì„±í™”ê°€ ëœë‹¤. 
                     if (pageCount <= (reSplit.Length / 10)) {
                         for (int j = 0; j < 10; j++) {
-                            // Room + ¼ıÀÚ ¹æÀÇ ¿ÀºêÁ§Æ®ÀÇ ButtonValues½ºÅ©¸³Æ®¿¡ Á¢±Ù 
-                            // °¢ ¹öÆ°ÀÇ text¿¡ °¡Á®¿Â ÆÀ ÀÌ¸§À» ´ëÀÔ 
-                            // Name º¯¼ö¿¡ ÆÀ ÀÌ¸§À» ´ëÀÔ ( Name º¯¼ö´Â ButtonValues½ºÅ©¸³Æ®¿¡ ÀÖÀ½ ) 
+                            // Room + ìˆ«ì ë°©ì˜ ì˜¤ë¸Œì íŠ¸ì˜ ButtonValuesìŠ¤í¬ë¦½íŠ¸ì— ì ‘ê·¼ 
+                            // ê° ë²„íŠ¼ì˜ textì— ê°€ì ¸ì˜¨ íŒ€ ì´ë¦„ì„ ëŒ€ì… 
+                            // Name ë³€ìˆ˜ì— íŒ€ ì´ë¦„ì„ ëŒ€ì… ( Name ë³€ìˆ˜ëŠ” ButtonValuesìŠ¤í¬ë¦½íŠ¸ì— ìˆìŒ ) 
                             createTeamRoom[j].SetActive(true);
                             ButtonValues buttonValues = GameObject.Find("Room" + j).GetComponent<ButtonValues>();
                             createTeamRoom[j].transform.GetChild(0).GetComponent<Text>().text = reSplit[j + curPage];
@@ -733,9 +739,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                     }
                     else {
                         for (int j = 0; j < reSplit.Length % 10; j++) {
-                            // Room + ¼ıÀÚ ¹æÀÇ ¿ÀºêÁ§Æ®ÀÇ ButtonValues½ºÅ©¸³Æ®¿¡ Á¢±Ù 
-                            // °¢ ¹öÆ°ÀÇ text¿¡ °¡Á®¿Â ÆÀ ÀÌ¸§À» ´ëÀÔ 
-                            // Name º¯¼ö¿¡ ÆÀ ÀÌ¸§À» ´ëÀÔ ( Name º¯¼ö´Â ButtonValues½ºÅ©¸³Æ®¿¡ ÀÖÀ½ ) 
+                            // Room + ìˆ«ì ë°©ì˜ ì˜¤ë¸Œì íŠ¸ì˜ ButtonValuesìŠ¤í¬ë¦½íŠ¸ì— ì ‘ê·¼ 
+                            // ê° ë²„íŠ¼ì˜ textì— ê°€ì ¸ì˜¨ íŒ€ ì´ë¦„ì„ ëŒ€ì… 
+                            // Name ë³€ìˆ˜ì— íŒ€ ì´ë¦„ì„ ëŒ€ì… ( Name ë³€ìˆ˜ëŠ” ButtonValuesìŠ¤í¬ë¦½íŠ¸ì— ìˆìŒ ) 
                             createTeamRoom[j].SetActive(true);
                             ButtonValues buttonValues = GameObject.Find("Room" + j).GetComponent<ButtonValues>();
                             createTeamRoom[j].transform.GetChild(0).GetComponent<Text>().text = reSplit[j + curPage];
@@ -743,26 +749,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                         }
                     }
                 }
-                // ÆÀÀÌ 10°³°¡ ³ÑÁö ¾ÊÀ» ¶§ 
-                // reSplitÀÇ °³¼ö ¸¸Å­ ¹öÆ°À» È°¼ºÈ­ 
+                // íŒ€ì´ 10ê°œê°€ ë„˜ì§€ ì•Šì„ ë•Œ 
+                // reSplitì˜ ê°œìˆ˜ ë§Œí¼ ë²„íŠ¼ì„ í™œì„±í™” 
                 else {
                     createTeamRoom[i].SetActive(true);
-                    // Room + ¼ıÀÚ ¹æÀÇ ¿ÀºêÁ§Æ®ÀÇ ButtonValues½ºÅ©¸³Æ®¿¡ Á¢±Ù 
-                    // °¢ ¹öÆ°ÀÇ text¿¡ °¡Á®¿Â ÆÀ ÀÌ¸§À» ´ëÀÔ 
-                    // Name º¯¼ö¿¡ ÆÀ ÀÌ¸§À» ´ëÀÔ ( Name º¯¼ö´Â ButtonValues½ºÅ©¸³Æ®¿¡ ÀÖÀ½ ) 
+                    // Room + ìˆ«ì ë°©ì˜ ì˜¤ë¸Œì íŠ¸ì˜ ButtonValuesìŠ¤í¬ë¦½íŠ¸ì— ì ‘ê·¼ 
+                    // ê° ë²„íŠ¼ì˜ textì— ê°€ì ¸ì˜¨ íŒ€ ì´ë¦„ì„ ëŒ€ì… 
+                    // Name ë³€ìˆ˜ì— íŒ€ ì´ë¦„ì„ ëŒ€ì… ( Name ë³€ìˆ˜ëŠ” ButtonValuesìŠ¤í¬ë¦½íŠ¸ì— ìˆìŒ ) 
                     ButtonValues buttonValues = GameObject.Find("Room" + i).GetComponent<ButtonValues>();
                     createTeamRoom[i].transform.GetChild(0).GetComponent<Text>().text = reSplit[i + curPage];
                     buttonValues.Name = reSplit[i + curPage];
                 }
-                // ÃÖ´ë ÆäÀÌÁö¸¦ ±¸ÇØ¼­ ÀúÀåÇÏ´Â º¯¼ö 
-                // ÃÖ´ë ÆäÀÌÁö´Â ÆÀÀÇ ÀüÃ¼ °³¼ö¸¦ 10À¸·Î ³ª´« ³ª¸Ó±â°¡ 0ÀÌ¸é 10,20 .. Ã³·³ µü ¶³¾îÁö±â ¶§¹®¿¡ ¸ò¿¡ 10À» °öÇÏ¿© ÃÖ´ë ¹öÆ°ÀÇ °³¼ö¸¦ ±¸ÇÏ°í 
-                // 0ÀÌ ¾Æ´Ï¶ó¸é 1ÆäÀÌÁö°¡ ´õ ¸¹Àº°ÍÀÌ±â ¶§¹®¿¡ + 1À» ÇÏ°í 10À» °öÇÏ¿© ÃÖ´ë ¹öÆ°ÀÇ °³¼ö¸¦ ±¸ÇÑ´Ù. 
-                // ÀÌ °ªÀº »ïÇ×¿¬»êÀÚ¸¦ »ç¿ëÇÏ¿© °ªÀ» ÀúÀå 
+                // ìµœëŒ€ í˜ì´ì§€ë¥¼ êµ¬í•´ì„œ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ 
+                // ìµœëŒ€ í˜ì´ì§€ëŠ” íŒ€ì˜ ì „ì²´ ê°œìˆ˜ë¥¼ 10ìœ¼ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ê¸°ê°€ 0ì´ë©´ 10,20 .. ì²˜ëŸ¼ ë”± ë–¨ì–´ì§€ê¸° ë•Œë¬¸ì— ëª«ì— 10ì„ ê³±í•˜ì—¬ ìµœëŒ€ ë²„íŠ¼ì˜ ê°œìˆ˜ë¥¼ êµ¬í•˜ê³  
+                // 0ì´ ì•„ë‹ˆë¼ë©´ 1í˜ì´ì§€ê°€ ë” ë§ì€ê²ƒì´ê¸° ë•Œë¬¸ì— + 1ì„ í•˜ê³  10ì„ ê³±í•˜ì—¬ ìµœëŒ€ ë²„íŠ¼ì˜ ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤. 
+                // ì´ ê°’ì€ ì‚¼í•­ì—°ì‚°ìë¥¼ ì‚¬ìš©í•˜ì—¬ ê°’ì„ ì €ì¥ 
                 endPage = (reSplit.Length % 10 == 0) ? (reSplit.Length / 10) * 10 : (reSplit.Length / 10 + 1) * 10;
             }
         }
-        //StartCoroutine(cItem());            // ÆÀ¹æ »ı¼º °ü·Ã ÄÚ·çÆ¾ 
-        // ¸Ş¸ğ¸® ´©¼ö ¹æÁö 
+        //StartCoroutine(cItem());            // íŒ€ë°© ìƒì„± ê´€ë ¨ ì½”ë£¨í‹´ 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ë°©ì§€ 
         wwwData.Dispose();
     }
 
@@ -770,19 +776,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
-        // ID°¡ Å°°ªÀÌ¹Ç·Î IDÀÇ °ª¸¸ °¡Á®¿Â´Ù. 
+        // IDê°€ í‚¤ê°’ì´ë¯€ë¡œ IDì˜ ê°’ë§Œ ê°€ì ¸ì˜¨ë‹¤. 
         form.AddField("id", loginManager.IDInputField.text);
 
         wwwData_3 = UnityWebRequest.Post(ItemInputData, form);
         yield return wwwData_3.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str = wwwData_3.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
-        // ¸¶Áö¸· ,µµ °¡Á®¿À°Ô µÇ¸é \n °ªµµ Ãß°¡°¡ µÇ±â¶§¹®¿¡ ¸¶Áö¸· ,´Â Áö¿öÁØ´Ù
+        // ë§ˆì§€ë§‰ ,ë„ ê°€ì ¸ì˜¤ê²Œ ë˜ë©´ \n ê°’ë„ ì¶”ê°€ê°€ ë˜ê¸°ë•Œë¬¸ì— ë§ˆì§€ë§‰ ,ëŠ” ì§€ì›Œì¤€ë‹¤
         re = re.TrimEnd(',');
         Debug.Log(re);
-        // ¹Ş¾Æ¿Â ¹®ÀÚ¿­À» ,¸¦ ±âÁØÀ¸·Î ³ª´©¾î ¹è¿­·Î ÀúÀå
+        // ë°›ì•„ì˜¨ ë¬¸ìì—´ì„ ,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°°ì—´ë¡œ ì €ì¥
 
         string[] reSplit = re.Split(',');
  
@@ -804,7 +810,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         
         Debug.Log(playername);
 
-        // ¸Ş¸ğ¸® ´©¼ö ¹æÁö 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ë°©ì§€ 
         wwwData_3.Dispose();
     }
 
@@ -812,7 +818,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         for (int i = 0; i < ItemName.Length; i++) {
             if (ItemID.Contains(name + i)) {
-                Debug.Log(name + i + "¸¦ Ã£¾Ò½À´Ï´Ù.");
+                Debug.Log(name + i + "ë¥¼ ì°¾ì•˜ìŠµë‹ˆë‹¤.");
                 ItemName[i].SetActive(true);
 
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
@@ -885,18 +891,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     }
     public void CreateTeamRoom()
     {
-        // ¹öÆ°¿¡ ¾Ë¸Â´Â ÆÀ ¹æ »ı¼º 
-        // ¹öÆ°À» Å¬¸¯½Ã ±× ÇØ´ç ¹öÆ°ÀÇ ÀÌº¥Æ®¸¦ ÀúÀå 
+        // ë²„íŠ¼ì— ì•Œë§ëŠ” íŒ€ ë°© ìƒì„± 
+        // ë²„íŠ¼ì„ í´ë¦­ì‹œ ê·¸ í•´ë‹¹ ë²„íŠ¼ì˜ ì´ë²¤íŠ¸ë¥¼ ì €ì¥ 
         GameObject clickObj = EventSystem.current.currentSelectedGameObject;
-        // ¹öÆ°ÀÇ value °ªÀ» index¿¡ ÀúÀå 
+        // ë²„íŠ¼ì˜ value ê°’ì„ indexì— ì €ì¥ 
         int index = clickObj.GetComponent<ButtonValues>().value;
-        // ¹öÆ°ÀÇ Name °ªÀ» TeamName¿¡ ÀúÀå 
+        // ë²„íŠ¼ì˜ Name ê°’ì„ TeamNameì— ì €ì¥ 
         string TeamName = clickObj.GetComponent<ButtonValues>().Name;
         Debug.Log(index + TeamName);
 
-        // ¹öÆ°ÀÇ ÃÖ´ë °³¼ö°¡ 10°³ index´Â 0 ~ 9±îÁö Á¸Àç 
-        // ¹öÆ°À» ´­·¶À» ¶§ ±× ¹öÆ°ÀÇ value °ª°ú i °ªÀÌ °°Àº °ÍÀÇ ¹æÀ» ¸¸µë 
-        // Ä³¸¯ÅÍ¿Í ¸ÊÀ» ¼±ÅÃÇÏÁö ¾ÊÀ¸¸é ¿À·ù ¸Ş½ÃÁö 
+        // ë²„íŠ¼ì˜ ìµœëŒ€ ê°œìˆ˜ê°€ 10ê°œ indexëŠ” 0 ~ 9ê¹Œì§€ ì¡´ì¬ 
+        // ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ê·¸ ë²„íŠ¼ì˜ value ê°’ê³¼ i ê°’ì´ ê°™ì€ ê²ƒì˜ ë°©ì„ ë§Œë“¬ 
+        // ìºë¦­í„°ì™€ ë§µì„ ì„ íƒí•˜ì§€ ì•Šìœ¼ë©´ ì˜¤ë¥˜ ë©”ì‹œì§€ 
         for (int i =0; i < 10; i++) {
             if (index == i) {
                 if (mapname != "" && playername != "") {
@@ -905,74 +911,74 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                     PhotonNetwork.CreateRoom(TeamName, new RoomOptions { MaxPlayers = 8 });
                 }
                 else if (mapname=="")
-                    Debug.Log("¸ÊÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+                    Debug.Log("ë§µì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
                 else if (playername=="")
-                    Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+                    Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
             }
         }
     }
 
-    //--------------------------------------------- °ø°³¹æ »ı¼º ÇÔ¼ö ---------------------------------------------// 
-    // °ø°³¹æÀÇ ÀÌ¸§À» A, B, C ·Î ¼±¾ğ 
-    string[] room = {"A", "B", "C", "D"};    
+    //--------------------------------------------- ê³µê°œë°© ìƒì„± í•¨ìˆ˜ ---------------------------------------------// 
+    // ê³µê°œë°©ì˜ ì´ë¦„ì„ A, B, C ë¡œ ì„ ì–¸ 
+    string[] room = {"A", "B", "C", "D"};
     public void CreateRoomA() 
     {
         RenderSettings.skybox = skyBoxSpring;
-        RenderSettings.reflectionIntensity = 1f;
-        // A¹æ »ı¼º, ¹æÀÇ ÀÎ¿øÀº ÃÖ´ë 21¸í ( °ü¸®ÀÚ ÇÑ¸í ¹«Á¶°Ç Æ÷ÇÔ ) 
-        // ¸¸¾à ¹æÀÇ ÀÌ¸§ÀÌ ¾ø´Ù¸é ·£´ı¼ıÀÚ·Î + RoomÀ¸·Î ¹æÀÌ¸§ÀÌ Á¤ÇØÁö°í ¾Æ´Ï¸é ³»°¡ ÀÔ·ÂÇÑ ¹æÀÌ¸§À¸·Î       
-        // Ä³¸¯ÅÍ¿Í ¸ÊÀ» ¼±ÅÃÇÏÁö ¾ÊÀ¸¸é ¿À·ù ¸Ş½ÃÁö 
+        RenderSettings.reflectionIntensity = 1.5f;
+        // Aë°© ìƒì„±, ë°©ì˜ ì¸ì›ì€ ìµœëŒ€ 21ëª… ( ê´€ë¦¬ì í•œëª… ë¬´ì¡°ê±´ í¬í•¨ ) 
+        // ë§Œì•½ ë°©ì˜ ì´ë¦„ì´ ì—†ë‹¤ë©´ ëœë¤ìˆ«ìë¡œ + Roomìœ¼ë¡œ ë°©ì´ë¦„ì´ ì •í•´ì§€ê³  ì•„ë‹ˆë©´ ë‚´ê°€ ì…ë ¥í•œ ë°©ì´ë¦„ìœ¼ë¡œ       
+        // ìºë¦­í„°ì™€ ë§µì„ ì„ íƒí•˜ì§€ ì•Šìœ¼ë©´ ì˜¤ë¥˜ ë©”ì‹œì§€ 
         if (mapname != "" && playername != "")
             PhotonNetwork.CreateRoom(room[0] == "" ? "Room" + Random.Range(0, 100) : room[0], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
-            Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+            Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
     }
 
     public void CreateRoomB()
     {
         RenderSettings.skybox = skyBoxSummer;
         RenderSettings.reflectionIntensity = 0.5f;
-        // B¹æ »ı¼º, ¹æÀÇ ÀÎ¿øÀº ÃÖ´ë 21¸í 
-        // ¸¸¾à ¹æÀÇ ÀÌ¸§ÀÌ ¾ø´Ù¸é ·£´ı¼ıÀÚ·Î + RoomÀ¸·Î ¹æÀÌ¸§ÀÌ Á¤ÇØÁö°í ¾Æ´Ï¸é ³»°¡ ÀÔ·ÂÇÑ ¹æÀÌ¸§À¸·Î
-        // Ä³¸¯ÅÍ¿Í ¸ÊÀ» ¼±ÅÃÇÏÁö ¾ÊÀ¸¸é ¿À·ù ¸Ş½ÃÁö 
+        // Bë°© ìƒì„±, ë°©ì˜ ì¸ì›ì€ ìµœëŒ€ 21ëª… 
+        // ë§Œì•½ ë°©ì˜ ì´ë¦„ì´ ì—†ë‹¤ë©´ ëœë¤ìˆ«ìë¡œ + Roomìœ¼ë¡œ ë°©ì´ë¦„ì´ ì •í•´ì§€ê³  ì•„ë‹ˆë©´ ë‚´ê°€ ì…ë ¥í•œ ë°©ì´ë¦„ìœ¼ë¡œ
+        // ìºë¦­í„°ì™€ ë§µì„ ì„ íƒí•˜ì§€ ì•Šìœ¼ë©´ ì˜¤ë¥˜ ë©”ì‹œì§€ 
         if (mapname != "" && playername != "")
             PhotonNetwork.CreateRoom(room[1] == "" ? "Room" + Random.Range(0, 100) : room[1], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
-            Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+            Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
     }
 
     public void CreateRoomC()
     {
         RenderSettings.skybox = skyBoxAutumn;
         RenderSettings.reflectionIntensity = 0f;
-        // C¹æ »ı¼º, ¹æÀÇ ÀÎ¿øÀº ÃÖ´ë 21¸í 
-        // ¸¸¾à ¹æÀÇ ÀÌ¸§ÀÌ ¾ø´Ù¸é ·£´ı¼ıÀÚ·Î + RoomÀ¸·Î ¹æÀÌ¸§ÀÌ Á¤ÇØÁö°í ¾Æ´Ï¸é ³»°¡ ÀÔ·ÂÇÑ ¹æÀÌ¸§À¸·Î 
-        // Ä³¸¯ÅÍ¿Í ¸ÊÀ» ¼±ÅÃÇÏÁö ¾ÊÀ¸¸é ¿À·ù ¸Ş½ÃÁö 
+        // Cë°© ìƒì„±, ë°©ì˜ ì¸ì›ì€ ìµœëŒ€ 21ëª… 
+        // ë§Œì•½ ë°©ì˜ ì´ë¦„ì´ ì—†ë‹¤ë©´ ëœë¤ìˆ«ìë¡œ + Roomìœ¼ë¡œ ë°©ì´ë¦„ì´ ì •í•´ì§€ê³  ì•„ë‹ˆë©´ ë‚´ê°€ ì…ë ¥í•œ ë°©ì´ë¦„ìœ¼ë¡œ 
+        // ìºë¦­í„°ì™€ ë§µì„ ì„ íƒí•˜ì§€ ì•Šìœ¼ë©´ ì˜¤ë¥˜ ë©”ì‹œì§€ 
         if (mapname != "" && playername != "")
             PhotonNetwork.CreateRoom(room[2] == "" ? "Room" + Random.Range(0, 100) : room[2], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
-            Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+            Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
     }
 
     public void CreateRoomD()
     {
         RenderSettings.skybox = skyBoxWinter;
         RenderSettings.reflectionIntensity = 0.5f;
-        // C¹æ »ı¼º, ¹æÀÇ ÀÎ¿øÀº ÃÖ´ë 21¸í 
-        // ¸¸¾à ¹æÀÇ ÀÌ¸§ÀÌ ¾ø´Ù¸é ·£´ı¼ıÀÚ·Î + RoomÀ¸·Î ¹æÀÌ¸§ÀÌ Á¤ÇØÁö°í ¾Æ´Ï¸é ³»°¡ ÀÔ·ÂÇÑ ¹æÀÌ¸§À¸·Î 
-        // Ä³¸¯ÅÍ¿Í ¸ÊÀ» ¼±ÅÃÇÏÁö ¾ÊÀ¸¸é ¿À·ù ¸Ş½ÃÁö 
+        // Cë°© ìƒì„±, ë°©ì˜ ì¸ì›ì€ ìµœëŒ€ 21ëª… 
+        // ë§Œì•½ ë°©ì˜ ì´ë¦„ì´ ì—†ë‹¤ë©´ ëœë¤ìˆ«ìë¡œ + Roomìœ¼ë¡œ ë°©ì´ë¦„ì´ ì •í•´ì§€ê³  ì•„ë‹ˆë©´ ë‚´ê°€ ì…ë ¥í•œ ë°©ì´ë¦„ìœ¼ë¡œ 
+        // ìºë¦­í„°ì™€ ë§µì„ ì„ íƒí•˜ì§€ ì•Šìœ¼ë©´ ì˜¤ë¥˜ ë©”ì‹œì§€ 
         if (mapname != "" && playername != "")
             PhotonNetwork.CreateRoom(room[3] == "" ? "Room" + Random.Range(0, 100) : room[3], new RoomOptions { MaxPlayers = 20 });
         else if (playername == "")
-            Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+            Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
     }
 
-    //--------------------------------------------- ÆÀ¹æ ÀÔÀåÇÏ±â ¹öÆ°ÀÇ Á¦ÇÑÀ» ¾ø¾Ö±â À§ÇÑ ÇÔ¼ö ---------------------------------------------// 
-    // ¢¸¹öÆ° -2 , ¢º¹öÆ° -1
-    // ÆÀ¹æ ¸¸µé±â ¹öÆ°ÀÇ Á¦ÇÑÀ» ¾ø¾Ö±â À§ÇÑ ÇÔ¼ö¿Í ¿ø¸®°¡ µ¿ÀÏÇÏ´Ù.
+    //--------------------------------------------- íŒ€ë°© ì…ì¥í•˜ê¸° ë²„íŠ¼ì˜ ì œí•œì„ ì—†ì• ê¸° ìœ„í•œ í•¨ìˆ˜ ---------------------------------------------// 
+    // â—€ë²„íŠ¼ -2 , â–¶ë²„íŠ¼ -1
+    // íŒ€ë°© ë§Œë“¤ê¸° ë²„íŠ¼ì˜ ì œí•œì„ ì—†ì• ê¸° ìœ„í•œ í•¨ìˆ˜ì™€ ì›ë¦¬ê°€ ë™ì¼í•˜ë‹¤.
     public void TeamInputListClick(int num)
     {
-        // ÀÌÀü ¹öÆ°À» ´­·¶À» ‹š 
+        // ì´ì „ ë²„íŠ¼ì„ ëˆŒë €ì„ ë–„ 
         if (num == -2) {
             for (int i = 0; i < 10; i++)
                 inputTeamRoom[i].SetActive(false);
@@ -984,7 +990,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             else if (curPage <= 0)
                 curPage = 0;
         }
-        // ´ÙÀ½ ¹öÆ°À» ´­·¶À» ¶§ 
+        // ë‹¤ìŒ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ 
         else if (num == -1) {
             for (int i = 0; i < 10; i++)
                 inputTeamRoom[i].SetActive(false);
@@ -998,47 +1004,47 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
     }
 
-    //--------------------------------------------- ÆÀ¹æ ÀÔÀåÇÏ±â ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- íŒ€ë°© ì…ì¥í•˜ê¸° í•¨ìˆ˜ ---------------------------------------------// 
     public void InputTeam()
     {
-        LobbyPanel.SetActive(false);        // ·Îºñ UI ¹× ¿ÀºêÁ§Æ® ºñÈ°¼ºÈ­ 
-        createTeam.SetActive(false);        // ÆÀ¹æ »ı¼ºÇÏ±â UI ºñÈ°¼ºÈ­ 
-        inputTeam.SetActive(true);          // ÆÀ¹æ ÀÔÀåÇÏ±â UI È°¼ºÈ­ 
-        Server.SetActive(false);            // server°ü·Ã UI ºñÈ°¼ºÈ­ 
-        StartCoroutine(iTeam());            // ÆÀ¹æ ÀÔÀåÇÏ±â ÄÚ·çÆ¾ 
+        LobbyPanel.SetActive(false);        // ë¡œë¹„ UI ë° ì˜¤ë¸Œì íŠ¸ ë¹„í™œì„±í™” 
+        createTeam.SetActive(false);        // íŒ€ë°© ìƒì„±í•˜ê¸° UI ë¹„í™œì„±í™” 
+        inputTeam.SetActive(true);          // íŒ€ë°© ì…ì¥í•˜ê¸° UI í™œì„±í™” 
+        Server.SetActive(false);            // serverê´€ë ¨ UI ë¹„í™œì„±í™” 
+        StartCoroutine(iTeam());            // íŒ€ë°© ì…ì¥í•˜ê¸° ì½”ë£¨í‹´ 
     }
     IEnumerator iTeam()
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
-        // ID°¡ Å°°ªÀÌ¹Ç·Î IDÀÇ °ª¸¸ °¡Á®¿Â´Ù. 
+        // IDê°€ í‚¤ê°’ì´ë¯€ë¡œ IDì˜ ê°’ë§Œ ê°€ì ¸ì˜¨ë‹¤. 
         form.AddField("id", loginManager.IDInputField.text);
 
         wwwData = UnityWebRequest.Post(UserTeamData, form);
         yield return wwwData.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str = wwwData.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
-        // ¸¶Áö¸· ,µµ °¡Á®¿À°Ô µÇ¸é \n °ªµµ Ãß°¡°¡ µÇ±â¶§¹®¿¡ ¸¶Áö¸· ,´Â Áö¿öÁØ´Ù
+        // ë§ˆì§€ë§‰ ,ë„ ê°€ì ¸ì˜¤ê²Œ ë˜ë©´ \n ê°’ë„ ì¶”ê°€ê°€ ë˜ê¸°ë•Œë¬¸ì— ë§ˆì§€ë§‰ ,ëŠ” ì§€ì›Œì¤€ë‹¤
         re = re.TrimEnd(',');
         Debug.Log(re);
-        // ¹Ş¾Æ¿Â ¹®ÀÚ¿­À» ,¸¦ ±âÁØÀ¸·Î ³ª´©¾î ¹è¿­·Î ÀúÀå 
+        // ë°›ì•„ì˜¨ ë¬¸ìì—´ì„ ,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°°ì—´ë¡œ ì €ì¥ 
         string[] reSplit = re.Split(',');
 
-        // ¿ø¸®´Â /**ÆÀ¹æ »ı¼º ÇÔ¼ö**/ ÀÇ ÄÚ·çÆ¾°ú µ¿ÀÏÇÑ ¹æ½ÄÀÌ´Ù. 
+        // ì›ë¦¬ëŠ” /**íŒ€ë°© ìƒì„± í•¨ìˆ˜**/ ì˜ ì½”ë£¨í‹´ê³¼ ë™ì¼í•œ ë°©ì‹ì´ë‹¤. 
         if (re != "") {
-            // °¢ ¹öÆ°¿¡ ¾Ë¸Â´Â ÆÀ ÀÌ¸§ ³Ö±â 
+            // ê° ë²„íŠ¼ì— ì•Œë§ëŠ” íŒ€ ì´ë¦„ ë„£ê¸° 
             for (int i = 0; i < reSplit.Length; i++) {
-                // ÆÀÀ¸·Î ¼ÓÇØÀÖ´Â ¹æÀÌ 10°³°¡ ³ÑÀ» ¶§ 
+                // íŒ€ìœ¼ë¡œ ì†í•´ìˆëŠ” ë°©ì´ 10ê°œê°€ ë„˜ì„ ë•Œ 
                 if (reSplit.Length > 10) {
-                    // ÆäÀÌÁö Count¸¸Å­ ( ¸ò¸¸Å­ ÆäÀÌÁö¸¦ ¸¸µé°í ³ª¸ÓÁö´Â else¹®¿¡¼­ ¸¸µë ) 
-                    // ¿¹·Î ÆÀÀ¸·Î¼ÓÇØÀÖ´Â¹æÀÌ 33°³°¡ ÀÖ´Ù¸é pageCount´Â 3±îÁö¸¸ ¿Ã¶ó°£´Ù.
-                    // µû¶ó¼­ 3ÆäÀÌÁö ±îÁö´Â ÃÑ 10°³ÀÇ ¹öÆ°À» È°¼ºÈ­ ÇÑ´Ù. ( ÀÌ·Ğ»ó ÃÑ 30°³ÀÇ ¹öÆ°À» È°¼ºÈ­ ÇÏ°Ô µÊ ) 
-                    // ÇÏÁö¸¸ ÆäÀÌÁö´Â ÃÑ 4°³ÀÌ±â ¶§¹®¿¡ 4¹øÂ° ÆäÀÌÁö´Â 
-                    // else ¹®¿¡¼­ Ã³¸®¸¦ ÇÏ°Ô µÈ´Ù. 
-                    // else ¹®Àº ´ç¿¬ÇÏ°Ô ³ª¸ÓÁö·Î Ã³¸®ÇÏ¿© ¹öÆ°À» È°¼ºÈ­ ÇÑ´Ù. 33À» 10À¸·Î ³ª´« ³ª¸ÓÁö°¡ 3ÀÌ±â ¶§¹®¿¡ 3°³ÀÇ ¹öÆ°À» È°¼ºÈ­ÇÔ 
-                    // µû¶ó¼­ ÃÖ´ë ÆÀÀÇ °³¼ö¿¡ ¸Â°Ô ¹æÀÇ ¹öÆ°µéÀÌ È°¼ºÈ­°¡ µÈ´Ù. 
+                    // í˜ì´ì§€ Countë§Œí¼ ( ëª«ë§Œí¼ í˜ì´ì§€ë¥¼ ë§Œë“¤ê³  ë‚˜ë¨¸ì§€ëŠ” elseë¬¸ì—ì„œ ë§Œë“¬ ) 
+                    // ì˜ˆë¡œ íŒ€ìœ¼ë¡œì†í•´ìˆëŠ”ë°©ì´ 33ê°œê°€ ìˆë‹¤ë©´ pageCountëŠ” 3ê¹Œì§€ë§Œ ì˜¬ë¼ê°„ë‹¤.
+                    // ë”°ë¼ì„œ 3í˜ì´ì§€ ê¹Œì§€ëŠ” ì´ 10ê°œì˜ ë²„íŠ¼ì„ í™œì„±í™” í•œë‹¤. ( ì´ë¡ ìƒ ì´ 30ê°œì˜ ë²„íŠ¼ì„ í™œì„±í™” í•˜ê²Œ ë¨ ) 
+                    // í•˜ì§€ë§Œ í˜ì´ì§€ëŠ” ì´ 4ê°œì´ê¸° ë•Œë¬¸ì— 4ë²ˆì§¸ í˜ì´ì§€ëŠ” 
+                    // else ë¬¸ì—ì„œ ì²˜ë¦¬ë¥¼ í•˜ê²Œ ëœë‹¤. 
+                    // else ë¬¸ì€ ë‹¹ì—°í•˜ê²Œ ë‚˜ë¨¸ì§€ë¡œ ì²˜ë¦¬í•˜ì—¬ ë²„íŠ¼ì„ í™œì„±í™” í•œë‹¤. 33ì„ 10ìœ¼ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ê°€ 3ì´ê¸° ë•Œë¬¸ì— 3ê°œì˜ ë²„íŠ¼ì„ í™œì„±í™”í•¨ 
+                    // ë”°ë¼ì„œ ìµœëŒ€ íŒ€ì˜ ê°œìˆ˜ì— ë§ê²Œ ë°©ì˜ ë²„íŠ¼ë“¤ì´ í™œì„±í™”ê°€ ëœë‹¤. 
                     if (pageCount <= (reSplit.Length / 10)) {
                         for (int j = 0; j < 10; j++) {
                             inputTeamRoom[j].SetActive(true);
@@ -1047,7 +1053,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                             buttonValues.Name = reSplit[j + curPage];
                         }
                     }
-                    // ³ª¸ÓÁö¸¦ È°¿ëÇÏ¿© °¡Àå ¸¶Áö¸· ÆäÀÌÁöÀÇ ¹öÆ°µéÀ» È°¼ºÈ­ 
+                    // ë‚˜ë¨¸ì§€ë¥¼ í™œìš©í•˜ì—¬ ê°€ì¥ ë§ˆì§€ë§‰ í˜ì´ì§€ì˜ ë²„íŠ¼ë“¤ì„ í™œì„±í™” 
                     else {
                         for (int j = 0; j < reSplit.Length % 10; j++) {
                             inputTeamRoom[j].SetActive(true);
@@ -1057,42 +1063,42 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                         }
                     }
                 }
-                // ÆÀÀ¸·Î ¼ÓÇØÀÖ´Â ¹æÀÌ 10°³°¡ ³ÑÁö ¾ÊÀ» ¶§ 
+                // íŒ€ìœ¼ë¡œ ì†í•´ìˆëŠ” ë°©ì´ 10ê°œê°€ ë„˜ì§€ ì•Šì„ ë•Œ 
                 else {
                     inputTeamRoom[i].SetActive(true);
                     ButtonValues buttonValues = GameObject.Find("InputRoom" + i).GetComponent<ButtonValues>();
                     inputTeamRoom[i].transform.GetChild(0).GetComponent<Text>().text = reSplit[i + curPage];
                     buttonValues.Name = reSplit[i + curPage];
                 }
-                // ÃÖ´ë ÆäÀÌÁö¸¦ ±¸ÇØ¼­ ÀúÀåÇÏ´Â º¯¼ö 
-                // ÃÖ´ë ÆäÀÌÁö´Â ÆÀÀÇ ÀüÃ¼ °³¼ö¸¦ 10À¸·Î ³ª´« ³ª¸Ó±â°¡ 0ÀÌ¸é 10,20 .. Ã³·³ µü ¶³¾îÁö±â ¶§¹®¿¡ ¸ò¿¡ 10À» °öÇÏ¿© ÃÖ´ë ¹öÆ°ÀÇ °³¼ö¸¦ ±¸ÇÏ°í 
-                // 0ÀÌ ¾Æ´Ï¶ó¸é 1ÆäÀÌÁö°¡ ´õ ¸¹Àº°ÍÀÌ±â ¶§¹®¿¡ + 1À» ÇÏ°í 10À» °öÇÏ¿© ÃÖ´ë ¹öÆ°ÀÇ °³¼ö¸¦ ±¸ÇÑ´Ù. 
-                // ÀÌ °ªÀº »ïÇ×¿¬»êÀÚ¸¦ »ç¿ëÇÏ¿© °ªÀ» ÀúÀå 
+                // ìµœëŒ€ í˜ì´ì§€ë¥¼ êµ¬í•´ì„œ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ 
+                // ìµœëŒ€ í˜ì´ì§€ëŠ” íŒ€ì˜ ì „ì²´ ê°œìˆ˜ë¥¼ 10ìœ¼ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ê¸°ê°€ 0ì´ë©´ 10,20 .. ì²˜ëŸ¼ ë”± ë–¨ì–´ì§€ê¸° ë•Œë¬¸ì— ëª«ì— 10ì„ ê³±í•˜ì—¬ ìµœëŒ€ ë²„íŠ¼ì˜ ê°œìˆ˜ë¥¼ êµ¬í•˜ê³  
+                // 0ì´ ì•„ë‹ˆë¼ë©´ 1í˜ì´ì§€ê°€ ë” ë§ì€ê²ƒì´ê¸° ë•Œë¬¸ì— + 1ì„ í•˜ê³  10ì„ ê³±í•˜ì—¬ ìµœëŒ€ ë²„íŠ¼ì˜ ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤. 
+                // ì´ ê°’ì€ ì‚¼í•­ì—°ì‚°ìë¥¼ ì‚¬ìš©í•˜ì—¬ ê°’ì„ ì €ì¥ 
                 endPage = (reSplit.Length % 10 == 0) ? (reSplit.Length / 10) * 10 : (reSplit.Length / 10 + 1) * 10;
             }
         }
-        // ¸Ş¸ğ¸® ´©¼ö ¹æÁö 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ë°©ì§€ 
         //StartCoroutine(iItem());
-        // ¸Ş¸ğ¸® ´©¼ö ¹æÁö 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ë°©ì§€ 
         wwwData.Dispose();
     }
     public IEnumerator iItem()
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
-        // ID°¡ Å°°ªÀÌ¹Ç·Î IDÀÇ °ª¸¸ °¡Á®¿Â´Ù. 
+        // IDê°€ í‚¤ê°’ì´ë¯€ë¡œ IDì˜ ê°’ë§Œ ê°€ì ¸ì˜¨ë‹¤. 
         form.AddField("id", loginManager.IDInputField.text);
 
         wwwData_3 = UnityWebRequest.Post(ItemInputData, form);
         yield return wwwData_3.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str = wwwData_3.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
-        // ¸¶Áö¸· ,µµ °¡Á®¿À°Ô µÇ¸é \n °ªµµ Ãß°¡°¡ µÇ±â¶§¹®¿¡ ¸¶Áö¸· ,´Â Áö¿öÁØ´Ù
+        // ë§ˆì§€ë§‰ ,ë„ ê°€ì ¸ì˜¤ê²Œ ë˜ë©´ \n ê°’ë„ ì¶”ê°€ê°€ ë˜ê¸°ë•Œë¬¸ì— ë§ˆì§€ë§‰ ,ëŠ” ì§€ì›Œì¤€ë‹¤
         re = re.TrimEnd(',');
         Debug.Log(re);
-        // ¹Ş¾Æ¿Â ¹®ÀÚ¿­À» ,¸¦ ±âÁØÀ¸·Î ³ª´©¾î ¹è¿­·Î ÀúÀå
+        // ë°›ì•„ì˜¨ ë¬¸ìì—´ì„ ,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°°ì—´ë¡œ ì €ì¥
 
         string[] reSplit = re.Split(',');
 
@@ -1114,7 +1120,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         Debug.Log(playername);
 
-        // ¸Ş¸ğ¸® ´©¼ö ¹æÁö 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ë°©ì§€ 
         wwwData_3.Dispose();
     }
 
@@ -1122,40 +1128,35 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         for (int i = 0; i < ItemName.Length; i++) {
             if (ItemID.Contains(name + i)) {
-                Debug.Log(name + i + "¸¦ Ã£¾Ò½À´Ï´Ù.");
+                Debug.Log(name + i + "ë¥¼ ì°¾ì•˜ìŠµë‹ˆë‹¤.");
                 ItemName[i].SetActive(true);
-
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
             }
         }
     }
+
     public void InputColorAvatar()
     {
-
         Toggle selectedColorToggle = InputColor.ActiveToggles().FirstOrDefault();
         if (selectedColorToggle != null)
             itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
         else
             itemName[0] = null;
-
     }
+
     public void InputHatAvatar()
     {
-
-
         Toggle selectedHatToggle = InputHat.ActiveToggles().FirstOrDefault();
         if (selectedHatToggle != null)
             itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
         else
             itemName[1] = null;
-
     }
+
     public void InputTopAvatar()
     {
-
-
         Toggle selectedTopToggle = InputTop.ActiveToggles().FirstOrDefault();
         if (selectedTopToggle != null)
             itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
@@ -1196,89 +1197,99 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     public void InputTeamRoom()
     {
-        // ¹öÆ°ÀÇ Å¬¸¯ÀÌº¥Æ®¸¦°¡Á®¿È 
+        // ë²„íŠ¼ì˜ í´ë¦­ì´ë²¤íŠ¸ë¥¼ê°€ì ¸ì˜´ 
         GameObject clickObj = EventSystem.current.currentSelectedGameObject;
-        // Å¬¸¯ÇÑ ¹öÆ°ÀÇ value°ª°ú Name°ªÀ» °¡Á®¿Í¼­ ÀúÀåÇÔ 
+        // í´ë¦­í•œ ë²„íŠ¼ì˜ valueê°’ê³¼ Nameê°’ì„ ê°€ì ¸ì™€ì„œ ì €ì¥í•¨ 
         int index = clickObj.GetComponent<ButtonValues>().value;
         string TeamName = clickObj.GetComponent<ButtonValues>().Name;
         Debug.Log(index + TeamName);
 
-        // Å¬¸¯ÇÑ ¹öÆ°ÀÇ value °ª°ú i °ªÀÌ °°À¸¸é ±× ¹öÆ°ÀÇ Name °ªÀ» °¡Á®¿Í ±× ¹æÀ¸·Î ÀÔÀå 
-        // ¹æ ÀÔÀå½Ã ¸ÊÀº ¼±ÅÃÇÏÁö ¾Ê°í Ä³¸¯ÅÍ¸¸ ¼±ÅÃÇÏ±â ¶§¹®¿¡ Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇÏÁö ¾Ê°í ÀÔÀåÇÏ¸é ¿¡·¯ ¹ß»ı 
+        // í´ë¦­í•œ ë²„íŠ¼ì˜ value ê°’ê³¼ i ê°’ì´ ê°™ìœ¼ë©´ ê·¸ ë²„íŠ¼ì˜ Name ê°’ì„ ê°€ì ¸ì™€ ê·¸ ë°©ìœ¼ë¡œ ì…ì¥ 
+        // ë°© ì…ì¥ì‹œ ë§µì€ ì„ íƒí•˜ì§€ ì•Šê³  ìºë¦­í„°ë§Œ ì„ íƒí•˜ê¸° ë•Œë¬¸ì— ìºë¦­í„°ë¥¼ ì„ íƒí•˜ì§€ ì•Šê³  ì…ì¥í•˜ë©´ ì—ëŸ¬ ë°œìƒ 
         for (int i = 0; i < 10; i++) {
             if (index == i) {
-                if (playername != "")
+                if (playername != "") { 
                     PhotonNetwork.JoinRoom(TeamName);
+                }
                 else
-                    Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+                    Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
             }
         }
     }
 
-    //--------------------------------------------- °ø°³¹æ ÀÔÀåÇÏ±â ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- ê³µê°œë°© ì…ì¥í•˜ê¸° í•¨ìˆ˜ ---------------------------------------------// 
     public void JoinRoomA()
     {
-        // A¹æ ÀÔÀå
-        // Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇÏÁö ¾ÊÀ» ¶§ ¿À·ù ¸Ş½ÃÁö 
+        RenderSettings.skybox = skyBoxSpring;
+        RenderSettings.reflectionIntensity = 1.5f;
+        // Aë°© ì…ì¥
+        // ìºë¦­í„°ë¥¼ ì„ íƒí•˜ì§€ ì•Šì„ ë•Œ ì˜¤ë¥˜ ë©”ì‹œì§€ 
+        PV.RPC("SkyBoxRender", RpcTarget.All, skyBoxSpring, 1.5f);
         if (playername != "")
             PhotonNetwork.JoinRoom(room[0]);
         else
-            Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+            Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
     }
 
     public void JoinRoomB()
     {
-        // B¹æ ÀÔÀå
-        // Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇÏÁö ¾ÊÀ» ¶§ ¿À·ù ¸Ş½ÃÁö 
+        RenderSettings.skybox = skyBoxSummer;
+        RenderSettings.reflectionIntensity = 0.5f;
+        // Bë°© ì…ì¥
+        // ìºë¦­í„°ë¥¼ ì„ íƒí•˜ì§€ ì•Šì„ ë•Œ ì˜¤ë¥˜ ë©”ì‹œì§€ 
         if (playername != "")
             PhotonNetwork.JoinRoom(room[1]);
         else
-            Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+            Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
     }
 
     public void JoinRoomC()
     {
-        // C¹æ ÀÔÀå
-        // Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇÏÁö ¾ÊÀ» ¶§ ¿À·ù ¸Ş½ÃÁö 
+        RenderSettings.skybox = skyBoxAutumn;
+        RenderSettings.reflectionIntensity = 0f;
+        // Cë°© ì…ì¥
+        // ìºë¦­í„°ë¥¼ ì„ íƒí•˜ì§€ ì•Šì„ ë•Œ ì˜¤ë¥˜ ë©”ì‹œì§€ 
         if (playername != "")
             PhotonNetwork.JoinRoom(room[2]);
         else
-            Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+            Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
     }
     public void JoinRoomD()
     {
-        // C¹æ ÀÔÀå
-        // Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇÏÁö ¾ÊÀ» ¶§ ¿À·ù ¸Ş½ÃÁö 
+        RenderSettings.skybox = skyBoxWinter;
+        RenderSettings.reflectionIntensity = 0.5f;
+        // Cë°© ì…ì¥
+        // ìºë¦­í„°ë¥¼ ì„ íƒí•˜ì§€ ì•Šì„ ë•Œ ì˜¤ë¥˜ ë©”ì‹œì§€ 
         if (playername != "")
             PhotonNetwork.JoinRoom(room[3]);
         else
-            Debug.Log("Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+            Debug.Log("ìºë¦­í„°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
     }
 
-    //--------------------------------------------- »ç¿ëÇÒÁö ¸»Áö Á¤ÇÏÁö ¸øÇÑ ÇÔ¼ö ( ÀÔÀåÇÏ¸é¼­ ¹æÀ» »ı¼º, ·£´ı ¹æ ÀÔÀå ÇÔ¼ö ) »ç¿ëÇÏÁö ¾ÊÀ» ²¨ °°À½ ---------------------------------------------// 
+    //--------------------------------------------- ì‚¬ìš©í• ì§€ ë§ì§€ ì •í•˜ì§€ ëª»í•œ í•¨ìˆ˜ ( ì…ì¥í•˜ë©´ì„œ ë°©ì„ ìƒì„±, ëœë¤ ë°© ì…ì¥ í•¨ìˆ˜ ) ì‚¬ìš©í•˜ì§€ ì•Šì„ êº¼ ê°™ìŒ ---------------------------------------------// 
     public void JoinOrCreateRoom()
     {
         PhotonNetwork.JoinOrCreateRoom(room[0], new RoomOptions { MaxPlayers = 20 }, null);
     }
 
-    // ·£´ı¹æ ÀÔÀå ±â´É  
+    // ëœë¤ë°© ì…ì¥ ê¸°ëŠ¥  
     public void JoinRandomRoom() 
     { 
         PhotonNetwork.JoinRandomRoom(); 
     }
 
-    //--------------------------------------------- ¹æ ¶°³ª±â ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- ë°© ë– ë‚˜ê¸° í•¨ìˆ˜ ---------------------------------------------// 
     public void LeaveRoom()
     {
-        // ¸ğµç ÆÀÀÇ Á¤º¸¸¦ °¡Á®¿Í ¹æÀåÀÌ ³ª°¡¸é ¹æÀÌ ÆÄ±«µÇµµ·Ï ¸¸µë 
+        // ëª¨ë“  íŒ€ì˜ ì •ë³´ë¥¼ ê°€ì ¸ì™€ ë°©ì¥ì´ ë‚˜ê°€ë©´ ë°©ì´ íŒŒê´´ë˜ë„ë¡ ë§Œë“¬ 
         lodingPanel.SetActive(true);
         checkRoom = false;
 
         UserCheck = false;
         StartCoroutine(AllTeam());
 
-        // ¹æÀ» ¶°³ª¸é Mapµµ ºñÈ°¼ºÈ­ ÇØÁØ´Ù. 
-        // ÇÁ¸®ÆÕÀ» ÆÄ±«ÇÏ¿© ºñÈ°¼ºÈ­¸¦ ÇÑ´Ù 
+        // ë°©ì„ ë– ë‚˜ë©´ Mapë„ ë¹„í™œì„±í™” í•´ì¤€ë‹¤. 
+        // í”„ë¦¬íŒ¹ì„ íŒŒê´´í•˜ì—¬ ë¹„í™œì„±í™”ë¥¼ í•œë‹¤ 
         if (PV.IsMine) {
             PhotonNetwork.Destroy(web);
             PhotonNetwork.Destroy(keybo);
@@ -1291,76 +1302,76 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         WWWForm form = new WWWForm();
-        // ID°¡ Å°°ªÀÌ¹Ç·Î IDÀÇ °ª¸¸ °¡Á®¿Â´Ù. 
+        // IDê°€ í‚¤ê°’ì´ë¯€ë¡œ IDì˜ ê°’ë§Œ ê°€ì ¸ì˜¨ë‹¤. 
         form.AddField("id", loginManager.IDInputField.text);
 
         wwwData = UnityWebRequest.Post(AllTeamData, form);
         yield return wwwData.SendWebRequest();
 
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str = wwwData.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
-        // ¸¶Áö¸· ,µµ °¡Á®¿À°Ô µÇ¸é \n °ªµµ Ãß°¡°¡ µÇ±â¶§¹®¿¡ ¸¶Áö¸· ,´Â Áö¿öÁØ´Ù
+        // ë§ˆì§€ë§‰ ,ë„ ê°€ì ¸ì˜¤ê²Œ ë˜ë©´ \n ê°’ë„ ì¶”ê°€ê°€ ë˜ê¸°ë•Œë¬¸ì— ë§ˆì§€ë§‰ ,ëŠ” ì§€ì›Œì¤€ë‹¤
         re = re.TrimEnd(',');
         Debug.Log(re);
-        // ¹Ş¾Æ¿Â ¹®ÀÚ¿­À» ,¸¦ ±âÁØÀ¸·Î ³ª´©¾î ¹è¿­·Î ÀúÀå 
+        // ë°›ì•„ì˜¨ ë¬¸ìì—´ì„ ,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°°ì—´ë¡œ ì €ì¥ 
         string[] reSplit = re.Split(',');
 
 
         wwwData_2 = UnityWebRequest.Post(UserData, form);
         yield return wwwData_2.SendWebRequest();
-        // ¹İÈ¯°ªÀ» ÀúÀåÇÏ°í °ø¹éÀ» Á¦°ÅÇÏ¿© ¹®ÀÚ¿­À» ÀúÀå 
+        // ë°˜í™˜ê°’ì„ ì €ì¥í•˜ê³  ê³µë°±ì„ ì œê±°í•˜ì—¬ ë¬¸ìì—´ì„ ì €ì¥ 
         string str_2 = wwwData_2.downloadHandler.text;
         string re_2 = string.Concat(str_2.Where(x => !char.IsWhiteSpace(x)));
-        // ¹Ş¾Æ¿Â ¹®ÀÚ¿­À» ,¸¦ ±âÁØÀ¸·Î ³ª´©¾î ¹è¿­·Î ÀúÀå 
+        // ë°›ì•„ì˜¨ ë¬¸ìì—´ì„ ,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°°ì—´ë¡œ ì €ì¥ 
         string[] reSplit_2 = re_2.Split(',');
-        // ¹è¿­¿¡ ¹®ÀÚ¿­ÀÌ Àß µé¾î°¬´ÂÁö È®ÀÎ 
-        // °á°ú [0] : ´Ğ³×ÀÓ [1] : 1 ¶Ç´Â 0 ( 1Àº admin 0Àº user ) 
+        // ë°°ì—´ì— ë¬¸ìì—´ì´ ì˜ ë“¤ì–´ê°”ëŠ”ì§€ í™•ì¸ 
+        // ê²°ê³¼ [0] : ë‹‰ë„¤ì„ [1] : 1 ë˜ëŠ” 0 ( 1ì€ admin 0ì€ user ) 
         for (int i = 0; i < reSplit_2.Length; i++)
             Debug.Log(reSplit_2[i]);
 
 
-        // ÆÀ¹æ°ú °ø°³¹æ¿¡¼­ ¹æÀ» ¶°³¯ ¶§ 
+        // íŒ€ë°©ê³¼ ê³µê°œë°©ì—ì„œ ë°©ì„ ë– ë‚  ë•Œ 
         for (int i = 0; i < reSplit.Length; i += 2) {
-            // ÆÀ¹æ¿¡¼­ ¶°³¯¶§ ±× ÆÀÀÇ ÆÀÀåÀÏ °æ¿ì 
+            // íŒ€ë°©ì—ì„œ ë– ë‚ ë•Œ ê·¸ íŒ€ì˜ íŒ€ì¥ì¼ ê²½ìš° 
             if(PhotonNetwork.CurrentRoom.Name == reSplit[i] && reSplit[i + 1]=="1") {
-                // hashtable¸¦ »ç¿ëÇÏ¿© Ä¿½ºÅÒ ÇÁ·ÎÆÛÆ¼¸¦ ¸¸µç´Ù. 
+                // hashtableë¥¼ ì‚¬ìš©í•˜ì—¬ ì»¤ìŠ¤í…€ í”„ë¡œí¼í‹°ë¥¼ ë§Œë“ ë‹¤. 
                 ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
-                // isKicked ÀÌ¶ó´Â º¯¼ö¿¡ true °ªÀ» Ãß°¡ 
+                // isKicked ì´ë¼ëŠ” ë³€ìˆ˜ì— true ê°’ì„ ì¶”ê°€ 
                 hashtable.Add("isKicked", true);
                 Debug.Log(reSplit[i]);
                 for (int j = 0; j < PhotonNetwork.PlayerList.Length; j++) {
-                    // ¹æ ÀÎ¿ø ÀüÃ¼¿¡°Ô isKicked¿¡ true °ªÀ» ºÎ¿© 
+                    // ë°© ì¸ì› ì „ì²´ì—ê²Œ isKickedì— true ê°’ì„ ë¶€ì—¬ 
                     PhotonNetwork.PlayerList[j].SetCustomProperties(hashtable);
                     Debug.Log(PhotonNetwork.PlayerList[j]);
                 }
-                // ÆÀÀåÀº ¹æÀ» ¶°³ª±â 
+                // íŒ€ì¥ì€ ë°©ì„ ë– ë‚˜ê¸° 
                 PhotonNetwork.LeaveRoom();
             }
-            // ÆÀ¹æ¿¡¼­ ¶°³¯ ¶§ ±× ÆÀÀÇ ÆÀ¿øÀÏ °æ¿ì 
-            // ±×³É Leave Room ¸¸ µ¿ÀÛÇÏ¸é µÈ´Ù.
+            // íŒ€ë°©ì—ì„œ ë– ë‚  ë•Œ ê·¸ íŒ€ì˜ íŒ€ì›ì¼ ê²½ìš° 
+            // ê·¸ëƒ¥ Leave Room ë§Œ ë™ì‘í•˜ë©´ ëœë‹¤.
             else if (PhotonNetwork.CurrentRoom.Name == reSplit[i] && reSplit[i + 1]=="0") {
                 if (PhotonNetwork.InRoom)
                     PhotonNetwork.LeaveRoom();
                 else if (PhotonNetwork.InLobby)
                     yield return 0;
             }
-            // °ø°³¹æ¿¡¼­ ¶°³¯¶§ ±× °ø°³¹æÀÇ °ü¸®ÀÚÀÏ °æ¿ì 
+            // ê³µê°œë°©ì—ì„œ ë– ë‚ ë•Œ ê·¸ ê³µê°œë°©ì˜ ê´€ë¦¬ìì¼ ê²½ìš° 
             else if ((PhotonNetwork.CurrentRoom.Name == "A" || PhotonNetwork.CurrentRoom.Name == "B" || PhotonNetwork.CurrentRoom.Name == "C") && reSplit_2[1] == "1") {
-                // hashtable¸¦ »ç¿ëÇÏ¿© Ä¿½ºÅÒ ÇÁ·ÎÆÛÆ¼¸¦ ¸¸µç´Ù. 
+                // hashtableë¥¼ ì‚¬ìš©í•˜ì—¬ ì»¤ìŠ¤í…€ í”„ë¡œí¼í‹°ë¥¼ ë§Œë“ ë‹¤. 
                 ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
-                // isKicked ÀÌ¶ó´Â º¯¼ö¿¡ true °ªÀ» Ãß°¡ 
+                // isKicked ì´ë¼ëŠ” ë³€ìˆ˜ì— true ê°’ì„ ì¶”ê°€ 
                 hashtable.Add("isKicked", true);
                 for (int j = 0; j < PhotonNetwork.PlayerList.Length; j++) {
-                    // ¹æ ÀÎ¿ø ÀüÃ¼¿¡°Ô isKicked¿¡ true °ªÀ» ºÎ¿© 
+                    // ë°© ì¸ì› ì „ì²´ì—ê²Œ isKickedì— true ê°’ì„ ë¶€ì—¬ 
                     PhotonNetwork.PlayerList[j].SetCustomProperties(hashtable);
                     Debug.Log(PhotonNetwork.PlayerList[j]);
                 }
-                // °ü¸®ÀÚ´Â ¹æÀ» ¶°³ª±â
+                // ê´€ë¦¬ìëŠ” ë°©ì„ ë– ë‚˜ê¸°
                 PhotonNetwork.LeaveRoom();
             }
-            // °ø°³¹æ¿¡¼­ ¶°³¯ ¶§ ±× °ø°³¹æÀÇ »ç¿ëÀÚÀÏ °æ¿ì 
-            // ±×³É Leave Room ¸¸ µ¿ÀÛÇÏ¸é µÈ´Ù. 
+            // ê³µê°œë°©ì—ì„œ ë– ë‚  ë•Œ ê·¸ ê³µê°œë°©ì˜ ì‚¬ìš©ìì¼ ê²½ìš° 
+            // ê·¸ëƒ¥ Leave Room ë§Œ ë™ì‘í•˜ë©´ ëœë‹¤. 
             else if((PhotonNetwork.CurrentRoom.Name == "A" || PhotonNetwork.CurrentRoom.Name == "B" || PhotonNetwork.CurrentRoom.Name == "C") && reSplit_2[1] == "0") {
                 if (PhotonNetwork.InRoom)
                     PhotonNetwork.LeaveRoom();
@@ -1369,20 +1380,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             }
         }
 
-        // ¸Ş¸ğ¸® ´©¼ö ¹æÁö 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ë°©ì§€ 
         wwwData.Dispose();
         wwwData_2.Dispose();
     }
 
-    //--------------------------------------------- ÆÀÀå ¶Ç´Â °ü¸®ÀÚ°¡ ¹æÀ» ¶°³¯¶§ °¢ À¯Àúµé¿¡¼­ ºÎ¿©ÇÑ ÇÁ·ÎÆÛÆ¼ »èÁ¦ÈÄ ¹æ ³»º¸³»±â ---------------------------------------------// 
+    //--------------------------------------------- íŒ€ì¥ ë˜ëŠ” ê´€ë¦¬ìê°€ ë°©ì„ ë– ë‚ ë•Œ ê° ìœ ì €ë“¤ì—ì„œ ë¶€ì—¬í•œ í”„ë¡œí¼í‹° ì‚­ì œí›„ ë°© ë‚´ë³´ë‚´ê¸° ---------------------------------------------// 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         if (targetPlayer == PhotonNetwork.LocalPlayer) {
-            // isKicked property°¡ Á¸ÀçÇÒ°æ¿ì
+            // isKicked propertyê°€ ì¡´ì¬í• ê²½ìš°
             if (changedProps["isKicked"] != null) {
-                // isKicked°¡ trueÀÎ °æ¿ì
+                // isKickedê°€ trueì¸ ê²½ìš°
                 if ((bool)changedProps["isKicked"]) {
-                    // isKicked ÇÁ·ÎÆÛÆ¼¸¦ »èÁ¦ÇÏ°í ¹æÀ» ¶°³­´Ù. 
+                    // isKicked í”„ë¡œí¼í‹°ë¥¼ ì‚­ì œí•˜ê³  ë°©ì„ ë– ë‚œë‹¤. 
                     string[] removeProperties = new string[1];
                     removeProperties[0] = "isKicked";
                     PhotonNetwork.RemovePlayerCustomProperties(removeProperties);
@@ -1396,80 +1407,114 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
     }
 
-    //--------------------------------------------- ¹æ »ı¼ºÀÌ ¿Ï·áµÇ¾úÀ» ¶§ ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- ë°© ìƒì„±ì´ ì™„ë£Œë˜ì—ˆì„ ë•Œ í•¨ìˆ˜ ---------------------------------------------// 
     public override void OnCreatedRoom()
     {
-        print("¹æ¸¸µé±â¿Ï·á");
-        Server.SetActive(false);                // server °ü·Ã UI ºñÈ°¼ºÈ­ 
-        LobbyPanel.SetActive(false);            // ·Îºñ UI ºñÈ°¼ºÈ­ 
-        createTeam.SetActive(false);            // ÆÀ¹æ »ı¼º UI ºñÈ°¼ºÈ­ 
-        inputTeam.SetActive(false);             // ÆÀ¹æ ÀÔÀå UI ºñÈ°¼ºÈ­ 
-        Lobby.SetActive(false);                 // ·Îºñ ºñÈ°¼ºÈ­ 
+        print("ë°©ë§Œë“¤ê¸°ì™„ë£Œ");
+        Server.SetActive(false);                // server ê´€ë ¨ UI ë¹„í™œì„±í™” 
+        LobbyPanel.SetActive(false);            // ë¡œë¹„ UI ë¹„í™œì„±í™” 
+        createTeam.SetActive(false);            // íŒ€ë°© ìƒì„± UI ë¹„í™œì„±í™” 
+        inputTeam.SetActive(false);             // íŒ€ë°© ì…ì¥ UI ë¹„í™œì„±í™” 
+        Lobby.SetActive(false);                 // ë¡œë¹„ ë¹„í™œì„±í™” 
         UserCheck = true;
 
-        // ¸Ê °ü·Ã ÇÁ¸®ÆÕ »ı¼º 
-        // mapname´Â ¸Ê ¹öÆ°À» ´©¸¦ ¶§ ¹ß»ıÇÏ´Â ÇÔ¼ö¿¡¼­ °ªÀÌ µé¾î°¨ ( MapValue() ÇÔ¼ö ) 
+        // ë§µ ê´€ë ¨ í”„ë¦¬íŒ¹ ìƒì„± 
+        // mapnameëŠ” ë§µ ë²„íŠ¼ì„ ëˆ„ë¥¼ ë•Œ ë°œìƒí•˜ëŠ” í•¨ìˆ˜ì—ì„œ ê°’ì´ ë“¤ì–´ê° ( MapValue() í•¨ìˆ˜ ) 
         if (mapname.Equals("Cafe"))
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
         else 
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-2.5f,5), Quaternion.identity);
-        Quaternion rot = Quaternion.Euler(0, 270, 0);
-        web = PhotonNetwork.Instantiate("WebViewPrefab", new Vector3(4.4f, -4f, -0.073f), rot);
-        keybo = PhotonNetwork.Instantiate("Keyboard", new Vector3(4f, -5f, -0.073f), rot);
-        OnWebviewCreate();
 
     }
-
-    public void OnWebviewCreate()
-    {
-        WebViewRPC.Instance._Prefab = web;
-        WebViewRPC.Instance.Initalize();
-    }
-    //--------------------------------------------- ¸Ê »ı¼ºÇÒ¶§ ¸ÊÀÇ ÀÌ¸§À» ÀúÀåÇÏ´Â ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- ë§µ ìƒì„±í• ë•Œ ë§µì˜ ì´ë¦„ì„ ì €ì¥í•˜ëŠ” í•¨ìˆ˜ ---------------------------------------------// 
     public void MapValue()
     {
-        // Å¬¸¯½Ã ¹ß»ıÇÏ´Â ÀÌº¥Æ®¸¦ ÀúÀåÇÏ´Â º¯¼ö ¼±¾ğ ÈÄ Name¸¦ ÀúÀå 
+        // í´ë¦­ì‹œ ë°œìƒí•˜ëŠ” ì´ë²¤íŠ¸ë¥¼ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ ì„ ì–¸ í›„ Nameë¥¼ ì €ì¥ 
         GameObject clickObj = EventSystem.current.currentSelectedGameObject;
         string TeamName = clickObj.GetComponent<ButtonValues>().Name;
 
-        // ¸Ê ¹öÆ°ÀÌ °¡Áö°í ÀÖ´Â ¸ÊÀÇ ÀÌ¸§À» mapname º¯¼ö¿¡ ÀúÀå
-        // ¹öÆ°¸¸ ¸¸µé¸é ¸ÊÀÌ ¸î°³µç ÇÁ¸®ÆÕÀ¸·Î °¡Á®¿Ã ¼ö ÀÖ´Ù.
+        // ë§µ ë²„íŠ¼ì´ ê°€ì§€ê³  ìˆëŠ” ë§µì˜ ì´ë¦„ì„ mapname ë³€ìˆ˜ì— ì €ì¥
+        // ë²„íŠ¼ë§Œ ë§Œë“¤ë©´ ë§µì´ ëª‡ê°œë“  í”„ë¦¬íŒ¹ìœ¼ë¡œ ê°€ì ¸ì˜¬ ìˆ˜ ìˆë‹¤.
         mapname = TeamName;
         Debug.Log(mapname);
     }
 
 
-    //--------------------------------------------- ¹æ ÀÔÀåÀÌ ¿Ï·áµÇ¾úÀ» ¶§ ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- ë°© ì…ì¥ì´ ì™„ë£Œë˜ì—ˆì„ ë•Œ í•¨ìˆ˜ ---------------------------------------------// 
     public override void OnJoinedRoom()
     {
         lodingPanel.SetActive(true);
-        print("¹æÂü°¡¿Ï·á");
-        Server.SetActive(false);                // server UI ºñÈ°¼ºÈ­
-        LobbyPanel.SetActive(false);            // ·Îºñ Panel ºñÈ°¼ºÈ­ 
-        createTeam.SetActive(false);            // ÆÀ¹æ »ı¼º UI ºñÈ°¼ºÈ­ 
-        inputTeam.SetActive(false);             // ÆÀ¹æ ÀÔÀå UI ºñÈ°¼ºÈ­ 
-        Lobby.SetActive(false);                 // ·Îºñ ºñÈ°¼ºÈ­ 
+        print("ë°©ì°¸ê°€ì™„ë£Œ");
+        Server.SetActive(false);                // server UI ë¹„í™œì„±í™”
+        LobbyPanel.SetActive(false);            // ë¡œë¹„ Panel ë¹„í™œì„±í™” 
+        createTeam.SetActive(false);            // íŒ€ë°© ìƒì„± UI ë¹„í™œì„±í™” 
+        inputTeam.SetActive(false);             // íŒ€ë°© ì…ì¥ UI ë¹„í™œì„±í™” 
+        Lobby.SetActive(false);                 // ë¡œë¹„ ë¹„í™œì„±í™” 
 
         checkRoom = true;
-        //RoomPanel.SetActive(true);              // ¹æ Panel È°
+        //RoomPanel.SetActive(true);              // ë°© Panel í™œ
 
-        // ÇÁ¸®ÆÕ »ı¼º ¹× ÇÃ·¹ÀÌ¾î µ¿±âÈ­ 
-        // Ä³¸¯ÅÍ ÀÌ¸§À» ¹Ş¾Æ¼­ Ä³¸¯ÅÍ »ı¼º 
+        // í”„ë¦¬íŒ¹ ìƒì„± ë° í”Œë ˆì´ì–´ ë™ê¸°í™” 
+        // ìºë¦­í„° ì´ë¦„ì„ ë°›ì•„ì„œ ìºë¦­í„° ìƒì„± 
         SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
         smoothFollow.roteta();
         player = PhotonNetwork.Instantiate(playername, new Vector3(0, 0, 0), Quaternion.identity);
 
+        //GameObject cubeObject = GameObject.Find("Cube");
 
-        // ÇöÀç ¹æÀÇ Á¤º¸¸¦ text·Î Ç¥½Ã 
-        // ÃÖ´ë ¸î¸í±îÁö ÇöÀç ¸î¸íÀÌ ÀÖ´ÂÁö
+
+        // í˜„ì¬ ë°©ì˜ ì •ë³´ë¥¼ textë¡œ í‘œì‹œ 
+        // ìµœëŒ€ ëª‡ëª…ê¹Œì§€ í˜„ì¬ ëª‡ëª…ì´ ìˆëŠ”ì§€
         RoomRenewal();
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) 
+            Debug.Log(PhotonNetwork.PlayerList[i].NickName + ":" + PhotonNetwork.PlayerList[i].ActorNumber);
 
-        ChatInput.text = "";                // Ã¤ÆÃ ÀÔ·Â Ã¢À» ÃÊ±âÈ­ 
+        ChatInput.text = "";                // ì±„íŒ… ì…ë ¥ ì°½ì„ ì´ˆê¸°í™” 
 
-        // ¸ğµç Ã¤ÆÃ±â·ÏÀ» ÃÊ±âÈ­ 
+        // ëª¨ë“  ì±„íŒ…ê¸°ë¡ì„ ì´ˆê¸°í™” 
         for (int i = 0; i < ChatText.Length; i++) 
             ChatText[i].text = "";
 
+        /*
+        TextMeshProUGUI textMeshPro = player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>();
+        Debug.Log(player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>());
+        textMeshPro.text = PhotonNetwork.LocalPlayer.NickName;
+        */
+        // ì›¹ë·° ë™ê¸°í™” êµ¬ê°„ ( í˜„ì¬ ê°œë°œ ì¤‘ì— ìˆê¸´í•œë° ) 
+        StartCoroutine(MapCreateInformation());
+    }
+
+    // ì›¹ë·° ë™ê¸°í™” ë§Œë“œëŠ” ì¤‘ 
+    [PunRPC]
+    public void WebViewSetActive(string localPlayerNickname)
+    {
+        WebViewArrangement[] webViews = FindObjectsOfType<WebViewArrangement>();
+        foreach (WebViewArrangement webView in webViews) {
+            MapViewViewActivate(localPlayerNickname, webView);
+        }
+    }
+
+    public void MapViewViewActivate(string localPlayerNickname, WebViewArrangement mapView)
+    {
+        PV = GetComponent<PhotonView>();
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
+            if (player != null && PhotonNetwork.PlayerList[i].NickName == localPlayerNickname) {
+                PhotonView photonView = mapView.webViewScreen[i].GetComponent<PhotonView>();
+                PhotonView photonViewObject = mapView.webViewObject[i].GetComponent<PhotonView>();
+                photonView.TransferOwnership(PV.ViewID);
+                photonViewObject.TransferOwnership(PV.ViewID);
+                Debug.Log(photonView);
+                Debug.Log(PV.ViewID);
+                mapView.webViewScreen[i].SetActive(true);
+                break;
+            }
+        }
+    }
+    IEnumerator MapCreateInformation()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        PV.RPC("WebViewSetActive", RpcTarget.All, PhotonNetwork.NickName);
     }
 
     public void createcharacter()
@@ -1477,64 +1522,65 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         player = PhotonNetwork.Instantiate(playername, new Vector3(-29, 0, 14), Quaternion.identity);
     }
 
-    //--------------------------------------------- Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇÒ ¶§ Ä³¸¯ÅÍÀÇ ÀÌ¸§À» ÀúÀåÇÏ´Â ÇÔ¼ö ---------------------------------------------// 
+    //--------------------------------------------- ìºë¦­í„°ë¥¼ ì„ íƒí•  ë•Œ ìºë¦­í„°ì˜ ì´ë¦„ì„ ì €ì¥í•˜ëŠ” í•¨ìˆ˜ ---------------------------------------------// 
     public void PlayerNameValue()
     {
-        // Å¬¸¯½Ã ¹ß»ıÇÏ´Â ÀÌº¥Æ®¸¦ ÀúÀåÇÏ´Â º¯¼ö ¼±¾ğ ÈÄ Name¸¦ ÀúÀå 
+        // í´ë¦­ì‹œ ë°œìƒí•˜ëŠ” ì´ë²¤íŠ¸ë¥¼ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ ì„ ì–¸ í›„ Nameë¥¼ ì €ì¥ 
         GameObject clickObj = EventSystem.current.currentSelectedGameObject;
         string TeamName = clickObj.GetComponent<ButtonValues>().Name;
 
-        // Ä³¸¯ÅÍ ¹öÆ°ÀÌ °¡Áö°í ÀÖ´Â Ä³¸¯ÅÍÀÇ ÀÌ¸§À» playername º¯¼ö¿¡ ÀúÀå
-        // ¹öÆ°¸¸ ¸¸µé¸é Ä³¸¯ÅÍ°¡ ¸î°³µç ÇÁ¸®ÆÕÀ¸·Î °¡Á®¿Ã ¼ö ÀÖ´Ù.
+        // ìºë¦­í„° ë²„íŠ¼ì´ ê°€ì§€ê³  ìˆëŠ” ìºë¦­í„°ì˜ ì´ë¦„ì„ playername ë³€ìˆ˜ì— ì €ì¥
+        // ë²„íŠ¼ë§Œ ë§Œë“¤ë©´ ìºë¦­í„°ê°€ ëª‡ê°œë“  í”„ë¦¬íŒ¹ìœ¼ë¡œ ê°€ì ¸ì˜¬ ìˆ˜ ìˆë‹¤.
         playername = TeamName;
         Debug.Log(playername);
     }
 
-    //--------------------------------------------- ¹æ ¸¸µé±â°¡ ½ÇÆĞÇÏ¿´À» ¶§ ---------------------------------------------// 
+    //--------------------------------------------- ë°© ë§Œë“¤ê¸°ê°€ ì‹¤íŒ¨í•˜ì˜€ì„ ë•Œ ---------------------------------------------// 
     public override void OnCreateRoomFailed( short returnCode, string message )
     {
-        print("¹æ¸¸µé±â½ÇÆĞ");
+        print("ë°©ë§Œë“¤ê¸°ì‹¤íŒ¨");
     }
-    //--------------------------------------------- ¹æÀÌ ¸¸µé¾îÁ® ÀÖÁö ¾Ê¾Æ ¹æ Âü°¡¿¡ ½ÇÆĞÇÏ¿´À» ¶§ ---------------------------------------------// 
+    //--------------------------------------------- ë°©ì´ ë§Œë“¤ì–´ì ¸ ìˆì§€ ì•Šì•„ ë°© ì°¸ê°€ì— ì‹¤íŒ¨í•˜ì˜€ì„ ë•Œ ---------------------------------------------// 
     public override void OnJoinRoomFailed( short returnCode, string message )
     {
-        print("¹æÂü°¡½ÇÆĞ");
+        print("ë°©ì°¸ê°€ì‹¤íŒ¨");
     }
 
-    //--------------------------------------------- »ç¿ëÇÏÁö ¾Ê´Â ±â´ÉÀÇ ¿À·ù... ---------------------------------------------// 
+    //--------------------------------------------- ì‚¬ìš©í•˜ì§€ ì•ŠëŠ” ê¸°ëŠ¥ì˜ ì˜¤ë¥˜... ---------------------------------------------// 
     public override void OnJoinRandomFailed( short returnCode, string message )
     {
-        print("¹æ·£´ıÂü°¡½ÇÆĞ");
+        print("ë°©ëœë¤ì°¸ê°€ì‹¤íŒ¨");
 
     }
     //----------------------------------------------------------------------------------------------------------------------// 
 
-    [ContextMenu("Á¤º¸")]
-    // ÇöÀç ¹æÀÇ Á¤º¸ 
+    [ContextMenu("ì •ë³´")]
+    // í˜„ì¬ ë°©ì˜ ì •ë³´ 
     void Info()
     {
         if (PhotonNetwork.InRoom) {
-            print("ÇöÀç ¹æ ÀÌ¸§ : " + PhotonNetwork.CurrentRoom.Name);
-            print("ÇöÀç ¹æ ÀÎ¿ø¼ö : " + PhotonNetwork.CurrentRoom.PlayerCount);
-            print("ÇöÀç ¹æ ÃÖ´ëÀÎ¿ø¼ö : " + PhotonNetwork.CurrentRoom.MaxPlayers);
+            print("í˜„ì¬ ë°© ì´ë¦„ : " + PhotonNetwork.CurrentRoom.Name);
+            print("í˜„ì¬ ë°© ì¸ì›ìˆ˜ : " + PhotonNetwork.CurrentRoom.PlayerCount);
+            print("í˜„ì¬ ë°© ìµœëŒ€ì¸ì›ìˆ˜ : " + PhotonNetwork.CurrentRoom.MaxPlayers);
 
-            string playerStr = "¹æ¿¡ ÀÖ´Â ÇÃ·¹ÀÌ¾î ¸ñ·Ï : ";
-            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) playerStr += PhotonNetwork.PlayerList[i].NickName + ", ";
+            string playerStr = "ë°©ì— ìˆëŠ” í”Œë ˆì´ì–´ ëª©ë¡ : ";
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+                playerStr += PhotonNetwork.PlayerList[i].NickName + ", ";
             print(playerStr);
         }
         else {
-            print("Á¢¼ÓÇÑ ÀÎ¿ø ¼ö : " + PhotonNetwork.CountOfPlayers);
-            print("¹æ °³¼ö : " + PhotonNetwork.CountOfRooms);
-            print("¸ğµç ¹æ¿¡ ÀÖ´Â ÀÎ¿ø ¼ö : " + PhotonNetwork.CountOfPlayersInRooms);
-            print("·Îºñ¿¡ ÀÖ´ÂÁö? : " + PhotonNetwork.InLobby);
-            print("¿¬°áµÆ´ÂÁö? : " + PhotonNetwork.IsConnected);
+            print("ì ‘ì†í•œ ì¸ì› ìˆ˜ : " + PhotonNetwork.CountOfPlayers);
+            print("ë°© ê°œìˆ˜ : " + PhotonNetwork.CountOfRooms);
+            print("ëª¨ë“  ë°©ì— ìˆëŠ” ì¸ì› ìˆ˜ : " + PhotonNetwork.CountOfPlayersInRooms);
+            print("ë¡œë¹„ì— ìˆëŠ”ì§€? : " + PhotonNetwork.InLobby);
+            print("ì—°ê²°ëëŠ”ì§€? : " + PhotonNetwork.IsConnected);
         }
     }
 
 
-    //--------------------------------------------- ¹æ¸®½ºÆ® °»½Å ÇÔ¼ö ---------------------------------------------// 
-    #region ¹æ¸®½ºÆ® °»½Å
-    // ¢¸¹öÆ° -2 , ¢º¹öÆ° -1 , ¼¿ ¼ıÀÚ
+    //--------------------------------------------- ë°©ë¦¬ìŠ¤íŠ¸ ê°±ì‹  í•¨ìˆ˜ ---------------------------------------------// 
+    #region ë°©ë¦¬ìŠ¤íŠ¸ ê°±ì‹ 
+    // â—€ë²„íŠ¼ -2 , â–¶ë²„íŠ¼ -1 , ì…€ ìˆ«ì
     public void MyListClick( int num )
     {
         if (num == -2)
@@ -1558,17 +1604,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     void MyListRenewal()
     {
-        // ÃÖ´ëÆäÀÌÁö
-        // ¸¸¾à ¹æÀÌ 9°³¶ó¸é ÆäÀÌÁö´Â 3°³°¡ ¸¸µé¾îÁ®¾ß ÇÑ´Ù.
+        // ìµœëŒ€í˜ì´ì§€
+        // ë§Œì•½ ë°©ì´ 9ê°œë¼ë©´ í˜ì´ì§€ëŠ” 3ê°œê°€ ë§Œë“¤ì–´ì ¸ì•¼ í•œë‹¤.
         maxPage = (myList.Count % CellBtn.Length == 0) ? myList.Count / CellBtn.Length : myList.Count / CellBtn.Length + 1;
 
-        // ÀÌÀü, ´ÙÀ½¹öÆ°
-        // Ã³À½ ÆäÀÌÁöÀÌ¸é ÀÌÀü ¹öÆ°ÀÌ ºñÈ°¼ºÈ­ 
-        // ¸¶Áö¸· ÆäÀÌÁö¸é ´ÙÀ½ ¹öÆ°ÀÌ ºñÈ°¼ºÈ­ 
+        // ì´ì „, ë‹¤ìŒë²„íŠ¼
+        // ì²˜ìŒ í˜ì´ì§€ì´ë©´ ì´ì „ ë²„íŠ¼ì´ ë¹„í™œì„±í™” 
+        // ë§ˆì§€ë§‰ í˜ì´ì§€ë©´ ë‹¤ìŒ ë²„íŠ¼ì´ ë¹„í™œì„±í™” 
         PreviousBtn.interactable = (currentPage <= 1) ? false : true;
         NextBtn.interactable = (currentPage >= maxPage) ? false : true;
 
-        // ÆäÀÌÁö¿¡ ¸Â´Â ¸®½ºÆ® ´ëÀÔ
+        // í˜ì´ì§€ì— ë§ëŠ” ë¦¬ìŠ¤íŠ¸ ëŒ€ì…
         multiple = (currentPage - 1) * CellBtn.Length;
         for (int i = 0; i < CellBtn.Length; i++) {
             CellBtn[i].interactable = (multiple + i < myList.Count) ? true : false;
@@ -1577,8 +1623,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
     }
 
-    // ·ë ¸®½ºÆ®¸¦ ´ÙÀ½ ÆäÀÌÁö·Î ÀÌµ¿ ½ÃÅ°°í ±× Á¤º¸¸¦ °¡Á®¿È 
-    // ¸®½ºÆ®°¡ °»½ÅÀÌ µÊ ( ´©±º°¡ ³ª°¡¸é ¹æÀÌ »ı¼ºµÇ°í, ³ª°¡¸é ¹æÀÌ ¾ø¾îÁö´Â ) 
+    // ë£¸ ë¦¬ìŠ¤íŠ¸ë¥¼ ë‹¤ìŒ í˜ì´ì§€ë¡œ ì´ë™ ì‹œí‚¤ê³  ê·¸ ì •ë³´ë¥¼ ê°€ì ¸ì˜´ 
+    // ë¦¬ìŠ¤íŠ¸ê°€ ê°±ì‹ ì´ ë¨ ( ëˆ„êµ°ê°€ ë‚˜ê°€ë©´ ë°©ì´ ìƒì„±ë˜ê³ , ë‚˜ê°€ë©´ ë°©ì´ ì—†ì–´ì§€ëŠ” ) 
     public override void OnRoomListUpdate( List<RoomInfo> roomList )
     {
         int roomCount = roomList.Count;
@@ -1592,22 +1638,27 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         MyListRenewal();
     }
 
-    //------------------------------------------- Ã¤ÆÃ ½Ã½ºÅÛ -------------------------------------------//
+    //------------------------------------------- ì±„íŒ… ì‹œìŠ¤í…œ -------------------------------------------//
     public void ChatEnd()
     {
         ChatSystem.SetActive(false);
+        ChatMax.SetActive(true);
     }
-
+    public void ChatStartButton()
+    {
+        ChatSystem.SetActive(true);
+        ChatMax.SetActive(false);
+    }
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
         RoomRenewal();
-        ChatRPC("<color=yellow>" + newPlayer.NickName + "´ÔÀÌ Âü°¡ÇÏ¼Ì½À´Ï´Ù</color>");
+        ChatRPC("<color=yellow>" + newPlayer.NickName + "ë‹˜ì´ ì°¸ê°€í•˜ì…¨ìŠµë‹ˆë‹¤</color>");
     }
 
     public override void OnPlayerLeftRoom( Player otherPlayer )
     {
         RoomRenewal();
-        ChatRPC("<color=yellow>" + otherPlayer.NickName + "´ÔÀÌ ÅğÀåÇÏ¼Ì½À´Ï´Ù</color>");
+        ChatRPC("<color=yellow>" + otherPlayer.NickName + "ë‹˜ì´ í‡´ì¥í•˜ì…¨ìŠµë‹ˆë‹¤</color>");
     }
 
     void RoomRenewal()
@@ -1616,18 +1667,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             ListText.text += PhotonNetwork.PlayerList[i].NickName + ((i + 1 == PhotonNetwork.PlayerList.Length) ? "" : ", ");
 
-        // Room¾È¿¡¼­ ÇöÀç¹æ ÀÌ¸§, ÀÎ¿ø¼ö, ÃÖ´ëÀÎ¿ø¼ö¸¦ Ç¥½Ã 
-        RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " / " + (PhotonNetwork.CurrentRoom.PlayerCount) + "¸í / " + (PhotonNetwork.CurrentRoom.MaxPlayers) + "ÃÖ´ë";
+        // Roomì•ˆì—ì„œ í˜„ì¬ë°© ì´ë¦„, ì¸ì›ìˆ˜, ìµœëŒ€ì¸ì›ìˆ˜ë¥¼ í‘œì‹œ 
+        RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " / " + (PhotonNetwork.CurrentRoom.PlayerCount) + "ëª… / " + (PhotonNetwork.CurrentRoom.MaxPlayers) + "ìµœëŒ€";
     }
     #endregion
 
 
-    #region Ã¤ÆÃ
+    #region ì±„íŒ…
     public void Send()
     {
-        // PV.RPC »ç¿ë¹ı 
-        // PV.RPC ( RPC ÇÔ¼ö ÀÌ¸§, RpcTarget. º¸³¾ »ç¶÷, ¸Å°³º¯¼ö( °ªÀ» ³Ñ°ÜÁÜ ) )
-        // º¸³¾ »ç¶÷À» All·Î ÇÒ ½Ã ¹æ¿¡ ÀÖ´Â ¸ğµçÀÎ¿øÀÌ º¼ ¼ö ÀÖÀ½ 
+        // PV.RPC ì‚¬ìš©ë²• 
+        // PV.RPC ( RPC í•¨ìˆ˜ ì´ë¦„, RpcTarget. ë³´ë‚¼ ì‚¬ëŒ, ë§¤ê°œë³€ìˆ˜( ê°’ì„ ë„˜ê²¨ì¤Œ ) )
+        // ë³´ë‚¼ ì‚¬ëŒì„ Allë¡œ í•  ì‹œ ë°©ì— ìˆëŠ” ëª¨ë“ ì¸ì›ì´ ë³¼ ìˆ˜ ìˆìŒ 
         if (!(ChatInput.text == "")) {
             PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
             StartCoroutine(ChatLog());
@@ -1637,47 +1688,47 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     IEnumerator ChatLog()
     {
         WWWForm form = new WWWForm();
-        // WWWform¿¡ id, pw, nick ÇÊµå¸¦ »ı¼ºÇÏ°í 
-        // ³»°¡ inputField¿¡ ÀÔ·ÂÇÑ ¾ÆÀÌµğ, ºñ¹Ğ¹øÈ£, ´Ğ³×ÀÓÀ» Ãß°¡ÇÑ´Ù.
+        // WWWformì— id, pw, nick í•„ë“œë¥¼ ìƒì„±í•˜ê³  
+        // ë‚´ê°€ inputFieldì— ì…ë ¥í•œ ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸, ë‹‰ë„¤ì„ì„ ì¶”ê°€í•œë‹¤.
         form.AddField("chat_log", ChatInput.text);
         form.AddField("team_name", PhotonNetwork.CurrentRoom.Name);
         form.AddField("nick", PhotonNetwork.NickName);
         Debug.Log(ChatInput.text + PhotonNetwork.CurrentRoom.Name + PhotonNetwork.NickName);
         
 
-        // Post ¹æ½ÄÀ¸·Î ·Î±×ÀÎURL¿¡ WWWformÇÊµå °ªÀ» wwwData º¯¼ö¿¡ ÀúÀå  
+        // Post ë°©ì‹ìœ¼ë¡œ ë¡œê·¸ì¸URLì— WWWformí•„ë“œ ê°’ì„ wwwData ë³€ìˆ˜ì— ì €ì¥  
         wwwData = UnityWebRequest.Post(ChatLogData, form);
         yield return wwwData.SendWebRequest();
 
-        // ¹éÂÊÀÇ µ¥ÀÌÅÍ¸¦ ¹Ş¾Æ¼­ ¹®ÀÚ¿­ ÇüÅÂ·Î ÀúÀåÇÏ°í 
-        // °ø¹éÀ» Áö¿òÀ¸·Î½á À¯´ÏÆ¼¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖ´Â µ¥ÀÌÅÍ·Î °¡°ø 
+        // ë°±ìª½ì˜ ë°ì´í„°ë¥¼ ë°›ì•„ì„œ ë¬¸ìì—´ í˜•íƒœë¡œ ì €ì¥í•˜ê³  
+        // ê³µë°±ì„ ì§€ì›€ìœ¼ë¡œì¨ ìœ ë‹ˆí‹°ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ë°ì´í„°ë¡œ ê°€ê³µ 
         string str = wwwData.downloadHandler.text;
         string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
         Debug.Log(re);
 
-        // ¸Ş¸ğ¸® ´©¼ö¸¦ ¹æÁö ÇÏ±â À§ÇÑ ¸Ş¸ğ¸® °ü¸® 
+        // ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ë¥¼ ë°©ì§€ í•˜ê¸° ìœ„í•œ ë©”ëª¨ë¦¬ ê´€ë¦¬ 
         wwwData.Dispose();
     }
 
 
-    // RPC´Â ÇÃ·¹ÀÌ¾î°¡ ¼ÓÇØÀÖ´Â ¹æ ¸ğµç ÀÎ¿ø¿¡°Ô Àü´ŞÇÑ´Ù
-    // ¸Å¿ì Áß¿äÇÑ ÇÔ¼ö RPC
+    // RPCëŠ” í”Œë ˆì´ì–´ê°€ ì†í•´ìˆëŠ” ë°© ëª¨ë“  ì¸ì›ì—ê²Œ ì „ë‹¬í•œë‹¤
+    // ë§¤ìš° ì¤‘ìš”í•œ í•¨ìˆ˜ RPC
     [PunRPC] 
     void ChatRPC( string msg )
     {
         bool isInput = false;
         
         for (int i = 0; i < ChatText.Length; i++)
-            // Ã¤ÆÃÀÇ textÁß¿¡¼­ ºñ¾îÀÖ´Â ±¸°£À» Ã£´Â´Ù.
-            // ºñ¾îÀÖ´Â ±¸°£ÀÌ ÀÖÀ¸¸é ¸Å°³º¯¼ö °ªÀ» ³Ñ°ÜÁØ´Ù 
+            // ì±„íŒ…ì˜ textì¤‘ì—ì„œ ë¹„ì–´ìˆëŠ” êµ¬ê°„ì„ ì°¾ëŠ”ë‹¤.
+            // ë¹„ì–´ìˆëŠ” êµ¬ê°„ì´ ìˆìœ¼ë©´ ë§¤ê°œë³€ìˆ˜ ê°’ì„ ë„˜ê²¨ì¤€ë‹¤ 
             if (ChatText[i].text == "") {
-                isInput = true;             // Ã¤ÆÃ Áï text°¡ µé¾î°¬´Ù¸é true·Î È®ÀÎ 
+                isInput = true;             // ì±„íŒ… ì¦‰ textê°€ ë“¤ì–´ê°”ë‹¤ë©´ trueë¡œ í™•ì¸ 
                 ChatText[i].text = msg;
                 break;
             }
 
-        // ¸¸¾à ºñ¾îÀÖ´Â °ø°£ÀÌ ¾ø¾î¼­ text°¡ µé¾î°¡Áö ¸øÇÏ¿´´Ù¸é 
-        if (!isInput) // ²ËÂ÷¸é ÇÑÄ­¾¿ À§·Î ¿Ã¸²
+        // ë§Œì•½ ë¹„ì–´ìˆëŠ” ê³µê°„ì´ ì—†ì–´ì„œ textê°€ ë“¤ì–´ê°€ì§€ ëª»í•˜ì˜€ë‹¤ë©´ 
+        if (!isInput) // ê½‰ì°¨ë©´ í•œì¹¸ì”© ìœ„ë¡œ ì˜¬ë¦¼
         {
             for (int i = 1; i < ChatText.Length; i++) 
                 ChatText[i - 1].text = ChatText[i].text;

@@ -39,11 +39,11 @@ public class LoginManager : MonoBehaviour
     private Transform tr;
 
     [Header("Lobby")]
-    public GameObject LobbyRoom;
-    public GameObject LobbyMainPlayer;
-    public GameObject publicPortal;
-    public GameObject CreateTeamPortal;
-    public GameObject InputTeamPortal;
+    public GameObject LobbyRoom;                // 로비 맵 
+    public GameObject LobbyMainPlayer;          // 로비 전용 캐릭터 
+    public GameObject publicPortal;             // 공개방 포탈 
+    public GameObject CreateTeamPortal;         // 방만들기 포탈 
+    public GameObject InputTeamPortal;          // 방입장하기 포탈 
     
     // DB관련 변수 
     [Header("Database")]
@@ -54,14 +54,17 @@ public class LoginManager : MonoBehaviour
     public string CreateUrl;                    // 백서버와 통신할 계정생성 URL
     // Use this for initialization
 
-    public GameObject loginErrorMessage;
+    // 로그인 실패 시 에러메시지 
+    public GameObject loginErrorMessage;        // 로그인 실패시 에러메시지 UI 
     public RectTransform rectLogin;
+
+    public int managerIndex = 0;
     //--------------------------------------------- URL 초기화 ---------------------------------------------//
     void Start()
     {
         // 버튼을 눌렀을 때 이동할 URL (인텔리제이에서 jsp 파일을 실행시켰을 때의 URL을 입력)
         // 로그인 URL
-        LoginUrl = "http://223.131.75.181:1356//Metaverse_war_exploded/Login.jsp";
+        LoginUrl = "http://223.131.75.181:1356/Metaverse_war_exploded/Login.jsp";
         // 계정생성 URL 
         CreateUrl = "http://223.131.75.181:1356/Metaverse_war_exploded/NewUserCreate.jsp";
 
@@ -114,6 +117,7 @@ public class LoginManager : MonoBehaviour
             NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
             networkManager.Connect();
             networkManager.LoginlodingPanel.SetActive(true);
+            managerIndex = 1;
         }
         else if (re == "0") {
             Debug.Log("로그인 성공");
@@ -124,6 +128,7 @@ public class LoginManager : MonoBehaviour
             NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
             networkManager.Connect();
             networkManager.LoginlodingPanel.SetActive(true);
+            managerIndex = 0;
         }
         else {
             rectLogin.anchoredPosition = new Vector2(0,0);
@@ -189,27 +194,5 @@ public class LoginManager : MonoBehaviour
         RoomPanelObj.SetActive(false);
         createTeam.SetActive(false);
         inputTeam.SetActive(false);
-        ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
-        buttonEvent.Women();
-        for (int i = 0; i < buttonEvent.Women_Men.Length; i++)
-            buttonEvent.Women_Men[i].SetActive(true);
-        buttonEvent.PublicCreateRoomPrevious();
-        buttonEvent.RoomCreate_Input.SetActive(false);
-        //buttonEvent.LobbyPanel_NextButton.SetActive(true);
-        buttonEvent.LobbyPanel_PreviousButton.SetActive(false);
-
-        buttonEvent.TeamInput_Women();
-        for (int i = 0; i < buttonEvent.TeamInput_Women_Men.Length; i++)
-            buttonEvent.TeamInput_Women_Men[i].SetActive(true);
-        for (int i = 0; i < buttonEvent.TeamInput_NextButton.Length; i++)
-            buttonEvent.TeamInput_NextButton[i].SetActive(true);
-        buttonEvent.TeamInput_PreviousButton.SetActive(false);
-        buttonEvent.TeamInputNext.SetActive(false);
-        buttonEvent.TeamInputPrevious.SetActive(false);
-        buttonEvent.playerBackGround.SetActive(true);
-
-        ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
-        thirdPersonController.MoveSpeed = 50f;
-        thirdPersonController.SprintSpeed = 80f;
     }
 }

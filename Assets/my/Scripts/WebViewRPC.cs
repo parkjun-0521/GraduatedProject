@@ -20,9 +20,6 @@ public class WebViewRPC : MonoBehaviour
     }
     async public void Initalize()
     {
-        //if (_Prefab != null) {
-        //    _WebViewPrefab = _Prefab.GetComponent<WebViewPrefab>();
-        //}
 
         _WebViewPrefab = _Prefab?.GetComponent<WebViewPrefab>();
  
@@ -35,18 +32,18 @@ public class WebViewRPC : MonoBehaviour
         };
     }
 
+    public void OnURLEvent(string URL)
+    { 
+        currentURL = URL;
+        Debug.Log(currentURL);
+        PV.RPC("SetURL", RpcTarget.All);
+    }
+
 
     [PunRPC]
     public void SetURL()
     {
         _WebViewPrefab.WebView.Reload();
         _WebViewPrefab?.WebView?.LoadUrl(currentURL);
-    }
-
-    public void OnURLEvent(string URL)
-    { 
-        currentURL = URL;
-        Debug.Log(currentURL);
-        PV.RPC("SetURL", RpcTarget.All);
     }
 }

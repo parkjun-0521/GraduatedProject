@@ -67,6 +67,12 @@ MonoBehaviour:
   - Eledown
   - Eleup
   - customizing
+  - MaterialSet
+  - PlayerNameInformation
+  - WebViewSetActive
+  - MapNameInformation
+  - TeamNameInformation
+  - SkyBoxRender
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
