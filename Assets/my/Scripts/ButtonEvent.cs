@@ -182,6 +182,11 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         }
 
         pCount++;           // 다음 버튼을 눌러서 이동하였기 때문에 flag 변수 변동 ( flag 변수 == 2 )
+        preimg.SetActive(false);
+        for(int i=0; i<6; i++)
+        {
+            preava[i].SetActive(false);
+        }
     }
 
     public void LobbyPanel_Select_Previous()
@@ -201,6 +206,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             publicplayerBackGround.SetActive(true);     // 캐릭터 선택 뒤배경 활성화 
 
             pCount--;                                   // 페이지 Flag 변수 감소 ( 현재 Flag == 0 ) 
+            preimg.SetActive(false);
         }
         // 맵 선택 창에서 아바타 선택 창으로 돌아갈 때 
         else if(pCount == 2) {
@@ -211,6 +217,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             RoomCreate_Input.SetActive(false);          // 캐릭터 선택 버튼 비활성화
 
             pCount--;                                   // 페이지 Flag 변수 감소 ( 현재 Flag == 1 )     
+            preimg.SetActive(true);
         }
     }
     public void Women()
@@ -363,6 +370,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         inputNextButton.SetActive(true);                            // 다음 버튼 활성화 ( 아바타 선택후 맵 선택으로 넘어가는 다음 버튼 ) 
 
         iCount++;                                                   // 페이지를 확인하기 위한 Flag 변수 ( flag == 1 ) 
+        preimg.SetActive(true);
     }
 
     public void TeamInput_Select_Next_Button()
@@ -380,6 +388,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         InputplayerTeaminput.SetActive(true);                       // 방 입장 UI 활성화 
         inputNextButton.SetActive(false);                           // 다음 버튼 비활성화 
         iCount++;                                                   // 페이지를 확인하기 위한 Flag 변수 ( flag == 2 ) 
+        preimg.SetActive(false);
     }
 
     public void TeamInput_Select_Previous()
@@ -397,6 +406,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             inputNextButton.SetActive(false);                       // 다음 버튼 비활성화
             playerBackGround.SetActive(true);                       // 캐릭터 선택 뒤 배경 활성화 
             iCount--;                                               // 페이지 확인을 위한 Flag 변수 ( flag == 0 됨 ) 
+            preimg.SetActive(false);
         }
         // 맵 선택에서 이전 버튼을 눌렀을 때 
         else if(iCount == 2) {                          
@@ -407,6 +417,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             TeamInputPrevious.SetActive(false);                     // 방 선택 이전 버튼 비활성화 
             TeamInputNext.SetActive(false);                         // 방 선택 다음 버튼 비활성화 
             iCount--;                                               // 페이지 확인을 위한 Flag 변수 ( flag == 1 됨 )        
+            preimg.SetActive(true);
         }
     }
 
@@ -704,6 +715,20 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
                 thirdPersonController.SprintSpeed = 80f;
                 thirdPersonController.turnStop = false;
                 smoothFollow.turnOff = false;
+            }
+        }
+        if (Lobby.activeSelf == true)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                preava[i].SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                preava[i].SetActive(false);
             }
         }
     }

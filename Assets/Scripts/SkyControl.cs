@@ -35,7 +35,7 @@ public class SkyControl : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {   // Player 태그를 가진 NPC의 콜라이더에 들어왔을 때 낮,밤 전환
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             if (ismorning == true)
             {
@@ -51,7 +51,7 @@ public class SkyControl : MonoBehaviour
     [PunRPC]
     public void movesky()
     {
-        //RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.6f);
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.6f);
     }
 
 
@@ -69,6 +69,7 @@ public class SkyControl : MonoBehaviour
         }
     }
 
+    [PunRPC]
     public void changesunset()
     {
         if(RenderSettings.skybox == morningmat)

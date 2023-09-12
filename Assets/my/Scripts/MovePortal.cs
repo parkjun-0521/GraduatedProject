@@ -7,6 +7,8 @@ public class MovePortal : MonoBehaviour
     public GameObject[] uiGroup;        // 포탈 종류 저장 변수 
     public GameObject serverObj;        // 서버의 기본 UI 
 
+    customizing custom;
+
     // 포탈에 닿았을 때 
     public void Enter()
     {
@@ -87,10 +89,22 @@ public class MovePortal : MonoBehaviour
     // 포탈에서 나갔을 때 발생하는 이벤트 
     public void Exit()
     {
+        ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
+        custom = GameObject.Find("Customizing").GetComponent<customizing>();
 
         for (int i = 0; i < uiGroup.Length; i++)
             uiGroup[i].SetActive(false);                            // 포탈을 들어갔을 때 열린 UI를 비활성화 
         serverObj.SetActive(true);                                  // 기본적인 로비의 UI를 활성화 
+        buttonEvent.preimg.SetActive(false);
+        for(int i=0; i<8; i++)
+        {
+            custom.fe1ava[i].SetActive(false);
+            custom.fe2ava[i].SetActive(false);
+            custom.fe3ava[i].SetActive(false);
+            custom.m1ava[i].SetActive(false);
+            custom.m2ava[i].SetActive(false);
+            custom.m3ava[i].SetActive(false);
+        }
 
 
         //NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();       // NetworkManager 스크립트가 달려있는 오브젝트를 찾는다. 
