@@ -42952,7 +42952,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4274987111573328502}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e8192f35a44301488ec0f072d9a16fe, type: 3}
   m_Name: 
@@ -70661,6 +70661,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1575522291895449281, guid: 4fd059785718649499a344b0c22ecd22, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c3013469543c634b9d3d347d1afe4a2, type: 2}
     - target: {fileID: 2539940527647856536, guid: 4fd059785718649499a344b0c22ecd22, type: 3}
       propertyPath: Player
       value: 
@@ -70669,6 +70673,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4258052727054666269, guid: 4fd059785718649499a344b0c22ecd22, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c3013469543c634b9d3d347d1afe4a2, type: 2}
     - target: {fileID: 4280047071520491383, guid: 4fd059785718649499a344b0c22ecd22, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -70681,6 +70689,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5841140127669251810, guid: 4fd059785718649499a344b0c22ecd22, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c3013469543c634b9d3d347d1afe4a2, type: 2}
     - target: {fileID: 6829557528369459010, guid: 4fd059785718649499a344b0c22ecd22, type: 3}
       propertyPath: m_Layer
       value: 7
