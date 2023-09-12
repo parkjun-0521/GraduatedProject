@@ -54,7 +54,7 @@ public class MovePortal : MonoBehaviour
         buttonEvent.CreateplayerBackGround.SetActive(true);             // 캐릭터 선택 뒤 배경 활성화 
         buttonEvent.CreateItemList.SetActive(true);                     // 아바타 리스트 활성화 
         buttonEvent.CreateItemBackGround.SetActive(true);               // 아이템 선택 뒤 배경 활성화 
-
+        buttonEvent.CreateTeamNextSelect.SetActive(false);
         buttonEvent.TeamCreate_PreviousButton.SetActive(false);         // 이전 버튼 비활성화 
         buttonEvent.TeamCreatePrevious.SetActive(false);                // 이전 버튼 비활성화 
         buttonEvent.TeamCreateNext.SetActive(false);                    // 다음 버튼 비활성화 

@@ -1475,6 +1475,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         for (int i = 0; i < ChatText.Length; i++) 
             ChatText[i].text = "";
 
+        // 닉네임 동기화 구간 
         /*
         TextMeshProUGUI textMeshPro = player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>();
         Debug.Log(player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>());

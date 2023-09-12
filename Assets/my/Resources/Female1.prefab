@@ -2680,6 +2680,7 @@ MonoBehaviour:
   FootstepAudioVolume: 0.5
   JumpHeight: 1.2
   JumpPower: -10
+  JumpFlag: 0
   Gravity: -15
   JumpTimeout: 0.5
   FallTimeout: 0.15
