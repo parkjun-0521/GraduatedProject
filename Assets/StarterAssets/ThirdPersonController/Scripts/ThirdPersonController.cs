@@ -461,7 +461,7 @@ namespace StarterAssets
             }
         }
         
-        private void PlayerRay()    // 플레이어 레이
+  /*      private void PlayerRay()    // 플레이어 레이
         {
             // ray 시작점
             Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
@@ -478,10 +478,10 @@ namespace StarterAssets
                     elevatoruse(raytag);
                 }
             }
-        }
+        }*/
         
 
-        private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
+ /*       private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
         {
             Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
             Gizmos.color = Color.red;
@@ -501,9 +501,9 @@ namespace StarterAssets
                 // Hit가 되지 않았으면 최대 검출 거리로 ray를 그려준다.
                 Gizmos.DrawRay(raypos, transform.forward * 0.0f);
             }
-        }
+        }*/
 
-        private void elevatoruse(string raytag)     // 엘리베이터 작동
+       /* private void elevatoruse(string raytag)     // 엘리베이터 작동
         {
             if (raytag == "elebtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
             {
@@ -521,7 +521,7 @@ namespace StarterAssets
             {
                 PV.RPC("Elevator.elevator.Eledown", RpcTarget.All);
             }    
-        }
+        }*/
 
         public void OnTriggerEnter(Collider other)
         {   

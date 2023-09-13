@@ -27,7 +27,8 @@ public class Elevator : MonoBehaviour
     public Animator[] evanim;
 
     public PhotonView PV;
-    Elevator_floor FloorText;
+
+    public int floorvalue = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -55,8 +56,8 @@ public class Elevator : MonoBehaviour
     [PunRPC]
     public void Eledooropen2f()
     {
-        evanim[2].SetTrigger("isClick");
-        evanim[3].SetTrigger("isleft");
+        evanim[2].SetTrigger("isClick2F");
+        evanim[3].SetTrigger("isLeft2F");
     }
     [PunRPC]
     public void Eleup()
@@ -124,7 +125,7 @@ public class Elevator : MonoBehaviour
                 if (floor1.transform.position.y > 1)
                 {                              
                     evanim[4].SetTrigger("Down");
-                    FloorText.thisfloor.text = "1Ãþ";
+                    floorvalue = 1;
                 }
                 else
                 {
@@ -138,7 +139,7 @@ public class Elevator : MonoBehaviour
                 if (floor1.transform.position.y < 1)
                 {
                     evanim[4].SetTrigger("Up");
-                    FloorText.thisfloor.text = "2Ãþ";
+                    floorvalue = 2;
                 }
                 else
                 {
