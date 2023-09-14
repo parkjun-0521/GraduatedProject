@@ -240,19 +240,29 @@ public class customizing : MonoBehaviour
         {
             fe1ava[4].SetActive(true);
         }
+        else if (netmgr.itemName[2].Equals("top1"))
+        {
+            fe1ava[8].SetActive(true);
+        }
         else
         {
             fe1ava[4].SetActive(false);
+            fe1ava[8].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 하의
-        if (netmgr.itemName[3].Equals("pants1"))
+        if (netmgr.itemName[3].Equals("pants0"))
         {
             fe1ava[5].SetActive(true);
+        }
+        else if (netmgr.itemName[3].Equals("pants1"))
+        {
+            fe1ava[9].SetActive(true);
         }
         else
         {
             fe1ava[5].SetActive(false);
+            fe1ava[9].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 가방
@@ -275,13 +285,8 @@ public class customizing : MonoBehaviour
     }
     public void avatar_fe2()
     {
-        // 선택된 체크박스의 Text와 일치하는 머리색
-        if (netmgr.itemName[0].Equals("color0"))
-        {
-            hair_mat[0].color = hair_def[0];
-            hair_mat[1].color = hair_def[1];
-        }
-        else if (netmgr.itemName[0].Equals("color1"))
+        // 선택된 체크박스의 Text와 일치하는 머리색     
+        if (netmgr.itemName[0].Equals("color1"))
         {
             hair_mat[0].color = color[0];
             hair_mat[1].color = color[0];
@@ -305,6 +310,11 @@ public class customizing : MonoBehaviour
         {
             hair_mat[0].color = color[4];
             hair_mat[1].color = color[4];
+        }
+        else                                    //기본머리
+        {
+            hair_mat[0].color = hair_def[0];
+            hair_mat[1].color = hair_def[1];
         }
 
         // 선택된 체크박스의 Text와 일치하는 모자
@@ -353,19 +363,29 @@ public class customizing : MonoBehaviour
         {
             fe2ava[4].SetActive(true);
         }
+        else if (netmgr.itemName[2].Equals("top1"))
+        {
+            fe2ava[8].SetActive(true);
+        }
         else
         {
             fe2ava[4].SetActive(false);
+            fe2ava[8].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 하의
-        if (netmgr.itemName[3].Equals("pants1"))
+        if (netmgr.itemName[3].Equals("pants0"))
         {
             fe2ava[5].SetActive(true);
+        }
+        else if (netmgr.itemName[3].Equals("pants1"))
+        {
+            fe2ava[9].SetActive(true);
         }
         else
         {
             fe2ava[5].SetActive(false);
+            fe2ava[9].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 가방
@@ -389,12 +409,7 @@ public class customizing : MonoBehaviour
     public void avatar_fe3()
     {
         // 선택된 체크박스의 Text와 일치하는 머리색
-        if (netmgr.itemName[0].Equals("color0"))
-        {
-            hair_mat[0].color = hair_def[0];
-            hair_mat[1].color = hair_def[1];
-        }
-        else if (netmgr.itemName[0].Equals("color1"))
+        if (netmgr.itemName[0].Equals("color1"))
         {
             hair_mat[0].color = color[0];
             hair_mat[1].color = color[0];
@@ -418,6 +433,11 @@ public class customizing : MonoBehaviour
         {
             hair_mat[0].color = color[4];
             hair_mat[1].color = color[4];
+        }
+        else
+        {
+            hair_mat[0].color = hair_def[0];
+            hair_mat[1].color = hair_def[1];
         }
 
         // 선택된 체크박스의 Text와 일치하는 모자
@@ -466,19 +486,29 @@ public class customizing : MonoBehaviour
         {
             fe3ava[4].SetActive(true);
         }
+        else if (netmgr.itemName[2].Equals("top1"))
+        {
+            fe3ava[8].SetActive(true);
+        }
         else
         {
             fe3ava[4].SetActive(false);
+            fe3ava[8].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 하의
-        if (netmgr.itemName[3].Equals("pants1"))
+        if (netmgr.itemName[3].Equals("pants0"))
         {
             fe3ava[5].SetActive(true);
+        }
+        else if (netmgr.itemName[3].Equals("pants1"))
+        {
+            fe3ava[9].SetActive(true);
         }
         else
         {
             fe3ava[5].SetActive(false);
+            fe3ava[9].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 가방
@@ -502,12 +532,7 @@ public class customizing : MonoBehaviour
     public void avatar_m1()
     {
         // 선택된 체크박스의 Text와 일치하는 머리색
-        if (netmgr.itemName[0].Equals("color0"))
-        {
-            hair_mat[0].color = hair_def[0];
-            hair_mat[1].color = hair_def[1];
-        }
-        else if (netmgr.itemName[0].Equals("color1"))
+        if (netmgr.itemName[0].Equals("color1"))
         {
             hair_mat[0].color = color[0];
             hair_mat[1].color = color[0];
@@ -531,6 +556,11 @@ public class customizing : MonoBehaviour
         {
             hair_mat[0].color = color[4];
             hair_mat[1].color = color[4];
+        }
+        else
+        {
+            hair_mat[0].color = hair_def[0];
+            hair_mat[1].color = hair_def[1];
         }
 
         // 선택된 체크박스의 Text와 일치하는 모자
@@ -579,19 +609,29 @@ public class customizing : MonoBehaviour
         {
             m1ava[4].SetActive(true);
         }
+        else if (netmgr.itemName[2].Equals("top1"))
+        {
+            m1ava[8].SetActive(true);
+        }
         else
         {
             m1ava[4].SetActive(false);
+            m1ava[8].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 하의
-        if (netmgr.itemName[3].Equals("pants1"))
+        if (netmgr.itemName[3].Equals("pants0"))
         {
             m1ava[5].SetActive(true);
+        }
+        else if (netmgr.itemName[3].Equals("pants1"))
+        {
+            m1ava[9].SetActive(true);
         }
         else
         {
             m1ava[5].SetActive(false);
+            m1ava[9].SetActive(false);
         }   
 
         // 선택된 체크박스의 Text와 일치하는 가방
@@ -615,12 +655,7 @@ public class customizing : MonoBehaviour
     public void avatar_m2()
     {
         // 선택된 체크박스의 Text와 일치하는 머리색
-        if (netmgr.itemName[0].Equals("color0"))
-        {
-            hair_mat[0].color = hair_def[0];
-            hair_mat[1].color = hair_def[1];
-        }
-        else if (netmgr.itemName[0].Equals("color1"))
+        if (netmgr.itemName[0].Equals("color1"))
         {
             hair_mat[0].color = color[0];
             hair_mat[1].color = color[0];
@@ -644,6 +679,11 @@ public class customizing : MonoBehaviour
         {
             hair_mat[0].color = color[4];
             hair_mat[1].color = color[4];
+        }
+        else
+        {
+            hair_mat[0].color = hair_def[0];
+            hair_mat[1].color = hair_def[1];
         }
 
         // 선택된 체크박스의 Text와 일치하는 모자
@@ -692,19 +732,29 @@ public class customizing : MonoBehaviour
         {
             m2ava[4].SetActive(true);
         }
+        else if (netmgr.itemName[2].Equals("top1"))
+        {
+            m2ava[8].SetActive(true);
+        }
         else
         {
             m2ava[4].SetActive(false);
+            m2ava[8].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 하의
-        if (netmgr.itemName[3].Equals("pants1"))
+        if (netmgr.itemName[3].Equals("pants0"))
         {
             m2ava[5].SetActive(true);
+        }
+        else if (netmgr.itemName[3].Equals("pants1"))
+        {
+            m2ava[9].SetActive(true);
         }
         else
         {
             m2ava[5].SetActive(false);
+            m2ava[9].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 가방
@@ -728,12 +778,7 @@ public class customizing : MonoBehaviour
     public void avatar_m3()
     {
         // 선택된 체크박스의 Text와 일치하는 머리색
-        if (netmgr.itemName[0].Equals("color0"))
-        {
-            hair_mat[0].color = hair_def[0];
-            hair_mat[1].color = hair_def[1];
-        }
-        else if (netmgr.itemName[0].Equals("color1"))
+        if (netmgr.itemName[0].Equals("color1"))
         {
             hair_mat[0].color = color[0];
             hair_mat[1].color = color[0];
@@ -757,6 +802,11 @@ public class customizing : MonoBehaviour
         {
             hair_mat[0].color = color[4];
             hair_mat[1].color = color[4];
+        }
+        else
+        {
+            hair_mat[0].color = hair_def[0];
+            hair_mat[1].color = hair_def[1];
         }
 
         // 선택된 체크박스의 Text와 일치하는 모자
@@ -805,19 +855,29 @@ public class customizing : MonoBehaviour
         {
             m3ava[4].SetActive(true);
         }
+        else if (netmgr.itemName[2].Equals("top1"))
+        {
+            m3ava[8].SetActive(true);
+        }
         else
         {
             m3ava[4].SetActive(false);
+            m3ava[8].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 하의
-        if (netmgr.itemName[3].Equals("pants1"))
+        if (netmgr.itemName[3].Equals("pants0"))
         {
             m3ava[5].SetActive(true);
+        }
+        else if (netmgr.itemName[3].Equals("pants1"))
+        {
+            m3ava[9].SetActive(true);
         }
         else
         {
             m3ava[5].SetActive(false);
+            m3ava[9].SetActive(false);
         }
 
         // 선택된 체크박스의 Text와 일치하는 가방
