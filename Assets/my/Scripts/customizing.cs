@@ -22,7 +22,7 @@ public class customizing : MonoBehaviour
     public GameObject[] m3ava = new GameObject[10];
 
     //어떤 캐릭터가 선택됐는지 체크하기위함
-    private int a_chk = 0;
+    private int a_chk;
 
     NetworkManager netmgr;
     ButtonEvent btnevn;
@@ -238,10 +238,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 상의     
         if (netmgr.itemName[2].Equals("top0"))
         {
+            fe1ava[8].SetActive(false);
             fe1ava[4].SetActive(true);
         }
         else if (netmgr.itemName[2].Equals("top1"))
         {
+            fe1ava[4].SetActive(false);
             fe1ava[8].SetActive(true);
         }
         else
@@ -253,10 +255,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 하의
         if (netmgr.itemName[3].Equals("pants0"))
         {
+            fe1ava[9].SetActive(false);
             fe1ava[5].SetActive(true);
         }
         else if (netmgr.itemName[3].Equals("pants1"))
         {
+            fe1ava[5].SetActive(false);
             fe1ava[9].SetActive(true);
         }
         else
@@ -361,10 +365,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 상의     
         if (netmgr.itemName[2].Equals("top0"))
         {
+            fe2ava[8].SetActive(false); 
             fe2ava[4].SetActive(true);
         }
         else if (netmgr.itemName[2].Equals("top1"))
         {
+            fe2ava[4].SetActive(false);
             fe2ava[8].SetActive(true);
         }
         else
@@ -376,10 +382,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 하의
         if (netmgr.itemName[3].Equals("pants0"))
         {
+            fe2ava[9].SetActive(false);
             fe2ava[5].SetActive(true);
         }
         else if (netmgr.itemName[3].Equals("pants1"))
         {
+            fe2ava[5].SetActive(false);
             fe2ava[9].SetActive(true);
         }
         else
@@ -484,10 +492,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 상의     
         if (netmgr.itemName[2].Equals("top0"))
         {
+            fe3ava[8].SetActive(false);
             fe3ava[4].SetActive(true);
         }
         else if (netmgr.itemName[2].Equals("top1"))
         {
+            fe3ava[4].SetActive(false);
             fe3ava[8].SetActive(true);
         }
         else
@@ -499,10 +509,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 하의
         if (netmgr.itemName[3].Equals("pants0"))
         {
+            fe3ava[9].SetActive(false);
             fe3ava[5].SetActive(true);
         }
         else if (netmgr.itemName[3].Equals("pants1"))
         {
+            fe3ava[5].SetActive(false);
             fe3ava[9].SetActive(true);
         }
         else
@@ -607,10 +619,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 상의     
         if (netmgr.itemName[2].Equals("top0"))
         {
+            m1ava[8].SetActive(false);
             m1ava[4].SetActive(true);
         }
         else if (netmgr.itemName[2].Equals("top1"))
         {
+            m1ava[4].SetActive(false);
             m1ava[8].SetActive(true);
         }
         else
@@ -622,10 +636,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 하의
         if (netmgr.itemName[3].Equals("pants0"))
         {
+            m1ava[9].SetActive(false);
             m1ava[5].SetActive(true);
         }
         else if (netmgr.itemName[3].Equals("pants1"))
         {
+            m1ava[5].SetActive(false);
             m1ava[9].SetActive(true);
         }
         else
@@ -730,10 +746,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 상의     
         if (netmgr.itemName[2].Equals("top0"))
         {
+            m2ava[8].SetActive(false);
             m2ava[4].SetActive(true);
         }
         else if (netmgr.itemName[2].Equals("top1"))
         {
+            m2ava[4].SetActive(false);
             m2ava[8].SetActive(true);
         }
         else
@@ -745,10 +763,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 하의
         if (netmgr.itemName[3].Equals("pants0"))
         {
+            m2ava[9].SetActive(false);
             m2ava[5].SetActive(true);
         }
         else if (netmgr.itemName[3].Equals("pants1"))
         {
+            m2ava[5].SetActive(false);
             m2ava[9].SetActive(true);
         }
         else
@@ -853,10 +873,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 상의     
         if (netmgr.itemName[2].Equals("top0"))
         {
+            m3ava[8].SetActive(false);
             m3ava[4].SetActive(true);
         }
         else if (netmgr.itemName[2].Equals("top1"))
         {
+            m3ava[4].SetActive(false);
             m3ava[8].SetActive(true);
         }
         else
@@ -868,10 +890,12 @@ public class customizing : MonoBehaviour
         // 선택된 체크박스의 Text와 일치하는 하의
         if (netmgr.itemName[3].Equals("pants0"))
         {
+            m3ava[9].SetActive(false);
             m3ava[5].SetActive(true);
         }
         else if (netmgr.itemName[3].Equals("pants1"))
         {
+            m3ava[5].SetActive(false);
             m3ava[9].SetActive(true);
         }
         else
