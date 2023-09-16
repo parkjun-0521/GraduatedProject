@@ -1420,8 +1420,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 맵 관련 프리팹 생성 
         // mapname는 맵 버튼을 누를 때 발생하는 함수에서 값이 들어감 ( MapValue() 함수 ) 
+        // 맵 위치
         if (mapname.Equals("Cafe"))
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
+        else if(mapname.Equals("Company"))
+            map = PhotonNetwork.Instantiate(mapname, new Vector3(5, 3f, 10), Quaternion.identity);
         else 
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-2.5f,5), Quaternion.identity);
 
