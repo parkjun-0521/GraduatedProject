@@ -177,6 +177,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public Material skyBoxAutumn;
     public Material skyBoxWinter;
 
+    [Header("-----웹뷰-----")]
+    public GameObject TeamMapWebView;
     //--------------------------------------------- 빌드 화면 크기 ---------------------------------------------// 
     void Awake()
     {
@@ -315,6 +317,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
         buttonEvent.OptionClose();
         buttonEvent.SoundOptionClose();
+
+        TeamMapWebView.transform.localScale = new Vector3(0f, 0f, 0f);
 
 
         // 방에서 나가고 로비로 돌아왔을때 
@@ -1421,13 +1425,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 맵 관련 프리팹 생성 
         // mapname는 맵 버튼을 누를 때 발생하는 함수에서 값이 들어감 ( MapValue() 함수 ) 
         // 맵 위치
-        if (mapname.Equals("Cafe"))
+        if (mapname.Equals("Cafe")) {
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
-        else if(mapname.Equals("Company"))
+            TeamMapWebView.transform.localPosition = new Vector3(-20.79f, 12.65f, -18.61f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
+            TeamMapWebView.transform.localScale = new Vector3(40f, 36f, 13f);
+        }
+        else if (mapname.Equals("Company")) {
             map = PhotonNetwork.Instantiate(mapname, new Vector3(5, 3f, 10), Quaternion.identity);
-        else 
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-2.5f,5), Quaternion.identity);
-
+            TeamMapWebView.transform.localPosition = new Vector3(-27.70f, 0.99f, -12.94f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0,-90,0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 27f, 10f);
+        }
+        else if (mapname.Equals("RoomMap")) {
+            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
+            TeamMapWebView.transform.localPosition = new Vector3(-3.358f, 2.282f, 6.692f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(13f, 15.5f, 10f);
+        }
+        else {
+            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
+            TeamMapWebView.transform.localPosition = new Vector3(14.79f, -0.55f, 21.19f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
+        }
     }
     //--------------------------------------------- 맵 생성할때 맵의 이름을 저장하는 함수 ---------------------------------------------// 
     public void MapValue()
@@ -1484,8 +1505,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         Debug.Log(player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>());
         textMeshPro.text = PhotonNetwork.LocalPlayer.NickName;
         */
-        // 웹뷰 동기화 구간 ( 현재 개발 중에 있긴한데 ) 
-        StartCoroutine(MapCreateInformation());
     }
 
     // 웹뷰 동기화 만드는 중 
@@ -1514,13 +1533,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             }
         }
     }
-    IEnumerator MapCreateInformation()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        PV.RPC("WebViewSetActive", RpcTarget.All, PhotonNetwork.NickName);
-    }
-
     public void createcharacter()
     {
         player = PhotonNetwork.Instantiate(playername, new Vector3(-29, 0, 14), Quaternion.identity);
