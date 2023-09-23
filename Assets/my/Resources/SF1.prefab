@@ -1657,7 +1657,7 @@ GameObject:
   - component: {fileID: 8906514320238622579}
   - component: {fileID: 7483167537011481389}
   m_Layer: 6
-  m_Name: Latifa V2 Prefab
+  m_Name: SF1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1672,7 +1672,7 @@ Transform:
   m_GameObject: {fileID: 1372609716213610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.55, y: 1.55, z: 1.55}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5111045491991469151}

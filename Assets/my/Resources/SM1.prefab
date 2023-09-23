@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456796404208146934}
   m_Layer: 6
-  m_Name: shop_man1
+  m_Name: SM1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -751,15 +751,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400152, guid: 90ef285aea69d964bb11c693b077dd11, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.55
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 400152, guid: 90ef285aea69d964bb11c693b077dd11, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.55
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 400152, guid: 90ef285aea69d964bb11c693b077dd11, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.55
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 400152, guid: 90ef285aea69d964bb11c693b077dd11, type: 3}
       propertyPath: m_LocalPosition.x
