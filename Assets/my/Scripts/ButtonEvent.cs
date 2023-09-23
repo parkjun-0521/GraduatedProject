@@ -16,6 +16,8 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     public GameObject LobbyPanel_PreviousButton;        // 이전으로 이동하기 위한 변수 
 
     public GameObject[] Women_Men;                      // 남여 캐릭터를 선택하기 위한 변수 
+    public GameObject eventChar;                        // 이벤트 캐릭터를 선택하기 위한 변수 
+    
 
     public GameObject[] publicCreateRoom;               // 방 만들기 맵      ( 관리자 )
     public GameObject[] publicInputRoom;                // 방 입장하기 맵    ( 사용자 )
@@ -37,6 +39,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     public GameObject TeamInput_PreviousButton;         // 이전으로 돌아갈 수 있는 버튼 오브젝트 
 
     public GameObject[] TeamInput_Women_Men;            // 남여 캐릭터를 바꾸기 위한 버튼 오브젝트 
+    public GameObject TeamInput_EChar;           
 
     public GameObject playerBackGround;                 // 캐릭터를 선택할 때 뒤배경
     public GameObject InputplayerTeaminput;             // 방을 들어갈 때 UI 뒤배경 
@@ -58,7 +61,8 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     public GameObject TeamCreate_PreviousButton;        // 팀방 생성에서 이전으로 돌아가기 위한 버튼 오브젝트 
 
     public GameObject[] TeamCreate_Women_Men;           // 남여 캐릭터를 바꾸기 위한 버튼 오브젝트 
-        
+    public GameObject TeamCreate_eventChar;             // 이벤트 캐릭터를 선택하기 위한 변수 
+
     public GameObject[] TeamCreateMap;                  // 팀방에만 존재하는 4개의 맵을 저장한 배열 
     public GameObject TeamRoomCreate;                   // 맵 선택에 관련된 UI 전체를 가지고 있는 오브젝트 
 
@@ -138,8 +142,10 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         // 남여 선택 버튼도 비활성화 
         for(int i = 0; i < LobbyPanel_Player.Length; i++) 
             LobbyPanel_Player[i].SetActive(false);
-        for (int i = 0; i < Women_Men.Length; i++)
+        for (int i = 0; i < Women_Men.Length; i++) {
             Women_Men[i].SetActive(false);
+            eventChar.SetActive(false);
+        }
         for(int i =0;i< LobbyPanel_NextButton.Length; i++)    
             LobbyPanel_NextButton[i].SetActive(false);
         
@@ -201,8 +207,10 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             publicNextButton.SetActive(false);          // 다음 버튼 비활성화 
 
             Women();                                    // 기본으로 여자 캐릭터가 나오도록 함 
-            for (int i = 0; i < Women_Men.Length; i++)
+            for (int i = 0; i < Women_Men.Length; i++) {
                 Women_Men[i].SetActive(true);           // 남여 선택 버튼 활성화 
+                eventChar.SetActive(true);
+            }
             publicplayerBackGround.SetActive(true);     // 캐릭터 선택 뒤배경 활성화 
 
             pCount--;                                   // 페이지 Flag 변수 감소 ( 현재 Flag == 0 ) 
@@ -226,7 +234,9 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         for (int i = 0; i < 3; i++) {
             LobbyPanel_Player[i].SetActive(true);
             LobbyPanel_Player[i+3].SetActive(false);
+            LobbyPanel_Player[i+6].SetActive(false);
         }
+        LobbyPanel_Player[9].SetActive(false);
     }
     public void Men()
     {
@@ -234,6 +244,18 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         for (int i = 0; i < 3; i++) {
             LobbyPanel_Player[i].SetActive(false);
             LobbyPanel_Player[i + 3].SetActive(true);
+            LobbyPanel_Player[i + 6].SetActive(false);
+        }
+        LobbyPanel_Player[9].SetActive(false);
+    }
+
+    public void EventChar()
+    {
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        StartCoroutine(networkManager.pCharItem());
+        for (int i = 0; i < 3; i++) {
+            LobbyPanel_Player[i].SetActive(false);
+            LobbyPanel_Player[i + 3].SetActive(false);
         }
     }
 
@@ -362,6 +384,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             TeamInput_Player[i].SetActive(false);                   // 캐릭터 선택 버튼 비활성화
         for (int i = 0; i < TeamInput_Women_Men.Length; i++)
             TeamInput_Women_Men[i].SetActive(false);                // 남여 선택 버튼 비활성화 
+        TeamInput_EChar.SetActive(false);
         for (int i = 0; i < TeamInput_NextButton.Length; i++) 
             TeamInput_NextButton[i].SetActive(false);               // 다음 버튼 비활성화 ( 캐릭터에 있는 다음 버튼을 비활성화 ) 
         playerBackGround.SetActive(false);                          // 캐릭터 선택 뒤 배경 비활성화 
@@ -399,6 +422,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             TeamInput_Women();
             for (int i = 0; i < TeamInput_Women_Men.Length; i++)
                 TeamInput_Women_Men[i].SetActive(true);             // 남여 선택 버튼 활성화 
+            TeamInput_EChar.SetActive(true);
 
             TeamInput_PreviousButton.SetActive(false);              // 이전 버튼 비활성화 
             TeamInputPrevious.SetActive(false);                     // 이전 버튼 비활성화
@@ -427,7 +451,9 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         for (int i = 0; i < 3; i++) {
             TeamInput_Player[i].SetActive(true);
             TeamInput_Player[i + 3].SetActive(false);
+            TeamInput_Player[i + 6].SetActive(false);
         }
+        TeamInput_Player[9].SetActive(false);
     }
     public void TeamInput_Men()
     {
@@ -435,6 +461,17 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         for (int i = 0; i < 3; i++) {
             TeamInput_Player[i].SetActive(false);
             TeamInput_Player[i + 3].SetActive(true);
+            TeamInput_Player[i + 6].SetActive(false);
+        }
+        TeamInput_Player[9].SetActive(false);
+    }
+    public void TeamInput_EventChar()
+    {
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        StartCoroutine(networkManager.iCharItem());
+        for (int i = 0; i < 3; i++) {
+            TeamInput_Player[i].SetActive(false);
+            TeamInput_Player[i + 3].SetActive(false);
         }
     }
     //========================================================================//
@@ -447,6 +484,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             }
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(false);
+            TeamCreate_eventChar.SetActive(false);
             preimg.SetActive(true);
             TeamRoomCreate.SetActive(false);
             TeamCreateRoomPrevious();
@@ -495,6 +533,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             TeamCreate_Women();
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(true);
+            TeamCreate_eventChar.SetActive(true);
             TeamRoomCreate.SetActive(false);
             TeamCreate_PreviousButton.SetActive(false);
             CreateItemBackGround.SetActive(true);
@@ -534,13 +573,27 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         for (int i = 0; i < 3; i++) {
             TeamCreate_Player[i].SetActive(true);
             TeamCreate_Player[i + 3].SetActive(false);
+            TeamCreate_Player[i + 6].SetActive(false);
         }
+        TeamCreate_Player[9].SetActive(false);
     }
     public void TeamCreate_Men()
     {
         for (int i = 0; i < 3; i++) {
             TeamCreate_Player[i].SetActive(false);
             TeamCreate_Player[i + 3].SetActive(true);
+            TeamCreate_Player[i + 6].SetActive(false);
+        }
+        TeamCreate_Player[9].SetActive(false);
+    }
+
+    public void TeamEventChar()
+    {
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        StartCoroutine(networkManager.cCharItem());
+        for (int i = 0; i < 3; i++) {
+            TeamCreate_Player[i].SetActive(false);
+            TeamCreate_Player[i + 3].SetActive(false);
         }
     }
 

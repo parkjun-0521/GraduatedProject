@@ -73,6 +73,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public string[] itemName = new string[6];
 
     public GameObject[] itemPublicColor;
+
+    public GameObject[] itemPublicChar;
     public GameObject[] itemPublicHat;
     public GameObject[] itemPublicTop;
     public GameObject[] itemPublicPants;
@@ -88,6 +90,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
 
     public GameObject[] ItemTeamColor;
+
+    public GameObject[] itemTeamChar;
     public GameObject[] ItemTeamHat;
     public GameObject[] ItemTeamTop;
     public GameObject[] ItemTeamPants;
@@ -102,6 +106,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public ToggleGroup Bag;
 
     public GameObject[] ItemTeamInputColor;
+
+    public GameObject[] ItemTeamInputChar;
     public GameObject[] ItemTeamInputHat;
     public GameObject[] ItemTeamInputTop;
     public GameObject[] ItemTeamInputPants;
@@ -464,11 +470,57 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
             }
-            else{
+            else {
                 Debug.Log("아이템찾지못함");
             }
         }
     }
+
+    public IEnumerator pCharItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        // 아바타를 가져온다. ( 각 아바타를 가져오는데 0.1초의 간격을 두고 가져온다 ) 
+        PublicCHarItemFor(reSplit, itemPublicChar, "ch");
+
+        Debug.Log(playername);
+
+        // 메모리 누수 방지 
+        wwwData.Dispose();
+    }
+    public void PublicCHarItemFor(string[] ItemID, GameObject[] ItemName, string name)
+    {
+        // 각 아바타에 맞는 체크박스를 활성화 한다. 
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
+                Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
+                ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
+            }
+            else {
+                Debug.Log("아이템찾지못함");
+            }
+        }
+    }
+
     public void ColorPublicAvatar()
     {
         Toggle selectedColorToggle = publicColor.ActiveToggles().FirstOrDefault();
@@ -831,6 +883,50 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             }
         }
     }
+    public IEnumerator cCharItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        // 아바타를 가져온다. ( 각 아바타를 가져오는데 0.1초의 간격을 두고 가져온다 ) 
+        IChartemFor(reSplit, itemTeamChar, "ch");
+
+        Debug.Log(playername);
+
+        // 메모리 누수 방지 
+        wwwData.Dispose();
+    }
+    public void IChartemFor(string[] ItemID, GameObject[] ItemName, string name)
+    {
+        // 각 아바타에 맞는 체크박스를 활성화 한다. 
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
+                Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
+                ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
+            }
+            else {
+                Debug.Log("아이템찾지못함");
+            }
+        }
+    }
     public void ColorAvatar()
     {
         
@@ -1137,6 +1233,51 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
+            }
+        }
+    }
+
+    public IEnumerator iCharItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        // 아바타를 가져온다. ( 각 아바타를 가져오는데 0.1초의 간격을 두고 가져온다 ) 
+        InputCharItemFor(reSplit, ItemTeamInputChar, "ch");
+
+        Debug.Log(playername);
+
+        // 메모리 누수 방지 
+        wwwData.Dispose();
+    }
+    public void InputCharItemFor(string[] ItemID, GameObject[] ItemName, string name)
+    {
+        // 각 아바타에 맞는 체크박스를 활성화 한다. 
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
+                Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
+                ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
+            }
+            else {
+                Debug.Log("아이템찾지못함");
             }
         }
     }
