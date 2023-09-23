@@ -185,6 +185,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     [Header("-----웹뷰-----")]
     public GameObject TeamMapWebView;
+
     //--------------------------------------------- 빌드 화면 크기 ---------------------------------------------// 
     void Awake()
     {
@@ -1600,6 +1601,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 맵 버튼이 가지고 있는 맵의 이름을 mapname 변수에 저장
         // 버튼만 만들면 맵이 몇개든 프리팹으로 가져올 수 있다.
+        PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
         mapname = TeamName;
         Debug.Log(mapname);
     }
@@ -1618,15 +1620,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         checkRoom = true;
         //RoomPanel.SetActive(true);              // 방 Panel 활
-
+        Invoke("MapNameData", 0.5f);
+        
         // 프리팹 생성 및 플레이어 동기화 
         // 캐릭터 이름을 받아서 캐릭터 생성 
         SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
         smoothFollow.roteta();
         player = PhotonNetwork.Instantiate(playername, new Vector3(0, 0, 0), Quaternion.identity);
-
-        //GameObject cubeObject = GameObject.Find("Cube");
-
 
         // 현재 방의 정보를 text로 표시 
         // 최대 몇명까지 현재 몇명이 있는지
@@ -1646,6 +1646,38 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         Debug.Log(player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>());
         textMeshPro.text = PhotonNetwork.LocalPlayer.NickName;
         */
+    }
+
+    public void MapNameData()
+    {
+        GameObject targetObject1 = GameObject.Find("Cafe(Clone)");
+        GameObject targetObject2 = GameObject.Find("Company(Clone)");
+        GameObject targetObject3 = GameObject.Find("RoomMap(Clone)");
+        GameObject targetObject4 = GameObject.Find("Library(Clone)");
+        print(targetObject1);
+        print(targetObject2);
+        print(targetObject3);
+        print(targetObject4);
+        if (targetObject1 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-20.79f, 12.65f, -18.61f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
+            TeamMapWebView.transform.localScale = new Vector3(40f, 36f, 13f);
+        }
+        else if (targetObject2 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-27.70f, 0.99f, -12.94f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 27f, 10f);
+        }
+        else if (targetObject3 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-3.358f, 2.282f, 6.692f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(13f, 15.5f, 10f);
+        }
+        else if (targetObject4 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(14.79f, -0.55f, 21.19f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
+        }
     }
 
     // 웹뷰 동기화 만드는 중 
