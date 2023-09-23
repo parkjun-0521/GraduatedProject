@@ -73,6 +73,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public string[] itemName = new string[6];
 
     public GameObject[] itemPublicColor;
+
+    public GameObject[] itemPublicChar;
     public GameObject[] itemPublicHat;
     public GameObject[] itemPublicTop;
     public GameObject[] itemPublicPants;
@@ -88,6 +90,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
 
     public GameObject[] ItemTeamColor;
+
+    public GameObject[] itemTeamChar;
     public GameObject[] ItemTeamHat;
     public GameObject[] ItemTeamTop;
     public GameObject[] ItemTeamPants;
@@ -102,6 +106,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public ToggleGroup Bag;
 
     public GameObject[] ItemTeamInputColor;
+
+    public GameObject[] ItemTeamInputChar;
     public GameObject[] ItemTeamInputHat;
     public GameObject[] ItemTeamInputTop;
     public GameObject[] ItemTeamInputPants;
@@ -177,6 +183,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public Material skyBoxAutumn;
     public Material skyBoxWinter;
 
+    [Header("-----웹뷰-----")]
+    public GameObject TeamMapWebView;
     //--------------------------------------------- 빌드 화면 크기 ---------------------------------------------// 
     void Awake()
     {
@@ -315,6 +323,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         ButtonEvent buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
         buttonEvent.OptionClose();
         buttonEvent.SoundOptionClose();
+
+        TeamMapWebView.transform.localScale = new Vector3(0f, 0f, 0f);
 
 
         // 방에서 나가고 로비로 돌아왔을때 
@@ -460,11 +470,57 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
                 buttonValues.Name = "Item" + name + i;
             }
-            else{
+            else {
                 Debug.Log("아이템찾지못함");
             }
         }
     }
+
+    public IEnumerator pCharItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        // 아바타를 가져온다. ( 각 아바타를 가져오는데 0.1초의 간격을 두고 가져온다 ) 
+        PublicCHarItemFor(reSplit, itemPublicChar, "ch");
+
+        Debug.Log(playername);
+
+        // 메모리 누수 방지 
+        wwwData.Dispose();
+    }
+    public void PublicCHarItemFor(string[] ItemID, GameObject[] ItemName, string name)
+    {
+        // 각 아바타에 맞는 체크박스를 활성화 한다. 
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
+                Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
+                ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
+            }
+            else {
+                Debug.Log("아이템찾지못함");
+            }
+        }
+    }
+
     public void ColorPublicAvatar()
     {
         Toggle selectedColorToggle = publicColor.ActiveToggles().FirstOrDefault();
@@ -827,6 +883,50 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             }
         }
     }
+    public IEnumerator cCharItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        // 아바타를 가져온다. ( 각 아바타를 가져오는데 0.1초의 간격을 두고 가져온다 ) 
+        IChartemFor(reSplit, itemTeamChar, "ch");
+
+        Debug.Log(playername);
+
+        // 메모리 누수 방지 
+        wwwData.Dispose();
+    }
+    public void IChartemFor(string[] ItemID, GameObject[] ItemName, string name)
+    {
+        // 각 아바타에 맞는 체크박스를 활성화 한다. 
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
+                Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
+                ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
+            }
+            else {
+                Debug.Log("아이템찾지못함");
+            }
+        }
+    }
     public void ColorAvatar()
     {
         
@@ -1137,6 +1237,51 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         }
     }
 
+    public IEnumerator iCharItem()
+    {
+        LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
+        WWWForm form = new WWWForm();
+        // ID가 키값이므로 ID의 값만 가져온다. 
+        form.AddField("id", loginManager.IDInputField.text);
+
+        wwwData = UnityWebRequest.Post(ItemInputData, form);
+        yield return wwwData.SendWebRequest();
+
+        // 반환값을 저장하고 공백을 제거하여 문자열을 저장 
+        string str = wwwData.downloadHandler.text;
+        string re = string.Concat(str.Where(x => !char.IsWhiteSpace(x)));
+        // 마지막 ,도 가져오게 되면 \n 값도 추가가 되기때문에 마지막 ,는 지워준다
+        re = re.TrimEnd(',');
+        Debug.Log(re);
+        // 받아온 문자열을 ,를 기준으로 나누어 배열로 저장
+
+        string[] reSplit = re.Split(',');
+
+        for (int i = 0; i < reSplit.Length; i += 2)
+            Debug.Log(reSplit[i]);
+
+        // 아바타를 가져온다. ( 각 아바타를 가져오는데 0.1초의 간격을 두고 가져온다 ) 
+        InputCharItemFor(reSplit, ItemTeamInputChar, "ch");
+
+        Debug.Log(playername);
+
+        // 메모리 누수 방지 
+        wwwData.Dispose();
+    }
+    public void InputCharItemFor(string[] ItemID, GameObject[] ItemName, string name)
+    {
+        // 각 아바타에 맞는 체크박스를 활성화 한다. 
+        for (int i = 0; i < ItemName.Length; i++) {
+            if (ItemID.Contains(name + i)) {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
+                Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
+                ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
+            }
+            else {
+                Debug.Log("아이템찾지못함");
+            }
+        }
+    }
+
     public void InputColorAvatar()
     {
         Toggle selectedColorToggle = InputColor.ActiveToggles().FirstOrDefault();
@@ -1420,11 +1565,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 맵 관련 프리팹 생성 
         // mapname는 맵 버튼을 누를 때 발생하는 함수에서 값이 들어감 ( MapValue() 함수 ) 
-        if (mapname.Equals("Cafe"))
+        // 맵 위치
+        if (mapname.Equals("Cafe")) {
             map = PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
-        else 
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(0,-2.5f,5), Quaternion.identity);
-
+            TeamMapWebView.transform.localPosition = new Vector3(-20.79f, 12.65f, -18.61f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
+            TeamMapWebView.transform.localScale = new Vector3(40f, 36f, 13f);
+        }
+        else if (mapname.Equals("Company")) {
+            map = PhotonNetwork.Instantiate(mapname, new Vector3(5, 3f, 10), Quaternion.identity);
+            TeamMapWebView.transform.localPosition = new Vector3(-27.70f, 0.99f, -12.94f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0,-90,0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 27f, 10f);
+        }
+        else if (mapname.Equals("RoomMap")) {
+            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
+            TeamMapWebView.transform.localPosition = new Vector3(-3.358f, 2.282f, 6.692f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(13f, 15.5f, 10f);
+        }
+        else {
+            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
+            TeamMapWebView.transform.localPosition = new Vector3(14.79f, -0.55f, 21.19f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
+        }
     }
     //--------------------------------------------- 맵 생성할때 맵의 이름을 저장하는 함수 ---------------------------------------------// 
     public void MapValue()
@@ -1481,8 +1646,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         Debug.Log(player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>());
         textMeshPro.text = PhotonNetwork.LocalPlayer.NickName;
         */
-        // 웹뷰 동기화 구간 ( 현재 개발 중에 있긴한데 ) 
-        StartCoroutine(MapCreateInformation());
     }
 
     // 웹뷰 동기화 만드는 중 
@@ -1511,13 +1674,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             }
         }
     }
-    IEnumerator MapCreateInformation()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        PV.RPC("WebViewSetActive", RpcTarget.All, PhotonNetwork.NickName);
-    }
-
     public void createcharacter()
     {
         player = PhotonNetwork.Instantiate(playername, new Vector3(-29, 0, 14), Quaternion.identity);
