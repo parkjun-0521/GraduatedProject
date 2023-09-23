@@ -30,7 +30,8 @@ public class SkyControl : MonoBehaviour
     
     public void Update()
     {
-        PV.RPC("movesky", RpcTarget.All);
+ //       PV.RPC("movesky", RpcTarget.All);
+        movesky();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -39,11 +40,13 @@ public class SkyControl : MonoBehaviour
         {
             if (ismorning == true)
             {
-                PV.RPC("changenight", RpcTarget.All);
+          //      PV.RPC("changenight", RpcTarget.All);
+                changenight();
             }
             else
             {
-                PV.RPC("changemorning", RpcTarget.All);
+          //      PV.RPC("changemorning", RpcTarget.All);
+                changemorning();
             }
         }
     }
