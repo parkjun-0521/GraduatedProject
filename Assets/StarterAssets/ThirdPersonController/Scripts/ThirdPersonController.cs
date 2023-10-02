@@ -10,8 +10,9 @@ using Random = UnityEngine.Random;
 using Photon.Pun;
 using Photon.Realtime;
 using Vuplex.WebView;
+using TMPro;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
- */
+*/
 
 namespace StarterAssets
 {
@@ -181,7 +182,6 @@ namespace StarterAssets
             }
         }
 
-
         private void Awake()
         {
             tr = GetComponent<Transform>();
@@ -191,10 +191,8 @@ namespace StarterAssets
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
                 if (PV.IsMine) {
                     Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
-
                 }
-            }
-            
+            }   
         }
 
         public void Start()
