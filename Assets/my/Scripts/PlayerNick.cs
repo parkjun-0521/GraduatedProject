@@ -15,8 +15,9 @@ public class PlayerNick : MonoBehaviourPunCallbacks {
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(0)) {
             StartCoroutine(SyncDataCoroutine());
+        }
     }
     public IEnumerator Nickname()
     {
@@ -33,8 +34,8 @@ public class PlayerNick : MonoBehaviourPunCallbacks {
         NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         if (PV != null) {
             if (PV.IsMine == false) {
-                networkManager.nick = "";
-                networkManager.nick = PV.Owner.NickName;
+                customText.text = "";
+                customText.text = PV.Owner.NickName;
             }
         }
         Debug.Log(networkManager.nick);
