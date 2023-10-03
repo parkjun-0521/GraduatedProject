@@ -16,14 +16,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 43
-    width: 2560
-    height: 1357
+    width: 1920
+    height: 997
   m_ShowMode: 4
-<<<<<<< HEAD
-  m_Title: Game
-=======
-  m_Title: Scene
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,8 +44,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 2560
-    height: 1357
+    width: 1920
+    height: 997
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
@@ -73,7 +69,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 2560
+    width: 1920
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -94,8 +90,8 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 1337
-    width: 2560
+    y: 977
+    width: 1920
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -118,16 +114,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 2560
-    height: 1307
+    width: 1920
+    height: 947
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-<<<<<<< HEAD
-  controlID: 121
-=======
-  controlID: 20
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+  controlID: 23
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,16 +139,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 2129
-    height: 1307
+    width: 1597
+    height: 947
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-<<<<<<< HEAD
-  controlID: 122
-=======
-  controlID: 21
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+  controlID: 29
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,21 +164,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 1003
-    height: 487
+    width: 1597
+    height: 686
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 70
-=======
-    width: 2129
-    height: 934
-  m_MinSize: {x: 200, y: 100}
-  m_MaxSize: {x: 16192, y: 8096}
-  vertical: 0
-  controlID: 22
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+  controlID: 30
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -208,21 +187,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 781
-    height: 487
+    width: 1244
+    height: 686
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
-=======
-    width: 1751
-    height: 934
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 15}
   m_Panes:
-  - {fileID: 14}
   - {fileID: 15}
+  - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 1
 --- !u!114 &9
@@ -240,22 +212,15 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1751
+    x: 1244
     y: 0
-<<<<<<< HEAD
-    width: 222
-    height: 487
+    width: 353
+    height: 686
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-=======
-    width: 378
-    height: 934
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
-  m_ActualView: {fileID: 16}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 16}
+  - {fileID: 17}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &10
@@ -276,23 +241,13 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-<<<<<<< HEAD
-    y: 487
-    width: 1003
-    height: 185
+    y: 686
+    width: 1597
+    height: 261
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 123
-=======
-    y: 934
-    width: 2129
-    height: 373
-  m_MinSize: {x: 200, y: 100}
-  m_MaxSize: {x: 16192, y: 8096}
-  vertical: 0
-  controlID: 66
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+  controlID: 125
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -310,18 +265,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 780
-    height: 185
-=======
-    width: 1656
-    height: 373
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    width: 1204
+    height: 261
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 18}
   m_Panes:
-  - {fileID: 17}
+  - {fileID: 18}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &12
@@ -339,22 +289,15 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1656
+    x: 1204
     y: 0
-<<<<<<< HEAD
-    width: 223
-    height: 185
+    width: 393
+    height: 261
   m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
-=======
-    width: 473
-    height: 373
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 19}
   m_Panes:
-  - {fileID: 18}
+  - {fileID: 19}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &13
@@ -367,23 +310,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 2129
+    x: 1597
     y: 0
-    width: 431
-    height: 1307
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 19}
+    width: 323
+    height: 947
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 20}
   m_Panes:
-  - {fileID: 19}
+  - {fileID: 20}
+  - {fileID: 14}
   m_Selected: 0
-  m_LastSelected: 0
+  m_LastSelected: 1
 --- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12090, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 300, y: 250}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Occlusion
+    m_Image: {fileID: -3571815596324412722, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1597
+    y: 73
+    width: 322
+    height: 926
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,17 +375,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 314
-    y: 189
-    width: 780
-    height: 466
-=======
     x: 0
     y: 73
-    width: 1750
-    height: 913
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    width: 1243
+    height: 665
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -566,7 +531,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Occlusion Culling
@@ -615,15 +580,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-<<<<<<< HEAD
-    m_Target: {x: 0.20485549, y: 2.179464, z: 0.39792135}
+    m_Target: {x: 4.417056, y: 0.62716734, z: -13.842938}
     speed: 2
-    m_Value: {x: 0.20485549, y: 2.179464, z: 0.39792135}
-=======
-    m_Target: {x: -5.0032434, y: 1.8064536, z: -9.838981}
-    speed: 2
-    m_Value: {x: -5.0032434, y: 1.8064536, z: -9.838981}
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    m_Value: {x: -10.57396, y: -67.08695, z: 59.190716}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -670,23 +629,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-<<<<<<< HEAD
-    m_Target: {x: -0.005662018, y: -0.07761727, z: -0.0005986521, w: 0.99701214}
+    m_Target: {x: -0.054457996, y: -0.6147392, z: 0.042789336, w: -0.7857535}
     speed: 2
-    m_Value: {x: -0.005661763, y: -0.07761378, z: -0.00059862516, w: 0.9969672}
+    m_Value: {x: -0.31765044, y: 0.1459762, z: -0.049580637, w: -0.9355912}
   m_Size:
-    m_Target: 2.1229064
+    m_Target: 10
     speed: 2
-    m_Value: 2.1229064
-=======
-    m_Target: {x: -0.037799824, y: -0.029088367, z: 0.00053947035, w: -0.99890035}
-    speed: 2
-    m_Value: {x: -0.03630003, y: -0.02908802, z: 0.00049581134, w: -0.9989174}
-  m_Size:
-    m_Target: 1.8676054
-    speed: 2
-    m_Value: 0.2731353
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    m_Value: 96.15759
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -711,7 +660,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &15
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -733,13 +682,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-<<<<<<< HEAD
     width: 1243
-    height: 666
-=======
-    width: 1750
-    height: 913
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    height: 665
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -786,46 +730,29 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-<<<<<<< HEAD
       width: 1243
-      height: 645
-    m_Scale: {x: 0.5972222, y: 0.5972222}
-    m_Translation: {x: 621.5, y: 322.5}
-=======
-      width: 1750
-      height: 892
-    m_Scale: {x: 0.82592595, y: 0.82592595}
-    m_Translation: {x: 875, y: 446}
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+      height: 644
+    m_Scale: {x: 0.5962963, y: 0.5962963}
+    m_Translation: {x: 621.5, y: 322}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-<<<<<<< HEAD
-      x: -1040.6512
+      x: -1042.2671
       y: -540
-      width: 2081.3025
+      width: 2084.5342
       height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.5972222
-  m_LastWindowPixelSize: {x: 1243, y: 666}
-=======
-      x: -1059.417
-      y: -540
-      width: 2118.834
-      height: 1080
-    m_MinimalGUI: 1
-  m_defaultScale: 0.82592595
-  m_LastWindowPixelSize: {x: 1750, y: 913}
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+  m_defaultScale: 0.5962963
+  m_LastWindowPixelSize: {x: 1243, y: 665}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
---- !u!114 &16
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -845,17 +772,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1095
-    y: 189
-    width: 220
-    height: 466
-=======
-    x: 1751
+    x: 1244
     y: 73
-    width: 376
-    height: 913
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    width: 351
+    height: 665
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -865,11 +785,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-<<<<<<< HEAD
-      m_ExpandedIDs: 74c5feff9e0fffff6838ffff768fffff0efbffff
-=======
-      m_ExpandedIDs: 72e7feff
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+      m_ExpandedIDs: faaca1ff14d9a2ff10f9a2ff6850a4ffcec1a7ff0418a9ff86e9b5ffb683b7ff7868bcff04b7c0fff83dc2ff3a0cd7ffc295e9ffca95e9fffa95e9ff16cfe9ff1ecfe9ff4ecfe9ff96b8edfff0b8edff80ceedff7a5eefffd45eefff6474efff08f0efffeebef0ff4abff0ffdad4f0ff066cf1ff92d9f2ffc0e0f4ffe201f5ff6ee6f5fff802f7ff4a03f7ffda18f7ff8064f7ff008ff7ff7ec7f7ffd0c7f7ff60ddf7ff8a3af8ffdc3af8ff6c50f8ffeaf0f8ffda5af9ff0c80f9ffb083f9ff0284f9ff9299f9ff0efbfffff4ffffffd6200c0054270c0046b01200c2b6120064bd120086c41200acd61200eceb280014292900ce342a00
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -893,7 +809,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &17
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -913,17 +829,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 314
-    y: 676
-    width: 779
-    height: 164
-=======
     x: 0
-    y: 1007
-    width: 1655
-    height: 352
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    y: 759
+    width: 1203
+    height: 240
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -941,53 +850,38 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-<<<<<<< HEAD
-    - Assets/StarterAssets
-=======
-    - Assets/Scripts
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    - Assets/my/Resources
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-<<<<<<< HEAD
-  - Assets/StarterAssets
-=======
-  - Assets/Scripts
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+  - Assets/my/Resources
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\kang6\Desktop\photonpj\GraduatedProject
+  m_LastProjectPath: C:\Users\parkj\Desktop\GraduatedProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-<<<<<<< HEAD
-    scrollPos: {x: 0, y: 489}
-    m_SelectedIDs: dea40000
-    m_LastClickedID: 42206
-    m_ExpandedIDs: 00000000aaa00000aca00000aea00000b0a00000b2a00000b4a00000b6a00000b8a00000baa0000000ca9a3b
-=======
-    scrollPos: {x: 0, y: 1300}
-    m_SelectedIDs: 843c0200
-    m_LastClickedID: 146564
-    m_ExpandedIDs: 000000004e37020050370200523702005437020056370200583702005a3702005c3702005e37020060370200623702006437020066370200683702006a3702006c3702006e37020070370200723702007437020076370200783702007a3702007c3702007e37020080370200823702008437020086370200883702008a3702008c3702008e37020000ca9a3b
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    scrollPos: {x: 0, y: 476}
+    m_SelectedIDs: cea40000
+    m_LastClickedID: 42190
+    m_ExpandedIDs: 00000000aaa00000aca00000aea00000b0a00000b2a00000b4a00000b6a00000baa0000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Scenes
+      m_OriginalName: Scenes
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 42192
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 11}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -999,11 +893,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-<<<<<<< HEAD
     m_ExpandedIDs: 00000000aaa00000aca00000aea00000b0a00000b2a00000b4a00000b6a00000b8a00000baa00000
-=======
-    m_ExpandedIDs: 000000004e37020050370200523702005437020056370200583702005a3702005c3702005e37020060370200623702006437020066370200683702006a3702006c3702006e37020070370200723702007437020076370200783702007a3702007c3702007e37020080370200823702008437020086370200883702008a3702008c3702008e370200
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1030,7 +920,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1055,11 +945,11 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 14}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
---- !u!114 &18
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1079,22 +969,15 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1094
-    y: 676
-    width: 221
-    height: 164
-=======
-    x: 1656
-    y: 1007
-    width: 471
-    height: 352
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    x: 1204
+    y: 759
+    width: 391
+    height: 240
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
---- !u!114 &19
+--- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1114,17 +997,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1317
-    y: 189
-    width: 202
-    height: 651
-=======
-    x: 2129
+    x: 1597
     y: 73
-    width: 430
-    height: 1286
->>>>>>> parent of 1c385ae (Fixing bugs that do not produce web views)
+    width: 322
+    height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default

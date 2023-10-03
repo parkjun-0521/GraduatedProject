@@ -15,8 +15,8 @@ public class PlayerNick : MonoBehaviourPunCallbacks {
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-            StartCoroutine(SyncDataCoroutine());
+        //if (Input.GetMouseButtonDown(1))
+        //    StartCoroutine(SyncDataCoroutine());
     }
     public IEnumerator Nickname()
     {
