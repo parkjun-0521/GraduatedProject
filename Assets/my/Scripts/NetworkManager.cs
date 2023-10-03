@@ -122,7 +122,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public ToggleGroup InputBag;
 
     [Header("Test Map")]
-    public GameObject map;                  // 맵 프리팹 ( 각 맵에 이름만 지정 해주면 됨 ) 
     public GameObject player;               // 플레이어 프리팹 ( 각 캐릭터에 이름만 지정 해주면 됨 ) 
     public GameObject web;                  // 
     public GameObject keybo;                  // 
@@ -289,7 +288,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 로비 캐릭터의 위치를 0, 3, 0으로 초기화
         LobbyMainPlayer.transform.position = new Vector3(0f, 1f, -9f);
-
         // 성공적으로 접속이 될 시 바로 로비로 이동 
         PhotonNetwork.JoinLobby();
     }
@@ -313,6 +311,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         RenderSettings.reflectionIntensity = 1f;
         TeamMapWebView.SetActive(false);
 
+        PhotonView photonView = LobbyMainPlayer.GetComponent<PhotonView>();
+        int myActorNumber = PhotonNetwork.LocalPlayer.ActorNumber;    
+        photonView.TransferOwnership(myActorNumber);
+
         // player 오브젝트를 찾아서 그 안의 Start 함수를 실행 
         // 카메라가 방에서 나왔을 시 로비 캐릭터를 잡게 만들기 위해서 Start 함수를 실행 하는 것 이다. 
         LobbyPlayer lobbyPlayer = GameObject.Find("Female1").GetComponent<LobbyPlayer>();
@@ -333,7 +335,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 이렇게 해야 중간에 빈방이 생기지 않는다. 
         myList.Clear();
     }
-
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)    
     {
@@ -1568,25 +1569,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 맵 위치
         TeamMapWebView.SetActive(true);
         if (mapname.Equals("Cafe")) {
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
+            PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(-20.79f, 12.65f, -18.61f);
             TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
             TeamMapWebView.transform.localScale = new Vector3(40f, 36f, 13f);
         }
         else if (mapname.Equals("Company")) {
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(5, 3f, 10), Quaternion.identity);
+            PhotonNetwork.Instantiate(mapname, new Vector3(5, 3f, 10), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(-27.70f, 0.99f, -12.94f);
             TeamMapWebView.transform.rotation = Quaternion.Euler(0,-90,0);
             TeamMapWebView.transform.localScale = new Vector3(30f, 27f, 10f);
         }
         else if (mapname.Equals("RoomMap")) {
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
+             PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(-3.358f, 2.282f, 6.692f);
             TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
             TeamMapWebView.transform.localScale = new Vector3(13f, 15.5f, 10f);
         }
         else {
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
+            PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(14.79f, -0.55f, 21.19f);
             TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
             TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
