@@ -15,15 +15,14 @@ public class PlayerNick : MonoBehaviourPunCallbacks {
     }
     void Update()
     {
-        //if (Input.GetMouseButtonDown(1))
-        //    StartCoroutine(SyncDataCoroutine());
+        if (Input.GetMouseButtonDown(1))
+            StartCoroutine(SyncDataCoroutine());
     }
     public IEnumerator Nickname()
     {
         yield return new WaitForSeconds(0.3f);
         NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         customText.text = networkManager.nick;
-        Debug.Log(networkManager.nick);
         Debug.Log(customText.text);
     }
 
@@ -32,14 +31,10 @@ public class PlayerNick : MonoBehaviourPunCallbacks {
         // 데이터가 동기화될 때까지 대기
         yield return new WaitForSeconds(0.3f);
         NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-        PV = GetComponent<PhotonView>();
         if (PV != null) {
             if (PV.IsMine == false) {
                 networkManager.nick = "";
                 networkManager.nick = PV.Owner.NickName;
-            }
-            else {
-                Debug.Log(networkManager.nick);
             }
         }
         Debug.Log(networkManager.nick);

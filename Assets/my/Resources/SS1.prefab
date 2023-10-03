@@ -175,7 +175,6 @@ MonoBehaviour:
   rotateSpeed: 500
   EnterCheck: 1
   webViewPrefab: {fileID: 0}
-  tmp: {fileID: 5910312982622162739}
 --- !u!114 &19428831269053978
 MonoBehaviour:
   m_ObjectHideFlags: 0

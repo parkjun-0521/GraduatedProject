@@ -309,11 +309,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         //webView.SetActive(true);
         RenderSettings.skybox = lobbySkyBox;
         RenderSettings.reflectionIntensity = 1f;
-        TeamMapWebView.SetActive(false);
-
-        PhotonView photonView = LobbyMainPlayer.GetComponent<PhotonView>();
-        int myActorNumber = PhotonNetwork.LocalPlayer.ActorNumber;    
-        photonView.TransferOwnership(myActorNumber);
 
         // player 오브젝트를 찾아서 그 안의 Start 함수를 실행 
         // 카메라가 방에서 나왔을 시 로비 캐릭터를 잡게 만들기 위해서 Start 함수를 실행 하는 것 이다. 
@@ -328,7 +323,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         buttonEvent.SoundOptionClose();
 
         TeamMapWebView.transform.localScale = new Vector3(0f, 0f, 0f);
-
+        
+        string objectNameToDestroy = "SM1(Clone)";
+        GameObject objectToDestroy = GameObject.Find(objectNameToDestroy);
+        Destroy(objectToDestroy);
 
         // 방에서 나가고 로비로 돌아왔을때 
         // 리스트를 초기화를 해줘야 버그가 발생하지 않는다. 
@@ -1440,8 +1438,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         UserCheck = false;
         StartCoroutine(AllTeam());
-
-   
     }
 
     IEnumerator AllTeam()
@@ -1567,7 +1563,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // 맵 관련 프리팹 생성 
         // mapname는 맵 버튼을 누를 때 발생하는 함수에서 값이 들어감 ( MapValue() 함수 ) 
         // 맵 위치
-        TeamMapWebView.SetActive(true);
         if (mapname.Equals("Cafe")) {
             PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(-20.79f, 12.65f, -18.61f);
@@ -1621,13 +1616,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         checkRoom = true;
         //RoomPanel.SetActive(true);              // 방 Panel 활
 
+        Invoke("MapNameData", 0.5f);
         // 프리팹 생성 및 플레이어 동기화 
         // 캐릭터 이름을 받아서 캐릭터 생성 
         SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
         smoothFollow.roteta();
         player = PhotonNetwork.Instantiate(playername, new Vector3(0, 0, 0), Quaternion.identity);
-
-        //GameObject cubeObject = GameObject.Find("Cube");
 
 
         // 현재 방의 정보를 text로 표시 
@@ -1643,6 +1637,37 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             ChatText[i].text = "";
 
         Invoke("Nick_Name", 0.1f);
+    }
+    public void MapNameData()
+    {
+        GameObject targetObject1 = GameObject.Find("Cafe(Clone)");
+        GameObject targetObject2 = GameObject.Find("Company(Clone)");
+        GameObject targetObject3 = GameObject.Find("RoomMap(Clone)");
+        GameObject targetObject4 = GameObject.Find("Library(Clone)");
+        print(targetObject1);
+        print(targetObject2);
+        print(targetObject3);
+        print(targetObject4);
+        if (targetObject1 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-20.79f, 12.65f, -18.61f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
+            TeamMapWebView.transform.localScale = new Vector3(40f, 36f, 13f);
+        }
+        else if (targetObject2 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-27.70f, 0.99f, -12.94f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 27f, 10f);
+        }
+        else if (targetObject3 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-3.358f, 2.282f, 6.692f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(13f, 15.5f, 10f);
+        }
+        else if (targetObject4 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(14.79f, -0.55f, 21.19f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
+        }
     }
     public void Nick_Name()
     {

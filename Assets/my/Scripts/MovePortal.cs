@@ -23,7 +23,8 @@ public class MovePortal : MonoBehaviour
         buttonEvent.Women();                                            // 포탈에 들어갔을 때 여자 캐릭터가 보여질 수 있도록 지정 
         for (int i = 0; i < buttonEvent.Women_Men.Length; i++)
             buttonEvent.Women_Men[i].SetActive(true);                   // 남여 캐릭터를 변경할 수 있는 버튼을 활성화 
-        if(networkManager.adminCheck)
+        buttonEvent.eventChar.SetActive(true); 
+        if (networkManager.adminCheck)
             buttonEvent.PublicCreateRoomPrevious();                     // 포탈에 들어간 사람이 관리자일 경우 공개방 입장 버튼을 비활성화 
         else if(!networkManager.adminCheck)
             buttonEvent.PublicInputRoomPrevious();                      // 포탈에 들어간 사람이 사용자일 경우 공개방 생성 버튼을 비활성화 
@@ -53,6 +54,7 @@ public class MovePortal : MonoBehaviour
         buttonEvent.TeamCreate_Women();                                 // 입장 시 여자 캐릭터 선택 창으로 초기화 
         for (int i = 0; i < buttonEvent.TeamCreate_Women_Men.Length; i++)
             buttonEvent.TeamCreate_Women_Men[i].SetActive(true);        // 남여 선택 버튼 활성화 
+        buttonEvent.TeamCreate_eventChar.SetActive(true);
         buttonEvent.CreateplayerBackGround.SetActive(true);             // 캐릭터 선택 뒤 배경 활성화 
         buttonEvent.CreateItemList.SetActive(true);                     // 아바타 리스트 활성화 
         buttonEvent.CreateItemBackGround.SetActive(true);               // 아이템 선택 뒤 배경 활성화 
@@ -76,6 +78,7 @@ public class MovePortal : MonoBehaviour
         buttonEvent.TeamInput_Women();                                  // 입장 시 여자 캐릭터 선택 창으로 초기화 
         for (int i = 0; i < buttonEvent.TeamInput_Women_Men.Length; i++)
             buttonEvent.TeamInput_Women_Men[i].SetActive(true);         // 남여 선택 버튼 활성화 
+        buttonEvent.TeamInput_EChar.SetActive(true);
         buttonEvent.TeamInput_PreviousButton.SetActive(false);          // 이전 버튼 비활성화 
         buttonEvent.TeamInputPrevious.SetActive(false);                 // 이전 버튼 비활성화 
         buttonEvent.TeamInputNext.SetActive(false);                     // 다음 버튼 비활성화 

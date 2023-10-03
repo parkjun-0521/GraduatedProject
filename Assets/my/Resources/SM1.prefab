@@ -27,15 +27,15 @@ RectTransform:
   m_GameObject: {fileID: 2070983422955363470}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.625, y: 0.625, z: 0.625}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1456796404208146934}
-  m_RootOrder: 1
+  m_Father: {fileID: 330498737363370042}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.9616}
+  m_AnchoredPosition: {x: 0, y: 1.851}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5657792671039024967
@@ -379,7 +379,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330498737363370042}
-  - {fileID: 8304420221065288135}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1121,7 +1120,6 @@ MonoBehaviour:
   rotateSpeed: 500
   EnterCheck: 1
   webViewPrefab: {fileID: 0}
-  tmp: {fileID: 5220441104976881582}
 --- !u!114 &7503188154705933443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,6 +1162,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8820417994787258530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330498737363606554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7a4c48a5043fc4da1a654b5b9a77ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PV: {fileID: 8872588265249057167}
+  customText: {fileID: 5220441104976881582}
 --- !u!114 &8872588265249057167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,17 +1218,3 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &8820417994787258530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330498737363606554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7a4c48a5043fc4da1a654b5b9a77ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PV: {fileID: 8872588265249057167}
-  customText: {fileID: 5220441104976881582}
