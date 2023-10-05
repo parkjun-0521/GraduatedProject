@@ -16,7 +16,7 @@
 
   - VS Code 
   - 3Ds Max
-  - 유니티 엔진
+  - Unity ( 버전 )
 
 ## 개발 언어 
 
