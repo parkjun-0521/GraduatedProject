@@ -23,10 +23,12 @@
 
   ### 박준 
   - Photon을 활용하여 멀티서버를 구축
-  - DB에서 유저정보를 받아와 유니티에서 처리하는 모든 작업 ( 로그인 및 팀 정보 )
-  - 로비와 공개맵 디자인 및 제작 
+  - DB와 통신 가능한 백엔드 구축 : https://github.com/parkjun-0521/GraduatedProject-Backserver-
+  - DB에서 유저정보를 받아와 유니티에서 처리하는 모든 작업 ( 로그인 및 팀 정보, 팀 방 입장 및 생성 )
   - 캐릭터 움직임 동기화
-  - https://github.com/parkjun-0521/GraduatedProject-Backserver-
+  - 실시간 채팅 시스템 구현
+  - 로비 맵과 공개방( 광장맵 ) 디자인 및 제작
+  - 유니티 UI 제작 
   
   ### 강형준 
 
