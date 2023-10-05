@@ -51,8 +51,8 @@
 
 ## 개발 일정
 
-<img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_1.png" alt="Image Error" width="70%" height="70%" /><img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_2.png" alt="Image Error" width="15%" height="15%" />
-<img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_3.png" alt="Image Error" width="72%" height="70%" />
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_1.png" alt="Image Error" width="70%" height="70%" /><img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_2.png" alt="Image Error" width="15%" height="15%" />
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_3.png" alt="Image Error" width="72%" height="70%" />
 
   - 이후 7월 ~ 10월 기간은 추가적인 기능 구현과 버그 수정 및 테스트 기간
 
@@ -63,6 +63,13 @@
   - 이벤트 캐릭터 추가 ( 홈페이지에서 상점 구매로 열리는 캐릭터 ) 
 
 ## 개발 실패 사항과 이유 
-
-  - 웹뷰 동기화
-  - 키 설정 
+  
+  ### 웹뷰 동기화
+  - Photon View RPC 동기화를 이용하여 모든 플레이어가 하나의 웹뷰를 사용하여 서로 같은 화면을 보는것을 목표로 잡고 개발을 시작함 
+  - Vupelx 에셋을 활용하여 개발을 하였고 현재 당시 Vuplex에서는 동기화 기능을 지원하지 않기에 직접 구현을 해야하는 상황
+  - 에셋에서는 RPC 동기화를 할 수 없게 해둔 상태였고 캡쳐를 이용한 동기화 방식을 해보았지만 개발 지식이 부족하여 실패 
+  ### 키 설정 
+  - 캐릭터의 이동 방식이 InputManager의 Axes에서 정해진 키값으로 이동하는 방식으로 만들어짐
+  - InputManager로 값을 줄 시 스크립트로는 Input의 값을 바꿀 수 없음
+  - 따라서 이동 로직을 전부 뜯어 고쳐야 하는 상황이 발생
+  - 졸업잘품 전시까지 시간이 부족하여 해당 기능을 구현하지 못함
