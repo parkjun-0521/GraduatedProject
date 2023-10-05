@@ -22,21 +22,25 @@
 ## 개발 인원
 
   ### 박준 
-  - Photon을 활용하여 멀티서버를 구축
+  - Photon을 활용하여 멀티 환경을 구축
   - DB와 통신 가능한 백엔드 구축 : https://github.com/parkjun-0521/GraduatedProject-Backserver-
   - DB에서 유저정보를 받아와 유니티에서 처리하는 모든 작업 ( 로그인 및 팀 정보, 팀 방 입장 및 생성 )
-  - 캐릭터 움직임 동기화
+  - 캐릭터 움직임 및 카메라 시점 동기화
   - 실시간 채팅 시스템과 음성 채팅 구현
   - 로비 맵과 공개방( 광장맵 ) 디자인 및 제작
   - 유니티 UI 및 옵션 제작
   
   ### 강형준 
-
+  - 플레이어 이동 및 점프
+  - 맵 및 오브젝트 제작
+  - 캐릭터,오브젝트 애니메이션
+  - 캐릭터 아바타 착용
+    
 ## 개발스택 
 
   - VS Code 
   - 3Ds Max
-  - Unity ( 버전 )
+  - Unity ( 2021.3.8 )
 
 ## 개발 언어 
 
@@ -45,7 +49,19 @@
 
 ## 구성 화면 ( 전체적인 부분 )  + 기능설명 
 
+## 개발 일정
 
-## 개발 일정 ( 엑셀 사진 ( 중간에 있던 계획 에러 사항 )) 
+<img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_1.png" alt="Image Error" width="70%" height="70%" /><img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_2.png" alt="Image Error" width="15%" height="15%" />
+<img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_3.png" alt="Image Error" width="72%" height="70%" />
 
-## 개발 에러 사항 ( 생각 중)
+  - 이후 7월 ~ 10월 기간은 추가적인 기능 구현과 버그 수정 및 테스트 기간
+
+## 추가적인 기능
+
+  - 캐릭터 구별을 위해 닉네임 띄우기
+  - 아바타 추가 및 아바타 동기화
+  - 이벤트 캐릭터 추가 ( 홈페이지에서 상점 구매로 열리는 캐릭터 ) 
+
+## 개발 실패 사항과 이유 
+
+  - 웹뷰 동기화 
