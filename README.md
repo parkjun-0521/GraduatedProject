@@ -21,7 +21,7 @@
 
 ## 개발 인원
 
-  ### 박준 
+  ### 박준 ( https://github.com/parkjun-0521 )
   - Photon을 활용하여 멀티 환경을 구축
   - DB와 통신 가능한 백엔드 구축 : https://github.com/parkjun-0521/GraduatedProject-Backserver-
   - DB에서 유저정보를 받아와 유니티에서 처리하는 모든 작업 ( 로그인 및 팀 정보, 팀 방 입장 및 생성 )
