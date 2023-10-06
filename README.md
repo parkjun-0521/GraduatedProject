@@ -60,6 +60,7 @@
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%BA%A1%EC%B2%981.PNG" alt="Image Error" width="20%" height="10%" />
   
   - 실행하였을 때 나오는 로그인 화면입니다.
+  - 다른 프로그램들과 동일하게 Tap을 누르면 아래로 이동할 수 있도록 구현하였습니다. 
   - 계정이 없을 경우를 생각하여 회원가입을 만들어 놓았고 버튼을 클릭하면 홈페이지의 회원가입 화면이 열리도록 해놓았습니다.
   - 회원가입을 직접 구현할 수 있었지만 홈페이지의 비중을 높이기 위해 직접 구현하지 않았습니다.
 
@@ -73,21 +74,50 @@
   
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8F%AC%ED%83%88.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%A1%9C%EB%B9%84.PNG" alt="Image Error" width="40%" height="50%" />
 
+  - 로그인 후 가장 처음 보이는 화면입니다.
+  - 왼쪽의 사진은 방을 입장하기 위한 포탈입니다. 상호작용 버튼 없이 포탈에 접근하면 입장하기 위한 UI가 등장합니다.
+  - 오른쪽 사진은 로비에 있는 거울과 웹뷰 기능입니다. 웹뷰 기능을 사용하여 인게임 내에서도 팀을 이룰 수 있도록 합니다. 
+  - 사진에는 없지만 이동키, 화면전환, 상호작용 키의 알림판이 있어 사용자의 불편함을 줄입니다.
+
   ### 포탈 입장시 
 
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%BA%90%EB%A6%AD%ED%84%B0_%EC%84%A0%ED%83%9D.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%95%84%EB%B0%94%ED%83%80.PNG" alt="Image Error" width="40%" height="50%" />
 
-  ### 공개방 
+  - 3개의 포탈에 입장시 공통으로 등장하는 UI입니다.
+  - 왼쪽 사진은 캐릭터 선택 UI입니다. 여자, 남자, 이벤트 캐릭터가 있고, 이벤트 캐릭터는 홈페이지에서 구매 하면 열리는 방식입니다.
+  - 오른쪽 사진은 아바타를 적용한 모습니다. 홈페이지에서 아바타를 구매하면 유니티에서 아바타를 적용할 수 있는 기능입니다. 
+  - 캐릭터 선택 시 자동으로 아바타 선택창으로 이동하도록 구현하여 사용자의 불편함을 줄였습니다. 
+
+  ### 공개방 맵
 
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%B4%84.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%97%AC%EB%A6%84.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EA%B0%80%EC%9D%84.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EA%B2%A8%EC%9A%B8.PNG" alt="Image Error" width="40%" height="50%" />
 
-  ### 팀 방
+  - 공개방 포탈에서 캐릭터 선택과 아바타 선택을 마친 후 등장하는 맵 선택 UI입니다.
+  - 맵은 같은 구조지만 테마가 다른 4개의 공개방입니다.
+  - 공개방은 최대 20명까지 멀티가 되도록 구현하였습니다.
+  - 맵을 클릭하면 바로 방에 입장되도록 구현하였습니다. 
+
+  ### 팀 생성 맵
 
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%B9%B4%ED%8E%98.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%82%AC%EB%AC%B4%EC%8B%A4.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%B0%A9.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%8F%84%EC%84%9C%EA%B4%80.PNG" alt="Image Error" width="40%" height="50%" />
 
-  ### 팀 방 생성 및 입장 
+  - 팀 생성 포탈에서 캐릭터 선택과 아바타 선택을 마친 후 등장하는 맵 선택 UI입니다.
+  - 서로다른 테마의 4개의 팀 방이고, 이 맵의 경우 팀장이거나 팀에 속해있는 경우에만 들어갈 수 있는 방입니다. 
+  - 팀 방은 최대 8명까지 멀티가 되도록 구현하였습니다.
+  - 맵을 클릭하면 바로 방에 입장되도록 구현하였습니다. 
+    
+  ### 팀 방 생성
 
-  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8C%80%EB%B0%A9.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8C%80%EB%B0%A9%EC%9E%85%EC%9E%A5.PNG" alt="Image Error" width="40%" height="50%" />
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8C%80%EB%B0%A9.PNG" alt="Image Error" width="40%" height="50%" /> 
+
+  - 팀 생성에서 맵을 선택한 후 등장하는 UI입니다.
+  - 홈페이지에서 팀을 생성하면 그 정보를 받아 한페이지 최대 10개씩 팀 정보를 띄워줍니다.
+  - 10개 초과시 다음 버튼을 활용하여 다음 팀을 볼 수 있습니다. 
+  - 팀 이름 버튼을 누르면 그에 해당하는 팀이 만들어집니다.
+    
+  ### 팀 방 입장 
+
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8C%80%EB%B0%A9%EC%9E%85%EC%9E%A5.PNG" alt="Image Error" width="40%" height="50%" />
 
   ### 방 입장 후
 
