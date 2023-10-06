@@ -94,6 +94,7 @@
 
   - 공개방 포탈에서 캐릭터 선택과 아바타 선택을 마친 후 등장하는 맵 선택 UI입니다.
   - 맵은 같은 구조지만 테마가 다른 4개의 공개방입니다.
+  - 팀과 상관없이 모든 사람이 입장할 수 있습니다. 
   - 공개방은 최대 20명까지 멀티가 되도록 구현하였습니다.
   - 맵을 클릭하면 바로 방에 입장되도록 구현하였습니다. 
 
@@ -110,26 +111,48 @@
 
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8C%80%EB%B0%A9.PNG" alt="Image Error" width="40%" height="50%" /> 
 
-  - 팀 생성에서 맵을 선택한 후 등장하는 UI입니다.
+  - 팀 생성 포탈에서 맵을 선택한 후 등장하는 UI입니다.
   - 홈페이지에서 팀을 생성하면 그 정보를 받아 한페이지 최대 10개씩 팀 정보를 띄워줍니다.
   - 10개 초과시 다음 버튼을 활용하여 다음 팀을 볼 수 있습니다. 
-  - 팀 이름 버튼을 누르면 그에 해당하는 팀이 만들어집니다.
+  - 팀 이름 버튼을 누를 시 그에 해당하는 팀 방이 만들어집니다.
     
   ### 팀 방 입장 
 
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8C%80%EB%B0%A9%EC%9E%85%EC%9E%A5.PNG" alt="Image Error" width="40%" height="50%" />
 
+  - 팀 방 입장 포탈에서 아바타 선택 후 등장하는 UI입니다.
+  - 홈페이지에서 가입한 팀의 정보를 받아 한페이지에 퇴대 10개씩 가입한 팀 정보를 띄워줍니다.
+  - 10개 초과시 다음 버튼을 활용하여 다음 팀을 볼 수 있습니다. 
+  - 팀 이름 버튼을 누를 시 그에 해당하는 팀 방으로 입장 됩니다. 
+
   ### 방 입장 후
 
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%B1%84%ED%8C%85.PNG" alt="Image Error" width="28%" height="20%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EA%B7%B8%EB%A6%BC%ED%8C%90.PNG" alt="Image Error" width="40%" height="50%" />  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%A9%80%ED%8B%B0_%EC%A7%84%ED%96%89.PNG" alt="Image Error" width="60%" height="60%" />
 
+  - 방 입장후 이루어지는 이벤트 입니다.
+  - 실시간 채팅 기능과 음성 채팅 기능을 제공합니다.
+  - 그림판의 경우 명암과 굵기 조절이 가능하고 3가지의 색을 이용하여 필기또는 그림을 그릴 수 있습니다. 
+  - 밑 사진에서의 오른쪽 상단 UI 3개는 각 그림판, 옵션, 방 나가기 버튼 UI입니다.
+  - 팀장이 팀을 만들고 방을 나갔을 경우에 모든 팀원이 방에서 나가지도록 구현하였습니다.
+  
   ### 웹 뷰 
 
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9B%B9%EB%B7%B0.PNG" alt="Image Error" width="40%" height="50%" />
 
+  - 웹에서 원하는 정보를 검색할 수 있고 영상 시청도 가능합니다.
+  - 오른쪽 상단의 앞,뒤로가기 버튼을 활용하여 원하는 페이지로 돌아갈수 있습니다.
+  - 웹뷰 기능의 경우 팀방에서만 사용할 수있도록 구현하였습니다. 
+
   ### 옵션 
 
   <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%98%B5%EC%85%98.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%82%AC%EC%9A%B4%EB%93%9C%EC%98%B5%EC%85%98.PNG" alt="Image Error" width="40%" height="50%" /> 
+
+  - 모든 맵에서 ESC를 누를 시 등장하는 옵션 UI입니다.
+  - 소리 버튼을 누르면 오른쪽과 같은 UI가 등장합니다.
+  - 배경음악을 조절하거나 마이크, 헤드셋을 조절할 수 있습니다.
+  - 헤드셋을 차단할 경우 마이크도 같이 차단되도록 구현하였습니다.
+  - 로그아웃 및 종료 버튼은 누를 시 즉시 로그아웃 되면서 게임이 종료되도록 구현하였습니다. 
+  
 ## 추가적인 기능
 
   - 캐릭터 구별을 위해 닉네임 띄우기
