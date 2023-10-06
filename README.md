@@ -30,10 +30,10 @@
   - 유니티 UI 및 옵션 제작
   
   ### 강형준 (https://github.com/Kanghyoengjun)
-  - 플레이어 이동 및 점프
+  - 플레이어 이동 및 점프 구현
   - 맵 및 오브젝트 제작
-  - 캐릭터,오브젝트 애니메이션
-  - 캐릭터 아바타 착용
+  - 캐릭터,오브젝트 애니메이션 제작 
+  - 캐릭터 아바타 디자인 및 제작 
     
 ## 기술 스택 
 
@@ -46,20 +46,65 @@
   - C#
   - JavaScript ( 웹뷰 )
 
-## 구성 화면 ( 전체적인 부분 )  + 기능설명 
-
 ## 개발 일정
 
-  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_1.png" alt="Image Error" width="70%" height="70%" /><img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_2.png" alt="Image Error" width="15%" height="15%" />
-  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_3.png" alt="Image Error" width="72%" height="70%" />
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_1.png" alt="Image Error" width="75%" height="80%" /><img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_2.png" alt="Image Error" width="16%" height="16%" />
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9D%BC%EC%A0%95_3.png" alt="Image Error" width="78%" height="80%" />
 
   - 이후 7월 ~ 10월 기간은 추가적인 기능 구현과 버그 수정 및 테스트 기간
 
+## 구성 화면 ( 전체적인 부분 )  + 기능설명 
+
+  ### 로그인 화면
+  
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%BA%A1%EC%B2%981.PNG" alt="Image Error" width="20%" height="10%" />
+  
+  - 실행하였을 때 나오는 로그인 화면입니다.
+  - 계정이 없을 경우를 생각하여 회원가입을 만들어 놓았고 버튼을 클릭하면 홈페이지의 회원가입 화면이 열리도록 해놓았습니다.
+  - 회원가입을 직접 구현할 수 있었지만 홈페이지의 비중을 높이기 위해 직접 구현하지 않았습니다.
+
+  ### 로딩
+  
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%A1%9C%EB%94%A9.png" alt="Image Error" width="40%" height="50%" />
+
+  - 화면 전환이 발생하는 경우마다 등장하는 로딩화면입니다.
+
+  ### 로비
+  
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8F%AC%ED%83%88.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%A1%9C%EB%B9%84.PNG" alt="Image Error" width="40%" height="50%" />
+
+  ### 포탈 입장시 
+
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%BA%90%EB%A6%AD%ED%84%B0_%EC%84%A0%ED%83%9D.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%95%84%EB%B0%94%ED%83%80.PNG" alt="Image Error" width="40%" height="50%" />
+
+  ### 공개방 
+
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%B4%84.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%97%AC%EB%A6%84.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EA%B0%80%EC%9D%84.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EA%B2%A8%EC%9A%B8.PNG" alt="Image Error" width="40%" height="50%" />
+
+  ### 팀 방
+
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%B9%B4%ED%8E%98.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%82%AC%EB%AC%B4%EC%8B%A4.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%B0%A9.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%8F%84%EC%84%9C%EA%B4%80.PNG" alt="Image Error" width="40%" height="50%" />
+
+  ### 팀 방 생성 및 입장 
+
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8C%80%EB%B0%A9.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%ED%8C%80%EB%B0%A9%EC%9E%85%EC%9E%A5.PNG" alt="Image Error" width="40%" height="50%" />
+
+  ### 방 입장 후
+
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%B1%84%ED%8C%85.PNG" alt="Image Error" width="28%" height="20%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EA%B7%B8%EB%A6%BC%ED%8C%90.PNG" alt="Image Error" width="40%" height="50%" />  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EB%A9%80%ED%8B%B0_%EC%A7%84%ED%96%89.PNG" alt="Image Error" width="60%" height="60%" />
+
+  ### 웹 뷰 
+
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%9B%B9%EB%B7%B0.PNG" alt="Image Error" width="40%" height="50%" />
+
+  ### 옵션 
+
+  <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%98%B5%EC%85%98.PNG" alt="Image Error" width="40%" height="50%" /> <img src="https://github.com/parkjun-0521/GraduatedProject/blob/main/image/%EC%82%AC%EC%9A%B4%EB%93%9C%EC%98%B5%EC%85%98.PNG" alt="Image Error" width="40%" height="50%" /> 
 ## 추가적인 기능
 
   - 캐릭터 구별을 위해 닉네임 띄우기
   - 아바타 추가 및 아바타 동기화
-  - 이벤트 캐릭터 추가 ( 홈페이지에서 상점 구매로 열리는 캐릭터 ) 
+  - 이벤트 캐릭터 추가 ( 홈페이지에서 상점 구매로 열리는 캐릭터 )
 
 ## 개발 실패 사항과 이유 
   
