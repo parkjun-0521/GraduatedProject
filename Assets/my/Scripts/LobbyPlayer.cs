@@ -8,7 +8,6 @@ public class LobbyPlayer : MonoBehaviourPunCallbacks {
 
     public bool turnStop = false;
     public float rotateSpeed = 500.0f;
-    public PhotonView PV;
     private Transform tr;
 
     public void Start()

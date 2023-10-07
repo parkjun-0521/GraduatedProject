@@ -40,7 +40,6 @@ public class LoginManager : MonoBehaviour
 
     [Header("Lobby")]
     public GameObject LobbyRoom;                // 로비 맵 
-    public GameObject LobbyMainPlayer;          // 로비 전용 캐릭터 
     public GameObject publicPortal;             // 공개방 포탈 
     public GameObject CreateTeamPortal;         // 방만들기 포탈 
     public GameObject InputTeamPortal;          // 방입장하기 포탈 

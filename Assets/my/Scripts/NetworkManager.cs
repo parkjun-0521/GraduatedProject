@@ -122,7 +122,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public ToggleGroup InputBag;
 
     [Header("Test Map")]
-    public GameObject map;                  // 맵 프리팹 ( 각 맵에 이름만 지정 해주면 됨 ) 
     public GameObject player;               // 플레이어 프리팹 ( 각 캐릭터에 이름만 지정 해주면 됨 ) 
     public GameObject web;                  // 
     public GameObject keybo;                  // 
@@ -137,7 +136,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
     public GameObject optionPanel;
 
-    
+    public string nick;
 
     [Header("-----실시간 채팅 시스템 구현-----")]
     [Header("LobbyPanel")]
@@ -289,7 +288,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         // 로비 캐릭터의 위치를 0, 3, 0으로 초기화
         LobbyMainPlayer.transform.position = new Vector3(0f, 1f, -9f);
-
         // 성공적으로 접속이 될 시 바로 로비로 이동 
         PhotonNetwork.JoinLobby();
     }
@@ -325,14 +323,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         buttonEvent.SoundOptionClose();
 
         TeamMapWebView.transform.localScale = new Vector3(0f, 0f, 0f);
-
+        
+        string objectNameToDestroy = "SM1(Clone)";
+        GameObject objectToDestroy = GameObject.Find(objectNameToDestroy);
+        Destroy(objectToDestroy);
 
         // 방에서 나가고 로비로 돌아왔을때 
         // 리스트를 초기화를 해줘야 버그가 발생하지 않는다. 
         // 이렇게 해야 중간에 빈방이 생기지 않는다. 
         myList.Clear();
     }
-
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)    
     {
@@ -409,11 +409,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
                 Input_Next_Previous[i].SetActive(true);
             }
         }
-        
+        NickSave(reSplit[0]);
+
         // 메모리 누수 방지를 위해 
         wwwData.Dispose();
     }
 
+    public void NickSave(string nickname)
+    {
+        nick = nickname;
+        Debug.Log(nick);
+    }
     public IEnumerator pItem()
     {
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
@@ -1432,15 +1438,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         UserCheck = false;
         StartCoroutine(AllTeam());
-
-        // 방을 떠나면 Map도 비활성화 해준다. 
-        // 프리팹을 파괴하여 비활성화를 한다 
-        if (PV.IsMine) {
-            PhotonNetwork.Destroy(web);
-            PhotonNetwork.Destroy(keybo);
-            PhotonNetwork.Destroy(map);
-            PhotonNetwork.Destroy(player);
-        }
     }
 
     IEnumerator AllTeam()
@@ -1567,25 +1564,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         // mapname는 맵 버튼을 누를 때 발생하는 함수에서 값이 들어감 ( MapValue() 함수 ) 
         // 맵 위치
         if (mapname.Equals("Cafe")) {
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
+            PhotonNetwork.Instantiate(mapname, new Vector3(0, 3f, 5), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(-20.79f, 12.65f, -18.61f);
             TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
             TeamMapWebView.transform.localScale = new Vector3(40f, 36f, 13f);
         }
         else if (mapname.Equals("Company")) {
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(5, 3f, 10), Quaternion.identity);
+            PhotonNetwork.Instantiate(mapname, new Vector3(5, 3f, 10), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(-27.70f, 0.99f, -12.94f);
             TeamMapWebView.transform.rotation = Quaternion.Euler(0,-90,0);
             TeamMapWebView.transform.localScale = new Vector3(30f, 27f, 10f);
         }
         else if (mapname.Equals("RoomMap")) {
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
+             PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(-3.358f, 2.282f, 6.692f);
             TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
             TeamMapWebView.transform.localScale = new Vector3(13f, 15.5f, 10f);
         }
         else {
-            map = PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
+            PhotonNetwork.Instantiate(mapname, new Vector3(0, -2.5f, 5), Quaternion.identity);
             TeamMapWebView.transform.localPosition = new Vector3(14.79f, -0.55f, 21.19f);
             TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
             TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
@@ -1619,13 +1616,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         checkRoom = true;
         //RoomPanel.SetActive(true);              // 방 Panel 활
 
+        Invoke("MapNameData", 0.5f);
         // 프리팹 생성 및 플레이어 동기화 
         // 캐릭터 이름을 받아서 캐릭터 생성 
         SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
         smoothFollow.roteta();
         player = PhotonNetwork.Instantiate(playername, new Vector3(0, 0, 0), Quaternion.identity);
-
-        //GameObject cubeObject = GameObject.Find("Cube");
 
 
         // 현재 방의 정보를 text로 표시 
@@ -1640,12 +1636,44 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         for (int i = 0; i < ChatText.Length; i++) 
             ChatText[i].text = "";
 
-        // 닉네임 동기화 구간 
-        /*
-        TextMeshProUGUI textMeshPro = player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>();
-        Debug.Log(player.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>());
-        textMeshPro.text = PhotonNetwork.LocalPlayer.NickName;
-        */
+        Invoke("Nick_Name", 0.1f);
+    }
+    public void MapNameData()
+    {
+        GameObject targetObject1 = GameObject.Find("Cafe(Clone)");
+        GameObject targetObject2 = GameObject.Find("Company(Clone)");
+        GameObject targetObject3 = GameObject.Find("RoomMap(Clone)");
+        GameObject targetObject4 = GameObject.Find("Library(Clone)");
+        print(targetObject1);
+        print(targetObject2);
+        print(targetObject3);
+        print(targetObject4);
+        if (targetObject1 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-20.79f, 12.65f, -18.61f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
+            TeamMapWebView.transform.localScale = new Vector3(40f, 36f, 13f);
+        }
+        else if (targetObject2 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-27.70f, 0.99f, -12.94f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, -90, 0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 27f, 10f);
+        }
+        else if (targetObject3 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(-3.358f, 2.282f, 6.692f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(13f, 15.5f, 10f);
+        }
+        else if (targetObject4 != null) {
+            TeamMapWebView.transform.localPosition = new Vector3(14.79f, -0.55f, 21.19f);
+            TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
+            TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
+        }
+    }
+    public void Nick_Name()
+    {
+        PlayerNick playerNick = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerNick>();
+        Debug.Log(playerNick);
+        StartCoroutine(playerNick.SyncDataCoroutine());
     }
 
     // 웹뷰 동기화 만드는 중 
