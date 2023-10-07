@@ -22,7 +22,7 @@ public class customizing : MonoBehaviour
     public GameObject[] m3ava = new GameObject[10];
 
     //어떤 캐릭터가 선택됐는지 체크하기위함
-    private int a_chk;
+    private int a_chk = 6;
 
     NetworkManager netmgr;
     ButtonEvent btnevn;
@@ -98,6 +98,10 @@ public class customizing : MonoBehaviour
             if(a_chk == 5)
             {
               avatar_m3();
+            }
+            else
+            {
+
             }
         }
     }
