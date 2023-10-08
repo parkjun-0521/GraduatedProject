@@ -11,6 +11,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using Vuplex.WebView;
 using TMPro;
+using System.Linq;
+using UnityEngine.UI;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
 */
 
@@ -88,9 +90,11 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-/*        [Tooltip("Customizing hair color")]
-        public Material hairs;
-        public Material hairs2;*/
+        /*        [Tooltip("Customizing hair color")]
+                public Material hairs;
+                public Material hairs2;*/
+
+        public GameObject closetui;
    
 
 
@@ -118,13 +122,14 @@ namespace StarterAssets
         private int _animIDMotionSpeed;
 
         // ray
-        private string raytag;
-        private float portalcool = 0.0f;
-        private float sradius = 2.0f;
+   //     private string raytag;
+   //     private float portalcool = 0.0f;
+   //     private float sradius = 2.0f;
 
         // customizing
         private Color[] color = new Color[9];
         private int colors;
+        public GameObject objectToSync;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -149,6 +154,8 @@ namespace StarterAssets
         public bool EnterCheck = true;
 
         public BaseWebViewPrefab webViewPrefab;
+        NetworkManager networkManager;
+        ButtonEvent buttonEvent;
 
         private bool IsCurrentDeviceMouse
         {
@@ -192,13 +199,16 @@ namespace StarterAssets
                 if (PV.IsMine) {
                     Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
                 }
-            }   
+            }
+            networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();       // NetworkManager 스크립트가 달려있는 오브젝트를 찾는다. 
+            buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();                   // ButtonEvent 스크립트가 달려있는 오브젝트를 찾는다. 
         }
 
         public void Start()
         {
 
             //_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            
 
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
@@ -458,73 +468,128 @@ namespace StarterAssets
               //  AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
-        
-  /*      private void PlayerRay()    // 플레이어 레이
-        {
-            // ray 시작점
-            Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
-            RaycastHit hitinfo;
 
-            if (gameObject.activeSelf == true)
+        public void ToggleObjectState()
+        {
+            StartCoroutine(networkManager.pItem());
+            closetui = GameObject.Find("clcosetUI");
+            closetui.SetActive(true);
+
+
+            if (PV.IsMine)
             {
-                // Sphere형으로 ray를 쏨
-                if (Physics.SphereCast(raypos, sradius, transform.forward , out hitinfo, 1.0f))
+                // 현재 플레이어가 이 오브젝트를 소유하고 있을 때만 상태를 변경합니다.
+                objectToSync.SetActive(!objectToSync.activeSelf);
+
+                // RPC를 통해 상태 변경을 다른 플레이어에게 알립니다.
+                PV.RPC("SyncObjectState", RpcTarget.AllBuffered, objectToSync.activeSelf);
+            }
+        }
+
+        [PunRPC]
+        private void SyncObjectState(bool isActive)
+        {
+            // 모든 플레이어에 의해 호출되며, 상태를 동기화합니다.
+          //  objectToSync.SetActive(isActive);
+            objectToSync.SetActive(true);
+        }
+
+        public void PublicItemFor(string[] ItemID, GameObject[] ItemName, string name)
+        {
+            // 각 아바타에 맞는 체크박스를 활성화 한다. 
+            for (int i = 0; i < ItemName.Length; i++)
+            {
+                if (ItemID.Contains(name + i))
+                {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
+                    Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
+                    ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
+
+                    // 체크 박스의 이름을 name에 숫자만 붙여서 임시적으로 표기 
+                    ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
+                    ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
+                    buttonValues.Name = "Item" + name + i;
+                }
+                else
                 {
-                    raytag = hitinfo.collider.tag;
-                    Debug.Log(raytag);
-                    //portaluse(raytag);        //포탈사용
-                    elevatoruse(raytag);
+                    Debug.Log("아이템찾지못함");
                 }
             }
-        }*/
-        
+        }
 
- /*       private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
-        {
-            Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
-            Gizmos.color = Color.red;
-            float sphereScale = Mathf.Max(sradius, transform.lossyScale.y, transform.lossyScale.z);
-
-            // 함수 파라미터 : 현재 위치 , sphere반지름, Ray의 방향, RaycastHit 결과, Sphere의 회전값, SphereCast를 진행할 거리
-            if (true == Physics.SphereCast(raypos, sradius, transform.forward, out RaycastHit hitinfo, 1.0f))
+        public void OnTriggerEnter(Collider other)
+        {   // 
+            if (other.CompareTag("closet"))
             {
-                // Hit된 지점까지 ray를 그려준다.
-                Gizmos.DrawRay(raypos, transform.forward * hitinfo.distance);
-
-                // Hit된 지점에 Sphere를 그려준다.
-                Gizmos.DrawWireSphere(raypos + transform.forward * hitinfo.distance, sradius);
+                ToggleObjectState();
             }
             else
             {
-                // Hit가 되지 않았으면 최대 검출 거리로 ray를 그려준다.
-                Gizmos.DrawRay(raypos, transform.forward * 0.0f);
+               // closetui.SetActive(false);
             }
-        }*/
-
-       /* private void elevatoruse(string raytag)     // 엘리베이터 작동
-        {
-            if (raytag == "elebtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
-            {
-                PV.RPC("Elevator.elevator.Eledooropen1f",RpcTarget.All);
-            }
-            else if (raytag == "elebtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
-            {
-                PV.RPC("Elevator.elevator.Eledooropen2f", RpcTarget.All);
-            }
-            else if (raytag == "upbtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
-            {
-                PV.RPC("Elevator.elevator.Eleup", RpcTarget.All);
-            }
-            else if (raytag == "upbtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
-            {
-                PV.RPC("Elevator.elevator.Eledown", RpcTarget.All);
-            }    
-        }*/
-
-        public void OnTriggerEnter(Collider other)
-        {   
-
         }
+
+        /*      private void PlayerRay()    // 플레이어 레이
+              {
+                  // ray 시작점
+                  Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
+                  RaycastHit hitinfo;
+
+                  if (gameObject.activeSelf == true)
+                  {
+                      // Sphere형으로 ray를 쏨
+                      if (Physics.SphereCast(raypos, sradius, transform.forward , out hitinfo, 1.0f))
+                      {
+                          raytag = hitinfo.collider.tag;
+                          Debug.Log(raytag);
+                          //portaluse(raytag);        //포탈사용
+                          elevatoruse(raytag);
+                      }
+                  }
+              }*/
+
+
+        /*       private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
+               {
+                   Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
+                   Gizmos.color = Color.red;
+                   float sphereScale = Mathf.Max(sradius, transform.lossyScale.y, transform.lossyScale.z);
+
+                   // 함수 파라미터 : 현재 위치 , sphere반지름, Ray의 방향, RaycastHit 결과, Sphere의 회전값, SphereCast를 진행할 거리
+                   if (true == Physics.SphereCast(raypos, sradius, transform.forward, out RaycastHit hitinfo, 1.0f))
+                   {
+                       // Hit된 지점까지 ray를 그려준다.
+                       Gizmos.DrawRay(raypos, transform.forward * hitinfo.distance);
+
+                       // Hit된 지점에 Sphere를 그려준다.
+                       Gizmos.DrawWireSphere(raypos + transform.forward * hitinfo.distance, sradius);
+                   }
+                   else
+                   {
+                       // Hit가 되지 않았으면 최대 검출 거리로 ray를 그려준다.
+                       Gizmos.DrawRay(raypos, transform.forward * 0.0f);
+                   }
+               }*/
+
+        /* private void elevatoruse(string raytag)     // 엘리베이터 작동
+         {
+             if (raytag == "elebtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
+             {
+                 PV.RPC("Elevator.elevator.Eledooropen1f",RpcTarget.All);
+             }
+             else if (raytag == "elebtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
+             {
+                 PV.RPC("Elevator.elevator.Eledooropen2f", RpcTarget.All);
+             }
+             else if (raytag == "upbtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
+             {
+                 PV.RPC("Elevator.elevator.Eleup", RpcTarget.All);
+             }
+             else if (raytag == "upbtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
+             {
+                 PV.RPC("Elevator.elevator.Eledown", RpcTarget.All);
+             }    
+         }*/
+
 
 
         /*private void portaluse(string raytag)
@@ -558,7 +623,7 @@ namespace StarterAssets
 
         private void cooldown()
         {
-            portalcool += Time.deltaTime;
+      //      portalcool += Time.deltaTime;
         }
 
        /* public void customizing()

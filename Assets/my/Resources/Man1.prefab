@@ -2894,6 +2894,8 @@ GameObject:
   - component: {fileID: 6993222848114512882}
   - component: {fileID: 5654396334794048666}
   - component: {fileID: 7373760093146961276}
+  - component: {fileID: 4348411437605284509}
+  - component: {fileID: 5986547721036923017}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -3130,6 +3132,45 @@ MonoBehaviour:
   character_body: {fileID: 0}
   body_mat: []
   PV: {fileID: -4342168869226430551}
+--- !u!114 &4348411437605284509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766903146837589408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5986547721036923017}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5986547721036923017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766903146837589408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &5916849935605214208
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,13 +3454,13 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  objectToSync: {fileID: 0}
   _animator: {fileID: 0}
   turnStop: 0
   PV: {fileID: -4342168869226430551}
   rotateSpeed: 500
   EnterCheck: 1
   webViewPrefab: {fileID: 0}
-  tmp: {fileID: 585382819047021254}
 --- !u!114 &4868149165463861057
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -257,6 +257,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             LobbyPanel_Player[i].SetActive(false);
             LobbyPanel_Player[i + 3].SetActive(false);
         }
+        preimg.SetActive(false);
     }
 
     // 맵 선택 ( 기본적으로 맵은 봄, 여름, 가을, 겨울이 있다. 이것을 순서대로 나오도록 한다. ) 
@@ -484,7 +485,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             }
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(false);
-            TeamCreate_eventChar.SetActive(false);
+            TeamCreate_eventChar.SetActive(false);          
             preimg.SetActive(true);
             TeamRoomCreate.SetActive(false);
             TeamCreateRoomPrevious();
@@ -689,6 +690,11 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     {
         precam.transform.localPosition = new Vector3(-980.6f, -538.5f, -1.5f);
         preimg.SetActive(true);
+    }
+
+    public void evcharpreimg()
+    {
+        preimg.SetActive(false);
     }
 
     //-----------------------------------------------------------------------------------//

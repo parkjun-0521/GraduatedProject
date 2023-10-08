@@ -10,14 +10,15 @@ public class SkyControl : MonoBehaviour
     public Material morningmat;
     public Material nightmat;
     public Material sunsetmat;
-    public GameObject morning;
-    public GameObject night;
-    public GameObject sunset;
+ //   public GameObject morning;
+ //   public GameObject night;
+ //   public GameObject sunset;
 
   //  public Color morningfog;
   //  public Color nightfog;
 
     public bool ismorning = true;
+    public bool issunset = false;
 
     public PhotonView PV;
     
@@ -40,18 +41,27 @@ public class SkyControl : MonoBehaviour
         {
             if (ismorning == true)
             {
-          //      PV.RPC("changenight", RpcTarget.All);
-                changenight();
+                PV.RPC("changesunset", RpcTarget.AllBuffered);
+                issunset = true;
+                ismorning = false;
+           //     changenight();
+            }
+            else if (issunset == true)
+            {
+                PV.RPC("changenight", RpcTarget.AllBuffered);
+                issunset = false;
+                
             }
             else
             {
-          //      PV.RPC("changemorning", RpcTarget.All);
-                changemorning();
+                PV.RPC("changemorning", RpcTarget.AllBuffered);
+                ismorning = true;
+           //     changemorning();
             }
         }
     }
 
-    [PunRPC]
+    
     public void movesky()
     {
         RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.6f);
@@ -64,10 +74,10 @@ public class SkyControl : MonoBehaviour
         if(RenderSettings.skybox == nightmat)
         {
             RenderSettings.skybox = morningmat;
-          //  RenderSettings.fogColor = morningfog;
+          /* RenderSettings.fogColor = morningfog;
             morning.SetActive(true);
             night.SetActive(false);
-            sunset.SetActive(false);
+            sunset.SetActive(false);*/
             ismorning = true;
         }
     }
@@ -78,9 +88,9 @@ public class SkyControl : MonoBehaviour
         if(RenderSettings.skybox == morningmat)
         {
             RenderSettings.skybox = sunsetmat;
-            sunset.SetActive(true);
+           /* sunset.SetActive(true);
             morning.SetActive(false);
-            night.SetActive(false);
+            night.SetActive(false);*/
         }       
     }
 
@@ -90,10 +100,10 @@ public class SkyControl : MonoBehaviour
         if(RenderSettings.skybox == sunsetmat)
         {
             RenderSettings.skybox = nightmat;
-          //  RenderSettings.fogColor = nightfog;
+          /*  RenderSettings.fogColor = nightfog;
             morning.SetActive(false);
             night.SetActive(true);
-            sunset.SetActive(false);
+            sunset.SetActive(false);*/
             ismorning = false;
         }
     }

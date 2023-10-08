@@ -19,6 +19,8 @@ TagManager:
   - upbtn
   - Fluid
   - ChangeTime
+  - map
+  - closet
   layers:
   - Default
   - TransparentFX

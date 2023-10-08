@@ -78,6 +78,7 @@ MonoBehaviour:
   - PlayerNickName_Room
   - PlayerNickName_Room_1
   - Nicksynchro
+  - SyncObjectState
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
