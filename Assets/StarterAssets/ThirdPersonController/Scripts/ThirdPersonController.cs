@@ -94,7 +94,6 @@ namespace StarterAssets
                 public Material hairs;
                 public Material hairs2;*/
 
-        public GameObject closetui;
    
 
 
@@ -129,7 +128,8 @@ namespace StarterAssets
         // customizing
         private Color[] color = new Color[9];
         private int colors;
-        public GameObject objectToSync;
+       //public GameObject objectToSync;
+        public GameObject[] EquipItem;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -206,7 +206,7 @@ namespace StarterAssets
 
         public void Start()
         {
-
+            EquipItem = new GameObject[6];
             //_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
 
@@ -427,7 +427,8 @@ namespace StarterAssets
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
         }
-
+           
+        //카메라 각도
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
@@ -449,6 +450,7 @@ namespace StarterAssets
                 GroundedRadius);
         }
 
+        //착지했을때 사운드
         private void OnFootstep(AnimationEvent animationEvent)
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
@@ -469,63 +471,58 @@ namespace StarterAssets
             }
         }
 
-        public void ToggleObjectState()
+        public void AvaEquip()
         {
-            StartCoroutine(networkManager.pItem());
-            closetui = GameObject.Find("clcosetUI");
-            closetui.SetActive(true);
-
-
-            if (PV.IsMine)
-            {
+            Debug.Log("아바타 장착 시작");
+            /*if (PV.IsMine)
+            {             
                 // 현재 플레이어가 이 오브젝트를 소유하고 있을 때만 상태를 변경합니다.
                 objectToSync.SetActive(!objectToSync.activeSelf);
 
                 // RPC를 통해 상태 변경을 다른 플레이어에게 알립니다.
                 PV.RPC("SyncObjectState", RpcTarget.AllBuffered, objectToSync.activeSelf);
+            }*/
+            if (PV.IsMine)
+            {
+                // 현재 플레이어가 이 오브젝트를 소유하고 있을 때만 상태를 변경합니다.
+                for (int i = 0; i < networkManager.itemName.Length; i++)
+                {                
+                    Debug.Log(buttonEvent.equipava[i]);
+                    if (buttonEvent.equipava[i] != "없음")
+                    {
+                      EquipItem[i] = this.transform.Find(buttonEvent.equipava[i]).gameObject;          
+                      EquipItem[i].gameObject.SetActive(!EquipItem[i].gameObject.activeSelf);
+                    }
+
+                    // RPC를 통해 상태 변경을 다른 플레이어에게 알립니다.
+                    PV.RPC("AvatarSync", RpcTarget.AllBuffered, EquipItem[i].gameObject.activeSelf);
+                }
             }
         }
 
         [PunRPC]
-        private void SyncObjectState(bool isActive)
+        public void AvatarSync(bool isActive)
         {
             // 모든 플레이어에 의해 호출되며, 상태를 동기화합니다.
           //  objectToSync.SetActive(isActive);
-            objectToSync.SetActive(true);
-        }
-
-        public void PublicItemFor(string[] ItemID, GameObject[] ItemName, string name)
-        {
-            // 각 아바타에 맞는 체크박스를 활성화 한다. 
-            for (int i = 0; i < ItemName.Length; i++)
+     //       objectToSync.SetActive(true);
+            for (int i = 0; i < networkManager.itemName.Length; i++)
             {
-                if (ItemID.Contains(name + i))
-                {                // Contains : 문자열 안에 지정한 문자가 있는지 확인
-                    Debug.Log(name + i + "를 찾았습니다.");      // 아이템이 있는지 디버그
-                    ItemName[i].SetActive(true);                // 아바타 체크 박스 활성화 
-
-                    // 체크 박스의 이름을 name에 숫자만 붙여서 임시적으로 표기 
-                    ButtonValues buttonValues = GameObject.Find(name + i).GetComponent<ButtonValues>();
-                    ItemName[i].transform.GetChild(0).GetComponent<Text>().text = name + i;
-                    buttonValues.Name = "Item" + name + i;
-                }
-                else
-                {
-                    Debug.Log("아이템찾지못함");
-                }
+                EquipItem[i].gameObject.SetActive(!EquipItem[i].gameObject.activeSelf);
             }
         }
 
+
         public void OnTriggerEnter(Collider other)
-        {   // 
-            if (other.CompareTag("closet"))
+        {   
+           /* if (other.CompareTag("closet"))
             {
                 ToggleObjectState();
             }
             else
             {
                // closetui.SetActive(false);
-            }
+            }*/
         }
 
         /*      private void PlayerRay()    // 플레이어 레이

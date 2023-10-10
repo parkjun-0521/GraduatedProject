@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 8944887630363983379}
   - component: {fileID: 8093704563789657685}
   m_Layer: 0
-  m_Name: snow_top_gold
+  m_Name: top2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,7 +944,7 @@ GameObject:
   - component: {fileID: 5157190078821046797}
   - component: {fileID: 6005575405485903345}
   m_Layer: 0
-  m_Name: snow_top
+  m_Name: top1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1817,7 +1817,7 @@ GameObject:
   - component: {fileID: 5266661066970975873}
   - component: {fileID: 5004121556756816303}
   m_Layer: 0
-  m_Name: snow_bottom
+  m_Name: pants1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2129,7 +2129,7 @@ GameObject:
   - component: {fileID: 375956914409289651}
   - component: {fileID: 765919907733917947}
   m_Layer: 0
-  m_Name: snow_bottom_gold
+  m_Name: pants2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3447,8 +3447,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  closetui: {fileID: 3165601792309724344, guid: a5a18ce491687b344b9d713f29c15fa9, type: 3}
-  objectToSync: {fileID: 7044612610808952384}
+  EquipItem: []
   _animator: {fileID: 0}
   turnStop: 0
   PV: {fileID: -3737999207576324901}
@@ -4716,11 +4715,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a09708b66323b1443bef5222e93990df, type: 3}
---- !u!1 &7044612610808952384 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7190010293688722315, guid: a09708b66323b1443bef5222e93990df, type: 3}
-  m_PrefabInstance: {fileID: 147336331829630411}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7676576282560261370 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7531105891220175153, guid: a09708b66323b1443bef5222e93990df, type: 3}

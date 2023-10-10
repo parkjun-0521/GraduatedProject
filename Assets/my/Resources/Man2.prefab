@@ -4752,7 +4752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_Name
-      value: snow_top
+      value: top1
       objectReference: {fileID: 0}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_IsActive
@@ -4830,7 +4830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_Name
-      value: snow_bottom
+      value: pants1
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_IsActive
@@ -4912,7 +4912,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6fae141d928f1bd42878c68a7cbb9e11, type: 2}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_Name
-      value: snow_top_gold
+      value: top2
       objectReference: {fileID: 0}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_IsActive
@@ -4990,7 +4990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_Name
-      value: snow_bottom_gold
+      value: pants2
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_IsActive
@@ -5016,7 +5016,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 392725814545958637, guid: b5d3dc4e7d5aa1e41a6e3f4bc3cdeb41, type: 3}
       propertyPath: m_Name
-      value: snow_hat
+      value: hat4
       objectReference: {fileID: 0}
     - target: {fileID: 392725814545958637, guid: b5d3dc4e7d5aa1e41a6e3f4bc3cdeb41, type: 3}
       propertyPath: m_IsActive

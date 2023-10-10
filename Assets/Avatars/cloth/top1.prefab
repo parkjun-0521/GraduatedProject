@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 860629472198687475}
   - component: {fileID: 4918008645254661227}
   m_Layer: 0
-  m_Name: snow_top
+  m_Name: top1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

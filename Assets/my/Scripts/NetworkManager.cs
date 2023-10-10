@@ -114,6 +114,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public GameObject[] ItemTeamInputShoes;
     public GameObject[] ItemTeamInputBag;
 
+    
+    
     public ToggleGroup InputColor;
     public ToggleGroup InputHat;
     public ToggleGroup InputTop;
@@ -182,6 +184,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public Material skyBoxAutumn;
     public Material skyBoxWinter;
 
+    ButtonEvent btnevent;
+
     [Header("-----웹뷰-----")]
     public GameObject TeamMapWebView;
     //--------------------------------------------- 빌드 화면 크기 ---------------------------------------------// 
@@ -215,6 +219,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         for (int i = 0; i < itemName.Length; i++) {
             itemName[i] = null;
         }
+        btnevent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
     }
 
     //--------------------------------------------- 사용자의 상태, 로비의 인원, 채팅창 관련 로직 ---------------------------------------------// 
@@ -1587,7 +1592,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
             TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
         }
+
+        
     }
+
+    
+
     //--------------------------------------------- 맵 생성할때 맵의 이름을 저장하는 함수 ---------------------------------------------// 
     public void MapValue()
     {
@@ -1622,6 +1632,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
         smoothFollow.roteta();
         player = PhotonNetwork.Instantiate(playername, new Vector3(0, 0, 0), Quaternion.identity);
+        ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
 
 
         // 현재 방의 정보를 text로 표시 
@@ -1637,7 +1648,28 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             ChatText[i].text = "";
 
         Invoke("Nick_Name", 0.1f);
+        
+        for(int i=0; i < btnevent.equipava.Length; i++)
+            Debug.Log(btnevent.equipava[i]);
+        thirdPersonController.AvaEquip();
+        
+
+        /*if (PV.IsMine)
+        {
+            // 현재 플레이어가 이 오브젝트를 소유하고 있을 때만 상태를 변경합니다.
+            for (int i = 0; i < itemName.Length; i++)
+            {
+                Debug.Log(btnevent.equipava[i]);
+                EquipItem[i] = transform.Find(btnevent.equipava[i]);
+                EquipItem[i].gameObject.SetActive(!EquipItem[i].gameObject.activeSelf);
+
+                // RPC를 통해 상태 변경을 다른 플레이어에게 알립니다.
+                PV.RPC("AvatarSync", RpcTarget.AllBuffered, EquipItem[i].gameObject.activeSelf);
+            }
+        }*/
     }
+
+
     public void MapNameData()
     {
         GameObject targetObject1 = GameObject.Find("Cafe(Clone)");
