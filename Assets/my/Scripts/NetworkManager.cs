@@ -260,14 +260,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             thirdPersonController.SprintSpeed = 80.0f;
             thirdPersonController.turnStop = false;
             thirdPersonController.EnterCheck = true;
-            thirdPersonController.JumpFlag = false;
+            
 
-            Invoke("PlayerJump",0.5f);
+            Invoke("PlayerJump", 0.5f);
             SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
             smoothFollow.turnOff = false;
 
             chatCheck = false;
         }
+    }
+
+    public void PlayerJump()
+    {
+        ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
+        thirdPersonController.JumpFlag = false;
     }
 
     //--------------------------------------------- 서버 접속 함수  ---------------------------------------------//  
@@ -613,6 +619,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         LoginManager loginManager = GameObject.Find("LoginManager").GetComponent<LoginManager>();
         loginManager.IDInputField.text = "";
         loginManager.PWInputField.text = "";
+        StartCoroutine(AllTeam());
+
         // 실제로 포톤서버의 네트워크를 끊기 
         PhotonNetwork.Disconnect();
         Application.Quit();
