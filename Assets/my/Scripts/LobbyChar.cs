@@ -117,9 +117,9 @@ namespace StarterAssets {
         private int _animIDMotionSpeed;
 
         // ray
-        private string raytag;
-        private float portalcool = 0.0f;
-        private float sradius = 2.0f;
+  //      private string raytag;
+   //     private float portalcool = 0.0f;
+  //      private float sradius = 2.0f;
 
         // customizing
         private Color[] color = new Color[9];
@@ -536,7 +536,7 @@ namespace StarterAssets {
 
         private void cooldown()
         {
-            portalcool += Time.deltaTime;
+     //       portalcool += Time.deltaTime;
         }
 
         /* public void customizing()

@@ -71,6 +71,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public GameObject[] inputTeamRoom;      // 방에 들어갈 버튼 배열 ( 한 페이지에 최대 10개만 띄움 ) 
 
     public string[] itemName = new string[6];
+    public string[] equipava = new string[6];
 
     public GameObject[] itemPublicColor;
 
@@ -114,6 +115,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public GameObject[] ItemTeamInputShoes;
     public GameObject[] ItemTeamInputBag;
 
+    
+    
     public ToggleGroup InputColor;
     public ToggleGroup InputHat;
     public ToggleGroup InputTop;
@@ -182,6 +185,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     public Material skyBoxAutumn;
     public Material skyBoxWinter;
 
+    ButtonEvent btnevent;
+
     [Header("-----웹뷰-----")]
     public GameObject TeamMapWebView;
     //--------------------------------------------- 빌드 화면 크기 ---------------------------------------------// 
@@ -215,6 +220,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         for (int i = 0; i < itemName.Length; i++) {
             itemName[i] = null;
         }
+        btnevent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();
     }
 
     //--------------------------------------------- 사용자의 상태, 로비의 인원, 채팅창 관련 로직 ---------------------------------------------// 
@@ -537,7 +543,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         Toggle selectedColorToggle = publicColor.ActiveToggles().FirstOrDefault();
         if (selectedColorToggle != null)
+          {
             itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
+            equipava[0] = itemName[0];
+          }   
         else
             itemName[0] = null;
 
@@ -546,7 +555,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         Toggle selectedHatToggle = publicHat.ActiveToggles().FirstOrDefault();
         if (selectedHatToggle != null)
+        {
             itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
+            equipava[1] = itemName[1];
+        }
         else
             itemName[1] = null;
 
@@ -555,7 +567,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         Toggle selectedTopToggle = publicTop.ActiveToggles().FirstOrDefault();
         if (selectedTopToggle != null)
+        {
             itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
+            equipava[2] = itemName[2];
+        }
         else
             itemName[2] = null;
 
@@ -565,7 +580,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         Toggle selectedPantsToggle = publicPants.ActiveToggles().FirstOrDefault();
         if (selectedPantsToggle != null)
+        {
             itemName[3] = selectedPantsToggle.GetComponentInChildren<Text>().text;
+            equipava[3] = itemName[3];
+        }
         else
             itemName[3] = null;
 
@@ -575,7 +593,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         Toggle selectedShoesoggle = publicShoes.ActiveToggles().FirstOrDefault();
         if (selectedShoesoggle != null)
+        {
             itemName[4] = selectedShoesoggle.GetComponentInChildren<Text>().text;
+            equipava[4] = itemName[4];
+        }
         else
             itemName[4] = null;
 
@@ -585,7 +606,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         Toggle selectedBagToggle = publicBag.ActiveToggles().FirstOrDefault();
         if (selectedBagToggle != null)
+        {
             itemName[5] = selectedBagToggle.GetComponentInChildren<Text>().text;
+            equipava[5] = itemName[5];
+        }
         else
             itemName[5] = null;
 
@@ -946,59 +970,70 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         
         Toggle selectedColorToggle = Color.ActiveToggles().FirstOrDefault();
         if (selectedColorToggle != null)
+        {
             itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
+            equipava[0] = itemName[0];
+        }
         else
             itemName[0] = null;
 
     }
     public void HatAvatar()
     {
-     
-
         Toggle selectedHatToggle = Hat.ActiveToggles().FirstOrDefault();
         if (selectedHatToggle != null)
+        {
             itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
+            equipava[1] = itemName[1];
+        }
         else
             itemName[1] = null;
 
     }
     public void TopAvatar()
     {
-       
-
         Toggle selectedTopToggle = Top.ActiveToggles().FirstOrDefault();
         if (selectedTopToggle != null)
+        {
             itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
+            equipava[2] = itemName[2];
+        }
         else
             itemName[2] = null;
 
     }
     public void PantsAvatar()
     {  
-
         Toggle selectedPantsToggle = Pants.ActiveToggles().FirstOrDefault();
         if (selectedPantsToggle != null)
+        {
             itemName[3] = selectedPantsToggle.GetComponentInChildren<Text>().text;
+            equipava[3] = itemName[3];
+        }
         else
             itemName[3] = null;
 
     }
     public void ShoesAvatar()
     {
-       
         Toggle selectedShoesoggle = Shoes.ActiveToggles().FirstOrDefault();
         if (selectedShoesoggle != null)
+        {
             itemName[4] = selectedShoesoggle.GetComponentInChildren<Text>().text;
+            equipava[4] = itemName[4];
+        }
         else
             itemName[4] = null;
 
     }
     public void BagAvatar()
     {
-
         Toggle selectedBagToggle = Bag.ActiveToggles().FirstOrDefault();
         if (selectedBagToggle != null)
+        {
             itemName[5] = selectedBagToggle.GetComponentInChildren<Text>().text;
+            equipava[5] = itemName[5];
+        }
         else
             itemName[5] = null;
 
@@ -1300,7 +1335,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         Toggle selectedColorToggle = InputColor.ActiveToggles().FirstOrDefault();
         if (selectedColorToggle != null)
+        {
             itemName[0] = selectedColorToggle.GetComponentInChildren<Text>().text;
+            equipava[0] = itemName[0];
+        }
         else
             itemName[0] = null;
     }
@@ -1309,7 +1347,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         Toggle selectedHatToggle = InputHat.ActiveToggles().FirstOrDefault();
         if (selectedHatToggle != null)
+        {
             itemName[1] = selectedHatToggle.GetComponentInChildren<Text>().text;
+            equipava[1] = itemName[1];
+        }
         else
             itemName[1] = null;
     }
@@ -1318,7 +1359,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
     {
         Toggle selectedTopToggle = InputTop.ActiveToggles().FirstOrDefault();
         if (selectedTopToggle != null)
+        {
             itemName[2] = selectedTopToggle.GetComponentInChildren<Text>().text;
+            equipava[2] = itemName[2];
+        }
         else
             itemName[2] = null;
 
@@ -1328,7 +1372,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         Toggle selectedPantsToggle = InputPants.ActiveToggles().FirstOrDefault();
         if (selectedPantsToggle != null)
+        {
             itemName[3] = selectedPantsToggle.GetComponentInChildren<Text>().text;
+            equipava[3] = itemName[3];
+        }
         else
             itemName[3] = null;
 
@@ -1338,7 +1385,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         Toggle selectedShoesoggle = InputShoes.ActiveToggles().FirstOrDefault();
         if (selectedShoesoggle != null)
+        {
             itemName[4] = selectedShoesoggle.GetComponentInChildren<Text>().text;
+            equipava[4] = itemName[4];
+        }
         else
             itemName[4] = null;
 
@@ -1348,7 +1398,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
 
         Toggle selectedBagToggle = InputBag.ActiveToggles().FirstOrDefault();
         if (selectedBagToggle != null)
+        {
             itemName[5] = selectedBagToggle.GetComponentInChildren<Text>().text;
+            equipava[5] = itemName[5];
+        }
         else
             itemName[5] = null;
 
@@ -1595,7 +1648,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             TeamMapWebView.transform.rotation = Quaternion.Euler(0, 0, 0);
             TeamMapWebView.transform.localScale = new Vector3(30f, 30f, 10f);
         }
+
+        
     }
+
+    
+
     //--------------------------------------------- 맵 생성할때 맵의 이름을 저장하는 함수 ---------------------------------------------// 
     public void MapValue()
     {
@@ -1630,6 +1688,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
         SmoothFollow smoothFollow = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
         smoothFollow.roteta();
         player = PhotonNetwork.Instantiate(playername, new Vector3(0, 0, 0), Quaternion.identity);
+        ThirdPersonController thirdPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
 
 
         // 현재 방의 정보를 text로 표시 
@@ -1645,7 +1704,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks,IPunInstantiateMagicCall
             ChatText[i].text = "";
 
         Invoke("Nick_Name", 0.1f);
+        
+        for(int i=0; i < btnevent.equipava.Length; i++)
+            Debug.Log(btnevent.equipava[i]);
+       // thirdPersonController.AvaEquip();
+        
     }
+
+
     public void MapNameData()
     {
         GameObject targetObject1 = GameObject.Find("Cafe(Clone)");

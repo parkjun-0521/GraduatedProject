@@ -125,6 +125,8 @@ GameObject:
   - component: {fileID: 7621940043235726787}
   - component: {fileID: 3961942265389826284}
   - component: {fileID: 1774889381306525863}
+  - component: {fileID: 5008201533554508797}
+  - component: {fileID: 1042339022717042812}
   m_Layer: 0
   m_Name: Bench_6
   m_TagString: Untagged
@@ -201,6 +203,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5008201533554508797
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3901547212079507725}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.0002003, y: 1.2319955, z: 1.3052733}
+  m_Center: {x: 2.2501023, y: 0.6070517, z: -0.40264016}
+--- !u!65 &1042339022717042812
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3901547212079507725}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.0002003, y: 1.2042913, z: 0.4436566}
+  m_Center: {x: 2.2501023, y: 1.6479588, z: -1.2680421}
 --- !u!1 &8888108441972143534
 GameObject:
   m_ObjectHideFlags: 0

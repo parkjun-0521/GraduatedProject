@@ -117,9 +117,16 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     //=====================================================================//
     public GameObject preimg;
     public GameObject[] preava;
+    public string[] equipava;
     public Camera precam;
     NetworkManager netManager;
 
+
+    public void Start()
+    {
+        netManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        equipava = new string[6];
+    }
     //=============================== 로그인 창에 존재하는 버튼의 이벤트 ======================================//
     // 홈페이지로 이동하기 버튼을 눌렀을 때 발생하는 이벤트 
     public void WithRium_Move()
@@ -257,6 +264,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             LobbyPanel_Player[i].SetActive(false);
             LobbyPanel_Player[i + 3].SetActive(false);
         }
+        preimg.SetActive(false);
     }
 
     // 맵 선택 ( 기본적으로 맵은 봄, 여름, 가을, 겨울이 있다. 이것을 순서대로 나오도록 한다. ) 
@@ -401,7 +409,12 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         // 아바타 선택 이후 다음 버튼을 눌렀을 때 
         NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();           // NetworkManager 스크립트가 있는 오브젝트를 가져온다. 
         for (int i = 0; i < networkManager.itemName.Length; i++) {
-            Debug.Log(networkManager.itemName[i]);                  // 아바타 리스트을 제대로 가져왔는지 확인 ( 디버그 )
+            if (networkManager.itemName[i] != null)
+            {
+              equipava[i] = networkManager.itemName[i];
+                //        Debug.Log(networkManager.itemName[i]);                  // 아바타 리스트을 제대로 가져왔는지 확인 ( 디버그 )
+                Debug.Log(equipava[i]);
+            }
         }
         InputItemList.SetActive(false);                             // 아바타 체크박스 비활성화 
         InputItemBackGround.SetActive(false);                       // 아바타 선택 뒤 배경 비활성화 
@@ -442,6 +455,10 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             TeamInputNext.SetActive(false);                         // 방 선택 다음 버튼 비활성화 
             iCount--;                                               // 페이지 확인을 위한 Flag 변수 ( flag == 1 됨 )        
             preimg.SetActive(true);
+            for (int i = 0; i < netManager.itemName.Length; i++)
+            {
+                equipava[i] = null;
+            }
         }
     }
 
@@ -477,6 +494,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
     //========================================================================//
     public void TeamCreate_Select_Next()
     {
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         if (count == 0) {
             for (int i = 0; i < TeamCreate_Player.Length; i++)
             {
@@ -484,7 +502,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             }
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
                 TeamCreate_Women_Men[i].SetActive(false);
-            TeamCreate_eventChar.SetActive(false);
+            TeamCreate_eventChar.SetActive(false);          
             preimg.SetActive(true);
             TeamRoomCreate.SetActive(false);
             TeamCreateRoomPrevious();
@@ -495,10 +513,14 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             CreateTeamPreSelect.SetActive(true);
             count++;
         }
-        else if(count == 1) {
-            NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        else if(count == 1) {         
             for (int i = 0; i < networkManager.itemName.Length; i++) {
                 Debug.Log(networkManager.itemName[i]);
+                if (networkManager.itemName[i] != null)
+                {
+                   equipava[i] = networkManager.itemName[i];
+                   Debug.Log(equipava[i]);
+                }
             }
             CreateplayerBackGround.SetActive(false);
             TeamRoomCreate.SetActive(true);
@@ -523,12 +545,13 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             CreateTeamPreSelect.SetActive(true);
             count++;
             CreateRoomBackGround.SetActive(true);
+          
         }
     }
 
     public void TeamCreate_Select_Previous()
     {
-        
+        NetworkManager networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         if (count == 1) {
             TeamCreate_Women();
             for (int i = 0; i < TeamCreate_Women_Men.Length; i++)
@@ -565,6 +588,10 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             roomCount = 0;
             preimg.SetActive(false);
             count--;
+            for (int i = 0; i < networkManager.itemName.Length; i++)
+            {
+             //   equipava[i] = null;
+            }
         }
         
     }
@@ -690,6 +717,12 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
         precam.transform.localPosition = new Vector3(-980.6f, -538.5f, -1.5f);
         preimg.SetActive(true);
     }
+
+    public void evcharpreimg()
+    {
+        preimg.SetActive(false);
+    }
+
 
     //-----------------------------------------------------------------------------------//
 

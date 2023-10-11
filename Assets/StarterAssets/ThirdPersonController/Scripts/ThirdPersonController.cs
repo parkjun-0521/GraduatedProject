@@ -11,6 +11,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using Vuplex.WebView;
 using TMPro;
+using System.Linq;
+using UnityEngine.UI;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
 */
 
@@ -88,9 +90,10 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-/*        [Tooltip("Customizing hair color")]
-        public Material hairs;
-        public Material hairs2;*/
+        /*        [Tooltip("Customizing hair color")]
+                public Material hairs;
+                public Material hairs2;*/
+
    
 
 
@@ -118,13 +121,15 @@ namespace StarterAssets
         private int _animIDMotionSpeed;
 
         // ray
-        private string raytag;
-        private float portalcool = 0.0f;
-        private float sradius = 2.0f;
+   //     private string raytag;
+   //     private float portalcool = 0.0f;
+   //     private float sradius = 2.0f;
 
         // customizing
         private Color[] color = new Color[9];
         private int colors;
+       //public GameObject objectToSync;
+        public GameObject[] EquipItem;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -149,6 +154,8 @@ namespace StarterAssets
         public bool EnterCheck = true;
 
         public BaseWebViewPrefab webViewPrefab;
+        NetworkManager networkManager;
+        ButtonEvent buttonEvent;
 
         private bool IsCurrentDeviceMouse
         {
@@ -192,13 +199,16 @@ namespace StarterAssets
                 if (PV.IsMine) {
                     Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
                 }
-            }   
+            }
+            networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();       // NetworkManager 스크립트가 달려있는 오브젝트를 찾는다. 
+            buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();                   // ButtonEvent 스크립트가 달려있는 오브젝트를 찾는다. 
         }
 
         public void Start()
         {
-
+            EquipItem = new GameObject[6];
             //_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            
 
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
@@ -226,6 +236,10 @@ namespace StarterAssets
                 GroundedCheck();
                 Move();
                 cooldown();
+                if (Input.GetKeyDown(KeyCode.G))
+                {
+                    AvaEquip();
+                }
             }
         }
 
@@ -417,7 +431,8 @@ namespace StarterAssets
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
         }
-
+           
+        //카메라 각도
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
@@ -439,6 +454,7 @@ namespace StarterAssets
                 GroundedRadius);
         }
 
+        //착지했을때 사운드
         private void OnFootstep(AnimationEvent animationEvent)
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
@@ -458,73 +474,165 @@ namespace StarterAssets
               //  AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
-        
-  /*      private void PlayerRay()    // 플레이어 레이
-        {
-            // ray 시작점
-            Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
-            RaycastHit hitinfo;
 
-            if (gameObject.activeSelf == true)
-            {
-                // Sphere형으로 ray를 쏨
-                if (Physics.SphereCast(raypos, sradius, transform.forward , out hitinfo, 1.0f))
+        public void AvaEquip()
+        {
+            networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();       // NetworkManager 스크립트가 달려있는 오브젝트를 찾는다. 
+            buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();                   // ButtonEvent 스크립트가 달려있는 오브젝트를 찾는다. 
+            Debug.Log("아바타 장착 시작");
+
+            if (PV.IsMine)
+            {             
+                for (int i = 1; i < networkManager.equipava.Length; i++)
+                {                
+                    Debug.Log(networkManager.equipava[i]);            
+                }
+                for (int i = 1; i < networkManager.equipava.Length; i++)
                 {
-                    raytag = hitinfo.collider.tag;
-                    Debug.Log(raytag);
-                    //portaluse(raytag);        //포탈사용
-                    elevatoruse(raytag);
+                    findchild();
+               //   EquipItem[i].gameObject.SetActive(!EquipItem[i].activeSelf);              // 현재 플레이어가 이 오브젝트를 소유하고 있을 때만 상태를 변경합니다.
+
+                    // RPC를 통해 상태 변경을 다른 플레이어에게 알립니다.
+                    PV.RPC("AvatarSync", RpcTarget.AllBuffered, EquipItem[i].activeSelf);
                 }
             }
-        }*/
-        
+        }
 
- /*       private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
+        public void findchild()
         {
-            Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
-            Gizmos.color = Color.red;
-            float sphereScale = Mathf.Max(sradius, transform.lossyScale.y, transform.lossyScale.z);
-
-            // 함수 파라미터 : 현재 위치 , sphere반지름, Ray의 방향, RaycastHit 결과, Sphere의 회전값, SphereCast를 진행할 거리
-            if (true == Physics.SphereCast(raypos, sradius, transform.forward, out RaycastHit hitinfo, 1.0f))
+            if (PV.IsMine)
             {
-                // Hit된 지점까지 ray를 그려준다.
-                Gizmos.DrawRay(raypos, transform.forward * hitinfo.distance);
+                for (int i = 1; i < networkManager.equipava.Length; i++)
+                {
+                    // 재귀적으로 오브젝트 찾기 실행
+                    GameObject targetObject = FindObjectByName(GameObject.FindWithTag("Player").transform, networkManager.equipava[i]);
 
-                // Hit된 지점에 Sphere를 그려준다.
-                Gizmos.DrawWireSphere(raypos + transform.forward * hitinfo.distance, sradius);
-            }
-            else
-            {
-                // Hit가 되지 않았으면 최대 검출 거리로 ray를 그려준다.
-                Gizmos.DrawRay(raypos, transform.forward * 0.0f);
-            }
-        }*/
+                    // 찾은 오브젝트가 있다면 로그에 출력
+                    if (targetObject != null)
+                    {
+                        Debug.Log("찾은 오브젝트: " + targetObject.name);
+                        targetObject.SetActive(true);
+                        EquipItem[i] = targetObject;
+                    }
+                    else
+                    {
+                        Debug.Log("오브젝트를 찾지 못했습니다.");
+                    }
 
-       /* private void elevatoruse(string raytag)     // 엘리베이터 작동
+                    GameObject FindObjectByName(Transform parent, string name)
+                    {
+                        // 부모 오브젝트의 자식들을 검사
+                        foreach (Transform child in parent)
+                        {
+                            // 현재 자식 오브젝트의 이름이 목표 이름과 일치하는지 확인
+                            if (child.name == name)
+                            {
+                                // 일치하면 해당 오브젝트 반환
+                                return child.gameObject;
+                            }
+
+                            // 일치하지 않으면 자식 오브젝트의 자식들을 재귀적으로 검색
+                            GameObject foundObject = FindObjectByName(child, name);
+
+                            // 찾은 오브젝트가 있다면 반환
+                            if (foundObject != null)
+                            {
+                                return foundObject;
+                            }
+                        }
+                        // 여기까지 왔다면 찾지 못한 것이므로 null 반환
+                        return null;
+                    }
+                }
+            }
+        }
+
+        [PunRPC]
+        public void AvatarSync(bool isActive)
         {
-            if (raytag == "elebtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
+            // 모든 플레이어에 의해 호출되며, 상태를 동기화합니다.
+            for (int i = 1; i < networkManager.equipava.Length; i++)
             {
-                PV.RPC("Elevator.elevator.Eledooropen1f",RpcTarget.All);
+                // EquipItem[i].gameObject.SetActive(!EquipItem[i].gameObject.activeSelf);
+                EquipItem[i].SetActive(true);
             }
-            else if (raytag == "elebtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
-            {
-                PV.RPC("Elevator.elevator.Eledooropen2f", RpcTarget.All);
-            }
-            else if (raytag == "upbtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
-            {
-                PV.RPC("Elevator.elevator.Eleup", RpcTarget.All);
-            }
-            else if (raytag == "upbtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
-            {
-                PV.RPC("Elevator.elevator.Eledown", RpcTarget.All);
-            }    
-        }*/
+        }
+
 
         public void OnTriggerEnter(Collider other)
         {   
-
+           /* if (other.CompareTag("closet"))
+            {
+                ToggleObjectState();
+            }
+            else
+            {
+               // closetui.SetActive(false);
+            }*/
         }
+
+        /*      private void PlayerRay()    // 플레이어 레이
+              {
+                  // ray 시작점
+                  Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
+                  RaycastHit hitinfo;
+
+                  if (gameObject.activeSelf == true)
+                  {
+                      // Sphere형으로 ray를 쏨
+                      if (Physics.SphereCast(raypos, sradius, transform.forward , out hitinfo, 1.0f))
+                      {
+                          raytag = hitinfo.collider.tag;
+                          Debug.Log(raytag);
+                          //portaluse(raytag);        //포탈사용
+                          elevatoruse(raytag);
+                      }
+                  }
+              }*/
+
+
+        /*       private void OnDrawGizmos()     // 레이쏘는거 그려주는곳
+               {
+                   Vector3 raypos = gameObject.transform.position + new Vector3(0f, 2.0f, 0f);
+                   Gizmos.color = Color.red;
+                   float sphereScale = Mathf.Max(sradius, transform.lossyScale.y, transform.lossyScale.z);
+
+                   // 함수 파라미터 : 현재 위치 , sphere반지름, Ray의 방향, RaycastHit 결과, Sphere의 회전값, SphereCast를 진행할 거리
+                   if (true == Physics.SphereCast(raypos, sradius, transform.forward, out RaycastHit hitinfo, 1.0f))
+                   {
+                       // Hit된 지점까지 ray를 그려준다.
+                       Gizmos.DrawRay(raypos, transform.forward * hitinfo.distance);
+
+                       // Hit된 지점에 Sphere를 그려준다.
+                       Gizmos.DrawWireSphere(raypos + transform.forward * hitinfo.distance, sradius);
+                   }
+                   else
+                   {
+                       // Hit가 되지 않았으면 최대 검출 거리로 ray를 그려준다.
+                       Gizmos.DrawRay(raypos, transform.forward * 0.0f);
+                   }
+               }*/
+
+        /* private void elevatoruse(string raytag)     // 엘리베이터 작동
+         {
+             if (raytag == "elebtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
+             {
+                 PV.RPC("Elevator.elevator.Eledooropen1f",RpcTarget.All);
+             }
+             else if (raytag == "elebtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
+             {
+                 PV.RPC("Elevator.elevator.Eledooropen2f", RpcTarget.All);
+             }
+             else if (raytag == "upbtn" && this.transform.position.y < -7 && Input.GetButtonDown("interact"))
+             {
+                 PV.RPC("Elevator.elevator.Eleup", RpcTarget.All);
+             }
+             else if (raytag == "upbtn" && this.transform.position.y > -5 && Input.GetButtonDown("interact"))
+             {
+                 PV.RPC("Elevator.elevator.Eledown", RpcTarget.All);
+             }    
+         }*/
+
 
 
         /*private void portaluse(string raytag)
@@ -558,7 +666,7 @@ namespace StarterAssets
 
         private void cooldown()
         {
-            portalcool += Time.deltaTime;
+      //      portalcool += Time.deltaTime;
         }
 
        /* public void customizing()
