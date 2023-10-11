@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4437747713172766970}
   - component: {fileID: 8640931858412163733}
   m_Layer: 0
-  m_Name: Hat3
+  m_Name: hat2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 8283428042756407996}
   - component: {fileID: 7962261878538822537}
   m_Layer: 0
-  m_Name: Hat1
+  m_Name: hat0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  objectToSync: {fileID: 0}
+  EquipItem: []
   _animator: {fileID: 0}
   turnStop: 0
   PV: {fileID: 5660682367128626602}
@@ -4835,7 +4835,7 @@ GameObject:
   - component: {fileID: 5331362867939205481}
   - component: {fileID: 811308475580096136}
   m_Layer: 0
-  m_Name: Hat2
+  m_Name: hat1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5274,7 +5274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5193689317062586087, guid: 09e84b59923a7f94da311f8d77de3c51, type: 3}
       propertyPath: m_Name
-      value: top2
+      value: top1
       objectReference: {fileID: 0}
     - target: {fileID: 5193689317062586087, guid: 09e84b59923a7f94da311f8d77de3c51, type: 3}
       propertyPath: m_IsActive
@@ -5340,7 +5340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3276343519427548617, guid: 8dfde482906bb8445b42b9752bcf898d, type: 3}
       propertyPath: m_Name
-      value: pants2
+      value: pants1
       objectReference: {fileID: 0}
     - target: {fileID: 3276343519427548617, guid: 8dfde482906bb8445b42b9752bcf898d, type: 3}
       propertyPath: m_IsActive
@@ -5362,7 +5362,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 392725814545958637, guid: b5d3dc4e7d5aa1e41a6e3f4bc3cdeb41, type: 3}
       propertyPath: m_Name
-      value: hat4
+      value: hat3
       objectReference: {fileID: 0}
     - target: {fileID: 392725814545958637, guid: b5d3dc4e7d5aa1e41a6e3f4bc3cdeb41, type: 3}
       propertyPath: m_IsActive
@@ -5512,7 +5512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3007002850629602781, guid: 0b4d7e714cf20e149992427068900334, type: 3}
       propertyPath: m_Name
-      value: Bag1
+      value: bag0
       objectReference: {fileID: 0}
     - target: {fileID: 3007002850629602781, guid: 0b4d7e714cf20e149992427068900334, type: 3}
       propertyPath: m_IsActive
@@ -5606,7 +5606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7921868460472758848, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
       propertyPath: m_Name
-      value: Bag2
+      value: bag1
       objectReference: {fileID: 0}
     - target: {fileID: 7921868460472758848, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
       propertyPath: m_IsActive
@@ -5684,7 +5684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_Name
-      value: pants1
+      value: pants0
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_IsActive
@@ -5852,7 +5852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_Name
-      value: top1
+      value: top0
       objectReference: {fileID: 0}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_IsActive

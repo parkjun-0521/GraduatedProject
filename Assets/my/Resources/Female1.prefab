@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 8944887630363983379}
   - component: {fileID: 8093704563789657685}
   m_Layer: 0
-  m_Name: top2
+  m_Name: top1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,7 +944,7 @@ GameObject:
   - component: {fileID: 5157190078821046797}
   - component: {fileID: 6005575405485903345}
   m_Layer: 0
-  m_Name: top1
+  m_Name: top0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1817,7 +1817,7 @@ GameObject:
   - component: {fileID: 5266661066970975873}
   - component: {fileID: 5004121556756816303}
   m_Layer: 0
-  m_Name: pants1
+  m_Name: pants0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2129,7 +2129,7 @@ GameObject:
   - component: {fileID: 375956914409289651}
   - component: {fileID: 765919907733917947}
   m_Layer: 0
-  m_Name: pants2
+  m_Name: pants1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4651,7 +4651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7190010293688722315, guid: a09708b66323b1443bef5222e93990df, type: 3}
       propertyPath: m_Name
-      value: Hat1
+      value: hat0
       objectReference: {fileID: 0}
     - target: {fileID: 7190010293688722315, guid: a09708b66323b1443bef5222e93990df, type: 3}
       propertyPath: m_IsActive
@@ -4729,7 +4729,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 1048f28cb90e5284996e73928005199b, type: 3}
       propertyPath: m_Name
-      value: Hat3
+      value: hat2
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1048f28cb90e5284996e73928005199b, type: 3}
       propertyPath: m_IsActive
@@ -4993,7 +4993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3311357915908506351, guid: db4fdfc07544cd54cb33933344468e62, type: 3}
       propertyPath: m_Name
-      value: Hat2
+      value: hat1
       objectReference: {fileID: 0}
     - target: {fileID: 3311357915908506351, guid: db4fdfc07544cd54cb33933344468e62, type: 3}
       propertyPath: m_IsActive
@@ -5089,6 +5089,14 @@ PrefabInstance:
       propertyPath: m_RotationOffset.z
       value: -109.93821
       objectReference: {fileID: 0}
+    - target: {fileID: 6093095845976355612, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6093095845976355612, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
+      propertyPath: ObservedComponents.Array.data[1]
+      value: 
+      objectReference: {fileID: 9091169359007752118}
     - target: {fileID: 7431699692781420298, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -5139,7 +5147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7921868460472758848, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
       propertyPath: m_Name
-      value: Bag2
+      value: bag1
       objectReference: {fileID: 0}
     - target: {fileID: 7921868460472758848, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
       propertyPath: m_IsActive
@@ -5171,6 +5179,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 8298984234914505513}
   - {fileID: 9091169359007752118}
   sceneViewId: 0
   InstantiationId: 0
@@ -5196,6 +5205,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7431699692781420298, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
   m_PrefabInstance: {fileID: 3089022865477211029}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8298984234914505513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6482232232763289788, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
+  m_PrefabInstance: {fileID: 3089022865477211029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129116785581056469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7595839373816797599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5203,6 +5223,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8655962759042214956}
     m_Modifications:
+    - target: {fileID: 1509196309648020821, guid: 0b4d7e714cf20e149992427068900334, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509196309648020821, guid: 0b4d7e714cf20e149992427068900334, type: 3}
+      propertyPath: ObservedComponents.Array.data[1]
+      value: 
+      objectReference: {fileID: 6893259631773894870}
     - target: {fileID: 1660281272823063500, guid: 0b4d7e714cf20e149992427068900334, type: 3}
       propertyPath: m_RotationOffset.x
       value: 21.048351
@@ -5273,7 +5301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3007002850629602781, guid: 0b4d7e714cf20e149992427068900334, type: 3}
       propertyPath: m_Name
-      value: Bag1
+      value: bag0
       objectReference: {fileID: 0}
     - target: {fileID: 3007002850629602781, guid: 0b4d7e714cf20e149992427068900334, type: 3}
       propertyPath: m_IsActive
@@ -5281,6 +5309,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4d7e714cf20e149992427068900334, type: 3}
+--- !u!114 &2681299205607436911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5502330850982898672, guid: 0b4d7e714cf20e149992427068900334, type: 3}
+  m_PrefabInstance: {fileID: 7595839373816797599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671027224979952706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4671027224979952706 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3007002850629602781, guid: 0b4d7e714cf20e149992427068900334, type: 3}
@@ -5305,6 +5344,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 2681299205607436911}
   - {fileID: 6893259631773894870}
   sceneViewId: 0
   InstantiationId: 0

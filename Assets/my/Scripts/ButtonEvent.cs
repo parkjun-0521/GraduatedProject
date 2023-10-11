@@ -412,7 +412,8 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             if (networkManager.itemName[i] != null)
             {
               equipava[i] = networkManager.itemName[i];
-              Debug.Log(networkManager.itemName[i]);                  // 아바타 리스트을 제대로 가져왔는지 확인 ( 디버그 )
+                //        Debug.Log(networkManager.itemName[i]);                  // 아바타 리스트을 제대로 가져왔는지 확인 ( 디버그 )
+                Debug.Log(equipava[i]);
             }
         }
         InputItemList.SetActive(false);                             // 아바타 체크박스 비활성화 
@@ -544,11 +545,7 @@ public class ButtonEvent : MonoBehaviourPunCallbacks {
             CreateTeamPreSelect.SetActive(true);
             count++;
             CreateRoomBackGround.SetActive(true);
-            for (int i = 0; i < networkManager.itemName.Length; i++)
-            {
-         //       equipava[i] = networkManager.itemName[i];
-                Debug.Log(equipava[i]);
-            }
+          
         }
     }
 

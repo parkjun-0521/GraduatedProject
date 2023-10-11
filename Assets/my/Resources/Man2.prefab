@@ -235,7 +235,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  objectToSync: {fileID: 0}
+  EquipItem: []
   _animator: {fileID: 0}
   turnStop: 0
   PV: {fileID: 861292616974760796}
@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 7377276968150381800}
   - component: {fileID: 8094904760593952311}
   m_Layer: 0
-  m_Name: Hat1
+  m_Name: hat0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2736,7 +2736,7 @@ GameObject:
   - component: {fileID: 6128643208876777402}
   - component: {fileID: 5450349275217701660}
   m_Layer: 0
-  m_Name: Hat2
+  m_Name: hat1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2777,7 +2777,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 5450349275217701660}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3767,7 +3768,7 @@ GameObject:
   - component: {fileID: 6637838107304827552}
   - component: {fileID: 2972049648202082584}
   m_Layer: 0
-  m_Name: Hat3
+  m_Name: hat2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3856,7 +3857,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 2972049648202082584}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4674,7 +4676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7921868460472758848, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
       propertyPath: m_Name
-      value: Bag2
+      value: bag1
       objectReference: {fileID: 0}
     - target: {fileID: 7921868460472758848, guid: 0a43d1d88233fc74d87999661bfff181, type: 3}
       propertyPath: m_IsActive
@@ -4752,7 +4754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_Name
-      value: top1
+      value: top0
       objectReference: {fileID: 0}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_IsActive
@@ -4830,7 +4832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_Name
-      value: pants1
+      value: pants0
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_IsActive
@@ -4912,7 +4914,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6fae141d928f1bd42878c68a7cbb9e11, type: 2}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_Name
-      value: top2
+      value: top1
       objectReference: {fileID: 0}
     - target: {fileID: 6425426373391874310, guid: 055dd8d8a9b46df4990db02611fcaa38, type: 3}
       propertyPath: m_IsActive
@@ -4990,7 +4992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_Name
-      value: pants2
+      value: pants1
       objectReference: {fileID: 0}
     - target: {fileID: 8048565140956556928, guid: 1bc927fdbfad3a341bc53d8cd3e8b3a1, type: 3}
       propertyPath: m_IsActive
@@ -5016,7 +5018,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 392725814545958637, guid: b5d3dc4e7d5aa1e41a6e3f4bc3cdeb41, type: 3}
       propertyPath: m_Name
-      value: hat4
+      value: hat3
       objectReference: {fileID: 0}
     - target: {fileID: 392725814545958637, guid: b5d3dc4e7d5aa1e41a6e3f4bc3cdeb41, type: 3}
       propertyPath: m_IsActive
@@ -5256,7 +5258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3007002850629602781, guid: 0b4d7e714cf20e149992427068900334, type: 3}
       propertyPath: m_Name
-      value: Bag1
+      value: bag0
       objectReference: {fileID: 0}
     - target: {fileID: 3007002850629602781, guid: 0b4d7e714cf20e149992427068900334, type: 3}
       propertyPath: m_IsActive

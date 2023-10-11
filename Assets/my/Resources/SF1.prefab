@@ -1814,7 +1814,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  objectToSync: {fileID: 0}
+  EquipItem: []
   _animator: {fileID: 0}
   turnStop: 0
   PV: {fileID: 4372261364049440862}

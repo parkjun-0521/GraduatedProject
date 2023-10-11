@@ -236,6 +236,10 @@ namespace StarterAssets
                 GroundedCheck();
                 Move();
                 cooldown();
+                if (Input.GetKeyDown(KeyCode.G))
+                {
+                    AvaEquip();
+                }
             }
         }
 
@@ -473,29 +477,72 @@ namespace StarterAssets
 
         public void AvaEquip()
         {
+            networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();       // NetworkManager 스크립트가 달려있는 오브젝트를 찾는다. 
+            buttonEvent = GameObject.Find("ButtonEvent").GetComponent<ButtonEvent>();                   // ButtonEvent 스크립트가 달려있는 오브젝트를 찾는다. 
             Debug.Log("아바타 장착 시작");
-            /*if (PV.IsMine)
-            {             
-                // 현재 플레이어가 이 오브젝트를 소유하고 있을 때만 상태를 변경합니다.
-                objectToSync.SetActive(!objectToSync.activeSelf);
 
-                // RPC를 통해 상태 변경을 다른 플레이어에게 알립니다.
-                PV.RPC("SyncObjectState", RpcTarget.AllBuffered, objectToSync.activeSelf);
-            }*/
             if (PV.IsMine)
-            {
-                // 현재 플레이어가 이 오브젝트를 소유하고 있을 때만 상태를 변경합니다.
-                for (int i = 0; i < networkManager.itemName.Length; i++)
+            {             
+                for (int i = 1; i < networkManager.equipava.Length; i++)
                 {                
-                    Debug.Log(buttonEvent.equipava[i]);
-                    if (buttonEvent.equipava[i] != "없음")
-                    {
-                      EquipItem[i] = this.transform.Find(buttonEvent.equipava[i]).gameObject;          
-                      EquipItem[i].gameObject.SetActive(!EquipItem[i].gameObject.activeSelf);
-                    }
+                    Debug.Log(networkManager.equipava[i]);            
+                }
+                for (int i = 1; i < networkManager.equipava.Length; i++)
+                {
+                    findchild();
+               //   EquipItem[i].gameObject.SetActive(!EquipItem[i].activeSelf);              // 현재 플레이어가 이 오브젝트를 소유하고 있을 때만 상태를 변경합니다.
 
                     // RPC를 통해 상태 변경을 다른 플레이어에게 알립니다.
-                    PV.RPC("AvatarSync", RpcTarget.AllBuffered, EquipItem[i].gameObject.activeSelf);
+                    PV.RPC("AvatarSync", RpcTarget.AllBuffered, EquipItem[i].activeSelf);
+                }
+            }
+        }
+
+        public void findchild()
+        {
+            if (PV.IsMine)
+            {
+                for (int i = 1; i < networkManager.equipava.Length; i++)
+                {
+                    // 재귀적으로 오브젝트 찾기 실행
+                    GameObject targetObject = FindObjectByName(GameObject.FindWithTag("Player").transform, networkManager.equipava[i]);
+
+                    // 찾은 오브젝트가 있다면 로그에 출력
+                    if (targetObject != null)
+                    {
+                        Debug.Log("찾은 오브젝트: " + targetObject.name);
+                        targetObject.SetActive(true);
+                        EquipItem[i] = targetObject;
+                    }
+                    else
+                    {
+                        Debug.Log("오브젝트를 찾지 못했습니다.");
+                    }
+
+                    GameObject FindObjectByName(Transform parent, string name)
+                    {
+                        // 부모 오브젝트의 자식들을 검사
+                        foreach (Transform child in parent)
+                        {
+                            // 현재 자식 오브젝트의 이름이 목표 이름과 일치하는지 확인
+                            if (child.name == name)
+                            {
+                                // 일치하면 해당 오브젝트 반환
+                                return child.gameObject;
+                            }
+
+                            // 일치하지 않으면 자식 오브젝트의 자식들을 재귀적으로 검색
+                            GameObject foundObject = FindObjectByName(child, name);
+
+                            // 찾은 오브젝트가 있다면 반환
+                            if (foundObject != null)
+                            {
+                                return foundObject;
+                            }
+                        }
+                        // 여기까지 왔다면 찾지 못한 것이므로 null 반환
+                        return null;
+                    }
                 }
             }
         }
@@ -504,11 +551,10 @@ namespace StarterAssets
         public void AvatarSync(bool isActive)
         {
             // 모든 플레이어에 의해 호출되며, 상태를 동기화합니다.
-          //  objectToSync.SetActive(isActive);
-     //       objectToSync.SetActive(true);
-            for (int i = 0; i < networkManager.itemName.Length; i++)
+            for (int i = 1; i < networkManager.equipava.Length; i++)
             {
-                EquipItem[i].gameObject.SetActive(!EquipItem[i].gameObject.activeSelf);
+                // EquipItem[i].gameObject.SetActive(!EquipItem[i].gameObject.activeSelf);
+                EquipItem[i].SetActive(true);
             }
         }
 
