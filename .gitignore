@@ -60,3 +60,90 @@ crashlytics-build.properties
 
 # webview
 Assets/Vuplex
+
+Assets/WinterTree/
+Assets/Unity UI Samples/
+Assets/Toon/
+Assets/Sunao Shader/
+Assets/TextMesh Pro/
+Assets/my/Photon/
+Assets/StarterAssets/
+Assets/_TerrainAutoUpgrade/
+Assets/18SeamlessNormalMaps512Free/
+Assets/1AllSkyFree/
+Assets/1MagicMirror/
+Assets/1Park/
+Assets/4Metarial/
+Assets/5_materials/
+Assets/animations/
+Assets/AnimeGirlIdleAnimations_free/
+Assets/Asset  Store/
+Assets/Avatars/
+Assets/Bricks&Walls/
+Assets/Characters/
+Assets/Clipboard/
+Assets/FreeDraw/
+Assets/HQ Modern Sofas Pack/
+Assets/Images/
+Assets/Interiors/
+Assets/lilToon/
+Assets/my/font/
+Assets/my/Image/
+Assets/my/Music/
+Assets/my/Resources/
+Assets/PBC_Texture_RoadsPack_01/
+Assets/ProBuilder Data/
+Assets/Scenes/
+Assets/SkySeries Freebie/
+Assets/_TerrainAutoUpgrade.meta
+Assets/18SeamlessNormalMaps512Free.meta
+Assets/1AllSkyFree.meta
+Assets/1MagicMirror.meta
+Assets/1Park.meta
+Assets/4Metarial.meta
+Assets/5_materials.meta
+Assets/air.mat
+Assets/air.mat.meta
+Assets/animations.meta
+Assets/AnimeGirlIdleAnimations_free.meta
+Assets/Asset  Store.meta
+Assets/avatarEquip.cs
+Assets/avatarEquip.cs.meta
+Assets/Avatars.meta
+Assets/Bricks&Walls.meta
+Assets/carrot.mat
+Assets/carrot.mat.meta
+Assets/Characters.meta
+Assets/Clipboard.meta
+Assets/csc.rsp
+Assets/csc.rsp.meta
+Assets/Elevator_floor.cs
+Assets/Elevator_floor.cs.meta
+Assets/Examples and Samples Have Moved.txt
+Assets/Examples and Samples Have Moved.txt.meta
+Assets/FloorValue.cs
+Assets/FloorValue.cs.meta
+Assets/FreeDraw.meta
+Assets/HQ Modern Sofas Pack.meta
+Assets/Images.meta
+Assets/Interiors.meta
+Assets/lilToon.meta
+Assets/my.meta
+Assets/NewAudioMixer.mixer
+Assets/NewAudioMixer.mixer.meta
+Assets/PBC_Texture_RoadsPack_01.meta
+Assets/ProBuilder Data.meta
+Assets/Scenes.meta
+Assets/Scripts.meta
+Assets/SkySeries Freebie.meta
+Assets/snowman.dae
+Assets/snowman.dae.meta
+Assets/StarterAssets.meta
+Assets/Sunao Shader.meta
+Assets/TextMesh Pro.meta
+Assets/Toon.meta
+Assets/Unity UI Samples.meta
+Assets/Vuplex.meta
+Assets/WinterTree.meta
+Assets/my/Scenes/
+image/
