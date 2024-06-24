@@ -4,7 +4,8 @@
   - 웹과 함께 진행한 프로젝트
   - 거리에 제약이 없는 커뮤니케이션 서비스 제공
   - 개발 기간 ( 2023.01.01 ~ 2023.10.11 )
-  - 시연 영상 : https://www.youtube.com/watch?v=SV16Wh1sHzw&t=681s
+  - 시연 영상 : https://www.youtube.com/watch?v=SV16Wh1sHzw&t=681s 
+                ( 11분 18초)
 
 ## 개요 
 
