@@ -42,6 +42,10 @@
   - VS Code 
   - 3Ds Max
   - Unity ( 2021.3.8f1 )
+  - Photon Network
+  - MySQL
+  - JSP
+  - Git
 
 ## 개발 언어 
 
